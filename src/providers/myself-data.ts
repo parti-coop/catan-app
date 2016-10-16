@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 
-import { Platform, AlertController } from 'ionic-angular';
+import { Platform } from 'ionic-angular';
 import { NativeStorage } from 'ionic-native';
 
 import { AuthToken } from '../models/auth-token';
+import { Myself } from '../models/myself';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
@@ -14,19 +15,20 @@ export class MyselfData {
   apiBaseUrl = 'http://parti.dev';
   STORAGE_REFERENCE_HAS_SIGNED_IN = 'MyselfData_hasSignedIn';
   STORAGE_REFERENCE_NICKNAME = 'MyselfData_nickname';
+  STORAGE_REFERENCE_IMAGE_URL = 'MyselfData_imageUrl';
   STORAGE_REFERENCE_ACCESS_TOKEN = 'MyselfData_accessToken';
   STORAGE_REFERENCE_REFRESH_TOKEN = 'MyselfData_refreshToken';
 
   public accessToken: string;
   public refreshToken: string;
   public nickname: string;
+  public imageUrl: string;
   private readyToAuth: boolean;
   private _hasSignedIn: boolean;
 
   constructor(
     private platform: Platform,
-    public http: Http,
-    private alertCtrl: AlertController
+    public http: Http
   ) {
     this.readyToAuth = false;
 
@@ -51,37 +53,50 @@ export class MyselfData {
   }
 
   auth(snsProvider, snsAccessToken) {
-    let body = {
+    let tokenRequestBody = {
       provider: snsProvider,
       assertion: snsAccessToken,
       grant_type: 'assertion',
       client_id: '48549c7c03f1a479c6702e1b5993742b013f2e99ea551e8f90450559e24b388a',
       client_secret: '2cef1a05f43abcead6c92605373b585e1b6d8dc539e9c3bfab41911f06f16bd9'
     };
-    return this.http.post(`${this.apiBaseUrl}/oauth/token`, body)
-      .map(res => <AuthToken>res.json())
-      .toPromise()
+    return this.http.post(`${this.apiBaseUrl}/oauth/token`, tokenRequestBody)
+      .map(res => <AuthToken>res.json()).toPromise()
       .then(response => {
-        return this.storeSignedInData(response.access_token, response.refresh_token, 'test nick');
+        return this.storeTokenData(response.access_token, response.refresh_token);
+      }).then(accessToken => {
+        let meRequestOptions = new RequestOptions({headers: new Headers({ 'Authorization': `Bearer ${accessToken}` })});
+        return this.http.get(`${this.apiBaseUrl}/api/v1/users/me`, meRequestOptions)
+                   .map(res => <Myself>res.json().user).toPromise();
+      }).then(response => {
+        return this.storeMyselfData(response.nickname, response.image_url);
+      }).then(() => {
+        this._hasSignedIn = true;
       }).catch((error) => {
-        alert(error);
+        this._hasSignedIn = false;
+        console.log(error);
         throw error;
       });
   }
 
-  storeSignedInData(accessToken, refreshToken, nickname) {
-    Promise.all([
-      NativeStorage.setItem(this.STORAGE_REFERENCE_HAS_SIGNED_IN, true),
-      NativeStorage.setItem(this.STORAGE_REFERENCE_NICKNAME, nickname),
+  storeTokenData(accessToken, refreshToken) {
+    return Promise.all([
       NativeStorage.setItem(this.STORAGE_REFERENCE_ACCESS_TOKEN, accessToken),
       NativeStorage.setItem(this.STORAGE_REFERENCE_REFRESH_TOKEN, refreshToken)
     ]).then(values => {
-      this._hasSignedIn = true;
-      this.nickname = nickname;
       this.accessToken = accessToken;
       this.refreshToken = refreshToken;
-    }).catch(error => {
-      console.log(error);
+      return accessToken
+    });
+  }
+
+  storeMyselfData(nickname, imageUrl) {
+    return Promise.all([
+      NativeStorage.setItem(this.STORAGE_REFERENCE_NICKNAME, nickname),
+      NativeStorage.setItem(this.STORAGE_REFERENCE_IMAGE_URL, imageUrl),
+    ]).then(values => {
+      this.nickname = nickname;
+      this.imageUrl = imageUrl;
     });
   }
 
