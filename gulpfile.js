@@ -4,14 +4,6 @@ var ngConstant = require('gulp-ng-constant');
 var rename = require('gulp-rename');
 var exec = require('child_process').exec;
 
-gulp.task('reset', function() {
-  exec('ionic state reset', function (err, stdout, stderr) {
-    console.log(err);
-    console.log(stdout);
-    console.log(stderr);
-  });
-});
-
 gulp.task('config', function() {
   var env = 'development';
   if(process.env.PARTI_ENV) {
@@ -34,4 +26,10 @@ gulp.task('config', function() {
   .pipe(gulp.dest('src/config'));
 });
 
-gulp.task('prepare-build', ['config', 'reset']);
+gulp.task('reset', ['config'], function() {
+  exec('ionic state reset', function (err, stdout, stderr) {
+    console.log(err);
+    console.log(stdout);
+    console.log(stderr);
+  });
+});

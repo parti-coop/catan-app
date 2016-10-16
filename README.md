@@ -12,6 +12,14 @@ config.tpl.xml을 수정한다. config.xml은 config.tpl.xml에서 자동 생성
 
 ## 개발 환경 설정
 
+### gulp를 설치합니다
+
+```
+$ npm install -g gulp
+```
+
+## 개발
+
 ### 테스트를 위한 ionic serve 띄우기
 
 로컬서버(http://part.dev)와 연동하는 ionic serve는 아래와 같이 구동시킨다.
@@ -24,15 +32,16 @@ $ ionic serve
 $ PARTI_ENV=staging ionic serve
 ```
 
-### 앱 빌드하기
+### 앱 빌드하거나 에뮬레이팅해보기
 
-로컬서버(http://part.dev)와 연동하는 앱은 아래와 같이 빌드한다.
+앱을 빌드하기 전에 환경 설정을 한다. 환경값은 development, staging, production이 가능하다. 마지막에서 수행한 환경 설정의 환경값과 같다면 수행할 필요가 없다. 
+```
+$ PARTI_ENV=환경값 gulp reset
+```
+
+연동하는 앱은 아래와 같이 빌드한다.
 ```
 $ ionic build ios
 ```
 
-테스트서버(http://dev.parti.xyz)와 연동하는 앱은 아래와 같이 빌드한다.
-```
-$ PARTI_ENV=staging ionic serve
-```
-
+ios 경우 환경 설정을 수행하였다면 Keychain Sharing Capability를 설정해야 한다. /platforms/ios/앱이름.xcodeproj 파일을 연다. 프로젝트이름을 클릭하고 > Capabilities > Keychain Sharing을 on한 뒤 다시 빌드한다.
