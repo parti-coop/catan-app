@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
-import { Settings } from '../../app/settings';
+import { PartiEnvironment } from '../../config/constant';
 
 @Component({
   selector: 'page-about',
@@ -9,7 +9,7 @@ import { Settings } from '../../app/settings';
 })
 export class AboutPage {
 
-  constructor(public navCtrl: NavController, public settings: Settings) {
+  constructor(public navCtrl: NavController, public partiEnvironment: PartiEnvironment) {
 
   }
 

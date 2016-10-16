@@ -6,14 +6,13 @@
   "scripts": {
     "build": "ionic-app-scripts build",
     "watch": "ionic-app-scripts watch",
+    "prebuild": "gulp prepare-build",
+    "prewatch": "gulp config",
     "serve:before": "watch",
     "emulate:before": "build",
     "deploy:before": "build",
     "build:before": "build",
     "run:before": "build"
-  },
-  "config": {
-    "ionic_rollup": "./config/rollup.config.js"
   },
   "dependencies": {
     "@angular/common": "^2.0.0",
@@ -30,11 +29,14 @@
     "@ionic/storage": "^1.0.3",
     "ionic-native": "^2.0.3",
     "rxjs": "^5.0.0-beta.12",
-    "zone.js": "^0.6.21",
-    "rollup-plugin-replace": "1.1.1"
+    "zone.js": "^0.6.21"
   },
   "devDependencies": {
     "@ionic/app-scripts": "^0.0.30",
+    "gulp": "^3.9.1",
+    "gulp-ionic-channels": "0.0.4",
+    "gulp-ng-constant": "^2.0.0-2",
+    "gulp-rename": "^1.2.2",
     "typescript": "^2.0.3"
   },
   "cordovaPlugins": [
@@ -43,6 +45,7 @@
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
+    "cordova-plugin-facebook4",
     "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [

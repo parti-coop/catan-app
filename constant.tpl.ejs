@@ -1,0 +1,15 @@
+import { Injectable } from "@angular/core";
+import { Platform } from 'ionic-angular';
+
+@Injectable()
+export class PartiEnvironment {
+  <% constants.forEach(function(constant) { %>
+    public <%- constant.name %>: string;
+   <% }); %>
+
+  constructor(platform: Platform) {
+    <% constants.forEach(function(constant) { %>
+      this.<%- constant.name %> = ${constant.value};
+    <% }); %>
+  }
+}
