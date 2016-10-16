@@ -1,33 +1,43 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
-import { MyApp } from './app.component';
+import { PartiApp } from './app.component';
+
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { SignInPage } from '../pages/sign-in/sign-in';
+
+import { MyselfData } from '../providers/myself-data';
+import { Storage } from '@ionic/storage';
+
 import { PartiEnvironment } from '../config/constant';
 
 @NgModule({
   declarations: [
-    MyApp,
+    PartiApp,
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    SignInPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(PartiApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
+    PartiApp,
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    SignInPage
   ],
   providers: [
-    PartiEnvironment
+    PartiEnvironment,
+    MyselfData,
+    Storage
   ]
 })
 export class AppModule {}

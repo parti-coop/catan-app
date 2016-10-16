@@ -45,6 +45,8 @@
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
     "cordova-plugin-facebook4",
+    "cordova-plugin-transport-security",
+    "cordova-plugin-nativestorage",
     "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [
