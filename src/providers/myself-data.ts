@@ -19,6 +19,9 @@ export class MyselfData {
   STORAGE_REFERENCE_ACCESS_TOKEN = 'MyselfData_accessToken';
   STORAGE_REFERENCE_REFRESH_TOKEN = 'MyselfData_refreshToken';
 
+  API_CLIENT_ID = '48549c7c03f1a479c6702e1b5993742b013f2e99ea551e8f90450559e24b388a';
+  API_CLIENT_SECRET = '2cef1a05f43abcead6c92605373b585e1b6d8dc539e9c3bfab41911f06f16bd9';
+
   public accessToken: string;
   public refreshToken: string;
   public nickname: string;
@@ -57,8 +60,8 @@ export class MyselfData {
       provider: snsProvider,
       assertion: snsAccessToken,
       grant_type: 'assertion',
-      client_id: '48549c7c03f1a479c6702e1b5993742b013f2e99ea551e8f90450559e24b388a',
-      client_secret: '2cef1a05f43abcead6c92605373b585e1b6d8dc539e9c3bfab41911f06f16bd9'
+      client_id: this.API_CLIENT_ID,
+      client_secret: this.API_CLIENT_SECRET
     };
     return this.http.post(`${this.apiBaseUrl}/oauth/token`, tokenRequestBody)
       .map(res => <AuthToken>res.json()).toPromise()
@@ -109,6 +112,32 @@ export class MyselfData {
     return NativeStorage.getItem(this.STORAGE_REFERENCE_HAS_SIGNED_IN).catch(error => {
       return Promise.resolve(false);
     });
+  }
+
+  refresh() {
+    let tokenRequestBody = {
+      refresh_token: this.refreshToken,
+      grant_type: 'refresh_token',
+      client_id: this.API_CLIENT_ID,
+      client_secret: this.API_CLIENT_SECRET
+    };
+    return this.http.post(`${this.apiBaseUrl}/oauth/token`, tokenRequestBody)
+      .map(res => <AuthToken>res.json()).toPromise()
+      .then(response => {
+        return this.storeTokenData(response.access_token, response.refresh_token);
+      }).then(accessToken => {
+        let meRequestOptions = new RequestOptions({headers: new Headers({ 'Authorization': `Bearer ${accessToken}` })});
+        return this.http.get(`${this.apiBaseUrl}/api/v1/users/me`, meRequestOptions)
+                   .map(res => <Myself>res.json().user).toPromise();
+      }).then(response => {
+        return this.storeMyselfData(response.nickname, response.image_url);
+      }).then(() => {
+        this._hasSignedIn = true;
+      }).catch((error) => {
+        this._hasSignedIn = false;
+        console.log(error);
+        throw error;
+      });
   }
 
 }

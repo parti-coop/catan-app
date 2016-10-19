@@ -12,6 +12,7 @@ import { MyselfData } from '../providers/myself-data';
 import { Storage } from '@ionic/storage';
 
 import { PartiEnvironment } from '../config/constant';
+import { ApiHttp } from '../providers/api-http';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { PartiEnvironment } from '../config/constant';
   providers: [
     PartiEnvironment,
     MyselfData,
+    ApiHttp,
     Storage
   ]
 })

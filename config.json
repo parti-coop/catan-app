@@ -3,6 +3,7 @@
     "appId": "xyz.parti-development",
     "appName": "Parti-D",
     "appTitle": "빠띠 D",
+    "apiBaseUrl": "http://parti.dev",
     "appKeyChaingAccessGroup": "xyz.parti-development",
     "facebookAppName": "parti-xyz - local",
     "facebookAppId": "824122964355260"
@@ -11,6 +12,7 @@
     "appId": "xyz.parti-staging",
     "appName": "Parti-S",
     "appTitle": "빠띠 S",
+    "apiBaseUrl": "http://dev.parti.xyz",
     "appKeyChaingAccessGroup": "xyz.parti-staging",
     "facebookAppName": "parti-xyz - dev",
     "facebookAppId": "769069449860612"
@@ -19,6 +21,7 @@
     "appId": "xyz.parti",
     "appName": "Parti",
     "appTitle": "빠띠",
+    "apiBaseUrl": "http://parti.xyz",
     "appKeyChaingAccessGroup": "xyz.parti",
     "facebookAppName": "parti-xyz",
     "facebookAppId": "743728572394700"
