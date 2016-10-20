@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Http, Headers } from "@angular/http";
+import { Events } from 'ionic-angular';
 import { RequestOptions, XHRBackend, RequestMethod, Response, RequestOptionsArgs } from '@angular/http';
+
 import { PartiEnvironment } from '../config/constant';
 import { MyselfData } from '../providers/myself-data';
 
@@ -11,7 +13,13 @@ import 'rxjs/add/operator/mergeMap';
 
 @Injectable()
 export class ApiHttp extends Http {
-  constructor(backend: XHRBackend, defaultOptions: RequestOptions, private myselfData: MyselfData, private partiEnvironment: PartiEnvironment) {
+  constructor(
+    backend: XHRBackend,
+    defaultOptions: RequestOptions,
+    private myselfData: MyselfData,
+    private partiEnvironment: PartiEnvironment,
+    private events: Events
+  ) {
     super(backend, defaultOptions);
   }
 
@@ -61,11 +69,15 @@ export class ApiHttp extends Http {
       if (error && error.status  == 401) {
         return this.myselfData.refresh()
           .mergeMap(succeed => {
-            if(succeed) {
-              requestOptions = this.getRequestOptionArgs(method, url, body, options);
-              return super.request(apiUrl, requestOptions);
-            } else {
+            requestOptions = this.getRequestOptionArgs(method, url, body, options);
+            return super.request(apiUrl, requestOptions);
+          }).catch(error => {
+            this.events.publish('user:signout');
+            if(this.myselfData.hasSignedIn) {
               return Observable.throw(new Error("Can't refresh the token"));
+            } else {
+              console.log("ApiHttp#intercept : signout out!");
+              return Observable.empty();
             }
           });
       } else {

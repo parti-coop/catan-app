@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { RequestOptions, XHRBackend } from '@angular/http';
+import { Events } from 'ionic-angular';
 
 import { PartiApp } from './app.component';
 
@@ -16,8 +17,19 @@ import { MyselfData } from '../providers/myself-data';
 import { PartiPostData } from '../providers/parti-post-data';
 import { ApiHttp } from '../providers/api-http';
 
-export function apiHttpFactory(backend: XHRBackend, defaultOptions: RequestOptions, myselfData: MyselfData, partiEnvironment: PartiEnvironment) {
-  return new ApiHttp(backend, defaultOptions, myselfData, partiEnvironment);
+export function apiHttpFactory(
+  backend: XHRBackend,
+  defaultOptions: RequestOptions,
+  myselfData: MyselfData,
+  partiEnvironment: PartiEnvironment,
+  events: Events
+) {
+  return new ApiHttp(
+    backend,
+    defaultOptions,
+    myselfData,
+    partiEnvironment,
+    events);
 }
 
 @NgModule({
@@ -49,7 +61,7 @@ export function apiHttpFactory(backend: XHRBackend, defaultOptions: RequestOptio
     {
       provide: ApiHttp,
       useFactory: apiHttpFactory,
-      deps: [XHRBackend, RequestOptions, MyselfData, PartiEnvironment]
+      deps: [XHRBackend, RequestOptions, MyselfData, PartiEnvironment, Events]
     },
     Storage
   ]
