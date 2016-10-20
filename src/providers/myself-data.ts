@@ -7,8 +7,15 @@ import { NativeStorage } from 'ionic-native';
 import { AuthToken } from '../models/auth-token';
 import { Myself } from '../models/myself';
 
-import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/zip';
+import 'rxjs/add/observable/from';
+import 'rxjs/add/observable/empty';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/fromPromise';
 
 @Injectable()
 export class MyselfData {
@@ -47,15 +54,16 @@ export class MyselfData {
         this.accessToken = values[2];
         this.refreshToken = values[3];
         this.readyToAuth = true;
+        console.log("MyselfData : 이미 로그인");
       }).catch(error => {
-        console.log("MyselfData Init");
+        console.log("MyselfData : 로그인 정보 없음");
         console.log(error);
         this._hasSignedIn = false;
       });
     });
   }
 
-  auth(snsProvider, snsAccessToken) {
+  auth(snsProvider: string, snsAccessToken: string) {
     let tokenRequestBody = {
       provider: snsProvider,
       assertion: snsAccessToken,
@@ -64,43 +72,50 @@ export class MyselfData {
       client_secret: this.API_CLIENT_SECRET
     };
     return this.http.post(`${this.apiBaseUrl}/oauth/token`, tokenRequestBody)
-      .map(res => <AuthToken>res.json()).toPromise()
-      .then(response => {
+      .map(res => <AuthToken>res.json())
+      .mergeMap(response => {
         return this.storeTokenData(response.access_token, response.refresh_token);
-      }).then(accessToken => {
+      }).mergeMap(accessToken => {
         let meRequestOptions = new RequestOptions({headers: new Headers({ 'Authorization': `Bearer ${accessToken}` })});
         return this.http.get(`${this.apiBaseUrl}/api/v1/users/me`, meRequestOptions)
-                   .map(res => <Myself>res.json().user).toPromise();
-      }).then(response => {
+                   .map(res => <Myself>res.json().user);
+      }).mergeMap(response => {
         return this.storeMyselfData(response.nickname, response.image_url);
-      }).then(() => {
-        this._hasSignedIn = true;
+      }).mergeMap(() => {
+        return this.storeHasSignedIn(true)
       }).catch((error) => {
-        this._hasSignedIn = false;
-        console.log(error);
-        throw error;
+        console.log("MyselfData#auth : " + error);
+        return this.storeHasSignedIn(false)
+          .map(() => {throw error});
       });
   }
 
   storeTokenData(accessToken, refreshToken) {
-    return Promise.all([
+    return Observable.from(Promise.all([
       NativeStorage.setItem(this.STORAGE_REFERENCE_ACCESS_TOKEN, accessToken),
-      NativeStorage.setItem(this.STORAGE_REFERENCE_REFRESH_TOKEN, refreshToken)
-    ]).then(values => {
-      this.accessToken = accessToken;
-      this.refreshToken = refreshToken;
-      return accessToken
-    });
+      NativeStorage.setItem(this.STORAGE_REFERENCE_REFRESH_TOKEN, refreshToken)])
+      .then(values => {
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
+        return accessToken
+      }));
   }
 
   storeMyselfData(nickname, imageUrl) {
-    return Promise.all([
+    return Observable.from(Promise.all([
       NativeStorage.setItem(this.STORAGE_REFERENCE_NICKNAME, nickname),
-      NativeStorage.setItem(this.STORAGE_REFERENCE_IMAGE_URL, imageUrl),
-    ]).then(values => {
-      this.nickname = nickname;
-      this.imageUrl = imageUrl;
-    });
+      NativeStorage.setItem(this.STORAGE_REFERENCE_IMAGE_URL, imageUrl)])
+      .then(values => {
+        this.nickname = nickname;
+        this.imageUrl = imageUrl;
+      }));
+  }
+
+  storeHasSignedIn(hasSignedIn) {
+    return Observable.from(NativeStorage.setItem(this.STORAGE_REFERENCE_HAS_SIGNED_IN, hasSignedIn)
+      .then(value => {
+        this._hasSignedIn = value;
+      }));
   }
 
   // Return a promise. This method sould be called after platform reday
@@ -108,34 +123,37 @@ export class MyselfData {
     if(this.readyToAuth) {
       return Promise.resolve(this._hasSignedIn);
     }
-
-    return NativeStorage.getItem(this.STORAGE_REFERENCE_HAS_SIGNED_IN).catch(error => {
-      return Promise.resolve(false);
-    });
+    return NativeStorage.getItem(this.STORAGE_REFERENCE_HAS_SIGNED_IN)
+      .catch(error => {
+        return Promise.resolve(false);
+      });
   }
 
-  refresh() {
+  refresh(): Observable<boolean> {
+    this._hasSignedIn = false;
     let tokenRequestBody = {
       refresh_token: this.refreshToken,
       grant_type: 'refresh_token',
       client_id: this.API_CLIENT_ID,
       client_secret: this.API_CLIENT_SECRET
     };
+    console.log("MyselfData#refresh : Starting refresh-token");
     return this.http.post(`${this.apiBaseUrl}/oauth/token`, tokenRequestBody)
-      .map(res => <AuthToken>res.json()).toPromise()
-      .then(response => {
+      .map(res => <AuthToken>res.json())
+      .mergeMap(response => {
         return this.storeTokenData(response.access_token, response.refresh_token);
-      }).then(accessToken => {
+      }).mergeMap(accessToken => {
         let meRequestOptions = new RequestOptions({headers: new Headers({ 'Authorization': `Bearer ${accessToken}` })});
         return this.http.get(`${this.apiBaseUrl}/api/v1/users/me`, meRequestOptions)
-                   .map(res => <Myself>res.json().user).toPromise();
-      }).then(response => {
+                   .map(res => <Myself>res.json().user);
+      }).mergeMap(response => {
         return this.storeMyselfData(response.nickname, response.image_url);
-      }).then(() => {
+      }).map(() => {
         this._hasSignedIn = true;
+        return this._hasSignedIn;
       }).catch((error) => {
         this._hasSignedIn = false;
-        console.log(error);
+        console.log("MyselfData#refresh" + error);
         throw error;
       });
   }

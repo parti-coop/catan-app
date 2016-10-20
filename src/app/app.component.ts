@@ -19,15 +19,13 @@ export class PartiApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
 
-      myselfData.hasSignedIn().then(
-        hasSignedIn => {
-          if(hasSignedIn) {
-            this.rootPage = TabsPage;
-          } else {
-            this.rootPage = SignInPage;
-          }
-        }
-      );
+      myselfData.hasSignedIn()
+        .then(hasSignedIn => {
+          this.rootPage = hasSignedIn ? TabsPage : SignInPage;
+        }).catch((error) => {
+          console.log("PartiApp#constructor : " + error);
+          throw error;
+        });
     });
 
   }

@@ -1,15 +1,17 @@
 import { Injectable } from "@angular/core";
 import { Http, Headers } from "@angular/http";
-import { RequestOptions, ConnectionBackend, RequestMethod, Response, RequestOptionsArgs } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { RequestOptions, XHRBackend, RequestMethod, Response, RequestOptionsArgs } from '@angular/http';
 import { PartiEnvironment } from '../config/constant';
 import { MyselfData } from '../providers/myself-data';
 
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
 
 @Injectable()
 export class ApiHttp extends Http {
-  constructor(backend: ConnectionBackend, defaultOptions: RequestOptions, private myselfData: MyselfData, private partiEnvironment: PartiEnvironment) {
+  constructor(backend: XHRBackend, defaultOptions: RequestOptions, private myselfData: MyselfData, private partiEnvironment: PartiEnvironment) {
     super(backend, defaultOptions);
   }
 
@@ -37,7 +39,7 @@ export class ApiHttp extends Http {
     return this.intercept(RequestMethod.Head, url, null, options);
   }
 
-  getRequestOptionArgs(method: RequestMethod, url: string, body?: string, options?: RequestOptionsArgs) : RequestOptionsArgs {
+  getRequestOptionArgs(method: RequestMethod, url: string, body?: string, options?: RequestOptionsArgs): RequestOptionsArgs {
     if (options == null) {
       options = new RequestOptions();
     }
@@ -52,22 +54,20 @@ export class ApiHttp extends Http {
   }
 
   intercept(method: RequestMethod, url: string, body?: string, options?: RequestOptionsArgs): Observable<Response> {
-    let requestOptions = this.getRequestOptionArgs(method, url, body, options);
+    var requestOptions: RequestOptionsArgs = this.getRequestOptionArgs(method, url, body, options);
     let apiUrl = `${this.partiEnvironment.apiBaseUrl}${url}`;
 
     return super.request(apiUrl, requestOptions).catch((error, source) => {
       if (error && error.status  == 401) {
-        return this.myselfData.refresh().flatMap(() => {
-          this.myselfData.hasSignedIn().then(
-            hasSignedIn => {
-              if(hasSignedIn) {
-                return super.request(apiUrl, requestOptions);
-              } else {
-                return Observable.throw(new Error("Can't refresh the token"));
-              }
+        return this.myselfData.refresh()
+          .mergeMap(succeed => {
+            if(succeed) {
+              requestOptions = this.getRequestOptionArgs(method, url, body, options);
+              return super.request(apiUrl, requestOptions);
+            } else {
+              return Observable.throw(new Error("Can't refresh the token"));
             }
-          );
-        });
+          });
       } else {
         return Observable.throw(error);
       }

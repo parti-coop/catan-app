@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import { RequestOptions, XHRBackend } from '@angular/http';
+
 import { PartiApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
@@ -8,11 +11,14 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SignInPage } from '../pages/sign-in/sign-in';
 
-import { MyselfData } from '../providers/myself-data';
-import { Storage } from '@ionic/storage';
-
 import { PartiEnvironment } from '../config/constant';
+import { MyselfData } from '../providers/myself-data';
+import { PartiPostData } from '../providers/parti-post-data';
 import { ApiHttp } from '../providers/api-http';
+
+export function apiHttpFactory(backend: XHRBackend, defaultOptions: RequestOptions, myselfData: MyselfData, partiEnvironment: PartiEnvironment) {
+  return new ApiHttp(backend, defaultOptions, myselfData, partiEnvironment);
+}
 
 @NgModule({
   declarations: [
@@ -38,7 +44,13 @@ import { ApiHttp } from '../providers/api-http';
   providers: [
     PartiEnvironment,
     MyselfData,
+    PartiPostData,
     ApiHttp,
+    {
+      provide: ApiHttp,
+      useFactory: apiHttpFactory,
+      deps: [XHRBackend, RequestOptions, MyselfData, PartiEnvironment]
+    },
     Storage
   ]
 })

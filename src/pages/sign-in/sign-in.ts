@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { Facebook } from 'ionic-native';
 import { Platform, LoadingController } from 'ionic-angular';
 
+import 'rxjs/add/operator/toPromise';
+
 import { TabsPage } from '../../pages/tabs/tabs';
 
 import { PartiEnvironment } from '../../config/constant';
@@ -37,12 +39,12 @@ export class SignInPage {
       .then((result) => {
         return Facebook.getAccessToken()
       }).then((snsAccessToken) => {
-        return this.myselfData.auth('facebook', snsAccessToken);
+        return this.myselfData.auth('facebook', snsAccessToken).toPromise();
       }).then(() => {
         this.navCtrl.push(TabsPage);
         loading.dismiss();
       }).catch((error) => {
-        console.log(error);
+        console.log("SignInPage#login" + error);
         loading.dismiss();
         alert('엇, 뭔가 잘못되었네요.');
       });

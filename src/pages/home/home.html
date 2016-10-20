@@ -6,4 +6,10 @@
 
 <ion-content padding>
   <h2>어서오세요! {{myselfData.nickname}}님</h2>
+  <ion-list>
+    <ion-list-header>
+      내 홈
+    </ion-list-header>
+    <ion-item *ngFor="let partiPost of partiPosts">{{partiPost.title}}</ion-item>
+  </ion-list>
 </ion-content>
