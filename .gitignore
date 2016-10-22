@@ -36,3 +36,5 @@ UserInterfaceState.xcuserstate
 
 config.xml
 src/config/constant.ts
+ionic.config.json
+src/index.html

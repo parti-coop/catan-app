@@ -4,9 +4,6 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Platform } from 'ionic-angular';
 import { NativeStorage } from 'ionic-native';
 
-import { AuthToken } from '../models/auth-token';
-import { Myself } from '../models/myself';
-
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
@@ -17,17 +14,17 @@ import 'rxjs/add/observable/empty';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/fromPromise';
 
+import { AuthToken } from '../models/auth-token';
+import { Myself } from '../models/myself';
+import { PartiEnvironment } from '../config/constant';
+
 @Injectable()
 export class MyselfData {
-  apiBaseUrl = 'http://parti.dev';
   STORAGE_REFERENCE_HAS_SIGNED_IN = 'MyselfData_hasSignedIn';
   STORAGE_REFERENCE_NICKNAME = 'MyselfData_nickname';
   STORAGE_REFERENCE_IMAGE_URL = 'MyselfData_imageUrl';
   STORAGE_REFERENCE_ACCESS_TOKEN = 'MyselfData_accessToken';
   STORAGE_REFERENCE_REFRESH_TOKEN = 'MyselfData_refreshToken';
-
-  API_CLIENT_ID = '48549c7c03f1a479c6702e1b5993742b013f2e99ea551e8f90450559e24b388a';
-  API_CLIENT_SECRET = '2cef1a05f43abcead6c92605373b585e1b6d8dc539e9c3bfab41911f06f16bd9';
 
   public accessToken: string;
   public refreshToken: string;
@@ -38,7 +35,8 @@ export class MyselfData {
 
   constructor(
     private platform: Platform,
-    public http: Http
+    public http: Http,
+    private partiEnvironment: PartiEnvironment
   ) {
     this.readyToAuth = false;
 
@@ -68,16 +66,16 @@ export class MyselfData {
       provider: snsProvider,
       assertion: snsAccessToken,
       grant_type: 'assertion',
-      client_id: this.API_CLIENT_ID,
-      client_secret: this.API_CLIENT_SECRET
+      client_id: this.partiEnvironment.apiClientId,
+      client_secret: this.partiEnvironment.apiClientSecret
     };
-    return this.http.post(`${this.apiBaseUrl}/oauth/token`, tokenRequestBody)
+    return this.http.post(`${this.partiEnvironment.apiBaseUrl}/oauth/token`, tokenRequestBody)
       .map(res => <AuthToken>res.json())
       .mergeMap(response => {
         return this.storeTokenData(response.access_token, response.refresh_token);
       }).mergeMap(accessToken => {
         let meRequestOptions = new RequestOptions({headers: new Headers({ 'Authorization': `Bearer ${accessToken}` })});
-        return this.http.get(`${this.apiBaseUrl}/api/v1/users/me`, meRequestOptions)
+        return this.http.get(`${this.partiEnvironment.apiBaseUrl}/api/v1/users/me`, meRequestOptions)
                    .map(res => <Myself>res.json().user);
       }).mergeMap(response => {
         return this.storeMyselfData(response.nickname, response.image_url);
@@ -134,17 +132,17 @@ export class MyselfData {
     let tokenRequestBody = {
       refresh_token: this.refreshToken,
       grant_type: 'refresh_token',
-      client_id: this.API_CLIENT_ID,
-      client_secret: this.API_CLIENT_SECRET
+      client_id: this.partiEnvironment.apiClientId,
+      client_secret: this.partiEnvironment.apiClientSecret
     };
     console.log("MyselfData#refresh : Starting refresh-token");
-    return this.http.post(`${this.apiBaseUrl}/oauth/token`, tokenRequestBody)
+    return this.http.post(`${this.partiEnvironment.apiBaseUrl}/oauth/token`, tokenRequestBody)
       .map(res => <AuthToken>res.json())
       .mergeMap(response => {
         return this.storeTokenData(response.access_token, response.refresh_token);
       }).mergeMap(accessToken => {
         let meRequestOptions = new RequestOptions({headers: new Headers({ 'Authorization': `Bearer ${accessToken}` })});
-        return this.http.get(`${this.apiBaseUrl}/api/v1/users/me`, meRequestOptions)
+        return this.http.get(`${this.partiEnvironment.apiBaseUrl}/api/v1/users/me`, meRequestOptions)
                    .map(res => <Myself>res.json().user);
       }).mergeMap(response => {
         return this.storeMyselfData(response.nickname, response.image_url);

@@ -33,7 +33,6 @@ export class SignInPage {
     });
 
     loading.present();
-
     this.platform.ready().then(() => {
       Facebook.login(["email"])
       .then((result) => {
@@ -44,7 +43,7 @@ export class SignInPage {
         this.navCtrl.push(TabsPage);
         loading.dismiss();
       }).catch((error) => {
-        console.log("SignInPage#login" + error);
+        console.log("SignInPage#login " + error);
         loading.dismiss();
         alert('엇, 뭔가 잘못되었네요.');
       });

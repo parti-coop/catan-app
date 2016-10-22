@@ -10,7 +10,9 @@
   <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#4e8ef7">
-
+  <% if (useProxy) { %>
+  <meta http-equiv="Content-Security-Policy" content="default-src * gap: 'unsafe-inline' 'unsafe-eval' http:; connect-src ws: http:;">
+  <% } %>
   <!-- un-comment this code to enable service worker
   <script>
     if ('serviceWorker' in navigator) {

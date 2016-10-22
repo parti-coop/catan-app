@@ -33,9 +33,9 @@
   "devDependencies": {
     "@ionic/app-scripts": "^0.0.30",
     "gulp": "^3.9.1",
-    "gulp-ionic-channels": "0.0.4",
-    "gulp-ng-constant": "^2.0.0-2",
-    "gulp-rename": "^1.2.2",
+    "js-yaml": "^3.6.1",
+    "gulp-template": "^4.0.0",
+    "gulp-ext": "^1.0.0",
     "typescript": "^2.0.3"
   },
   "cordovaPlugins": [

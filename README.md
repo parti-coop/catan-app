@@ -4,15 +4,25 @@
 
 ### 설정값 관리
 
-config.json에 설정한다. 이 값은 config.xml 생성과 src/config/constant.ts를 생성하는데 사용된다. 이 생성 과정은 gulpfile.js에 gulp taks로 정의되어 있다. 이 gulp task는 npm script로 ionic cli 구동 시 호출된다. 이 npm script 설정은 package.json에 있다.
+settings/config.yml에 설정한다. 이 값을 settings 아래 템플릿에 적용하여 실제 적용되는 소스가 생성된다. 이 생성 과정은 gulpfile.js에 gulp taks로 정의되어 있다. 
 
-### cordova 설정을 위한 config.xml
+이 gulp task를 실행하는 방법은 아래와 같다.
 
-config.tpl.xml을 수정한다. config.xml은 config.tpl.xml에서 자동 생성된다.
+```
+PARTI_ENV=development-proxy gulp reset
+```
+
+위에 예시는 PARTI_ENV에 development-proxy를 설정하고 있다. development환경으로 수행되며 proxy 설정한다는 뜻이다. development만을 주면 proxy설정 없이 쓸 수 있다. liveload를 이용하는 경우에 CORS문제로 인해 proxy 설정을 이용해야 한다.
+
+이 gulp task는 npm script watch 구동 직전에 호출되기도 한다. npm script watch는 ionic cli이 만든 npm script 설정이나 ionic cli 자체에 의해 호출되는데 자세한 것은 ionic2 매뉴얼을 참조한다. ionic cli에 의해 npm script 설정은 package.json에 있다. ionic cli에 의해 위에 gulp task가 호출 될 때도 PARTI_ENV값을 인식할 수 있다.
+
+### 템플릿 위치
+
+settings/templates에 있다.
 
 ## 개발 환경 설정
 
-### gulp를 설치합니다
+### gulp를 설치
 
 ```
 $ npm install -g gulp
@@ -20,28 +30,28 @@ $ npm install -g gulp
 
 ## 개발
 
-### 테스트를 위한 ionic serve 띄우기
+### 개발을 위한 ionic emulator 띄우기
 
-로컬서버(http://part.dev)와 연동하는 ionic serve는 아래와 같이 구동시킨다.
-```
-$ ionic serve
-```
+로컬서버(http://parti.dev)와 연동하는 에뮬레이터 위에 앱은 아래와 같이 구동시킨다.
 
-테스트서버(http://dev.parti.xyz)와 연동하는 ionic serve는 아래와 같이 구동시킨다.
+먼저 설정한다. 이 설정은 다른 환경으로 바꾸는 경우나 플랫폼에 설정을 건드리는 경우는 꼭 해야한다.
 ```
-$ PARTI_ENV=staging ionic serve
+$ PARTI_ENV=development-proxy gulp reset
 ```
 
-### 앱 빌드하거나 에뮬레이팅해보기
+ios 경우 위의 gulp reset task를 수행하였다면 Keychain Sharing Capability를 설정해야 한다. /platforms/ios/앱이름.xcodeproj 파일을 연다. 프로젝트이름을 클릭하고 > Capabilities > Keychain Sharing을 on한 뒤 다시 빌드한다.
 
-앱을 빌드하기 전에 환경 설정을 한다. 환경값은 development, staging, production이 가능하다. 마지막에서 수행한 환경 설정의 환경값과 같다면 수행할 필요가 없다. 
+이제 에뮬레이터 위에 앱을 띄운다. target은 ios-sim showdevicetypes 명령을 통해 로컬에 있는 것을 적절히 고른다.
 ```
-$ PARTI_ENV=환경값 gulp reset
+$ ionic emulate ios -l -c -s --target="iPhone-6s, 10.0" --address localhost
 ```
 
-연동하는 앱은 아래와 같이 빌드한다.
+소스를 수정한 뒤 적용하려면 다른 세션을 열어서 빌드를 수행한다.
 ```
 $ ionic build ios
 ```
 
-ios 경우 환경 설정을 수행하였다면 Keychain Sharing Capability를 설정해야 한다. /platforms/ios/앱이름.xcodeproj 파일을 연다. 프로젝트이름을 클릭하고 > Capabilities > Keychain Sharing을 on한 뒤 다시 빌드한다.
+개발 도중에 플랫폼을 건드리지 않는 설정을 변경한 경우엔 gulp reset task를 할 필요가 없다. 아래 명령으로 간단히 수행할 수 있다. 이 task를 수행하면 ios라도 플랫폼의 Keychain Sharing Capability 설정이 변경되지 않는다.
+```
+$ PARTI_ENV=development-proxy gulp config
+```

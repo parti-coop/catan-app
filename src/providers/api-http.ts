@@ -1,15 +1,16 @@
 import { Injectable } from "@angular/core";
 import { Http, Headers } from "@angular/http";
 import { Events } from 'ionic-angular';
-import { RequestOptions, XHRBackend, RequestMethod, Response, RequestOptionsArgs } from '@angular/http';
-
-import { PartiEnvironment } from '../config/constant';
-import { MyselfData } from '../providers/myself-data';
+import { RequestOptions, XHRBackend, RequestMethod, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
+
+import { PartiEnvironment } from '../config/constant';
+import { MyselfData } from '../providers/myself-data';
 
 @Injectable()
 export class ApiHttp extends Http {
@@ -23,31 +24,31 @@ export class ApiHttp extends Http {
     super(backend, defaultOptions);
   }
 
-  public get(url: string, options?: RequestOptionsArgs): Observable<Response> {
+  public get(url: string, options?: RequestOptions): Observable<Response> {
     return this.intercept(RequestMethod.Get, url, null, options);
   }
 
-  public post(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
+  public post(url: string, body: string, options?: RequestOptions): Observable<Response> {
     return this.intercept(RequestMethod.Post, url, body, options);
   }
 
-  public put(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
+  public put(url: string, body: string, options?: RequestOptions): Observable<Response> {
     return this.intercept(RequestMethod.Put, url, body, options);
   }
 
-  public delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
+  public delete(url: string, options?: RequestOptions): Observable<Response> {
     return this.intercept(RequestMethod.Delete, url, null, options);
   }
 
-  public patch(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
+  public patch(url: string, body: string, options?: RequestOptions): Observable<Response> {
     return this.intercept(RequestMethod.Patch, url, body, options);
   }
 
-  public head(url: string, options?: RequestOptionsArgs): Observable<Response> {
+  public head(url: string, options?: RequestOptions): Observable<Response> {
     return this.intercept(RequestMethod.Head, url, null, options);
   }
 
-  getRequestOptionArgs(method: RequestMethod, url: string, body?: string, options?: RequestOptionsArgs): RequestOptionsArgs {
+  getRequestOption(method: RequestMethod, url: string, body?: string, options?: RequestOptions): RequestOptions {
     if (options == null) {
       options = new RequestOptions();
     }
@@ -61,15 +62,15 @@ export class ApiHttp extends Http {
     return options;
   }
 
-  intercept(method: RequestMethod, url: string, body?: string, options?: RequestOptionsArgs): Observable<Response> {
-    var requestOptions: RequestOptionsArgs = this.getRequestOptionArgs(method, url, body, options);
+  intercept(method: RequestMethod, url: string, body?: string, options?: RequestOptions): Observable<Response> {
+    var requestOptions: RequestOptions = this.getRequestOption(method, url, body, options);
     let apiUrl = `${this.partiEnvironment.apiBaseUrl}${url}`;
 
     return super.request(apiUrl, requestOptions).catch((error, source) => {
       if (error && error.status  == 401) {
         return this.myselfData.refresh()
           .mergeMap(succeed => {
-            requestOptions = this.getRequestOptionArgs(method, url, body, options);
+            requestOptions = this.getRequestOption(method, url, body, options);
             return super.request(apiUrl, requestOptions);
           }).catch(error => {
             this.events.publish('user:signout');

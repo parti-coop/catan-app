@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="<%= appId %>" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name><%= appName %></name>
-  <description>함께 만드는 온라인 광장</description>
+<widget id="<%= constants.appId %>" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name><%= constants.appName %></name>
+  <description>함께 만드는 온라인 광장1</description>
   <author email="help@parti.xyz" href="http://parti.xyz">빠흐띠</author>
+  <% if (useProxy) { %>
   <content src="index.html"/>
   <access origin="*"/>
+  <allow-navigation href="*" />
+  <allow-intent href="*" />
+  <% } %>
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
   <allow-intent href="tel:*"/>
@@ -39,7 +43,7 @@
   <plugin name="cordova-plugin-nativestorage"/>
   <plugin name="ionic-plugin-keyboard" spec="~2.2.1"/>
   <plugin name="cordova-plugin-facebook4" spec="~1.7.4">
-    <variable name="APP_ID" value="<%= facebookAppId %>" />
-    <variable name="APP_NAME" value="<%= facebookAppName %>" />
+    <variable name="APP_ID" value="<%= constants.facebookAppId %>" />
+    <variable name="APP_NAME" value="<%= constants.facebookAppName %>" />
   </plugin>
 </widget>

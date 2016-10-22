@@ -1,29 +1,31 @@
 var gulp = require('gulp');
-var ionicChannels = require('gulp-ionic-channels');
-var ngConstant = require('gulp-ng-constant');
-var rename = require('gulp-rename');
 var exec = require('child_process').exec;
+var yaml = require('js-yaml');
+var fs = require('fs');
+var _ = require('lodash');
+var template = require('gulp-template');
+var ext = require('gulp-ext');
 
 gulp.task('config', function() {
   var env = 'development';
   if(process.env.PARTI_ENV) {
-    var env = process.env.PARTI_ENV;
+    env = process.env.PARTI_ENV;
     console.log("Parti Environment: " + env);
   }
 
-  var partiConfig = require('./config.json');
-  var envConfig = partiConfig[process.env];
+  let postfixProxy = '-proxy';
+  var useProxy = false;
+  if(env.endsWith(postfixProxy)) {
+    useProxy = true;
+    env = env.replace(postfixProxy,'');
+  }
 
-  gulp.src('./config.json')
-  .pipe(ionicChannels({
-    channelTag: env
-  }))
-  .pipe(ngConstant({
-    templatePath: 'constant.tpl.ejs',
-    wrap: false
-  }))
-  .pipe(rename('constant.ts'))
-  .pipe(gulp.dest('src/config'));
+  let constants = yaml.safeLoad(fs.readFileSync('./settings/config.yml', 'utf-8'))[env];
+  constants.env = env;
+  gulp.src('./settings/templates/**/*.tpl')
+    .pipe(template({constants: constants, useProxy: useProxy}))
+    .pipe(ext.crop())
+    .pipe(gulp.dest("./"));
 });
 
 gulp.task('reset', ['config'], function() {
