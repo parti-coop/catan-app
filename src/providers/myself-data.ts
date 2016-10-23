@@ -151,7 +151,7 @@ export class MyselfData {
         return this._hasSignedIn;
       }).catch((error) => {
         this._hasSignedIn = false;
-        console.log("MyselfData#refresh" + error);
+        console.log("MyselfData#refresh : " + error);
         throw error;
       });
   }

@@ -3,13 +3,35 @@
     <ion-title>{{partiEnvironment.appTitle}}</ion-title>
   </ion-navbar>
 </ion-header>
-
-<ion-content padding>
+<ion-content>
   <h2>어서오세요! {{myselfData.nickname}}님</h2>
   <ion-list>
     <ion-list-header>
       내 홈
     </ion-list-header>
-    <ion-item *ngFor="let partiPost of partiPosts">{{partiPost.title}}</ion-item>
+    <ion-item *ngFor='let partiPost of partiPosts'>
+      <ion-row class='parti'>
+        <ion-col with-10>
+          <img src='{{ partiPost.parti.logo_url }}'>
+        </ion-col>
+        <ion-col class='parti-title' width-90>
+          {{ partiPost.parti.title }}
+          <span *ngIf='partiPost.parti.group' class='group'>
+            <
+            {{ partiPost.parti.group.name }}
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row class='parti-post'>
+        <ion-col>
+          {{ partiPost.title }}
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf='partiPost.body'>
+        <ion-col>
+          <span [innerHTML]='partiPost.body'></span>
+        </ion-col>
+      </ion-row>
+    </ion-item>
   </ion-list>
 </ion-content>

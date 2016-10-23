@@ -46,12 +46,16 @@ ios 경우 위의 gulp reset task를 수행하였다면 Keychain Sharing Capabil
 $ ionic emulate ios -l -c -s --target="iPhone-6s, 10.0" --address localhost
 ```
 
-소스를 수정한 뒤 적용하려면 다른 세션을 열어서 빌드를 수행한다.
+소스를 수정한 뒤 바로 적용되도록 하려면 다른 터미널 세션을 열어서 아래를 수행한다.
 ```
-$ ionic build ios
+$ PARTI_ENV=development-proxy npm run watch
 ```
 
-개발 도중에 플랫폼을 건드리지 않는 설정을 변경한 경우엔 gulp reset task를 할 필요가 없다. 아래 명령으로 간단히 수행할 수 있다. 이 task를 수행하면 ios라도 플랫폼의 Keychain Sharing Capability 설정이 변경되지 않는다.
+개발 도중에 플랫폼을 건드리지 않는 설정을 변경한 경우엔 gulp reset task를 할 필요가 없다. 또다른 터미널 세션에서 아래 명령으로 간단히 수행할 수 있다. 이 task를 수행하면 ios라도 플랫폼의 Keychain Sharing Capability 설정이 변경되지 않는다.
 ```
 $ PARTI_ENV=development-proxy gulp config
 ```
+
+### haml을 통한 레이아웃
+
+src/pages 아래 haml은 동일한 폴더에 html로 컴파일 됩니다.

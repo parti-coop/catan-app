@@ -5,6 +5,20 @@ var fs = require('fs');
 var _ = require('lodash');
 var template = require('gulp-template');
 var ext = require('gulp-ext');
+var haml = require('gulp-ruby-haml');
+var watch = require('gulp-watch');
+
+gulp.task('build-haml', function(done) {
+  gulp.src('./src/pages/**/*.html.haml')
+    .pipe(haml().on('error', function(e) { console.log(e.message); }))
+    .pipe(ext.crop())
+    .pipe(gulp.dest('./src/pages'))
+    .on('end', done);
+});
+
+gulp.task('watch-haml', [ 'build-haml' ], function() {
+  watch([ './src/**/*.haml' ], function() { gulp.start('build-haml'); });
+});
 
 gulp.task('config', function() {
   var env = 'development';
