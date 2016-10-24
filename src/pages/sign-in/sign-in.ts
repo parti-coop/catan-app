@@ -23,13 +23,9 @@ export class SignInPage {
     private myselfData: MyselfData,
   ) {}
 
-  ionViewDidLoad() {
-    console.log('Hello SignIn Page');
-  }
-
   login() {
     let loading = this.loadingCtrl.create({
-      content: 'Please wait...'
+      content: '잠시만 기다려 주세요...'
     });
 
     loading.present();
@@ -43,9 +39,11 @@ export class SignInPage {
         this.navCtrl.push(TabsPage);
         loading.dismiss();
       }).catch((error) => {
-        console.log("SignInPage#login " + error);
+        console.log("SignInPage#login : " + error);
         loading.dismiss();
-        alert('엇, 뭔가 잘못되었네요.');
+        if(error !== "User cancelled.") {
+          alert('엇, 뭔가 잘못되었네요.');
+        }
       });
     });
   }

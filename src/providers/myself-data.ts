@@ -52,10 +52,14 @@ export class MyselfData {
         this.accessToken = values[2];
         this.refreshToken = values[3];
         this.readyToAuth = true;
-        console.log("MyselfData : 이미 로그인");
+        if(this._hasSignedIn) {
+          console.log("MyselfData : 이미 로그인");
+        } else {
+          console.log("MyselfData : 로그아웃");
+        }
       }).catch(error => {
         console.log("MyselfData : 로그인 정보 없음");
-        console.log(error);
+        console.log(JSON.stringify(error));
         this._hasSignedIn = false;
       });
     });

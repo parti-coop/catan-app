@@ -3,9 +3,6 @@ development: &development-base
   appName: Parti-D
   appTitle: 빠띠 D
   apiBaseUrl: "http://parti.dev"
-  apiClientId: "48549c7c03f1a479c6702e1b5993742b013f2e99ea551e8f90450559e24b388a"
-  apiClientSecret: "2cef1a05f43abcead6c92605373b585e1b6d8dc539e9c3bfab41911f06f16bd9"
-  appKeyChaingAccessGroup: xyz.parti-development
   facebookAppName: parti-xyz - local
   facebookAppId: "824122964355260"
 staging:
@@ -13,7 +10,6 @@ staging:
   appName: Parti-S
   appTitle: 빠띠 S
   apiBaseUrl: "http://dev.parti.xyz"
-  appKeyChaingAccessGroup: xyz.parti-staging
   facebookAppName: parti-xyz - dev
   facebookAppId: "769069449860612"
 production:
@@ -21,6 +17,5 @@ production:
   appName: Parti
   appTitle: 빠띠
   apiBaseUrl: "http://parti.xyz"
-  appKeyChaingAccessGroup: xyz.parti
   facebookAppName: parti-xyz
   facebookAppId: "743728572394700"

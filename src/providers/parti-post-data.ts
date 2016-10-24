@@ -8,9 +8,9 @@ import { PartiPost } from '../models/parti-post'
 
 @Injectable()
 export class PartiPostData {
-  constructor(private http: ApiHttp) {
-    console.log("PartiPostData!!!!")
-  }
+  constructor(
+    private http: ApiHttp
+  ) {}
 
   dashboard(): Observable<PartiPost[]> {
     return this.http.get('/api/v1/dashboard/posts')

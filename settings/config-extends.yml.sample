@@ -1,0 +1,9 @@
+development: &development-base
+  apiClientId: "x"
+  apiClientSecret: "x"
+staging:
+  apiClientId: "x"
+  apiClientSecret: "x"
+production:
+  apiClientId: "x"
+  apiClientSecret: "x"

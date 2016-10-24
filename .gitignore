@@ -33,8 +33,9 @@ $RECYCLE.BIN/
 Thumbs.db
 UserInterfaceState.xcuserstate
 
-
+settings/config-extends.yml
 config.xml
 src/config/constant.ts
-ionic.config.json
 src/index.html
+ionic.config.json
+
