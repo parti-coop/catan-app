@@ -1,4 +1,4 @@
-development: &development-base
+development:
   apiClientId: "x"
   apiClientSecret: "x"
 staging:
