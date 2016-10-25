@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { __platform_browser_private__, DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Pipe({
   name: 'simpleFormat'

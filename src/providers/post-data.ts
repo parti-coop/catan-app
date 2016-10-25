@@ -4,16 +4,16 @@ import 'rxjs/add/operator/map';
 
 // import { Http, Headers, RequestOptions } from '@angular/http';
 import { ApiHttp } from '../providers/api-http'
-import { PartiPost } from '../models/parti-post'
+import { Post } from '../models/post'
 
 @Injectable()
-export class PartiPostData {
+export class PostData {
   constructor(
     private http: ApiHttp
   ) {}
 
-  dashboard(): Observable<PartiPost[]> {
+  dashboard(): Observable<Post[]> {
     return this.http.get('/api/v1/dashboard/posts')
-      .map(res => <PartiPost[]>(res.json().posts));
+      .map(res => <Post[]>(res.json().posts));
   }
 }

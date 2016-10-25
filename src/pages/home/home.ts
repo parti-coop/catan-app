@@ -4,25 +4,25 @@ import { NavController } from 'ionic-angular';
 
 import { PartiEnvironment } from '../../config/constant';
 import { MyselfData } from '../../providers/myself-data';
-import { PartiPostData } from '../../providers/parti-post-data';
-import { PartiPost } from '../../models/parti-post';
+import { PostData } from '../../providers/post-data';
+import { Post } from '../../models/post';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  partiPosts: PartiPost[];
+  posts: Post[];
 
   constructor(
     public navCtrl: NavController,
     public partiEnvironment: PartiEnvironment,
     public myselfData: MyselfData,
-    partiPostData: PartiPostData,
+    postData: PostData,
     platform: Platform
   ) {
-    partiPostData.dashboard().subscribe(partiPosts => {
-      this.partiPosts = partiPosts;
+    postData.dashboard().subscribe(posts => {
+      this.posts = posts;
     });
   }
 }

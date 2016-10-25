@@ -9,23 +9,23 @@
     <ion-list-header>
       내 홈
     </ion-list-header>
-    <ion-item *ngFor='let partiPost of partiPosts'>
+    <ion-item *ngFor='let post of posts'>
       <ion-row class='parti'>
         <ion-col with-10>
-          <img src='{{ partiPost.parti.logo_url }}'>
+          <img src='{{ post.parti.logo_url }}'>
         </ion-col>
         <ion-col class='parti-title' width-90>
-          {{ partiPost.parti.title }}
-          <span *ngIf='partiPost.parti.group' class='group'>
+          {{ post.parti.title }}
+          <span *ngIf='post.parti.group' class='group'>
             <
-            {{ partiPost.parti.group.name }}
+            {{ post.parti.group.name }}
           </span>
         </ion-col>
       </ion-row>
       <div class='post-title'>
-        {{ partiPost.title }}
+        {{ post.title }}
       </div>
-      <div [innerHTML]='partiPost.body | simpleFormat ' class='post-body'></div>
+      <div [innerHTML]='post.body | simpleFormat ' class='post-body'></div>
     </ion-item>
   </ion-list>
 </ion-content>

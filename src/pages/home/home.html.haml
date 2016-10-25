@@ -6,16 +6,16 @@
   %ion-list(text-wrap)
     %ion-list-header
       내 홈
-    %ion-item{ '*ngFor': 'let partiPost of partiPosts' }
+    %ion-item{ '*ngFor': 'let post of posts' }
       %ion-row.parti
         %ion-col(with-10)
-          %img(src="{{ partiPost.parti.logo_url }}")
+          %img(src="{{ post.parti.logo_url }}")
         %ion-col.parti-title(width-90)
-          {{ partiPost.parti.title }}
-          %span.group{ '*ngIf': 'partiPost.parti.group' }
+          {{ post.parti.title }}
+          %span.group{ '*ngIf': 'post.parti.group' }
             <
-            {{ partiPost.parti.group.name }}
+            {{ post.parti.group.name }}
       .post-title
-        {{ partiPost.title }}
-      .post-body{ '[innerHTML]': "partiPost.body | simpleFormat " }
+        {{ post.title }}
+      .post-body{ '[innerHTML]': "post.body | simpleFormat " }
 

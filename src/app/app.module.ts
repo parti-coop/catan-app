@@ -18,7 +18,7 @@ import { SignInPage } from '../pages/sign-in/sign-in';
 
 import { PartiEnvironment } from '../config/constant';
 import { MyselfData } from '../providers/myself-data';
-import { PartiPostData } from '../providers/parti-post-data';
+import { PostData } from '../providers/post-data';
 import { ApiHttp } from '../providers/api-http';
 
 export function apiHttpFactory(
@@ -62,7 +62,7 @@ export function apiHttpFactory(
   providers: [
     PartiEnvironment,
     MyselfData,
-    PartiPostData,
+    PostData,
     ApiHttp,
     {
       provide: ApiHttp,
