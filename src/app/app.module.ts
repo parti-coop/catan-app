@@ -3,8 +3,12 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { RequestOptions, XHRBackend } from '@angular/http';
 import { Events } from 'ionic-angular';
+import { __platform_browser_private__ } from '@angular/platform-browser';
 
 import { PartiApp } from './app.component';
+
+import { SafePipe } from '../pipes/safe-pipe';
+import { SimpleFormatPipe } from '../pipes/simple-format-pipe';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -39,7 +43,9 @@ export function apiHttpFactory(
     ContactPage,
     HomePage,
     TabsPage,
-    SignInPage
+    SignInPage,
+    SafePipe,
+    SimpleFormatPipe
   ],
   imports: [
     IonicModule.forRoot(PartiApp)
@@ -63,7 +69,8 @@ export function apiHttpFactory(
       useFactory: apiHttpFactory,
       deps: [XHRBackend, RequestOptions, MyselfData, PartiEnvironment, Events]
     },
-    Storage
+    Storage,
+    __platform_browser_private__.BROWSER_SANITIZATION_PROVIDERS
   ]
 })
 export class AppModule {}

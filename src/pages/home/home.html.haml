@@ -3,7 +3,7 @@
     %ion-title {{partiEnvironment.appTitle}}
 %ion-content
   %h2 어서오세요! {{myselfData.nickname}}님
-  %ion-list
+  %ion-list(text-wrap)
     %ion-list-header
       내 홈
     %ion-item{ '*ngFor': 'let partiPost of partiPosts' }
@@ -15,9 +15,7 @@
           %span.group{ '*ngIf': 'partiPost.parti.group' }
             <
             {{ partiPost.parti.group.name }}
-      %ion-row.parti-post
-        %ion-col
-          {{ partiPost.title }}
-      %ion-row{ '*ngIf': 'partiPost.body' }
-        %ion-col
-          %span{ '[innerHTML]': 'partiPost.body' }
+      .post-title
+        {{ partiPost.title }}
+      .post-body{ '[innerHTML]': "partiPost.body | simpleFormat " }
+
