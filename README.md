@@ -9,6 +9,7 @@ ios 개발 환경과 android 개발환경, nodejs, cordova, ionic이 이미 설�
 라이브러리를 다운로드 받습니다.
 
 ```
+$ npm install ios-sim -g
 $ npm install -g gulp
 $ npm install
 ```
