@@ -59,11 +59,7 @@
   ],
   "cordovaPlatforms": [
     "ios",
-    {
-      "platform": "ios",
-      "version": "",
-      "locator": "ios"
-    }
+    "android"
   ],
   "description": "catan-app: An Ionic project"
 }
