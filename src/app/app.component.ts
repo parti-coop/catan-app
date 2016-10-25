@@ -36,6 +36,10 @@ export class PartiApp {
   }
 
   listenToLoginEvents() {
+    this.events.subscribe('user:signerror', () => {
+      alert('로그인 하는 중에 뭔가 잘못되었네요. 다시 로그인해 주세요!');
+      this.navCtrl.setRoot(SignInPage);
+    });
     this.events.subscribe('user:signout', () => {
       alert('로그아웃 되었습니다. 다시 로그인해 주세요!');
       this.navCtrl.setRoot(SignInPage);

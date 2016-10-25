@@ -73,10 +73,11 @@ export class ApiHttp extends Http {
             requestOptions = this.getRequestOption(method, url, body, options);
             return super.request(apiUrl, requestOptions);
           }).catch(error => {
-            this.events.publish('user:signout');
             if(this.myselfData.hasSignedIn) {
+              this.events.publish('user:signerror');
               return Observable.throw(new Error("Can't refresh the token"));
             } else {
+              this.events.publish('user:signout');
               console.log("ApiHttp#intercept : signout out!");
               return Observable.empty();
             }
