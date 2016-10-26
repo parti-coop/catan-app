@@ -1,10 +1,11 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Injectable, Pipe } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Pipe({
-  name: 'simpleFormat'
+  name: 'partiSimpleFormat'
 })
-export class SimpleFormatPipe implements PipeTransform {
+@Injectable()
+export class PartiSimpleFormatPipe {
   constructor(private sanitizer: DomSanitizer) {
   }
 

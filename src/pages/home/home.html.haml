@@ -7,15 +7,15 @@
     %ion-list-header
       내 홈
     %ion-item{ '*ngFor': 'let post of posts' }
-      %ion-row.parti
-        %ion-col(with-10)
-          %img(src="{{ post.parti.logo_url }}")
-        %ion-col.parti-title(width-90)
-          {{ post.parti.title }}
-          %span.group{ '*ngIf': 'post.parti.group' }
-            <
-            {{ post.parti.group.name }}
+      .post-parti
+        .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + post.parti.logo_url + ')' }" }
+        .parti-title {{ post.parti.title }}
+        .parti-group{ '*ngIf': 'post.parti.group' }
+          <
+          {{ post.parti.group.name }}
+      .post-head
+        %parti-post-byline{ '[post]': 'post' }
       .post-title
         {{ post.title }}
-      .post-body{ '[innerHTML]': "post.body | simpleFormat " }
+      .post-body{ '[innerHTML]': "post.body | partiSimpleFormat " }
 

@@ -10,22 +10,21 @@
       내 홈
     </ion-list-header>
     <ion-item *ngFor='let post of posts'>
-      <ion-row class='parti'>
-        <ion-col with-10>
-          <img src='{{ post.parti.logo_url }}'>
-        </ion-col>
-        <ion-col class='parti-title' width-90>
-          {{ post.parti.title }}
-          <span *ngIf='post.parti.group' class='group'>
-            <
-            {{ post.parti.group.name }}
-          </span>
-        </ion-col>
-      </ion-row>
+      <div class='post-parti'>
+        <div [ngStyle]="{ 'background-image': 'url(' + post.parti.logo_url + ')' }" class='parti-logo'></div>
+        <div class='parti-title'>{{ post.parti.title }}</div>
+        <div *ngIf='post.parti.group' class='parti-group'>
+          <
+          {{ post.parti.group.name }}
+        </div>
+      </div>
+      <div class='post-head'>
+        <parti-post-byline [post]='post'></parti-post-byline>
+      </div>
       <div class='post-title'>
         {{ post.title }}
       </div>
-      <div [innerHTML]='post.body | simpleFormat ' class='post-body'></div>
+      <div [innerHTML]='post.body | partiSimpleFormat ' class='post-body'></div>
     </ion-item>
   </ion-list>
 </ion-content>

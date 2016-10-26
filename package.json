@@ -15,7 +15,7 @@
     "watch:settings": "gulp watch-settings",
     "watch": "npm-run-all --parallel watch:*",
     "prebuild": "gulp build-haml",
-    "prewatch": "gulp settings"
+    "prewatch": "npm install && gulp settings"
   },
   "dependencies": {
     "@angular/common": "2.1.0",
@@ -32,7 +32,8 @@
     "@ionic/storage": "1.1.6",
     "ionic-native": "2.2.4",
     "rxjs": "5.0.0-rc.1",
-    "zone.js": "0.6.26"
+    "zone.js": "0.6.26",
+    "angular2-moment": "1.0.0-beta.6"
   },
   "devDependencies": {
     "@ionic/app-scripts": "0.0.36",
@@ -40,7 +41,7 @@
     "js-yaml": "^3.6.1",
     "gulp-template": "^4.0.0",
     "gulp-ext": "^1.0.0",
-    "typescript": "2.0.3",
+    "typescript": "2.0.6",
     "gulp-ruby-haml": "^0.0.9",
     "npm-run-all": "^3.1.1",
     "gulp-watch": "^4.3.10",

@@ -1,4 +1,24 @@
 page-home {
+  .post-parti {
+    border-bottom: 1px solid #efefef;
+    padding-bottom: 6px;
+    .parti-logo {
+      height: 20px;
+      width: 20px;
+      background-repeat: none;
+      background-position: center;
+      background-size: contain;
+      vertical-align: middle;
+    }
+  }
+  .post-head {
+    padding-top: 6px;
+  }
+  .parti-logo,
+  .parti-title,
+  .parti-group {
+    display: inline-block;
+  }
   .post-title {
     font-weight: bold;
   }

@@ -10,10 +10,10 @@ var watch = require('gulp-watch');
 var assign = require('assign-deep');
 
 gulp.task('build-haml', function(done) {
-  gulp.src('./src/pages/**/*.html.haml')
+  gulp.src('./src/**/*.html.haml')
     .pipe(haml().on('error', function(e) { console.log(e.message); }))
     .pipe(ext.crop())
-    .pipe(gulp.dest('./src/pages'))
+    .pipe(gulp.dest('./src'))
     .on('end', done);
 });
 

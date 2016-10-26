@@ -1,4 +1,4 @@
-export interface Myself {
-  nickname: string;
-  image_url: string;
+import { User } from '../models/user';
+
+export interface Myself extends User {
 }
