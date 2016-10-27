@@ -1,0 +1,13 @@
+.ion-parti {
+  ion-item.item-block {
+    padding: 0;
+    .item-inner {
+      padding: 0;
+      border: none;
+    }
+    ion-label {
+      padding: 0;
+      margin: 0;
+    }
+  }
+}

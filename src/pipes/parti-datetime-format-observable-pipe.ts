@@ -1,6 +1,5 @@
-import { Injectable, ChangeDetectorRef, Pipe } from '@angular/core';
+import { Injectable, Pipe } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { AsyncPipe } from '@angular/common';
 import moment from 'moment';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/interval';

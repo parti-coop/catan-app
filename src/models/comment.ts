@@ -1,12 +1,11 @@
-import { Parti } from '../models/parti';
 import { User } from '../models/user';
 
-export interface Post {
+export interface Comment {
   id: number;
-  title: string;
   body: string;
-  parti: Parti;
+  upvotes_count: number;
   user: User;
   created_at: string;
+  is_mentionable: boolean;
   is_upvotable: boolean;
 }

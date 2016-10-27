@@ -3,28 +3,44 @@
     <ion-title>{{partiEnvironment.appTitle}}</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content>
+<ion-content class='ion-parti'>
   <h2>어서오세요! {{myselfData.nickname}}님</h2>
   <ion-list text-wrap>
     <ion-list-header>
       내 홈
     </ion-list-header>
-    <ion-item *ngFor='let post of posts'>
-      <div class='post-parti'>
-        <div [ngStyle]="{ 'background-image': 'url(' + post.parti.logo_url + ')' }" class='parti-logo'></div>
-        <div class='parti-title'>{{ post.parti.title }}</div>
-        <div *ngIf='post.parti.group' class='parti-group'>
-          <
-          {{ post.parti.group.name }}
+    <ion-item *ngFor='let post of posts' class='ion-parti'>
+      <div class='post'>
+        <div class='post-parti'>
+          <div [ngStyle]="{ 'background-image': 'url(' + post.parti.logo_url + ')' }" class='parti-logo'></div>
+          <div class='parti-title'>{{ post.parti.title }}</div>
+          <div *ngIf='post.parti.group' class='parti-group'>
+            <
+            {{ post.parti.group.name }}
+          </div>
+        </div>
+        <div class='post-head'>
+          <parti-post-byline [post]='post'></parti-post-byline>
+        </div>
+        <div class='post-title'>
+          {{ post.title }}
+        </div>
+        <div [innerHTML]='post.body | partiSimpleFormat ' class='post-body'></div>
+        <div class='post-comments'>
+          <div *ngFor='let comment of post.comments' class='comment'>
+            <div class='comment-header'>
+              <div class='comment-byline'>
+                <div [ngStyle]="{ 'background-image': 'url(' + comment.user.image_url + ')' }" class='user-image'></div>
+                <div class='user-nickname'>{{ comment.user.nickname }}</div>
+                <div class='comment-created-at'>
+                  {{ comment.created_at | partiDateTimeFormatObservable | async }}
+                </div>
+              </div>
+            </div>
+            <div [innerHTML]='comment.body | partiSimpleFormat ' class='comment-body'></div>
+          </div>
         </div>
       </div>
-      <div class='post-head'>
-        <parti-post-byline [post]='post'></parti-post-byline>
-      </div>
-      <div class='post-title'>
-        {{ post.title }}
-      </div>
-      <div [innerHTML]='post.body | partiSimpleFormat ' class='post-body'></div>
     </ion-item>
   </ion-list>
 </ion-content>
