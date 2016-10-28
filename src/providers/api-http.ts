@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Http, Headers } from "@angular/http";
 import { Events } from 'ionic-angular';
-import { RequestOptions, XHRBackend, RequestMethod, Response } from '@angular/http';
+import { RequestOptions, RequestMethod, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
@@ -13,16 +13,13 @@ import { PartiEnvironment } from '../config/constant';
 import { MyselfData } from '../providers/myself-data';
 
 @Injectable()
-export class ApiHttp extends Http {
+export class ApiHttp {
   constructor(
-    backend: XHRBackend,
-    defaultOptions: RequestOptions,
     private myselfData: MyselfData,
     private partiEnvironment: PartiEnvironment,
-    private events: Events
-  ) {
-    super(backend, defaultOptions);
-  }
+    private events: Events,
+    private http: Http
+  ) {}
 
   public get(url: string, options?: RequestOptions): Observable<Response> {
     return this.intercept(RequestMethod.Get, url, null, options);
@@ -55,7 +52,9 @@ export class ApiHttp extends Http {
     if (options.headers == null) {
       options.headers = new Headers();
     }
-    options.headers.append('Authorization', `Bearer ${this.myselfData.accessToken}`);
+    if (this.myselfData.accessToken) {
+      options.headers.append('Authorization', `Bearer ${this.myselfData.accessToken}`);
+    }
     options.headers.append('Content-Type', 'application/json');
     options.method = method;
     options.body = body;
@@ -66,12 +65,12 @@ export class ApiHttp extends Http {
     var requestOptions: RequestOptions = this.getRequestOption(method, url, body, options);
     let apiUrl = `${this.partiEnvironment.apiBaseUrl}${url}`;
 
-    return super.request(apiUrl, requestOptions).catch((error, source) => {
+    return this.http.request(apiUrl, requestOptions).catch((error, source) => {
       if (error && error.status  == 401) {
         return this.myselfData.refresh()
           .mergeMap(succeed => {
             requestOptions = this.getRequestOption(method, url, body, options);
-            return super.request(apiUrl, requestOptions);
+            return this.http.request(apiUrl, requestOptions);
           }).catch(error => {
             if(this.myselfData.hasSignedIn) {
               this.events.publish('user:signerror');
@@ -83,6 +82,8 @@ export class ApiHttp extends Http {
             }
           });
       } else {
+        this.events.publish('app:error');
+        console.log("ApiHttps#intercept : error - " + error);
         return Observable.throw(error);
       }
     });

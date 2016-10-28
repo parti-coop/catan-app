@@ -44,5 +44,8 @@ export class PartiApp {
       alert('로그아웃 되었습니다. 다시 로그인해 주세요!');
       this.navCtrl.setRoot(SignInPage);
     });
+    this.events.subscribe('app:error', () => {
+      alert('오류가 발생했습니다.');
+    });
   }
 }

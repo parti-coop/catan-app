@@ -3,7 +3,7 @@
     %ion-title {{partiEnvironment.appTitle}}
 %ion-content.ion-parti
   %h2 어서오세요! {{myselfData.nickname}}님
-  %ion-list(text-wrap)
+  %ion-list{ 'text-wrap': true }
     %ion-list-header
       내 홈
     %ion-item.ion-parti{ '*ngFor': 'let post of posts' }
@@ -28,4 +28,6 @@
                 .comment-created-at
                   {{ comment.created_at | partiDateTimeFormatObservable | async }}
             .comment-body{ '[innerHTML]': "comment.body | partiSimpleFormat " }
+  %ion-infinite-scroll{ '(ionInfinite)': "loadMore($event)" }
+    %ion-infinite-scroll-content{ loadingSpinner: "bubbles" }
 

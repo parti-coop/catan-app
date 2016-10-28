@@ -1,8 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { RequestOptions, XHRBackend } from '@angular/http';
-import { Events } from 'ionic-angular';
 
 import { PartiApp } from './app.component';
 
@@ -25,21 +23,6 @@ import { ApiHttp } from '../providers/api-http';
 import moment from 'moment';
 import 'moment/src/locale/ko';
 moment.locale('ko');
-
-export function apiHttpFactory(
-  backend: XHRBackend,
-  defaultOptions: RequestOptions,
-  myselfData: MyselfData,
-  partiEnvironment: PartiEnvironment,
-  events: Events
-) {
-  return new ApiHttp(
-    backend,
-    defaultOptions,
-    myselfData,
-    partiEnvironment,
-    events);
-}
 
 @NgModule({
   declarations: [
@@ -70,11 +53,6 @@ export function apiHttpFactory(
     MyselfData,
     PostData,
     ApiHttp,
-    {
-      provide: ApiHttp,
-      useFactory: apiHttpFactory,
-      deps: [XHRBackend, RequestOptions, MyselfData, PartiEnvironment, Events]
-    },
     Storage
   ],
   schemas: [

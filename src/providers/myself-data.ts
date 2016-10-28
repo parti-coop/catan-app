@@ -31,7 +31,7 @@ export class MyselfData {
 
   constructor(
     private platform: Platform,
-    public http: Http,
+    private http: Http,
     private partiEnvironment: PartiEnvironment
   ) {
     this.readyToAuth = false;
