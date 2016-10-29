@@ -1,0 +1,12 @@
+%ion-header
+  %ion-navbar
+    %ion-title "{{ post.title }}" 댓글쓰기
+%ion-content{ 'padding': true, '#content': true }
+  %parti-post{ '[post]': 'post', '[isCollection]': 'false' }
+
+  %ion-footer{ '[keyboardAttach]': 'content' }
+    %ion-toolbar
+      %ion-item
+        %ion-textarea{ '#inputCommentBody': true, 'fz-elastic': true, placeholder: "댓글을 입력하세요!..." }
+      %button{ '(click)': 'save()', 'ion-button': true, block: true, type: 'submit' } 게시
+

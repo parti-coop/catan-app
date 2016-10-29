@@ -5,7 +5,7 @@ import { Post } from '../../models/post';
   selector: 'parti-post-byline',
   templateUrl: 'parti-post-byline.html'
 })
-export class PartiPostByline {
+export class PartiPostBylineComponent {
   @Input()
   post: Post;
 

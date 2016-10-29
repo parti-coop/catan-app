@@ -1,0 +1,23 @@
+.post
+  .post-parti
+    .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + post.parti.logo_url + ')' }" }
+    .parti-title {{ post.parti.title }}
+    .parti-group{ '*ngIf': 'post.parti.group' }
+      <
+      {{ post.parti.group.name }}
+  .post-head
+    %parti-post-byline{ '[post]': 'post' }
+  .post-title
+    {{ post.title }}
+  .post-body{ '[innerHTML]': "post.body | partiSimpleFormat " }
+  .post-buttons{ '*ngIf': 'isCollection' }
+    .comment-button{'(click)': 'onCommentFormFocus(post)' } 댓글달기
+  .post-comments
+    .comment{ '*ngFor': 'let comment of post.comments' }
+      .comment-header
+        .comment-byline
+          .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + comment.user.image_url + ')' }" }
+          .user-nickname {{ comment.user.nickname }}
+          .comment-created-at
+            {{ comment.created_at | partiDateTimeFormatObservable | async }}
+      .comment-body{ '[innerHTML]': "comment.body | partiSimpleFormat " }

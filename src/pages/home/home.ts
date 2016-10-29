@@ -27,13 +27,18 @@ export class HomePage {
     private loadingCtrl: LoadingController
   ) {}
 
+  // ionViewLoaded() {
+  //   this.todo = this.formBuilder.group({
+  //     title: ['', Validators.required],
+  //     description: [''],
+  //   });
+  // }
+
   ionViewDidEnter() {
-    let loader = this.loadingCtrl.create();
-    loader.present();
     if(!this.posts.length) {
-      this.load(() => {
-        loader.dismiss();
-      });
+      let loader = this.loadingCtrl.create();
+      loader.present();
+      this.load(() => loader.dismiss(), () => loader.dismiss());
     }
   }
 
@@ -41,13 +46,13 @@ export class HomePage {
     this.load(() => {
       infiniteScroll.complete();
       if(!this.hasMoreData) {
-        console.log("disable infinite")
+        console.log("disable infinite");
         infiniteScroll.enable(false);
       }
     });
   }
 
-  load(callback: () => void) {
+  load(onNext: () => void, onError: () => void = null, onCompleted: () => void = null) {
     this.postData.dashboard(this.lastPost).subscribe(pagedPosts => {
       this.hasMoreData = pagedPosts.has_more_item;
       this.posts = this.posts.concat(pagedPosts.items);
@@ -55,12 +60,18 @@ export class HomePage {
         this.lastPost = this.posts[this.posts.length-1];
       }
 
-      if(callback) {
-        callback();
+      if(onNext) {
+        onNext();
       }
     }, (error) => {
-      this.events.publish('app:error');
-      console.log("ApiHttps#intercept : error - " + error);
+      console.log("HomePage#load : error - " + error);
+      if(onError) {
+        onError();
+      }
+    }, () => {
+      if(onCompleted) {
+        onCompleted();
+      }
     });
   }
 }

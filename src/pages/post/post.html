@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>"{{ post.title }}" 댓글쓰기</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content #content padding>
+  <parti-post [isCollection]='false' [post]='post'></parti-post>
+  <ion-footer [keyboardAttach]='content'>
+    <ion-toolbar>
+      <ion-item>
+        <ion-textarea #inputCommentBody fz-elastic placeholder='댓글을 입력하세요!...'></ion-textarea>
+      </ion-item>
+      <button (click)='save()' block ion-button type='submit'>게시</button>
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Keyboard } from 'ionic-native';
+import { Platform } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
 import { AboutPage } from '../about/about';
@@ -14,6 +16,15 @@ export class TabsPage {
   tab2Root: any = AboutPage;
   tab3Root: any = ContactPage;
 
-  constructor() {
+  constructor(platform: Platform) {
+    platform.ready().then(() => {
+      Keyboard.onKeyboardShow().subscribe(() => {
+          document.body.classList.add('keyboard-is-open');
+      });
+
+      Keyboard.onKeyboardHide().subscribe(() => {
+          document.body.classList.remove('keyboard-is-open');
+      });
+    });
   }
 }

@@ -53,6 +53,7 @@ export class ApiHttp {
       options.headers = new Headers();
     }
     if (this.myselfData.accessToken) {
+      options.headers.delete('Authorization');
       options.headers.append('Authorization', `Bearer ${this.myselfData.accessToken}`);
     }
     options.headers.append('Content-Type', 'application/json');

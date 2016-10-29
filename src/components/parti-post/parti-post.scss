@@ -1,0 +1,49 @@
+parti-post {
+  .post {
+    background-color: #efefef;
+    padding: 12px;
+    margin: 6px 0;
+    .post-parti {
+      .parti-logo {
+        height: 20px;
+        width: 20px;
+        background-repeat: none;
+        background-position: center;
+        background-size: contain;
+        vertical-align: middle;
+      }
+    }
+    .post-head {
+      padding-top: 6px;
+    }
+    .parti-logo,
+    .parti-title,
+    .parti-group {
+      display: inline-block;
+    }
+    .post-title {
+      font-weight: bold;
+    }
+    .post-comments {
+      .comment {
+        border-top: 1px solid #777;
+        padding-top: 6px;
+        .comment-header {
+          .comment-byline .user-image {
+            height: 20px;
+            width: 20px;
+            background-repeat: none;
+            background-position: center;
+            background-size: contain;
+            vertical-align: middle;
+          }
+          .user-image,
+          .user-nickname,
+          .comment-created-at {
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+}

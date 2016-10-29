@@ -9,4 +9,5 @@ export interface Post {
   user: User;
   created_at: string;
   is_upvotable: boolean;
+  comments: Comment[];
 }

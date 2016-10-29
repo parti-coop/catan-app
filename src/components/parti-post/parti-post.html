@@ -1,0 +1,34 @@
+<div class='post'>
+  <div class='post-parti'>
+    <div [ngStyle]="{ 'background-image': 'url(' + post.parti.logo_url + ')' }" class='parti-logo'></div>
+    <div class='parti-title'>{{ post.parti.title }}</div>
+    <div *ngIf='post.parti.group' class='parti-group'>
+      <
+      {{ post.parti.group.name }}
+    </div>
+  </div>
+  <div class='post-head'>
+    <parti-post-byline [post]='post'></parti-post-byline>
+  </div>
+  <div class='post-title'>
+    {{ post.title }}
+  </div>
+  <div [innerHTML]='post.body | partiSimpleFormat ' class='post-body'></div>
+  <div *ngIf='isCollection' class='post-buttons'>
+    <div (click)='onCommentFormFocus(post)' class='comment-button'>댓글달기</div>
+  </div>
+  <div class='post-comments'>
+    <div *ngFor='let comment of post.comments' class='comment'>
+      <div class='comment-header'>
+        <div class='comment-byline'>
+          <div [ngStyle]="{ 'background-image': 'url(' + comment.user.image_url + ')' }" class='user-image'></div>
+          <div class='user-nickname'>{{ comment.user.nickname }}</div>
+          <div class='comment-created-at'>
+            {{ comment.created_at | partiDateTimeFormatObservable | async }}
+          </div>
+        </div>
+      </div>
+      <div [innerHTML]='comment.body | partiSimpleFormat ' class='comment-body'></div>
+    </div>
+  </div>
+</div>
