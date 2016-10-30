@@ -23,6 +23,7 @@ import { PostPage } from '../pages/post/post';
 import { PartiEnvironment } from '../config/constant';
 import { MyselfData } from '../providers/myself-data';
 import { PostData } from '../providers/post-data';
+import { CommentData } from '../providers/comment-data';
 import { ApiHttp } from '../providers/api-http';
 
 import moment from 'moment';
@@ -62,6 +63,7 @@ moment.locale('ko');
     PartiEnvironment,
     MyselfData,
     PostData,
+    CommentData,
     ApiHttp,
     Storage
   ],

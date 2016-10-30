@@ -22,30 +22,30 @@ export class ApiHttp {
   ) {}
 
   public get(url: string, options?: RequestOptions): Observable<Response> {
-    return this.intercept(RequestMethod.Get, url, null, options);
+    return this.intercept(RequestMethod.Get, url, options);
   }
 
-  public post(url: string, body: string, options?: RequestOptions): Observable<Response> {
-    return this.intercept(RequestMethod.Post, url, body, options);
+  public post(url: string, options?: RequestOptions): Observable<Response> {
+    return this.intercept(RequestMethod.Post, url, options);
   }
 
-  public put(url: string, body: string, options?: RequestOptions): Observable<Response> {
-    return this.intercept(RequestMethod.Put, url, body, options);
+  public put(url: string, options?: RequestOptions): Observable<Response> {
+    return this.intercept(RequestMethod.Put, url, options);
   }
 
   public delete(url: string, options?: RequestOptions): Observable<Response> {
-    return this.intercept(RequestMethod.Delete, url, null, options);
+    return this.intercept(RequestMethod.Delete, url, options);
   }
 
-  public patch(url: string, body: string, options?: RequestOptions): Observable<Response> {
-    return this.intercept(RequestMethod.Patch, url, body, options);
+  public patch(url: string, options?: RequestOptions): Observable<Response> {
+    return this.intercept(RequestMethod.Patch, url, options);
   }
 
   public head(url: string, options?: RequestOptions): Observable<Response> {
-    return this.intercept(RequestMethod.Head, url, null, options);
+    return this.intercept(RequestMethod.Head, url, options);
   }
 
-  getRequestOption(method: RequestMethod, url: string, body?: string, options?: RequestOptions): RequestOptions {
+  getRequestOption(method: RequestMethod, url: string, options?: RequestOptions): RequestOptions {
     if (options == null) {
       options = new RequestOptions();
     }
@@ -56,21 +56,22 @@ export class ApiHttp {
       options.headers.delete('Authorization');
       options.headers.append('Authorization', `Bearer ${this.myselfData.accessToken}`);
     }
-    options.headers.append('Content-Type', 'application/json');
+    if (!options.headers.get('Content-Type') || !options.headers.get('Content-Type').length) {
+      options.headers.append('Content-Type', 'application/json');
+    }
     options.method = method;
-    options.body = body;
     return options;
   }
 
-  intercept(method: RequestMethod, url: string, body?: string, options?: RequestOptions): Observable<Response> {
-    var requestOptions: RequestOptions = this.getRequestOption(method, url, body, options);
+  intercept(method: RequestMethod, url: string, options?: RequestOptions): Observable<Response> {
+    var requestOptions: RequestOptions = this.getRequestOption(method, url, options);
     let apiUrl = `${this.partiEnvironment.apiBaseUrl}${url}`;
 
     return this.http.request(apiUrl, requestOptions).catch((error, source) => {
       if (error && error.status  == 401) {
         return this.myselfData.refresh()
           .mergeMap(succeed => {
-            requestOptions = this.getRequestOption(method, url, body, options);
+            requestOptions = this.getRequestOption(method, url, options);
             return this.http.request(apiUrl, requestOptions);
           }).catch(error => {
             if(this.myselfData.hasSignedIn) {

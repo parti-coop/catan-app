@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Events, LoadingController } from 'ionic-angular';
+import { Events, LoadingController, InfiniteScroll } from 'ionic-angular';
 
 import 'rxjs/add/operator/finally';
 
@@ -14,6 +14,8 @@ import { Post } from '../../models/post';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
+
   posts: Post[] = [];
   lastPost: Post;
   hasMoreData: boolean = true;
@@ -38,40 +40,41 @@ export class HomePage {
     if(!this.posts.length) {
       let loader = this.loadingCtrl.create();
       loader.present();
-      this.load(() => loader.dismiss(), () => loader.dismiss());
+      this.load(() => {
+        loader.dismiss();
+        this.disableInfiniteScrollIfNoMoreData(this.infiniteScroll);
+      });
     }
   }
 
   loadMore(infiniteScroll) {
     this.load(() => {
       infiniteScroll.complete();
-      if(!this.hasMoreData) {
-        console.log("disable infinite");
-        infiniteScroll.enable(false);
-      }
+      this.disableInfiniteScrollIfNoMoreData(infiniteScroll);
     });
   }
 
-  load(onNext: () => void, onError: () => void = null, onCompleted: () => void = null) {
-    this.postData.dashboard(this.lastPost).subscribe(pagedPosts => {
-      this.hasMoreData = pagedPosts.has_more_item;
-      this.posts = this.posts.concat(pagedPosts.items);
-      if(this.posts.length) {
-        this.lastPost = this.posts[this.posts.length-1];
-      }
+  load(onCompleted: () => void = null) {
+    this.postData.dashboard(this.lastPost)
+      .finally(() => {
+        if(onCompleted) {
+          console.log("dashboard completed!");
+          onCompleted();
+        }
+      }).subscribe(pagedPosts => {
+        console.log("loading dashboard data!");
+        this.hasMoreData = pagedPosts.has_more_item;
+        this.posts = this.posts.concat(pagedPosts.items);
+        if(this.posts.length) {
+          this.lastPost = this.posts[this.posts.length-1];
+        }
+      });
+  }
 
-      if(onNext) {
-        onNext();
-      }
-    }, (error) => {
-      console.log("HomePage#load : error - " + error);
-      if(onError) {
-        onError();
-      }
-    }, () => {
-      if(onCompleted) {
-        onCompleted();
-      }
-    });
+  private disableInfiniteScrollIfNoMoreData(infiniteScroll) {
+    if(!this.hasMoreData) {
+      console.log("disable infinite");
+      infiniteScroll.enable(false);
+    }
   }
 }

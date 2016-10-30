@@ -9,7 +9,7 @@
     <h3>내 홈</h3>
     <parti-post *ngFor='let post of posts' [isCollection]='true' [post]='post'></parti-post>
   </div>
-  <ion-infinite-scroll (ionInfinite)='loadMore($event)'>
+  <ion-infinite-scroll #infiniteScroll (ionInfinite)='loadMore($event)'>
     <ion-infinite-scroll-content loadingSpinner='bubbles'></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
