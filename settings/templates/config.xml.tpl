@@ -3,8 +3,8 @@
   <name><%= constants.appName %></name>
   <description>함께 만드는 온라인 광장1</description>
   <author email="help@parti.xyz" href="http://parti.xyz">빠흐띠</author>
-  <% if (useProxy) { %>
   <content src="index.html"/>
+  <% if (useProxy) { %>
   <access origin="*"/>
   <allow-navigation href="*" />
   <allow-intent href="*" />
