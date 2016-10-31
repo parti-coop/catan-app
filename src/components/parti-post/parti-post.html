@@ -15,7 +15,11 @@
   </div>
   <div [innerHTML]='post.body | partiSimpleFormat ' class='post-body'></div>
   <div *ngIf='isCollection' class='post-buttons'>
-    <div (click)='onCommentFormFocus(post)' class='comment-button'>댓글달기</div>
+    <span (click)='onClickCommentButton()' class='comment-button'>
+      <ion-icon name='chatboxes'></ion-icon>
+      댓글달기
+    </span>
+    <parti-upvote-button [post]='post'></parti-upvote-button>
   </div>
   <div class='post-comments'>
     <div *ngFor='let comment of post.comments' class='comment'>

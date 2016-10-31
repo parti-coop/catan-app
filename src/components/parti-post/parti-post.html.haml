@@ -11,7 +11,10 @@
     {{ post.title }}
   .post-body{ '[innerHTML]': "post.body | partiSimpleFormat " }
   .post-buttons{ '*ngIf': 'isCollection' }
-    .comment-button{'(click)': 'onCommentFormFocus(post)' } 댓글달기
+    %span.comment-button{ '(click)': 'onClickCommentButton()' }
+      %ion-icon{ name: 'chatboxes' }
+      댓글달기
+    %parti-upvote-button{ '[post]': 'post' }
   .post-comments
     .comment{ '*ngFor': 'let comment of post.comments' }
       .comment-header

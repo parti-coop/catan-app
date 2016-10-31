@@ -18,9 +18,9 @@ export class PartiPostComponent {
     private navCtrl: NavController
   ) {}
 
-  onCommentFormFocus(post) {
+  onClickCommentButton() {
     this.navCtrl.push(PostPage, {
-      post: post
+      post: this.post
     });
   }
 }

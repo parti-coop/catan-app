@@ -1,0 +1,8 @@
+parti-upvote-button {
+  .upvoted {
+    color: map-get($colors, primary);
+  }
+  .upvotable {
+    color: initial;
+  }
+}

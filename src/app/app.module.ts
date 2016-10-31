@@ -10,6 +10,7 @@ import { PartiDateTimeFormatObservablePipe } from '../pipes/parti-datetime-forma
 
 import { PartiPostComponent } from '../components/parti-post/parti-post';
 import { PartiPostBylineComponent } from '../components/parti-post-byline/parti-post-byline';
+import { PartiUpvoteButton } from '../components/parti-upvote-button/parti-upvote-button';
 
 import { KeyboardAttachDirective } from '../directives/keyboard-attach';
 
@@ -24,8 +25,10 @@ import { PartiEnvironment } from '../config/constant';
 import { MyselfData } from '../providers/myself-data';
 import { PostData } from '../providers/post-data';
 import { CommentData } from '../providers/comment-data';
+import { UpvoteData } from '../providers/upvote-data';
 import { ApiHttp } from '../providers/api-http';
 
+// monent settings
 import moment from 'moment';
 import 'moment/src/locale/ko';
 moment.locale('ko');
@@ -41,6 +44,7 @@ moment.locale('ko');
     PostPage,
     PartiPostBylineComponent,
     PartiPostComponent,
+    PartiUpvoteButton,
     PartiSimpleFormatPipe,
     KeyboardAttachDirective,
     PartiDateTimeFormatObservablePipe
@@ -64,6 +68,7 @@ moment.locale('ko');
     MyselfData,
     PostData,
     CommentData,
+    UpvoteData,
     ApiHttp,
     Storage
   ],

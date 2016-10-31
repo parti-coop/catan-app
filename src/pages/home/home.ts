@@ -58,11 +58,9 @@ export class HomePage {
     this.postData.dashboard(this.lastPost)
       .finally(() => {
         if(onCompleted) {
-          console.log("dashboard completed!");
           onCompleted();
         }
       }).subscribe(pagedPosts => {
-        console.log("loading dashboard data!");
         this.hasMoreData = pagedPosts.has_more_item;
         this.posts = this.posts.concat(pagedPosts.items);
         if(this.posts.length) {
@@ -73,7 +71,6 @@ export class HomePage {
 
   private disableInfiniteScrollIfNoMoreData(infiniteScroll) {
     if(!this.hasMoreData) {
-      console.log("disable infinite");
       infiniteScroll.enable(false);
     }
   }
