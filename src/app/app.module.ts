@@ -8,7 +8,7 @@ import { PartiApp } from './app.component';
 import { PartiSimpleFormatPipe } from '../pipes/parti-simple-format-pipe';
 import { PartiDateTimeFormatObservablePipe } from '../pipes/parti-datetime-format-observable-pipe';
 
-import { PartiPostComponent } from '../components/parti-post/parti-post';
+import { PartiPostPanelComponent } from '../components/parti-post-panel/parti-post-panel';
 import { PartiPostBylineComponent } from '../components/parti-post-byline/parti-post-byline';
 import { PartiUpvoteButton } from '../components/parti-upvote-button/parti-upvote-button';
 
@@ -43,7 +43,7 @@ moment.locale('ko');
     SignInPage,
     PostPage,
     PartiPostBylineComponent,
-    PartiPostComponent,
+    PartiPostPanelComponent,
     PartiUpvoteButton,
     PartiSimpleFormatPipe,
     KeyboardAttachDirective,

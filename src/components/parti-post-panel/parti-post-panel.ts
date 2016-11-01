@@ -4,10 +4,10 @@ import { PostPage } from '../../pages/post/post';
 import { NavController } from 'ionic-angular';
 
 @Component({
-  selector: 'parti-post',
-  templateUrl: 'parti-post.html'
+  selector: 'parti-post-panel',
+  templateUrl: 'parti-post-panel.html'
 })
-export class PartiPostComponent {
+export class PartiPostPanelComponent {
   @Input()
   post: Post;
 

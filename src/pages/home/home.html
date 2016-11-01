@@ -7,7 +7,7 @@
   <h2>어서오세요! {{myselfData.nickname}}님</h2>
   <div class='posts'>
     <h3>내 홈</h3>
-    <parti-post *ngFor='let post of posts' [isCollection]='true' [post]='post'></parti-post>
+    <parti-post-panel *ngFor='let post of posts' [isCollection]='true' [post]='post'></parti-post-panel>
   </div>
   <ion-infinite-scroll #infiniteScroll (ionInfinite)='loadMore($event)'>
     <ion-infinite-scroll-content loadingSpinner='bubbles'></ion-infinite-scroll-content>
