@@ -8,6 +8,10 @@
   <access origin="*"/>
   <allow-navigation href="*" />
   <allow-intent href="*" />
+  <% } else { %>
+  <access origin="<%= constants.apiBaseUrl %>"/>
+  <allow-navigation href="<%= constants.apiBaseUrl %>" />
+  <allow-intent href="<%= constants.apiBaseUrl %>" />
   <% } %>
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
