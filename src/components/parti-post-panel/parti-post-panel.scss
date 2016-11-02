@@ -7,10 +7,7 @@ parti-post-panel {
       .parti-logo {
         height: 20px;
         width: 20px;
-        background-repeat: none;
-        background-position: center;
-        background-size: contain;
-        vertical-align: middle;
+        @include background-thumbnail();
       }
     }
     .post-head {
@@ -24,6 +21,33 @@ parti-post-panel {
     .post-title {
       font-weight: bold;
     }
+    .post-link-reference {
+      border: 1px solid #777;
+      .link-reference-title {
+        font-weight: bold;
+      }
+      .link-reference-image-wrapper {
+        flex: 0 0 130px;
+        .link-reference-image {
+          width: 100%;
+          height: 130px;
+          @include background-thumbnail();
+        }
+      }
+      .parti-logo {
+        height: 20px;
+        width: 20px;
+        @include background-thumbnail();
+      }
+    }
+    .post-poll {
+      .voting-users {
+        height: 20px;
+        width: 20px;
+        @include background-thumbnail();
+        display: inline-block;
+      }
+    }
     .post-comments {
       .comment {
         border-top: 1px solid #777;
@@ -32,10 +56,7 @@ parti-post-panel {
           .comment-byline .user-image {
             height: 20px;
             width: 20px;
-            background-repeat: none;
-            background-position: center;
-            background-size: contain;
-            vertical-align: middle;
+            @include background-thumbnail();
           }
           .user-image,
           .user-nickname,

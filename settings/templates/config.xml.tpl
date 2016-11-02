@@ -51,4 +51,6 @@
     <variable name="APP_ID" value="<%= constants.facebookAppId %>" />
     <variable name="APP_NAME" value="<%= constants.facebookAppName %>" />
   </plugin>
+  <plugin name="cordova-plugin-inappbrowser" spec="1.5.0"/>
+  <plugin name="cordova-plugin-file-opener2" spec="2.0.2"/>
 </widget>

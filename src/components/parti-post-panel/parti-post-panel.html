@@ -14,6 +14,55 @@
     {{ post.title }}
   </div>
   <div [innerHTML]='post.body | partiSimpleFormat ' class='post-body'></div>
+  <ion-row (click)='onClickLinkReference(post.link_reference)' *ngIf='!!post.link_reference' class='post-link-reference'>
+    <ion-col>
+      <div class='link-reference-title'>{{ post.link_reference.title }}</div>
+      <div class='link-reference-body'>{{ post.link_reference.body }}</div>
+      <div class='link-reference-site-name'>{{ post.link_reference.site_name | uppercase }} 원글보기</div>
+    </ion-col>
+    <ion-col class='link-reference-image-wrapper'>
+      <div [ngStyle]="{ 'background-image': 'url(' + post.link_reference.image_url + ')' }" class='link-reference-image'></div>
+    </ion-col>
+  </ion-row>
+  <ion-row (click)='onClickFileReference(post.file_reference)' *ngIf='!!post.file_reference' class='post-file-reference'>
+    <ion-col>
+      <div class='file-reference-name'>{{ post.file_reference.name }}</div>
+      <div class='file-reference-file-size'>{{ post.file_reference.file_size }} byte</div>
+    </ion-col>
+    <ion-col class='file-reference-file-type-wrapper'>
+      <div class='file-reference-file-type'>{{ post.file_reference.file_type }}</div>
+    </ion-col>
+  </ion-row>
+  <div *ngIf='!!post.poll' class='post-poll'>
+    <div class='poll-title'>{{ post.poll.title }}</div>
+    <ion-row class='poll-voting-btns'>
+      <ion-col>
+        <button (click)='onClickVotingButton("agree")' [class.voted]='isAgreed()' [disabled]='disableVotingButtons' class='agreed-voting-btn' ion-button>
+          찬성
+          <br>
+          {{ post.poll.agreed_votings_count }}
+        </button>
+      </ion-col>
+      <ion-col>
+        <button (click)='onClickVotingButton("disagree")' [class.voted]='isDisagreed()' [disabled]='disableVotingButtons' class='disagreed-voting-btn' ion-button>
+          반대
+          <br>
+          {{ post.poll.disagreed_votings_count }}
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf='isVoted()' class='poll-votings'>
+      <ion-col class='agreed-voting-users'>
+        <div (click)='onClickVotingUser(user)' *ngFor='let user of post.poll.agreed_voting_users' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='voting-users'></div>
+      </ion-col>
+      <ion-col class='disagreed-voting-users'>
+        <span (click)='onClickVotingUser(user)' *ngFor='let user of post.poll.disagreed_voting_users' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='voting-users'></span>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf='!isVoted()' class='poll-recommend-voting'>
+      {{ post.poll.votings_count }}명이 투표했습니다. 투표하면 결과를 볼 수 있어요.
+    </ion-row>
+  </div>
   <div *ngIf='isCollection' class='post-buttons'>
     <span (click)='onClickCommentButton()' class='comment-button'>
       <ion-icon name='chatboxes'></ion-icon>

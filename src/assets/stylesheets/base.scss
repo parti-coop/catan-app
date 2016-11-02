@@ -5,3 +5,12 @@ body.keyboard-is-open ion-footer {
 body.keyboard-is-open .scroll-content {
   margin-bottom: 0 !important;
 }
+
+// 백그라운드 속성의 썸네일
+
+@mixin background-thumbnail() {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  vertical-align: middle;
+}

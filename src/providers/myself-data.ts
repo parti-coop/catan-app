@@ -18,6 +18,7 @@ import { PartiEnvironment } from '../config/constant';
 export class MyselfData {
   STORAGE_REFERENCE_HAS_SIGNED_IN = 'MyselfData_hasSignedIn';
   STORAGE_REFERENCE_NICKNAME = 'MyselfData_nickname';
+  STORAGE_REFERENCE_ID = 'MyselfData_id';
   STORAGE_REFERENCE_IMAGE_URL = 'MyselfData_imageUrl';
   STORAGE_REFERENCE_ACCESS_TOKEN = 'MyselfData_accessToken';
   STORAGE_REFERENCE_REFRESH_TOKEN = 'MyselfData_refreshToken';
@@ -25,6 +26,7 @@ export class MyselfData {
   public accessToken: string;
   public refreshToken: string;
   public nickname: string;
+  public id: number;
   public imageUrl: string;
   private readyToAuth: boolean;
   private _hasSignedIn: boolean;
@@ -40,13 +42,15 @@ export class MyselfData {
       Promise.all([
         NativeStorage.getItem(this.STORAGE_REFERENCE_HAS_SIGNED_IN),
         NativeStorage.getItem(this.STORAGE_REFERENCE_NICKNAME),
+        NativeStorage.getItem(this.STORAGE_REFERENCE_ID),
         NativeStorage.getItem(this.STORAGE_REFERENCE_ACCESS_TOKEN),
         NativeStorage.getItem(this.STORAGE_REFERENCE_REFRESH_TOKEN)
       ]).then(values => {
         this._hasSignedIn = values[0];
         this.nickname = values[1];
-        this.accessToken = values[2];
-        this.refreshToken = values[3];
+        this.id = values[2];
+        this.accessToken = values[3];
+        this.refreshToken = values[4];
         this.readyToAuth = true;
         if(this._hasSignedIn) {
           console.log("MyselfData : 이미 로그인");
@@ -78,7 +82,7 @@ export class MyselfData {
         return this.http.get(`${this.partiEnvironment.apiBaseUrl}/api/v1/users/me`, meRequestOptions)
                    .map(res => <Myself>res.json().user);
       }).mergeMap(response => {
-        return this.storeMyselfData(response.nickname, response.image_url);
+        return this.storeMyselfData(response.id, response.nickname, response.image_url);
       }).mergeMap(() => {
         return this.storeHasSignedIn(true)
       }).catch((error) => {
@@ -99,11 +103,13 @@ export class MyselfData {
       }));
   }
 
-  storeMyselfData(nickname, imageUrl) {
+  storeMyselfData(id, nickname, imageUrl) {
     return Observable.from(Promise.all([
+      NativeStorage.setItem(this.STORAGE_REFERENCE_ID, id),
       NativeStorage.setItem(this.STORAGE_REFERENCE_NICKNAME, nickname),
       NativeStorage.setItem(this.STORAGE_REFERENCE_IMAGE_URL, imageUrl)])
       .then(values => {
+        this.id = id;
         this.nickname = nickname;
         this.imageUrl = imageUrl;
       }));
@@ -144,8 +150,8 @@ export class MyselfData {
         let meRequestOptions = new RequestOptions({headers: new Headers({ 'Authorization': `Bearer ${accessToken}` })});
         return this.http.get(`${this.partiEnvironment.apiBaseUrl}/api/v1/users/me`, meRequestOptions)
                    .map(res => <Myself>res.json().user);
-      }).mergeMap(response => {
-        return this.storeMyselfData(response.nickname, response.image_url);
+      }).mergeMap(myself => {
+        return this.storeMyselfData(myself.id, myself.nickname, myself.image_url);
       }).map(() => {
         this._hasSignedIn = true;
         return this._hasSignedIn;
@@ -154,6 +160,10 @@ export class MyselfData {
         console.log("MyselfData#refresh : " + error);
         throw error;
       });
+  }
+
+  asModel(): Myself {
+    return <Myself>{id: this.id, nickname: this.nickname, image_url: this.imageUrl};
   }
 
 }
