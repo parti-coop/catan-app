@@ -29,13 +29,6 @@ export class HomePage {
     private loadingCtrl: LoadingController
   ) {}
 
-  // ionViewLoaded() {
-  //   this.todo = this.formBuilder.group({
-  //     title: ['', Validators.required],
-  //     description: [''],
-  //   });
-  // }
-
   ionViewDidEnter() {
     if(!this.posts.length) {
       let loader = this.loadingCtrl.create();

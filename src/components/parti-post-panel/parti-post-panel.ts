@@ -13,7 +13,7 @@ import { LinkSource } from '../../models/link-source';
 import { FileSource } from '../../models/file-source';
 import { User } from '../../models/user';
 
-import { UpvoteData } from '../../providers/upvote-data';
+import { VotingData } from '../../providers/voting-data';
 import { MyselfData } from '../../providers/myself-data';
 
 declare var cordova: any;
@@ -35,7 +35,7 @@ export class PartiPostPanelComponent {
     private navCtrl: NavController,
     private alertCtrl: AlertController,
     private platform: Platform,
-    private upvoteData: UpvoteData,
+    private votingData: VotingData,
     private myselfData: MyselfData
   ) {}
 
@@ -120,8 +120,7 @@ export class PartiPostPanelComponent {
       return;
     }
     this.disableVotingButtons = true;
-    this.upvoteData.create(this.post.id, 'Post')
-      .finally(() => {
+    this.votingData.choose(this.post.poll.id, choice).finally(() => {
         this.disableVotingButtons = false;
       }).subscribe(() => {
         if(choice === this.post.poll.my_choice) {

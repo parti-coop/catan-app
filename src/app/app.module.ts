@@ -15,7 +15,7 @@ import { PartiUpvoteButton } from '../components/parti-upvote-button/parti-upvot
 import { KeyboardAttachDirective } from '../directives/keyboard-attach';
 
 import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
+import { MorePage } from '../pages/more/more';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SignInPage } from '../pages/sign-in/sign-in';
@@ -26,6 +26,7 @@ import { MyselfData } from '../providers/myself-data';
 import { PostData } from '../providers/post-data';
 import { CommentData } from '../providers/comment-data';
 import { UpvoteData } from '../providers/upvote-data';
+import { VotingData } from '../providers/voting-data';
 import { ApiHttp } from '../providers/api-http';
 
 // monent settings
@@ -37,7 +38,7 @@ moment.locale('ko');
   declarations: [
     PartiApp,
     AboutPage,
-    ContactPage,
+    MorePage,
     HomePage,
     TabsPage,
     SignInPage,
@@ -57,7 +58,7 @@ moment.locale('ko');
   entryComponents: [
     PartiApp,
     AboutPage,
-    ContactPage,
+    MorePage,
     HomePage,
     TabsPage,
     SignInPage,
@@ -69,6 +70,7 @@ moment.locale('ko');
     PostData,
     CommentData,
     UpvoteData,
+    VotingData,
     ApiHttp,
     Storage
   ],

@@ -21,6 +21,10 @@ export class ApiHttp {
     private http: Http
   ) {}
 
+  public request(method: RequestMethod, url: string, options?: RequestOptions): Observable<Response> {
+    return this.intercept(method, url, options);
+  }
+
   public get(url: string, options?: RequestOptions): Observable<Response> {
     return this.intercept(RequestMethod.Get, url, options);
   }
