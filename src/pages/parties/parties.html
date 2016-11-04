@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{partiEnvironment.appTitle}}</ion-title>
+  </ion-navbar>
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]='selection'>
+      <ion-segment-button value='watched'>
+        가입한 빠띠
+      </ion-segment-button>
+      <ion-segment-button value='making'>
+        내가 만든 빠디
+      </ion-segment-button>
+      <ion-segment-button value='all'>
+        모든 빠디
+      </ion-segment-button>
+      <ion-segment-button value='marked'>
+        <ion-icon name='star'></ion-icon>
+        빠띠
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content class='ion-parti'>
+  <div [ngSwitch]='selection'>
+    <ion-list *ngSwitchCase="'watched'">
+      <ion-item *ngFor='let parti of parties'>
+        {{ parti.title }}
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'making'">
+      <ion-item>making 준비중</ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'all'">
+      <ion-item>all 준비중</ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'marked'">
+      <ion-item>marked 준비중</ion-item>
+    </ion-list>
+  </div>
+</ion-content>

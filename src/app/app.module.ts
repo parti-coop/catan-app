@@ -20,8 +20,10 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SignInPage } from '../pages/sign-in/sign-in';
 import { PostPage } from '../pages/post/post';
+import { PartiesPage } from '../pages/parties/parties';
 
 import { PartiEnvironment } from '../config/constant';
+import { PartiData } from '../providers/parti-data';
 import { MyselfData } from '../providers/myself-data';
 import { PostData } from '../providers/post-data';
 import { CommentData } from '../providers/comment-data';
@@ -43,6 +45,7 @@ moment.locale('ko');
     TabsPage,
     SignInPage,
     PostPage,
+    PartiesPage,
     PartiPostBylineComponent,
     PartiPostPanelComponent,
     PartiUpvoteButton,
@@ -62,7 +65,8 @@ moment.locale('ko');
     HomePage,
     TabsPage,
     SignInPage,
-    PostPage
+    PostPage,
+    PartiesPage
   ],
   providers: [
     PartiEnvironment,
@@ -71,6 +75,7 @@ moment.locale('ko');
     CommentData,
     UpvoteData,
     VotingData,
+    PartiData,
     ApiHttp,
     Storage
   ],
