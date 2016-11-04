@@ -1,0 +1,15 @@
+page-messages {
+  .sender-image {
+    height: 20px;
+    width: 20px;
+    background-repeat: none;
+    background-position: center;
+    background-size: contain;
+    vertical-align: middle;
+  }
+  .sender-image,
+  .sender-nickname,
+  .message-created-at {
+    display: inline-block;
+  }
+}

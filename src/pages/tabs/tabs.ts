@@ -4,7 +4,7 @@ import { Platform } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
 import { PartiesPage } from '../parties/parties';
-import { AboutPage } from '../about/about';
+import { MessagesPage } from '../messages/messages';
 import { MorePage } from '../more/more';
 
 @Component({
@@ -13,7 +13,7 @@ import { MorePage } from '../more/more';
 export class TabsPage {
   homeRoot: any = HomePage;
   partiesRoot: any = PartiesPage;
-  tab2Root: any = AboutPage;
+  messagesRoot: any = MessagesPage;
   moreRoot: any = MorePage;
 
   constructor(platform: Platform) {

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ partiEnvironment.appTitle }}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class='ion-parti'>
+  <ion-list>
+    <ion-item *ngFor='let message of messages' text-wrap>
+      <div class='byline'>
+        <div [ngStyle]="{ 'background-image': 'url(' + message.sender.image_url + ')' }" class='sender-image'></div>
+        <div class='sender-nickname'>{{ message.sender.nickname }}</div>
+        <div class='message-created-at'>
+          {{ message.created_at | partiDateTimeFormatObservable | async }}
+        </div>
+      </div>
+      <div [innerHTML]='message.desc' class='desc'></div>
+    </ion-item>
+  </ion-list>
+</ion-content>

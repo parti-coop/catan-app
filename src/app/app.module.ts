@@ -14,13 +14,13 @@ import { PartiUpvoteButton } from '../components/parti-upvote-button/parti-upvot
 
 import { KeyboardAttachDirective } from '../directives/keyboard-attach';
 
-import { AboutPage } from '../pages/about/about';
 import { MorePage } from '../pages/more/more';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SignInPage } from '../pages/sign-in/sign-in';
 import { PostPage } from '../pages/post/post';
 import { PartiesPage } from '../pages/parties/parties';
+import { MessagesPage } from '../pages/messages/messages';
 
 import { PartiEnvironment } from '../config/constant';
 import { PartiData } from '../providers/parti-data';
@@ -29,6 +29,7 @@ import { PostData } from '../providers/post-data';
 import { CommentData } from '../providers/comment-data';
 import { UpvoteData } from '../providers/upvote-data';
 import { VotingData } from '../providers/voting-data';
+import { MessageData } from '../providers/message-data';
 import { ApiHttp } from '../providers/api-http';
 
 // monent settings
@@ -39,13 +40,13 @@ moment.locale('ko');
 @NgModule({
   declarations: [
     PartiApp,
-    AboutPage,
     MorePage,
     HomePage,
     TabsPage,
     SignInPage,
     PostPage,
     PartiesPage,
+    MessagesPage,
     PartiPostBylineComponent,
     PartiPostPanelComponent,
     PartiUpvoteButton,
@@ -60,13 +61,13 @@ moment.locale('ko');
   bootstrap: [IonicApp],
   entryComponents: [
     PartiApp,
-    AboutPage,
     MorePage,
     HomePage,
     TabsPage,
     SignInPage,
     PostPage,
-    PartiesPage
+    PartiesPage,
+    MessagesPage
   ],
   providers: [
     PartiEnvironment,
@@ -76,6 +77,7 @@ moment.locale('ko');
     UpvoteData,
     VotingData,
     PartiData,
+    MessageData,
     ApiHttp,
     Storage
   ],
