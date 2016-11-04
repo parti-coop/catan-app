@@ -10,8 +10,8 @@
   <div class='post-head'>
     <parti-post-byline [post]='post'></parti-post-byline>
   </div>
-  <div [innerHTML]='post.title | partiSimpleFormat' class='post-title'></div>
-  <div [innerHTML]='post.body | partiSimpleFormat' class='post-body'></div>
+  <div [innerHTML]='post.parsed_title | partiSimpleFormat' class='post-title'></div>
+  <div [innerHTML]='post.parsed_body | partiSimpleFormat' class='post-body'></div>
   <ion-row (click)='onClickLinkReference(post.link_reference)' *ngIf='!!post.link_reference' class='post-link-reference'>
     <ion-col>
       <div class='link-reference-title'>{{ post.link_reference.title }}</div>

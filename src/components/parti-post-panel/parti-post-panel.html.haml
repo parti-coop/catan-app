@@ -7,8 +7,8 @@
       {{ post.parti.group.name }}
   .post-head
     %parti-post-byline{ '[post]': 'post' }
-  .post-title{ '[innerHTML]': "post.title | partiSimpleFormat" }
-  .post-body{ '[innerHTML]': "post.body | partiSimpleFormat" }
+  .post-title{ '[innerHTML]': "post.parsed_title | partiSimpleFormat" }
+  .post-body{ '[innerHTML]': "post.parsed_body | partiSimpleFormat" }
   %ion-row.post-link-reference{ '(click)': 'onClickLinkReference(post.link_reference)', '*ngIf': '!!post.link_reference' }
     %ion-col
       .link-reference-title {{ post.link_reference.title }}

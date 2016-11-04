@@ -7,8 +7,8 @@ import { Poll } from '../models/poll';
 
 export interface Post {
   id: number;
-  title: string;
-  body: string;
+  parsed_title: string;
+  parsed_body: string;
   parti: Parti;
   user: User;
   created_at: string;
