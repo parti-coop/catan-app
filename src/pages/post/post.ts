@@ -62,9 +62,11 @@ export class PostPage {
 
   ionViewDidEnter() {
     this.commentForm.controls['body'].setValue(null);
-    setTimeout(() => {
-      this.inputCommentBody.setFocus();
-    }, 150);
+    if(this.navParams.get('needFocusCommentInut')) {
+      setTimeout(() => {
+        this.inputCommentBody.setFocus();
+      }, 50);
+    }
   }
 
   save() {
@@ -86,7 +88,7 @@ export class PostPage {
         this.content.resize();
         setTimeout(() => {
           this.content.scrollToBottom();
-        }, 150);
+        }, 50);
       });
   }
 

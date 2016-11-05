@@ -53,7 +53,8 @@ export class PartiPostPanelComponent {
 
   onClickCommentButton() {
     this.navCtrl.push(PostPage, {
-      post: this.post
+      post: this.post,
+      needFocusCommentInut: true
     });
   }
 

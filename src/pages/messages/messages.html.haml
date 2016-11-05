@@ -3,7 +3,7 @@
     %ion-title {{ partiEnvironment.appTitle }}
 %ion-content.ion-parti
   %ion-list
-    %ion-item{ '*ngFor': 'let message of messages', 'text-wrap': true }
+    %ion-item{ '*ngFor': 'let message of messages', 'text-wrap': true, '(click)': 'onClickMessage(message)' }
       .byline
         .sender-image{ '[ngStyle]': "{ 'background-image': 'url(' + message.sender.image_url + ')' }" }
         .sender-nickname {{ message.sender.nickname }}

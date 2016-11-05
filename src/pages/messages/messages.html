@@ -5,7 +5,7 @@
 </ion-header>
 <ion-content class='ion-parti'>
   <ion-list>
-    <ion-item *ngFor='let message of messages' text-wrap>
+    <ion-item (click)='onClickMessage(message)' *ngFor='let message of messages' text-wrap>
       <div class='byline'>
         <div [ngStyle]="{ 'background-image': 'url(' + message.sender.image_url + ')' }" class='sender-image'></div>
         <div class='sender-nickname'>{{ message.sender.nickname }}</div>
