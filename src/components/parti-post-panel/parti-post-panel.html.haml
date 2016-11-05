@@ -1,58 +1,57 @@
-.post
-  .post-parti
-    .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + post.parti.logo_url + ')' }" }
-    .parti-title {{ post.parti.title }}
-    .parti-group{ '*ngIf': 'post.parti.group' }
-      <
-      {{ post.parti.group.name }}
-  .post-head
-    %parti-post-byline{ '[post]': 'post' }
-  .post-title{ '[innerHTML]': "post.parsed_title | partiSimpleFormat" }
-  .post-body{ '[innerHTML]': "post.parsed_body | partiSimpleFormat" }
-  %ion-row.post-link-reference{ '(click)': 'onClickLinkReference(post.link_reference)', '*ngIf': '!!post.link_reference' }
+.post-parti
+  .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + post.parti.logo_url + ')' }" }
+  .parti-title {{ post.parti.title }}
+  .parti-group{ '*ngIf': 'post.parti.group' }
+    <
+    {{ post.parti.group.name }}
+.post-head
+  %parti-post-byline{ '[post]': 'post' }
+.post-title{ '[innerHTML]': "post.parsed_title | partiSimpleFormat" }
+.post-body{ '[innerHTML]': "post.parsed_body | partiSimpleFormat" }
+%ion-row.post-link-reference{ '(click)': 'onClickLinkReference(post.link_reference)', '*ngIf': '!!post.link_reference' }
+  %ion-col
+    .link-reference-title {{ post.link_reference.title }}
+    .link-reference-body {{ post.link_reference.body }}
+    .link-reference-site-name {{ post.link_reference.site_name | uppercase }} 원글보기
+  %ion-col.link-reference-image-wrapper
+    .link-reference-image{ '[ngStyle]': "{ 'background-image': 'url(' + post.link_reference.image_url + ')' }" }
+%ion-row.post-file-reference{ '(click)': 'onClickFileReference(post.file_reference)', '*ngIf': '!!post.file_reference' }
+  %ion-col
+    .file-reference-name {{ post.file_reference.name }}
+    .file-reference-file-size {{ post.file_reference.file_size }} byte
+  %ion-col.file-reference-file-type-wrapper
+    .file-reference-file-type {{ post.file_reference.file_type }}
+.post-poll{ '*ngIf': '!!post.poll' }
+  .poll-title {{ post.poll.title }}
+  %ion-row.poll-voting-btns
     %ion-col
-      .link-reference-title {{ post.link_reference.title }}
-      .link-reference-body {{ post.link_reference.body }}
-      .link-reference-site-name {{ post.link_reference.site_name | uppercase }} 원글보기
-    %ion-col.link-reference-image-wrapper
-      .link-reference-image{ '[ngStyle]': "{ 'background-image': 'url(' + post.link_reference.image_url + ')' }" }
-  %ion-row.post-file-reference{ '(click)': 'onClickFileReference(post.file_reference)', '*ngIf': '!!post.file_reference' }
+      %button.agreed-voting-btn{ 'ion-button': true, '[class.voted]': 'isAgreed()', '(click)': 'onClickVotingButton("agree")', '[disabled]': 'disableVotingButtons' }
+        찬성
+        %br
+        {{ post.poll.agreed_votings_count }}
     %ion-col
-      .file-reference-name {{ post.file_reference.name }}
-      .file-reference-file-size {{ post.file_reference.file_size }} byte
-    %ion-col.file-reference-file-type-wrapper
-      .file-reference-file-type {{ post.file_reference.file_type }}
-  .post-poll{ '*ngIf': '!!post.poll' }
-    .poll-title {{ post.poll.title }}
-    %ion-row.poll-voting-btns
-      %ion-col
-        %button.agreed-voting-btn{ 'ion-button': true, '[class.voted]': 'isAgreed()', '(click)': 'onClickVotingButton("agree")', '[disabled]': 'disableVotingButtons' }
-          찬성
-          %br
-          {{ post.poll.agreed_votings_count }}
-      %ion-col
-        %button.disagreed-voting-btn{ 'ion-button': true, '[class.voted]': 'isDisagreed()', '(click)': 'onClickVotingButton("disagree")', '[disabled]': 'disableVotingButtons' }
-          반대
-          %br
-          {{ post.poll.disagreed_votings_count }}
-    %ion-row.poll-votings{ '*ngIf': 'isVoted()' }
-      %ion-col.agreed-voting-users
-        .voting-users{ '*ngFor': 'let user of post.poll.agreed_voting_users', '(click)': 'onClickVotingUser(user)', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
-      %ion-col.disagreed-voting-users
-        %span.voting-users{ '*ngFor': 'let user of post.poll.disagreed_voting_users', '(click)': 'onClickVotingUser(user)', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
-    %ion-row.poll-recommend-voting{ '*ngIf': '!isVoted()' }
-      {{ post.poll.votings_count }}명이 투표했습니다. 투표하면 결과를 볼 수 있어요.
-  .post-buttons{ '*ngIf': 'isCollection' }
-    %span.comment-button{ '(click)': 'onClickCommentButton()' }
-      %ion-icon{ name: 'chatboxes' }
-      댓글달기
-    %parti-upvote-button{ '[post]': 'post' }
-  .post-comments
-    .comment{ '*ngFor': 'let comment of post.comments' }
-      .comment-header
-        .comment-byline
-          .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + comment.user.image_url + ')' }" }
-          .user-nickname {{ comment.user.nickname }}
-          .comment-created-at
-            {{ comment.created_at | partiDateTimeFormatObservable | async }}
-      .comment-body{ '[innerHTML]': "comment.body | partiSimpleFormat " }
+      %button.disagreed-voting-btn{ 'ion-button': true, '[class.voted]': 'isDisagreed()', '(click)': 'onClickVotingButton("disagree")', '[disabled]': 'disableVotingButtons' }
+        반대
+        %br
+        {{ post.poll.disagreed_votings_count }}
+  %ion-row.poll-votings{ '*ngIf': 'isVoted()' }
+    %ion-col.agreed-voting-users
+      .voting-users{ '*ngFor': 'let user of post.poll.agreed_voting_users', '(click)': 'onClickVotingUser(user)', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
+    %ion-col.disagreed-voting-users
+      %span.voting-users{ '*ngFor': 'let user of post.poll.disagreed_voting_users', '(click)': 'onClickVotingUser(user)', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
+  %ion-row.poll-recommend-voting{ '*ngIf': '!isVoted()' }
+    {{ post.poll.votings_count }}명이 투표했습니다. 투표하면 결과를 볼 수 있어요.
+.post-buttons{ '*ngIf': 'isCollection' }
+  %span.comment-button{ '(click)': 'onClickCommentButton()' }
+    %ion-icon{ name: 'chatboxes' }
+    댓글달기
+  %parti-upvote-button{ '[post]': 'post' }
+.post-comments
+  .comment{ '*ngFor': 'let comment of post.comments' }
+    .comment-header
+      .comment-byline
+        .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + comment.user.image_url + ')' }" }
+        .user-nickname {{ comment.user.nickname }}
+        .comment-created-at
+          {{ comment.created_at | partiDateTimeFormatObservable | async }}
+    .comment-body{ '[innerHTML]': "comment.body | partiSimpleFormat " }

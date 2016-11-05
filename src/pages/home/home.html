@@ -4,10 +4,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content class='ion-parti'>
-  <div class='posts'>
-    <h5>내 홈</h5>
-    <parti-post-panel *ngFor='let post of posts' [isCollection]='true' [post]='post'></parti-post-panel>
-  </div>
+  <parti-post-panel *ngFor='let post of posts' [isCollection]='true' [post]='post' class='post'></parti-post-panel>
   <ion-infinite-scroll #infiniteScroll (ionInfinite)='loadMore($event)'>
     <ion-infinite-scroll-content loadingSpinner='bubbles'></ion-infinite-scroll-content>
   </ion-infinite-scroll>

@@ -1,3 +1,9 @@
 page-home {
-
+  parti-post-panel {
+    display: block;
+    margin-top: 12px;
+    &:first-child {
+      margin: 0;
+    }
+  }
 }
