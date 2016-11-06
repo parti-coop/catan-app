@@ -20,7 +20,7 @@ export class SignInPage {
     public partiEnvironment: PartiEnvironment,
     public loadingCtrl: LoadingController,
     private platform: Platform,
-    private myselfData: MyselfData,
+    private myselfData: MyselfData
   ) {}
 
   login() {

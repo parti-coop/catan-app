@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Keyboard } from 'ionic-native';
-import { Platform } from 'ionic-angular';
+import { Platform, MenuController } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
 import { PartiesPage } from '../parties/parties';
@@ -16,7 +16,10 @@ export class TabsPage {
   messagesRoot: any = MessagesPage;
   moreRoot: any = MorePage;
 
-  constructor(platform: Platform) {
+  constructor(
+    platform: Platform,
+    private menuCtrl: MenuController
+  ) {
     platform.ready().then(() => {
       Keyboard.onKeyboardShow().subscribe(() => {
           document.body.classList.add('keyboard-is-open');

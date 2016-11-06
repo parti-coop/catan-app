@@ -1,17 +1,20 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 
 import 'rxjs/add/operator/finally';
 
 import { Parti } from '../../models/parti';
 import { PartiEnvironment } from '../../config/constant';
 import { PartiData } from '../../providers/parti-data';
+import { HomePage } from '../../pages/home/home';
 
 @Component({
   selector: 'page-parties',
   templateUrl: 'parties.html'
 })
 export class PartiesPage {
+  partiHomePage: any = HomePage;
+
   partiesMaking: Parti[];
   partiesJoinedOnly: Parti[];
   partiesAll: Parti[];
@@ -19,11 +22,13 @@ export class PartiesPage {
 
   constructor(
     public navCtrl: NavController,
+    private menuCtrl: MenuController,
     public partiEnvironment: PartiEnvironment,
     private partiData: PartiData
   ) {}
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
+    this.menuCtrl.open();
     this.partiData.joinedOnly()
       .subscribe((parties: Parti[]) => {
         this.partiesJoinedOnly = parties;

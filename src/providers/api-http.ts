@@ -79,10 +79,10 @@ export class ApiHttp {
             return this.http.request(apiUrl, requestOptions);
           }).catch(error => {
             if(this.myselfData.hasSignedIn) {
-              this.events.publish('user:signerror');
+              this.events.publish('user:signError');
               return Observable.throw(new Error("Can't refresh the token"));
             } else {
-              this.events.publish('user:signout');
+              this.events.publish('user:signOut');
               console.log("ApiHttp#intercept : signout out!");
               return Observable.empty();
             }

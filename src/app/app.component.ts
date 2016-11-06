@@ -8,7 +8,7 @@ import { SignInPage } from '../pages/sign-in/sign-in';
 import { MyselfData } from '../providers/myself-data';
 
 @Component({
-  template: `<ion-nav #appNav [root]="rootPage"></ion-nav>`
+  templateUrl: 'app.html'
 })
 export class PartiApp {
   @ViewChild('appNav') navCtrl: NavController;
@@ -16,8 +16,8 @@ export class PartiApp {
 
   constructor(
     platform: Platform,
-    myselfData: MyselfData,
-    private events: Events
+    private events: Events,
+    myselfData: MyselfData
   ) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -36,11 +36,11 @@ export class PartiApp {
   }
 
   listenToLoginEvents() {
-    this.events.subscribe('user:signerror', () => {
+    this.events.subscribe('user:signError', () => {
       alert('로그인 하는 중에 뭔가 잘못되었네요. 다시 로그인해 주세요!');
       this.navCtrl.setRoot(SignInPage);
     });
-    this.events.subscribe('user:signout', () => {
+    this.events.subscribe('user:signOut', () => {
       alert('로그아웃 되었습니다. 다시 로그인해 주세요!');
       this.navCtrl.setRoot(SignInPage);
     });

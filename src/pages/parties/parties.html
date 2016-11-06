@@ -1,82 +1,80 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>{{partiEnvironment.appTitle}}</ion-title>
-  </ion-navbar>
-  <ion-toolbar no-border-top>
-    <ion-segment [(ngModel)]='selection'>
-      <ion-segment-button value='joined'>
-        내 빠띠
-      </ion-segment-button>
-      <ion-segment-button value='all'>
-        모든 빠디
-      </ion-segment-button>
-      <ion-segment-button value='marked'>
-        <ion-icon name='star'></ion-icon>
-        빠띠
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
-</ion-header>
-<ion-content class='ion-parti'>
-  <div [hidden]="selection !== 'joined'" class='full'>
-    <ion-scroll class='full' scrollY='true'>
-      <ion-list>
-        <ion-item-group>
-          <ion-item-divider>
-            내가 메이커인 빠디
-            {{ partiesMakingCount() }}
-          </ion-item-divider>
-          <template [ngIf]='!partiesMaking'>
+<ion-menu [content]='partiesNav'>
+  <ion-content class='ion-parti'>
+    <ion-toolbar no-border>
+      <ion-segment [(ngModel)]='selection'>
+        <ion-segment-button value='joined'>
+          내 빠띠
+        </ion-segment-button>
+        <ion-segment-button value='all'>
+          모든 빠디
+        </ion-segment-button>
+        <ion-segment-button value='marked'>
+          <ion-icon name='star'></ion-icon>
+          빠띠
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+    <div [hidden]="selection !== 'joined'" class='full'>
+      <ion-scroll class='full' scrollY='true'>
+        <ion-list>
+          <ion-item-group>
+            <ion-item-divider>
+              내가 메이커인 빠디
+              {{ partiesMakingCount() }}
+            </ion-item-divider>
+            <template [ngIf]='!partiesMaking'>
+              <ion-item text-center>
+                <ion-spinner></ion-spinner>
+              </ion-item>
+            </template>
+            <template [ngIf]='!!partiesMaking'>
+              <ion-item *ngFor='let parti of partiesMaking'>
+                {{ parti.title }}
+              </ion-item>
+            </template>
+          </ion-item-group>
+          <ion-item-group>
+            <ion-item-divider>
+              내가 가입 중인 빠디
+              {{ partiesJoinedOnlyCount() }}
+            </ion-item-divider>
+            <template [ngIf]='!partiesJoinedOnly'>
+              <ion-item text-center>
+                <ion-spinner></ion-spinner>
+              </ion-item>
+            </template>
+            <template [ngIf]='!!partiesJoinedOnly'>
+              <ion-item *ngFor='let parti of partiesJoinedOnly'>
+                {{ parti.title }}
+              </ion-item>
+            </template>
+          </ion-item-group>
+        </ion-list>
+      </ion-scroll>
+    </div>
+    <div [hidden]="selection !== 'all'" class='full'>
+      <ion-scroll class='full' scrollY='true'>
+        <ion-list>
+          <template [ngIf]='!partiesAll'>
             <ion-item text-center>
               <ion-spinner></ion-spinner>
             </ion-item>
           </template>
-          <template [ngIf]='!!partiesMaking'>
-            <ion-item *ngFor='let parti of partiesMaking'>
+          <template [ngIf]='!!partiesAll'>
+            <ion-item *ngFor='let parti of partiesAll'>
               {{ parti.title }}
             </ion-item>
           </template>
-        </ion-item-group>
-        <ion-item-group>
-          <ion-item-divider>
-            내가 가입 중인 빠디
-            {{ partiesJoinedOnlyCount() }}
-          </ion-item-divider>
-          <template [ngIf]='!partiesJoinedOnly'>
-            <ion-item text-center>
-              <ion-spinner></ion-spinner>
-            </ion-item>
-          </template>
-          <template [ngIf]='!!partiesJoinedOnly'>
-            <ion-item *ngFor='let parti of partiesJoinedOnly'>
-              {{ parti.title }}
-            </ion-item>
-          </template>
-        </ion-item-group>
-      </ion-list>
-    </ion-scroll>
-  </div>
-  <div [hidden]="selection !== 'all'" class='full'>
-    <ion-scroll class='full' scrollY='true'>
-      <ion-list>
-        <template [ngIf]='!partiesAll'>
-          <ion-item text-center>
-            <ion-spinner></ion-spinner>
-          </ion-item>
-        </template>
-        <template [ngIf]='!!partiesAll'>
-          <ion-item *ngFor='let parti of partiesAll'>
-            {{ parti.title }}
-          </ion-item>
-        </template>
-      </ion-list>
-    </ion-scroll>
-  </div>
-  <div [hidden]="selection !== 'marked'" class='full'>
-    <ion-scroll class='full' scrollY='true'>
-      <ion-list>
-        <ion-item>all 준비중</ion-item>
-      </ion-list>
-    </ion-scroll>
-  </div>
-</ion-content>
+        </ion-list>
+      </ion-scroll>
+    </div>
+    <div [hidden]="selection !== 'marked'" class='full'>
+      <ion-scroll class='full' scrollY='true'>
+        <ion-list>
+          <ion-item>all 준비중</ion-item>
+        </ion-list>
+      </ion-scroll>
+    </div>
+  </ion-content>
+</ion-menu>
+<ion-nav #partiesNav [root]='partiHomePage'></ion-nav>

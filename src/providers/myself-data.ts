@@ -83,7 +83,7 @@ export class MyselfData {
       }).mergeMap(myself => {
         return this.storeMyselfData(myself);
       }).mergeMap(() => {
-        return this.storeHasSignedIn(true)
+        return this.storeHasSignedIn(true);
       }).catch((error) => {
         console.log("MyselfData#auth : " + error);
         return this.storeHasSignedIn(false)
