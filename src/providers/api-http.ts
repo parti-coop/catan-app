@@ -14,12 +14,16 @@ import { MyselfData } from '../providers/myself-data';
 
 @Injectable()
 export class ApiHttp {
+  sessionStamp: Date;
+
   constructor(
     private myselfData: MyselfData,
     private partiEnvironment: PartiEnvironment,
     private events: Events,
     private http: Http
-  ) {}
+  ) {
+    this.sessionStamp = new Date();
+  }
 
   public request(method: RequestMethod, url: string, options?: RequestOptions): Observable<Response> {
     return this.intercept(method, url, options);
@@ -70,6 +74,7 @@ export class ApiHttp {
   intercept(method: RequestMethod, url: string, options?: RequestOptions): Observable<Response> {
     var requestOptions: RequestOptions = this.getRequestOption(method, url, options);
     let apiUrl = `${this.partiEnvironment.apiBaseUrl}${url}`;
+    let usedSessionStamp = this.sessionStamp;
 
     return this.http.request(apiUrl, requestOptions).catch((error, source) => {
       if (error && error.status  == 401) {
@@ -78,6 +83,12 @@ export class ApiHttp {
             requestOptions = this.getRequestOption(method, url, options);
             return this.http.request(apiUrl, requestOptions);
           }).catch(error => {
+            if(usedSessionStamp != this.sessionStamp) {
+              console.log("ApiHttp#intercept : old session");
+              return Observable.empty();
+            }
+
+            this.sessionStamp = new Date();
             if(this.myselfData.hasSignedIn) {
               this.events.publish('user:signError');
               return Observable.throw(new Error("Can't refresh the token"));
@@ -88,6 +99,12 @@ export class ApiHttp {
             }
           });
       } else {
+        if(usedSessionStamp != this.sessionStamp) {
+          console.log("ApiHttp#intercept : old session");
+          return Observable.empty();
+        }
+
+        this.sessionStamp = new Date();
         this.events.publish('app:error');
         console.log("ApiHttps#intercept : error - " + error);
         return Observable.throw(error);

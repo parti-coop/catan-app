@@ -16,9 +16,7 @@ export class PartiesPage {
   @ViewChild('partiesNav') partiesNavCtrl: NavController;
   partiHomePage: any = PartiHomePage;
 
-  partiesMaking: Parti[];
-  partiesJoinedOnly: Parti[];
-  partiesAll: Parti[];
+  parties: { [id: string] : Parti[]; } = {};
   currentParti: Parti;
   selection: string = 'joined';
 
@@ -30,32 +28,30 @@ export class PartiesPage {
   ) {}
 
   ionViewDidLoad() {
-    console.log('PartiesPage ionViewDidLoad!!!');
-    this.partiData.joinedOnly()
-      .subscribe((parties: Parti[]) => {
-        this.partiesJoinedOnly = parties;
-      });
-    this.partiData.making()
-      .subscribe((parties: Parti[]) => {
-        this.partiesMaking = parties;
-      });
-    this.partiData.all()
-      .subscribe((parties: Parti[]) => {
-        this.partiesAll = parties;
-      });
+    for (let key of ['joinedOnly', 'making', 'all']) {
+      if(!this.parties[key]) {
+        this.partiData[key]()
+          .subscribe((parties: Parti[]) => {
+            this.parties[key] = parties;
+          }, (error) => {
+            this.parties[key] = this.parties[key] || [];
+          }, () => {
+            this.parties[key] = this.parties[key] || [];
+          });
+      }
+    }
   }
 
   ionViewDidEnter() {
-    console.log('PartiesPage ionViewDidEnter!!!');
     this.menuCtrl.open();
   }
 
   partiesMakingCount() {
-    return (!!this.partiesMaking ? this.partiesMaking.length : "");
+    return (!!this.parties['making'] ? this.parties['making'].length : "");
   }
 
   partiesJoinedOnlyCount() {
-    return (!!this.partiesJoinedOnly ? this.partiesJoinedOnly.length : "");
+    return (!!this.parties['joinedOnly'] ? this.parties['joinedOnly'].length : "");
   }
 
   onClickParti(parti: Parti) {

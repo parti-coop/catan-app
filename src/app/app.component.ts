@@ -13,7 +13,6 @@ import { MyselfData } from '../providers/myself-data';
 export class PartiApp {
   @ViewChild('appNav') navCtrl: NavController;
   rootPage;
-
   constructor(
     platform: Platform,
     private events: Events,

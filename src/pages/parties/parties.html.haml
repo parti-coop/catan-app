@@ -16,30 +16,30 @@
             %ion-item-divider
               내가 메이커인 빠디
               {{ partiesMakingCount() }}
-            %template{'[ngIf]': '!partiesMaking'}
+            %template{'[ngIf]': '!parties["making"]'}
               %ion-item{ 'text-center': true }
                 %ion-spinner
-            %template{'[ngIf]': '!!partiesMaking'}
-              %ion-item{ '*ngFor': 'let parti of partiesMaking', '(click)': 'onClickParti(parti)' }
+            %template{'[ngIf]': '!!parties["making"]'}
+              %ion-item{ '*ngFor': 'let parti of parties["making"]', '(click)': 'onClickParti(parti)' }
                 {{ parti.title }}
           %ion-item-group
             %ion-item-divider
               내가 가입 중인 빠디
               {{ partiesJoinedOnlyCount() }}
-            %template{'[ngIf]': '!partiesJoinedOnly'}
+            %template{'[ngIf]': '!parties["joinedOnly"]'}
               %ion-item{ 'text-center': true }
                 %ion-spinner
-            %template{'[ngIf]': '!!partiesJoinedOnly'}
-              %ion-item{ '*ngFor': 'let parti of partiesJoinedOnly', '(click)': 'onClickParti(parti)' }
+            %template{'[ngIf]': '!!parties["joinedOnly"]'}
+              %ion-item{ '*ngFor': 'let parti of parties["joinedOnly"]', '(click)': 'onClickParti(parti)' }
                 {{ parti.title }}
     %div.full{ '[hidden]': "selection !== 'all'" }
       %ion-scroll.full{ scrollY: 'true' }
         %ion-list
-          %template{'[ngIf]': '!partiesAll'}
+          %template{'[ngIf]': '!parties["all"]'}
             %ion-item{ 'text-center': true }
               %ion-spinner
-          %template{'[ngIf]': '!!partiesAll'}
-            %ion-item{ '*ngFor': 'let parti of partiesAll', '(click)': 'onClickParti(parti)' }
+          %template{'[ngIf]': '!!parties["all"]'}
+            %ion-item{ '*ngFor': 'let parti of parties["all"]', '(click)': 'onClickParti(parti)' }
               {{ parti.title }}
     %div.full{ '[hidden]': "selection !== 'marked'" }
       %ion-scroll.full{ scrollY: 'true' }

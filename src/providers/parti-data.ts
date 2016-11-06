@@ -25,4 +25,9 @@ export class PartiData {
     return this.http.get('/api/v1/parties')
       .map(res => <Parti[]>(res.json().parties));
   }
+
+  first(): Observable<Parti> {
+    return this.http.get('/api/v1/parties/first')
+      .map(res => <Parti>(res.json().parti));
+  }
 }

@@ -3,7 +3,6 @@ import { Observable } from 'rxjs/Rx';
 
 import 'rxjs/add/operator/map';
 
-import { RequestOptions, URLSearchParams } from '@angular/http';
 import { ApiHttp } from '../providers/api-http'
 import { Message } from '../models/message'
 import { InfinitPage } from '../models/infinit-page'

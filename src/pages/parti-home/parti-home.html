@@ -8,6 +8,10 @@
     <ion-spinner></ion-spinner>
   </div>
   <template [ngIf]='!isLoading()'>
+    <div class='cover'>
+      <div [ngStyle]="{ 'background-image': 'url(' + parti.logo_url + ')' }" class='parti-logo'></div>
+      <div class='parti-title'>{{ parti.title }}</div>
+    </div>
     <parti-post-panel *ngFor='let post of posts' [isCollection]='true' [post]='post' class='post'></parti-post-panel>
     <ion-infinite-scroll #infiniteScroll (ionInfinite)='loadMore($event)'>
       <ion-infinite-scroll-content loadingSpinner='bubbles'></ion-infinite-scroll-content>

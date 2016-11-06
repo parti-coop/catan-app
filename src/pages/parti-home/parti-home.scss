@@ -5,4 +5,17 @@ page-parti-home {
       margin: 0;
     }
   }
+
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .parti-logo {
+      height: 30px;
+      width: 30px;
+      @include background-thumbnail();
+    }
+  }
 }

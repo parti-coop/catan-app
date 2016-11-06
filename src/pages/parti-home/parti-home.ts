@@ -1,8 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, InfiniteScroll } from 'ionic-angular';
 
+import 'rxjs/add/operator/mergeMap';
+
 import { Parti } from '../../models/parti';
 import { PostData } from '../../providers/post-data';
+import { PartiData } from '../../providers/parti-data';
 import { Post } from '../../models/post';
 
 @Component({
@@ -16,17 +19,29 @@ export class PartiHomePage {
   lastPost: Post;
   hasMoreData: boolean = true;
   parti: Parti;
+  isFirstPartiHomePage: boolean = false;
 
   constructor(
     public navCtrl: NavController,
     private navParams: NavParams,
+    private partiData: PartiData,
     private postData: PostData
   ) {
     this.parti = navParams.get('parti');
+    this.isFirstPartiHomePage = !this.parti;
   }
 
-  ionViewDidEnter() {
-    if(!!this.parti && !this.posts) {
+  ionViewDidLoad() {
+    if(this.isFirstPartiHomePage) {
+      this.partiData.first()
+        .subscribe((parti: Parti) => {
+          this.parti = parti;
+          this.load(() => {
+            this.disableInfiniteScrollIfNoMoreData(this.infiniteScroll);
+          });
+        });
+    }
+    else {
       this.load(() => {
         this.disableInfiniteScrollIfNoMoreData(this.infiniteScroll);
       });
@@ -72,11 +87,7 @@ export class PartiHomePage {
     return '빠띠';
   }
 
-  isLoading() {
-    if(!this.parti) {
-      return false;
-    }
-
-    return !this.posts;
+  isLoading(): boolean {
+    return !this.parti || !this.posts;
   }
 }

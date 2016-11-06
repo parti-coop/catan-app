@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Events, LoadingController, InfiniteScroll } from 'ionic-angular';
+import { Events, InfiniteScroll } from 'ionic-angular';
 
 import 'rxjs/add/operator/finally';
 
@@ -16,7 +16,7 @@ import { Post } from '../../models/post';
 export class HomePage {
   @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
 
-  posts: Post[] = [];
+  posts: Post[];
   lastPost: Post;
   hasMoreData: boolean = true;
 
@@ -25,19 +25,14 @@ export class HomePage {
     public partiEnvironment: PartiEnvironment,
     public myselfData: MyselfData,
     private postData: PostData,
-    private events: Events,
-    private loadingCtrl: LoadingController
+    private events: Events
   ) {}
 
-  ionViewDidEnter() {
-    if(!this.posts.length) {
-      let loader = this.loadingCtrl.create();
-      loader.present();
-      this.load(() => {
-        loader.dismiss();
-        this.disableInfiniteScrollIfNoMoreData(this.infiniteScroll);
-      });
-    }
+  ionViewDidLoad() {
+    console.log('home view loading');
+    this.load(() => {
+      this.disableInfiniteScrollIfNoMoreData(this.infiniteScroll);
+    });
   }
 
   loadMore(infiniteScroll) {
@@ -55,6 +50,9 @@ export class HomePage {
         }
       }).subscribe(pagedPosts => {
         this.hasMoreData = pagedPosts.has_more_item;
+        if(this.posts == null) {
+          this.posts = [];
+        }
         this.posts = this.posts.concat(pagedPosts.items);
         if(this.posts.length) {
           this.lastPost = this.posts[this.posts.length-1];
@@ -66,5 +64,9 @@ export class HomePage {
     if(!this.hasMoreData) {
       infiniteScroll.enable(false);
     }
+  }
+
+  isLoading() {
+    return !this.posts;
   }
 }

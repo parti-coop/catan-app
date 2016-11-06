@@ -5,6 +5,9 @@
   .spinner-center-wrapper{ '*ngIf': 'isLoading()' }
     %ion-spinner
   %template{ '[ngIf]': '!isLoading()'}
+    .cover
+      .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }
+      .parti-title {{ parti.title }}
     %parti-post-panel.post{ '[post]': 'post', '*ngFor': 'let post of posts', '[isCollection]': 'true' }
     %ion-infinite-scroll{ '(ionInfinite)': 'loadMore($event)', '#infiniteScroll': true }
       %ion-infinite-scroll-content{ loadingSpinner: "bubbles" }

@@ -22,13 +22,13 @@
               내가 메이커인 빠디
               {{ partiesMakingCount() }}
             </ion-item-divider>
-            <template [ngIf]='!partiesMaking'>
+            <template [ngIf]='!parties["making"]'>
               <ion-item text-center>
                 <ion-spinner></ion-spinner>
               </ion-item>
             </template>
-            <template [ngIf]='!!partiesMaking'>
-              <ion-item (click)='onClickParti(parti)' *ngFor='let parti of partiesMaking'>
+            <template [ngIf]='!!parties["making"]'>
+              <ion-item (click)='onClickParti(parti)' *ngFor='let parti of parties["making"]'>
                 {{ parti.title }}
               </ion-item>
             </template>
@@ -38,13 +38,13 @@
               내가 가입 중인 빠디
               {{ partiesJoinedOnlyCount() }}
             </ion-item-divider>
-            <template [ngIf]='!partiesJoinedOnly'>
+            <template [ngIf]='!parties["joinedOnly"]'>
               <ion-item text-center>
                 <ion-spinner></ion-spinner>
               </ion-item>
             </template>
-            <template [ngIf]='!!partiesJoinedOnly'>
-              <ion-item (click)='onClickParti(parti)' *ngFor='let parti of partiesJoinedOnly'>
+            <template [ngIf]='!!parties["joinedOnly"]'>
+              <ion-item (click)='onClickParti(parti)' *ngFor='let parti of parties["joinedOnly"]'>
                 {{ parti.title }}
               </ion-item>
             </template>
@@ -55,13 +55,13 @@
     <div [hidden]="selection !== 'all'" class='full'>
       <ion-scroll class='full' scrollY='true'>
         <ion-list>
-          <template [ngIf]='!partiesAll'>
+          <template [ngIf]='!parties["all"]'>
             <ion-item text-center>
               <ion-spinner></ion-spinner>
             </ion-item>
           </template>
-          <template [ngIf]='!!partiesAll'>
-            <ion-item (click)='onClickParti(parti)' *ngFor='let parti of partiesAll'>
+          <template [ngIf]='!!parties["all"]'>
+            <ion-item (click)='onClickParti(parti)' *ngFor='let parti of parties["all"]'>
               {{ parti.title }}
             </ion-item>
           </template>
