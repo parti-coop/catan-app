@@ -70,7 +70,6 @@ export class PostPage {
   }
 
   save() {
-    console.log("save!!!");
     let loader = this.loadingCtrl.create();
     loader.present();
 
@@ -79,7 +78,6 @@ export class PostPage {
       .finally(() => {
         loader.dismiss();
       }).subscribe((comment: Comment) => {
-        console.log("add comment data!");
         if(!this.post.comments) {
           this.post.comments = [];
         }
@@ -96,7 +94,7 @@ export class PostPage {
     input.setFocus();
   }
 
-  post_body_or_title() {
+  postBodyOrTitle() {
     if(!this.post) {
       return "";
     }

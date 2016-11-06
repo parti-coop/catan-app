@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ pageTitle() }}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class='ion-parti'>
+  <div *ngIf='isLoading()' class='spinner-center-wrapper'>
+    <ion-spinner></ion-spinner>
+  </div>
+  <template [ngIf]='!isLoading()'>
+    <parti-post-panel *ngFor='let post of posts' [isCollection]='true' [post]='post' class='post'></parti-post-panel>
+    <ion-infinite-scroll #infiniteScroll (ionInfinite)='loadMore($event)'>
+      <ion-infinite-scroll-content loadingSpinner='bubbles'></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </template>
+</ion-content>

@@ -20,7 +20,7 @@
               %ion-item{ 'text-center': true }
                 %ion-spinner
             %template{'[ngIf]': '!!partiesMaking'}
-              %ion-item{ '*ngFor': 'let parti of partiesMaking' }
+              %ion-item{ '*ngFor': 'let parti of partiesMaking', '(click)': 'onClickParti(parti)' }
                 {{ parti.title }}
           %ion-item-group
             %ion-item-divider
@@ -30,7 +30,7 @@
               %ion-item{ 'text-center': true }
                 %ion-spinner
             %template{'[ngIf]': '!!partiesJoinedOnly'}
-              %ion-item{ '*ngFor': 'let parti of partiesJoinedOnly' }
+              %ion-item{ '*ngFor': 'let parti of partiesJoinedOnly', '(click)': 'onClickParti(parti)' }
                 {{ parti.title }}
     %div.full{ '[hidden]': "selection !== 'all'" }
       %ion-scroll.full{ scrollY: 'true' }
@@ -39,11 +39,11 @@
             %ion-item{ 'text-center': true }
               %ion-spinner
           %template{'[ngIf]': '!!partiesAll'}
-            %ion-item{ '*ngFor': 'let parti of partiesAll' }
+            %ion-item{ '*ngFor': 'let parti of partiesAll', '(click)': 'onClickParti(parti)' }
               {{ parti.title }}
     %div.full{ '[hidden]': "selection !== 'marked'" }
       %ion-scroll.full{ scrollY: 'true' }
         %ion-list
           %ion-item all 준비중
 
-%ion-nav{ '#partiesNav': true, '[root]': 'partiHomePage' }
+%ion-nav{ '#partiesNav': true, '[root]': 'partiHomePage', 'swipe-back-enabled': 'false' }

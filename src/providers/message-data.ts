@@ -12,9 +12,7 @@ import { InfinitPage } from '../models/infinit-page'
 export class MessageData {
   constructor(
     private http: ApiHttp
-  ){
-    console.log('Hello MessageData Provider');
-  }
+  ) {}
 
   fetch(): Observable<Message[]> {
     return this.http.get('/api/v1/messages')

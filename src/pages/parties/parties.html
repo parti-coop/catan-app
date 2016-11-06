@@ -28,7 +28,7 @@
               </ion-item>
             </template>
             <template [ngIf]='!!partiesMaking'>
-              <ion-item *ngFor='let parti of partiesMaking'>
+              <ion-item (click)='onClickParti(parti)' *ngFor='let parti of partiesMaking'>
                 {{ parti.title }}
               </ion-item>
             </template>
@@ -44,7 +44,7 @@
               </ion-item>
             </template>
             <template [ngIf]='!!partiesJoinedOnly'>
-              <ion-item *ngFor='let parti of partiesJoinedOnly'>
+              <ion-item (click)='onClickParti(parti)' *ngFor='let parti of partiesJoinedOnly'>
                 {{ parti.title }}
               </ion-item>
             </template>
@@ -61,7 +61,7 @@
             </ion-item>
           </template>
           <template [ngIf]='!!partiesAll'>
-            <ion-item *ngFor='let parti of partiesAll'>
+            <ion-item (click)='onClickParti(parti)' *ngFor='let parti of partiesAll'>
               {{ parti.title }}
             </ion-item>
           </template>
@@ -77,4 +77,4 @@
     </div>
   </ion-content>
 </ion-menu>
-<ion-nav #partiesNav [root]='partiHomePage'></ion-nav>
+<ion-nav #partiesNav [root]='partiHomePage' swipe-back-enabled='false'></ion-nav>

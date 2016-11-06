@@ -21,6 +21,7 @@ import { SignInPage } from '../pages/sign-in/sign-in';
 import { PostPage } from '../pages/post/post';
 import { PartiesPage } from '../pages/parties/parties';
 import { MessagesPage } from '../pages/messages/messages';
+import { PartiHomePage } from '../pages/parti-home/parti-home';
 
 import { PartiEnvironment } from '../config/constant';
 import { PartiData } from '../providers/parti-data';
@@ -47,6 +48,7 @@ moment.locale('ko');
     PostPage,
     PartiesPage,
     MessagesPage,
+    PartiHomePage,
     PartiPostBylineComponent,
     PartiPostPanelComponent,
     PartiUpvoteButton,
@@ -67,7 +69,8 @@ moment.locale('ko');
     SignInPage,
     PostPage,
     PartiesPage,
-    MessagesPage
+    MessagesPage,
+    PartiHomePage
   ],
   providers: [
     PartiEnvironment,
