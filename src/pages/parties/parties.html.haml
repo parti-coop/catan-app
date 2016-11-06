@@ -1,5 +1,5 @@
 %ion-menu{ '[content]': 'partiesNav' }
-  %ion-content.ion-parti
+  %ion-header
     %ion-toolbar{ 'no-border': true }
       %ion-segment{ '[(ngModel)]': 'selection' }
         %ion-segment-button{ value: 'joined' }
@@ -9,6 +9,7 @@
         %ion-segment-button{ value: 'marked' }
           %ion-icon{ name: 'star' }
           빠띠
+  %ion-content.ion-parti
     %div.full{ '[hidden]': "selection !== 'joined'" }
       %ion-scroll.full{ scrollY: 'true' }
         %ion-list
