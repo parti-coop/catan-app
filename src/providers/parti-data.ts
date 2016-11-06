@@ -11,8 +11,18 @@ export class PartiData {
     private http: ApiHttp
   ) {}
 
-  watchedParties(): Observable<Parti[]> {
-    return this.http.get('/api/v1/parties/watched')
+  joinedOnly(): Observable<Parti[]> {
+    return this.http.get('/api/v1/parties/joined_only')
+      .map(res => <Parti[]>(res.json().parties));
+  }
+
+  making(): Observable<Parti[]> {
+    return this.http.get('/api/v1/parties/making')
+      .map(res => <Parti[]>(res.json().parties));
+  }
+
+  all(): Observable<Parti[]> {
+    return this.http.get('/api/v1/parties')
       .map(res => <Parti[]>(res.json().parties));
   }
 }

@@ -95,4 +95,12 @@ export class PostPage {
   focusInput(input) {
     input.setFocus();
   }
+
+  post_body_or_title() {
+    if(!this.post) {
+      return "";
+    }
+
+    return this.post.parsed_title || this.post.parsed_body;
+  }
 }

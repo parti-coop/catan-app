@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
 import 'rxjs/add/operator/finally';
 
@@ -12,24 +12,37 @@ import { PartiData } from '../../providers/parti-data';
   templateUrl: 'parties.html'
 })
 export class PartiesPage {
-  parties: Parti[];
-  selection: string = 'watched';
+  partiesMaking: Parti[];
+  partiesJoinedOnly: Parti[];
+  partiesAll: Parti[];
+  selection: string = 'joined';
 
   constructor(
     public navCtrl: NavController,
     public partiEnvironment: PartiEnvironment,
-    private loadingCtrl: LoadingController,
     private partiData: PartiData
   ) {}
 
   ionViewDidLoad() {
-    let loader = this.loadingCtrl.create();
-    loader.present();
-    this.partiData.watchedParties()
-      .finally(() => {
-        loader.dismiss();
-      }).subscribe((parties: Parti[]) => {
-        this.parties = parties
+    this.partiData.joinedOnly()
+      .subscribe((parties: Parti[]) => {
+        this.partiesJoinedOnly = parties;
       });
-   }
+    this.partiData.making()
+      .subscribe((parties: Parti[]) => {
+        this.partiesMaking = parties;
+      });
+    this.partiData.all()
+      .subscribe((parties: Parti[]) => {
+        this.partiesAll = parties;
+      });
+  }
+
+  partiesMakingCount() {
+    return (!!this.partiesMaking ? this.partiesMaking.length : "");
+  }
+
+  partiesJoinedOnlyCount() {
+    return (!!this.partiesJoinedOnly ? this.partiesJoinedOnly.length : "");
+  }
 }
