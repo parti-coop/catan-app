@@ -47,12 +47,20 @@ $ PARTI_ENV=development-proxy gulp reset
 
 ## 개발
 
+### 서브라임설정
+
+```
+$ open ./catan-app.sublime-project
+```
+
 ### 개발을 위한 ios ionic emulator 띄우기
 
 로컬서버(http://parti.dev)와 연동하는 에뮬레이터 위에 앱은 아래와 같이 구동시킵니다. target은 ios-sim showdevicetypes 명령을 통해 로컬에 있는 것을 적절히 고릅니다.
 ```
 $ ionic emulate ios -l -c -s --target="iPhone-6s, 10.0" --address localhost
 ```
+
+**2016년 11월 초 cordova / ionic 업그레이드 이후로 위의 명령에선 facebook plugin에서 사용하는 key change sharing이 작동하지 않습니다. 해서 실제 앱은 xcode로 다시 구동시켜야 합니다.**
 
 소스를 수정한 뒤 바로 적용되도록 하려면 다른 터미널 세션을 열어서 아래를 수행합니다.
 ```
