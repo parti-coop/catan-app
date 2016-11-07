@@ -1,12 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, InfiniteScroll } from 'ionic-angular';
+import { NavController, NavParams,
+  InfiniteScroll, ToastController, PopoverController, Events } from 'ionic-angular';
 
 import 'rxjs/add/operator/mergeMap';
 
 import { Parti } from '../../models/parti';
+import { Post } from '../../models/post';
+import { CancelPartiMemberPage } from '../../pages/cancel-parti-member/cancel-parti-member';
 import { PostData } from '../../providers/post-data';
 import { PartiData } from '../../providers/parti-data';
-import { Post } from '../../models/post';
+import { MemberData } from '../../providers/member-data';
 
 @Component({
   selector: 'page-parti-home',
@@ -23,9 +26,13 @@ export class PartiHomePage {
 
   constructor(
     public navCtrl: NavController,
+    private toastCtrl: ToastController,
+    public popoverCtrl: PopoverController,
     private navParams: NavParams,
     private partiData: PartiData,
-    private postData: PostData
+    private postData: PostData,
+    private memberData: MemberData,
+    private events: Events
   ) {
     this.parti = navParams.get('parti');
     this.isFirstPartiHomePage = !this.parti;
@@ -89,5 +96,39 @@ export class PartiHomePage {
 
   isLoading(): boolean {
     return !this.parti || !this.posts;
+  }
+
+  onClickJoinParti() {
+    this.memberData.join(this.parti)
+      .subscribe(() => {
+        this.parti.is_member = true;
+        this.events.publish('parti:join', this.parti);
+        let toast = this.toastCtrl.create({
+          message: '가입되었습니다.',
+          duration: 3000
+        });
+        toast.present();
+      });
+  }
+
+  onClickCancelParti() {
+    this.memberData.cancel(this.parti)
+      .subscribe(() => {
+        this.parti.is_member = false;
+        this.events.publish('parti:cancel', this.parti);
+        let toast = this.toastCtrl.create({
+          message: '탈퇴되었습니다.',
+          duration: 3000
+        });
+        toast.present();
+      });
+  }
+
+  onClickJoinedParti(event) {
+    let popover = this.popoverCtrl.create(CancelPartiMemberPage, {
+      partiHomePage: this });
+    popover.present({
+      ev: event
+    });
   }
 }

@@ -6,4 +6,6 @@ export interface Parti {
   slug: string;
   logo_url: string;
   group: Group;
+  is_member: boolean;
+  is_made_by: boolean;
 }

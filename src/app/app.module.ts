@@ -22,6 +22,7 @@ import { PostPage } from '../pages/post/post';
 import { PartiesPage } from '../pages/parties/parties';
 import { MessagesPage } from '../pages/messages/messages';
 import { PartiHomePage } from '../pages/parti-home/parti-home';
+import { CancelPartiMemberPage } from '../pages/cancel-parti-member/cancel-parti-member';
 
 import { PartiEnvironment } from '../config/constant';
 import { PartiData } from '../providers/parti-data';
@@ -31,6 +32,7 @@ import { CommentData } from '../providers/comment-data';
 import { UpvoteData } from '../providers/upvote-data';
 import { VotingData } from '../providers/voting-data';
 import { MessageData } from '../providers/message-data';
+import { MemberData } from '../providers/member-data';
 import { ApiHttp } from '../providers/api-http';
 
 // monent settings
@@ -49,6 +51,7 @@ moment.locale('ko');
     PartiesPage,
     MessagesPage,
     PartiHomePage,
+    CancelPartiMemberPage,
     PartiPostBylineComponent,
     PartiPostPanelComponent,
     PartiUpvoteButton,
@@ -70,7 +73,8 @@ moment.locale('ko');
     PostPage,
     PartiesPage,
     MessagesPage,
-    PartiHomePage
+    PartiHomePage,
+    CancelPartiMemberPage
   ],
   providers: [
     PartiEnvironment,
@@ -81,6 +85,7 @@ moment.locale('ko');
     VotingData,
     PartiData,
     MessageData,
+    MemberData,
     ApiHttp,
     Storage
   ],

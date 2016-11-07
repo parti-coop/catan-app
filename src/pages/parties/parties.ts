@@ -1,7 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, MenuController } from 'ionic-angular';
+import { NavController, MenuController, Events } from 'ionic-angular';
 
 import 'rxjs/add/operator/finally';
+
+import _ from 'lodash';
 
 import { Parti } from '../../models/parti';
 import { PartiEnvironment } from '../../config/constant';
@@ -24,8 +26,11 @@ export class PartiesPage {
     public navCtrl: NavController,
     private menuCtrl: MenuController,
     public partiEnvironment: PartiEnvironment,
+    private events: Events,
     private partiData: PartiData
-  ) {}
+  ) {
+    this.listenToMemberEvents();
+  }
 
   ionViewDidLoad() {
     for (let key of ['joinedOnly', 'making', 'all']) {
@@ -60,5 +65,19 @@ export class PartiesPage {
     }
     this.menuCtrl.close();
     this.currentParti = parti;
+  }
+
+  listenToMemberEvents() {
+    this.events.subscribe('parti:join', (data) => {
+      let parti: Parti = <Parti>data[0];
+      if (!_.includes(this.parties['joinedOnly'], {id: parti.id})) {
+        this.parties['joinedOnly'].unshift(parti);
+      }
+    });
+    this.events.subscribe('parti:cancel', (data) => {
+      let parti: Parti = <Parti>data[0];
+      _.remove(this.parties['joinedOnly'], { id: parti.id });
+      _.remove(this.parties['making'], { id: parti.id });
+    });
   }
 }
