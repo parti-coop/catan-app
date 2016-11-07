@@ -13,6 +13,35 @@
 $text-color:        #000;
 $background-color:  #fff;
 
+$font-size-base:          14px;
+$font-size-large:         18px;
+$font-size-small:         12px;
+
+
+$gray-base:              #000;
+$gray-darker:            #161616;
+$gray-dark:              #44444a;
+$gray:                   #777777;
+$gray-light:             #c0c0c2;
+$gray-less-lighter:      #d2d2d2;
+$gray-lighter:           #eaeaeb;
+$gray-lightest:          #f3f3f7;
+$gray-more-lightest:     #f9f9f9;
+
+$brand-primary:         #966fd6;
+$brand-light:           #f1ebfb;
+$brand-primary-light:   lighten($brand-primary, 25%);
+$brand-primary-lighter: #f1ebfb;
+$brand-primary-dark:    darken($brand-primary, 15%);
+$brand-primary-darker:  darken($brand-primary, 40%);
+
+$brand-success:         #59baa3;
+$brand-success-dark:    #367264;
+$brand-info:            #66b7e1;
+$brand-warning:         #ffc152;
+$brand-danger:          #f0646d;
+$brand-danger-dark:     #c0575d;
+
 
 // Named Color Variables
 // --------------------------------------------------

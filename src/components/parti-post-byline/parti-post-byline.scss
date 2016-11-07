@@ -1,15 +1,28 @@
 parti-post-byline {
-  .user-image {
-    height: 20px;
-    width: 20px;
-    background-repeat: none;
-    background-position: center;
-    background-size: contain;
-    vertical-align: middle;
-  }
-  .user-image,
-  .user-nickname,
-  .post-created-at {
-    display: inline-block;
+  .byline {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    .user-image {
+      background-image: url(https://catan-file.s3.amazonaws.com/uploads/user/0/sm_bbaf990a97.jpg);
+      height: 36px;
+      width: 36px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .bylink-info {
+      display: flex;
+      flex-direction: column;
+      padding-left: 4px;
+      .user-nickname {
+        color: $brand-primary-dark;
+      }
+      .post-created-at {
+        color: $gray-light;
+        font-size: $font-size-small;
+      }
+    }
   }
 }

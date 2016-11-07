@@ -3,19 +3,25 @@ parti-post-panel {
   background-color: #efefef;
   padding: 12px;
   .post-parti {
+    border-bottom: 1px solid #d2d2d2;
+    padding-bottom: 4px;
     .parti-logo {
-      height: 20px;
-      width: 20px;
+      height: 28px;
+      width: 28px;
+      border-radius: 2px;
       @include background-thumbnail();
     }
   }
   .post-head {
-    padding-top: 6px;
+    padding-top: 12px;
   }
   .parti-logo,
   .parti-title,
   .parti-group {
     display: inline-block;
+  }
+  .parti-title {
+    color: $brand-primary;
   }
   .post-title {
     font-weight: bold;

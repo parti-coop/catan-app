@@ -1,7 +1,9 @@
 <div *ngIf='post' class='byline'>
   <div [ngStyle]="{ 'background-image': 'url(' + post.user.image_url + ')' }" class='user-image'></div>
-  <div class='user-nickname'>{{ post.user.nickname }}</div>
-  <div class='post-created-at'>
-    {{ post.created_at | partiDateTimeFormatObservable | async }}
+  <div class='bylink-info'>
+    <div class='user-nickname'>{{ post.user.nickname }}</div>
+    <div class='post-created-at'>
+      {{ post.created_at | partiDateTimeFormatObservable | async }}
+    </div>
   </div>
 </div>
