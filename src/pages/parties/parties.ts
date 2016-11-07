@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { NavController, MenuController, Events } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController, Events } from 'ionic-angular';
 
 import 'rxjs/add/operator/finally';
 
@@ -15,16 +15,12 @@ import { PartiHomePage } from '../../pages/parti-home/parti-home';
   templateUrl: 'parties.html'
 })
 export class PartiesPage {
-  @ViewChild('partiesNav') partiesNavCtrl: NavController;
-  partiHomePage: any = PartiHomePage;
-
   parties: { [id: string] : Parti[]; } = {};
   currentParti: Parti;
   selection: string = 'joined';
 
   constructor(
     public navCtrl: NavController,
-    private menuCtrl: MenuController,
     public partiEnvironment: PartiEnvironment,
     private events: Events,
     private partiData: PartiData
@@ -47,10 +43,6 @@ export class PartiesPage {
     }
   }
 
-  ionViewDidEnter() {
-    this.menuCtrl.open();
-  }
-
   partiesMakingCount() {
     return (!!this.parties['making'] ? this.parties['making'].length : "");
   }
@@ -60,10 +52,7 @@ export class PartiesPage {
   }
 
   onClickParti(parti: Parti) {
-    if(this.currentParti != parti) {
-      this.partiesNavCtrl.setRoot(PartiHomePage, { parti: parti });
-    }
-    this.menuCtrl.close();
+    this.navCtrl.push(PartiHomePage, { parti: parti });
     this.currentParti = parti;
   }
 

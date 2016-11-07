@@ -35,7 +35,6 @@ export class PartiHomePage {
     private events: Events
   ) {
     this.parti = navParams.get('parti');
-    this.isFirstPartiHomePage = !this.parti;
   }
 
   ionViewDidLoad() {

@@ -1,50 +1,50 @@
-%ion-menu{ '[content]': 'partiesNav' }
-  %ion-header
-    %ion-toolbar{ 'no-border': true }
-      %ion-segment{ '[(ngModel)]': 'selection' }
-        %ion-segment-button{ value: 'joined' }
-          내 빠띠
-        %ion-segment-button{ value: 'all' }
-          모든 빠디
-        %ion-segment-button{ value: 'marked' }
-          %ion-icon{ name: 'star' }
-          빠띠
-  %ion-content.ion-parti
-    %div.full{ '[hidden]': "selection !== 'joined'" }
-      %ion-scroll.full{ scrollY: 'true' }
-        %ion-list
-          %ion-item-group
-            %ion-item-divider
-              내가 메이커인 빠디
-              {{ partiesMakingCount() }}
-            %template{'[ngIf]': '!parties["making"]'}
-              %ion-item{ 'text-center': true }
-                %ion-spinner
-            %template{'[ngIf]': '!!parties["making"]'}
-              %ion-item{ '*ngFor': 'let parti of parties["making"]', '(click)': 'onClickParti(parti)' }
-                {{ parti.title }}
-          %ion-item-group
-            %ion-item-divider
-              내가 가입 중인 빠디
-              {{ partiesJoinedOnlyCount() }}
-            %template{'[ngIf]': '!parties["joinedOnly"]'}
-              %ion-item{ 'text-center': true }
-                %ion-spinner
-            %template{'[ngIf]': '!!parties["joinedOnly"]'}
-              %ion-item{ '*ngFor': 'let parti of parties["joinedOnly"]', '(click)': 'onClickParti(parti)' }
-                {{ parti.title }}
-    %div.full{ '[hidden]': "selection !== 'all'" }
-      %ion-scroll.full{ scrollY: 'true' }
-        %ion-list
-          %template{'[ngIf]': '!parties["all"]'}
+%ion-header
+  %ion-navbar
+    %ion-title {{partiEnvironment.appTitle}}
+  %ion-toolbar{ 'no-border': true }
+    %ion-segment{ '[(ngModel)]': 'selection' }
+      %ion-segment-button{ value: 'joined' }
+        내 빠띠
+      %ion-segment-button{ value: 'all' }
+        모든 빠디
+      %ion-segment-button{ value: 'marked' }
+        %ion-icon{ name: 'star' }
+        빠띠
+%ion-content.ion-parti
+  %div.full{ '[hidden]': "selection !== 'joined'" }
+    %ion-scroll.full{ scrollY: 'true' }
+      %ion-list
+        %ion-item-group
+          %ion-item-divider
+            내가 메이커인 빠디
+            {{ partiesMakingCount() }}
+          %template{'[ngIf]': '!parties["making"]'}
             %ion-item{ 'text-center': true }
               %ion-spinner
-          %template{'[ngIf]': '!!parties["all"]'}
-            %ion-item{ '*ngFor': 'let parti of parties["all"]', '(click)': 'onClickParti(parti)' }
+          %template{'[ngIf]': '!!parties["making"]'}
+            %ion-item{ '*ngFor': 'let parti of parties["making"]', '(click)': 'onClickParti(parti)' }
               {{ parti.title }}
-    %div.full{ '[hidden]': "selection !== 'marked'" }
-      %ion-scroll.full{ scrollY: 'true' }
-        %ion-list
-          %ion-item all 준비중
+        %ion-item-group
+          %ion-item-divider
+            내가 가입 중인 빠디
+            {{ partiesJoinedOnlyCount() }}
+          %template{'[ngIf]': '!parties["joinedOnly"]'}
+            %ion-item{ 'text-center': true }
+              %ion-spinner
+          %template{'[ngIf]': '!!parties["joinedOnly"]'}
+            %ion-item{ '*ngFor': 'let parti of parties["joinedOnly"]', '(click)': 'onClickParti(parti)' }
+              {{ parti.title }}
+  %div.full{ '[hidden]': "selection !== 'all'" }
+    %ion-scroll.full{ scrollY: 'true' }
+      %ion-list
+        %template{'[ngIf]': '!parties["all"]'}
+          %ion-item{ 'text-center': true }
+            %ion-spinner
+        %template{'[ngIf]': '!!parties["all"]'}
+          %ion-item{ '*ngFor': 'let parti of parties["all"]', '(click)': 'onClickParti(parti)' }
+            {{ parti.title }}
+  %div.full{ '[hidden]': "selection !== 'marked'" }
+    %ion-scroll.full{ scrollY: 'true' }
+      %ion-list
+        %ion-item all 준비중
 
-%ion-nav{ '#partiesNav': true, '[root]': 'partiHomePage', 'swipe-back-enabled': 'false' }
