@@ -1,3 +1,91 @@
 page-parties {
-
+  .parti-toolbar {
+    .toolbar-ios {
+      padding: 0;
+      .segment-ios {
+        top: 6px;
+        position: relative;
+        .segment-button {
+          color: $gray-less-light;
+          border: 0;
+          border-radius: 0;
+          border-bottom: 1px solid $gray-less-lighter;
+          height: 32px;
+          &.segment-activated {
+            color: $gray-dark;
+            border-bottom: 2.5px solid $brand-primary;
+            background-color: #fafafa;
+            border-radius: 0;
+          }
+          &:first-of-type {
+            padding-left: 18px;
+          }
+          &:last-of-type {
+            padding-right: 18px;
+          }
+          .icon-ios.ion-ios-star {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+  .parti-list {
+    .item-ios {
+      padding: 0;
+      &.item-block{
+        .item-inner {
+          padding: 0;
+          border-bottom: 1px solid $gray-lighter;
+        }
+      }
+      .label-ios {
+        margin: 12px 0px;
+      }
+    }
+    .parti-item {
+      display: flex;
+      flex-flow: row nowrap;
+      padding: 0 12px 0;
+      align-items: center;
+      .parti-logo {
+        height: 42px;
+        width: 42px;
+        margin-right: 6px;
+        border-radius: 2px;
+        @include background-thumbnail();
+      }
+      .parti-body {
+        flex: 1;
+        overflow: hidden;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        .parti-title {
+          font-size: 16px;
+          color: $gray-dark;
+        }
+        .parti-date {
+          font-size: $font-size-base;
+          color: $gray-less-light;
+        }
+        .parti-info {
+          font-size: $font-size-small;
+          color: $gray-less-light;
+        }
+      }
+      .parti-star {
+        width: 18px;
+        color: $gray-less-light;
+      }
+      .parti-join {
+        width: 39px;
+        font-size: $font-size-small;
+        padding: 6px 9px;
+        border: 1px solid $gray-lighter;
+        color: $gray-dark;
+        border-radius: 2px;
+      }
+    }
+  }
 }

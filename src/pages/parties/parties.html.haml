@@ -1,48 +1,65 @@
 %ion-header
   %ion-navbar
     %ion-title {{partiEnvironment.appTitle}}
-  %ion-toolbar{ 'no-border': true }
-    %ion-segment{ '[(ngModel)]': 'selection' }
-      %ion-segment-button{ value: 'joined' }
-        내 빠띠
-      %ion-segment-button{ value: 'all' }
-        모든 빠디
-      %ion-segment-button{ value: 'marked' }
-        %ion-icon{ name: 'star' }
-        빠띠
+  .parti-toolbar
+    %ion-toolbar{ 'no-border': true }
+      %ion-segment{ '[(ngModel)]': 'selection' }
+        %ion-segment-button{ value: 'joined' }
+          내가 가입한 빠띠
+        %ion-segment-button{ value: 'made'}
+          내가 만든 빠띠
+        %ion-segment-button{ value: 'all' }
+          전체 빠띠
+        %ion-segment-button{ value: 'marked' }
+          %ion-icon{ name: 'star' }
+          빠띠
 %ion-content.ion-parti
   %div.full{ '[hidden]': "selection !== 'joined'" }
     %ion-scroll.full{ scrollY: 'true' }
-      %ion-list
-        %ion-item-group
-          %ion-item-divider
-            내가 메이커인 빠디
-            {{ partiesMakingCount() }}
-          %template{'[ngIf]': '!parties["making"]'}
-            %ion-item{ 'text-center': true }
-              %ion-spinner
-          %template{'[ngIf]': '!!parties["making"]'}
-            %ion-item{ '*ngFor': 'let parti of parties["making"]', '(click)': 'onClickParti(parti)' }
-              {{ parti.title }}
-        %ion-item-group
-          %ion-item-divider
-            내가 가입 중인 빠디
-            {{ partiesJoinedOnlyCount() }}
+      .parti-list
+        %ion-list
           %template{'[ngIf]': '!parties["joinedOnly"]'}
             %ion-item{ 'text-center': true }
               %ion-spinner
           %template{'[ngIf]': '!!parties["joinedOnly"]'}
             %ion-item{ '*ngFor': 'let parti of parties["joinedOnly"]', '(click)': 'onClickParti(parti)' }
-              {{ parti.title }}
+              .parti-item
+                .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }
+                .parti-body
+                  .parti-title {{ parti.title }}
+                  .parti-date 2016.10.26
+                .parti-star
+                  %ion-icon{ name: 'star' }
+  %div.full{ '[hidden]': "selection !== 'made'"}
+    %ion-scroll.full{ scrollY: 'true' }
+      %ion-list
+        .parti-list
+          %template{'[ngIf]': '!parties["making"]'}
+            %ion-item{ 'text-center': true }
+              %ion-spinner
+          %template{'[ngIf]': '!!parties["making"]'}
+            %ion-item{ '*ngFor': 'let parti of parties["making"]', '(click)': 'onClickParti(parti)' }
+              .parti-item
+                .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }
+                .parti-body
+                  .parti-title {{ parti.title }}
+                  .parti-date 2016.10.26
   %div.full{ '[hidden]': "selection !== 'all'" }
     %ion-scroll.full{ scrollY: 'true' }
       %ion-list
-        %template{'[ngIf]': '!parties["all"]'}
-          %ion-item{ 'text-center': true }
-            %ion-spinner
-        %template{'[ngIf]': '!!parties["all"]'}
-          %ion-item{ '*ngFor': 'let parti of parties["all"]', '(click)': 'onClickParti(parti)' }
-            {{ parti.title }}
+        .parti-list
+          %template{'[ngIf]': '!parties["all"]'}
+            %ion-item{ 'text-center': true }
+              %ion-spinner
+          %template{'[ngIf]': '!!parties["all"]'}
+            %ion-item{ '*ngFor': 'let parti of parties["all"]', '(click)': 'onClickParti(parti)' }
+              .parti-item
+                .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }
+                .parti-body
+                  .parti-title {{ parti.title }}
+                  .parti-info 멤버 123명 게시글 123개
+                .parti-join
+                  가입
   %div.full{ '[hidden]': "selection !== 'marked'" }
     %ion-scroll.full{ scrollY: 'true' }
       %ion-list
