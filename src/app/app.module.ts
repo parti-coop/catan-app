@@ -23,6 +23,7 @@ import { PartiesPage } from '../pages/parties/parties';
 import { MessagesPage } from '../pages/messages/messages';
 import { PartiHomePage } from '../pages/parti-home/parti-home';
 import { CancelPartiMemberPage } from '../pages/cancel-parti-member/cancel-parti-member';
+import { DisconnectedPage } from '../pages/disconnected/disconnected';
 
 import { PartiEnvironment } from '../config/constant';
 import { PartiData } from '../providers/parti-data';
@@ -52,6 +53,7 @@ moment.locale('ko');
     MessagesPage,
     PartiHomePage,
     CancelPartiMemberPage,
+    DisconnectedPage,
     PartiPostBylineComponent,
     PartiPostPanelComponent,
     PartiUpvoteButton,
@@ -74,6 +76,7 @@ moment.locale('ko');
     PartiesPage,
     MessagesPage,
     PartiHomePage,
+    DisconnectedPage,
     CancelPartiMemberPage
   ],
   providers: [

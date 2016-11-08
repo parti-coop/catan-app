@@ -61,7 +61,8 @@
     "ionic-plugin-keyboard",
     "cordova-plugin-inappbrowser",
     "cordova-plugin-file-transfer",
-    "cordova-plugin-file-opener2"
+    "cordova-plugin-file-opener2",
+    "cordova-plugin-network-information"
   ],
   "cordovaPlatforms": [
     "ios",

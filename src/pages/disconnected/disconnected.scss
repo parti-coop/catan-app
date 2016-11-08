@@ -1,0 +1,10 @@
+page-disconnected {
+  // 스피너를 중앙에 정렬
+  .message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+}
