@@ -1,7 +1,5 @@
 import { Platform } from 'ionic-angular';
 import { Component, Input } from '@angular/core';
-import { Post } from '../../models/post';
-import { PostPage } from '../../pages/post/post';
 import { NavController, AlertController } from 'ionic-angular';
 import { InAppBrowser, Transfer, FileOpener } from 'ionic-native';
 
@@ -12,6 +10,8 @@ import 'rxjs/add/operator/finally';
 import { LinkSource } from '../../models/link-source';
 import { FileSource } from '../../models/file-source';
 import { User } from '../../models/user';
+import { Post } from '../../models/post';
+import { PostPage } from '../../pages/post/post';
 
 import { VotingData } from '../../providers/voting-data';
 import { MyselfData } from '../../providers/myself-data';

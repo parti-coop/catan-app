@@ -15,13 +15,14 @@ parti-post-byline {
     .bylink-info {
       display: flex;
       flex-direction: column;
-      padding-left: 4px;
+      padding-left: 8px;
       .user-nickname {
         color: $brand-primary-dark;
       }
       .post-created-at {
         color: $gray-light;
         font-size: $font-size-small;
+        padding-top: 3px;
       }
     }
   }

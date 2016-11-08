@@ -1,11 +1,12 @@
 parti-post-panel {
   display: block;
-  background-color: #efefef;
-  padding: 12px;
+  background-color: $gray-lighter;
+  padding: 12px 0;
   .post-parti {
     border-bottom: 1px solid #d2d2d2;
-    padding-bottom: 4px;
+    padding: 0 12px 12px;
     .parti-logo {
+      display: inline-block;
       height: 28px;
       width: 28px;
       border-radius: 2px;
@@ -13,18 +14,40 @@ parti-post-panel {
     }
   }
   .post-head {
-    padding-top: 12px;
+    padding: 12px 12px 0;
   }
-  .parti-logo,
-  .parti-title,
   .parti-group {
     display: inline-block;
   }
   .parti-title {
+    display: inline-block;
     color: $brand-primary;
   }
   .post-title {
-    font-weight: bold;
+    font-size: $font-size-large;
+    color: $gray-darker;
+    padding: 0 12px;
+    p {
+      margin: 12px 0;
+    }
+  }
+  .post-body {
+    padding: 12px;
+    color: $gray-dark;
+    p {
+      margin: 0 0 12px;
+    }
+  }
+  .post-upvote-count {
+    color: $gray-less-light;
+  }
+  .post-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    margin: 0 12px;
+    border-top: 1px solid $gray-lighter;
+    color: $gray-dark;
   }
   .post-link-reference {
     border: 1px solid #777;
@@ -54,6 +77,8 @@ parti-post-panel {
     }
   }
   .post-comments {
+    padding: 12px 12px 0;
+    border-top: 1px solid #d2d2d2;
     .comment {
       border-top: 1px solid #777;
       padding-top: 6px;

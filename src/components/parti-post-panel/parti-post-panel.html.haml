@@ -45,8 +45,13 @@
   %span.comment-button{ '(click)': 'onClickCommentButton()' }
     %ion-icon{ name: 'chatboxes' }
     댓글달기
+  %parti-share-button
+    %ion-icon{ md: 'md-share' }
+    공유하기
   %parti-upvote-button{ '[post]': 'post' }
 .post-comments
+  .post-upvote-count
+    공감 {{ post.upvotes_count }}
   .comment{ '*ngFor': 'let comment of post.comments' }
     .comment-header
       .comment-byline

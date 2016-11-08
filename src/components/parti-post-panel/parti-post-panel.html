@@ -65,9 +65,16 @@
     <ion-icon name='chatboxes'></ion-icon>
     댓글달기
   </span>
+  <parti-share-button>
+    <ion-icon md='md-share'></ion-icon>
+    공유하기
+  </parti-share-button>
   <parti-upvote-button [post]='post'></parti-upvote-button>
 </div>
 <div class='post-comments'>
+  <div class='post-upvote-count'>
+    공감 {{ post.upvotes_count }}
+  </div>
   <div *ngFor='let comment of post.comments' class='comment'>
     <div class='comment-header'>
       <div class='comment-byline'>
