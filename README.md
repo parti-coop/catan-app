@@ -116,6 +116,9 @@ $ PARTI_ENV=development-proxy gulp settings
 https://ionicframework.com/docs/v2/resources/developer-tips/#debugging-ios-safari
 
 https://ionicframework.com/docs/v2/resources/developer-tips/#debugging-android-chrome
+```
+chrome://inspect/#devices
+```
 
 ### 설정
 
