@@ -11,7 +11,7 @@ body.keyboard-is-open .scroll-content {
 @mixin background-thumbnail() {
   background-repeat: no-repeat;
   background-position: center;
-  background-size: contain;
+  background-size: cover;
   vertical-align: middle;
 }
 
