@@ -36,6 +36,8 @@
   <preference name="FadeSplashScreenDuration" value="0"/>
   <preference name="SplashScreenBackgroundColor" value="0xFFFFFFFF"/>
   <preference name="KeyboardDisplayRequiresUserAction" value="false"/>
+  <preference name="TwitterConsumerKey" value="<%= secrets.twitterConsumerKey %>" />
+  <preference name="TwitterConsumerSecret" value="<%= secrets.twitterConsumerSecret %>" />
   <feature name="StatusBar">
     <param name="ios-package" onload="true" value="CDVStatusBar"/>
   </feature>
@@ -53,4 +55,8 @@
   </plugin>
   <plugin name="cordova-plugin-inappbrowser" spec="1.5.0"/>
   <plugin name="cordova-plugin-file-opener2" spec="2.0.2"/>
+  <plugin name="cordova-plugin-file-transfer" spec="1.6.0"/>
+  <plugin name="twitter-connect-plugin" source="npm" spec="0.6.0">
+    <param name="FABRIC_KEY" value="<%= secrets.fabricKey %>" />
+  </plugin>
 </widget>

@@ -1,0 +1,8 @@
+%ion-header
+  %ion-navbar
+    %ion-title {{partiEnvironment.appTitle}}
+
+%ion-content{ 'padding': true }
+  %h2 가입/로그인
+  %button{ 'ion-button': true,  '(click)': 'facebookLogin()' } 페이스북으로 빠띠하기
+  %button{ 'ion-button': true,  '(click)': 'twitterLogin()' } 트위터로 빠띠하기

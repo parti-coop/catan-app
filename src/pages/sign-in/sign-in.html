@@ -3,9 +3,8 @@
     <ion-title>{{partiEnvironment.appTitle}}</ion-title>
   </ion-navbar>
 </ion-header>
-
-
 <ion-content padding>
-  <h2>Sign in!</h2>
-  <button ion-button (click)="login()">Login</button>
+  <h2>가입/로그인</h2>
+  <button (click)='facebookLogin()' ion-button>페이스북으로 빠띠하기</button>
+  <button (click)='twitterLogin()' ion-button>트위터로 빠띠하기</button>
 </ion-content>

@@ -64,10 +64,11 @@ export class MyselfData {
     });
   }
 
-  auth(snsProvider: string, snsAccessToken: string) {
+  auth(snsProvider: string, snsAccessToken: string,  snsSecretToken: string = '') {
     let tokenRequestBody = {
       provider: snsProvider,
       assertion: snsAccessToken,
+      secret: snsSecretToken,
       grant_type: 'assertion',
       client_id: this.partiEnvironment.apiClientId,
       client_secret: this.partiEnvironment.apiClientSecret
@@ -87,7 +88,9 @@ export class MyselfData {
       }).catch((error) => {
         console.log("MyselfData#auth : " + error);
         return this.storeHasSignedIn(false)
-          .map(() => {throw error});
+          .map(() => {
+            throw error
+          });
       });
   }
 
