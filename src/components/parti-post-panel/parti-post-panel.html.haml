@@ -49,14 +49,19 @@
     %ion-icon{ md: 'md-share' }
     공유하기
   %parti-upvote-button{ '[post]': 'post' }
-.post-comments
-  .post-upvote-count
-    공감 {{ post.upvotes_count }}
-  .comment{ '*ngFor': 'let comment of post.comments' }
-    .comment-header
-      .comment-byline
-        .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + comment.user.image_url + ')' }" }
-        .user-nickname {{ comment.user.nickname }}
-        .comment-created-at
-          {{ comment.created_at | partiDateTimeFormatObservable | async }}
-    .comment-body{ '[innerHTML]': "comment.body | partiSimpleFormat " }
+.post-footer
+  .post-reaction-info
+    %span.post-upvotes-count
+      공감 {{ post.upvotes_count }}
+    %span.post-comments-count
+      댓글 {{ post.comments_count }}
+  .post-comments
+    .comment{ '*ngFor': 'let comment of post.comments' }
+      .comment-header
+        .comment-byline
+          .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + comment.user.image_url + ')' }" }
+          .byline-info
+            .user-nickname {{ comment.user.nickname }}
+            .comment-created-at
+              {{ comment.created_at | partiDateTimeFormatObservable | async }}
+      .comment-body{ '[innerHTML]': "comment.body | partiSimpleFormat " }
