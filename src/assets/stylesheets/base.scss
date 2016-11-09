@@ -1,3 +1,8 @@
+// 기본 폰트
+* , body {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans CJK KR', 'Noto Sans KR', 'Source Sans Pro', 'Helvetica Neue', Helvetica, '맑은 고딕', 'Malgun Gothic', '돋움', dotum, Arial, sans-serif;
+}
+
 // 키보드가 열릴 때 자동으로 탭 숨기기
 body.keyboard-is-open ion-footer {
   bottom: 0 !important;
@@ -29,7 +34,6 @@ body.keyboard-is-open .scroll-content {
   align-items: center;
   height: 100%;
 }
-
 
 // 아이콘을 세로의 중앙에 정렬
 .icon-md {

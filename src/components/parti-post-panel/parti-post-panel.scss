@@ -94,6 +94,7 @@ parti-post-panel {
       .comment {
         &:first-child {
           border-top: none;
+          padding-top: 0;
         }
         &:last-child {
           padding-bottom: 0;
