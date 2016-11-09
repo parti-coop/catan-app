@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Events } from 'ionic-angular';
 
 import { PartiEnvironment } from '../../config/constant';
 
@@ -10,6 +10,11 @@ import { PartiEnvironment } from '../../config/constant';
 export class DisconnectedPage {
   constructor(
     public navCtrl: NavController,
+    private events: Events,
     public partiEnvironment: PartiEnvironment
   ) {}
+
+  onClickRetry() {
+    this.events.publish('refresh');
+  }
 }

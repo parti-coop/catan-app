@@ -21,6 +21,7 @@ export class PartiApp {
   ) {
     platform.ready().then(() => {
       StatusBar.styleDefault();
+
       this.defaultRoot((page) => {
         this.rootPage = page;
       });
@@ -30,6 +31,11 @@ export class PartiApp {
   }
 
   defaultRoot(cb) {
+    let current = Network.connection
+    if(current == 'none') {
+      cb(DisconnectedPage);
+      return;
+    }
     this.myselfData.hasSignedIn()
       .then(hasSignedIn => {
         cb(hasSignedIn ? TabsPage : SignInPage);
@@ -44,15 +50,6 @@ export class PartiApp {
       console.log('network was disconnected :-(');
       this.navCtrl.setRoot(DisconnectedPage);
     });
-
-    Network.onConnect().subscribe(() => {
-      console.log('network connected :-)');
-      setTimeout(() => {
-        this.defaultRoot((page) => {
-          this.navCtrl.setRoot(page);
-        });
-      }, 3000);
-    });
   }
 
   listenToBaseEvents() {
@@ -66,6 +63,11 @@ export class PartiApp {
     });
     this.events.subscribe('app:error', () => {
       alert('오류가 발생했습니다.');
+    });
+    this.events.subscribe('refresh', () => {
+      this.defaultRoot((page) => {
+        this.navCtrl.setRoot(page);
+      });
     });
   }
 }

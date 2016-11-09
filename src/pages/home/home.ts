@@ -22,10 +22,10 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
+    private events: Events,
     public partiEnvironment: PartiEnvironment,
     public myselfData: MyselfData,
-    private postData: PostData,
-    private events: Events
+    private postData: PostData
   ) {}
 
   ionViewDidLoad() {
