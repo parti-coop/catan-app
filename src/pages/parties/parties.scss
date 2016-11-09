@@ -1,19 +1,18 @@
 page-parties {
   .parti-toolbar {
-    .toolbar-ios {
+    ion-toolbar {
       padding: 0;
-      .segment-ios {
-        top: 6px;
+      ion-segment {
+        top: 8px;
         position: relative;
         .segment-button {
           color: $gray-less-light;
           border: 0;
           border-radius: 0;
-          border-bottom: 1px solid $gray-less-lighter;
-          height: 32px;
+          height: 40px;
           &.segment-activated {
             color: $gray-dark;
-            border-bottom: 2.5px solid $brand-primary;
+            border-bottom: 3px solid $brand-primary;
             background-color: #fafafa;
             border-radius: 0;
           }
@@ -23,15 +22,42 @@ page-parties {
           &:last-of-type {
             padding-right: 18px;
           }
-          .icon-ios.ion-ios-star {
+          ion-icon {
             font-size: 16px;
           }
         }
       }
     }
   }
+  .select-tag-panel {
+    background-color: $gray-more-lightest;
+    padding: 12px 12px;
+    p {
+      margin: 0;
+      color: $gray;
+      font-size: $font-size-base;
+    }
+    .tags {
+      display: flex;
+      margin-top: 12px;
+      .tag:first-child {
+        margin: 0;
+      }
+      .tag {
+        color: $brand-primary;
+        font-size: 16px;
+        margin-left: 12px;
+      }
+    }
+  }
+  ion-scroll {
+    background-color: $gray-more-lightest;
+  }
+  .list-md {
+    margin: 0;
+  }
   .parti-list {
-    .item-ios {
+    ion-item {
       padding: 0;
       &.item-block{
         .item-inner {
@@ -39,7 +65,7 @@ page-parties {
           border-bottom: 1px solid $gray-lighter;
         }
       }
-      .label-ios {
+      ion-label {
         margin: 12px 0px;
       }
     }
@@ -65,27 +91,81 @@ page-parties {
           font-size: 16px;
           color: $gray-dark;
         }
-        .parti-date {
-          font-size: $font-size-base;
-          color: $gray-less-light;
-        }
         .parti-info {
-          font-size: $font-size-small;
-          color: $gray-less-light;
+          display: flex;
+          padding-top: 6px;
+          &--new-post {
+            display:flex;
+            margin-right: 12px;
+            &__icon {
+              background-color: $brand-primary;
+              font-size: 11px;
+              color: #fff;
+              padding: 2px 4px 1px;
+            }
+            &__number {
+              padding-left: 3px;
+              padding-top: 3px;
+              font-size: $font-size-small;
+              color: $brand-primary;
+            }
+          }
+          &--new-member {
+            display:flex;
+            &__icon {
+              color: $brand-primary;
+              width: 12px;
+              height: 12px;
+            }
+            &__number {
+              padding-left: 3px;
+              padding-top: 3px;
+              font-size: $font-size-small;
+              color: $brand-primary;
+            }
+          }
+          &--members {
+            color: $gray-less-light;
+            font-size: $font-size-small;
+          }
+          &--posts {
+            margin-left: 15px;
+            color: $gray-less-light;
+            font-size: $font-size-small;
+          }
+          &--date {
+            font-size: $font-size-base;
+            color: $gray-less-light;
+          }
         }
       }
       .parti-star {
         width: 18px;
         color: $gray-less-light;
       }
-      .parti-join {
-        width: 39px;
+      .parti-join-btn {
+        width: 42px;
         font-size: $font-size-small;
         padding: 6px 9px;
         border: 1px solid $gray-lighter;
         color: $gray-dark;
         border-radius: 2px;
       }
+    }
+  }
+  .parti-make-panel {
+    padding: 12px;
+    text-align: center;
+    p {
+      margin: 0;
+      color: $gray-dark;
+    }
+    .parti-make-btn {
+      color: #fff;
+      background-color: $brand-primary;
+      padding: 10px 12px;
+      margin: 10px 120px;
+      border-radius: 2px;
     }
   }
 }
