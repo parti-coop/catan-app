@@ -8,23 +8,49 @@
     <ion-spinner></ion-spinner>
   </div>
   <template [ngIf]='!isLoading()'>
-    <div class='cover'>
-      <div [ngStyle]="{ 'background-image': 'url(' + parti.logo_url + ')' }" class='parti-logo'></div>
-      <div class='parti-title'>{{ parti.title }}</div>
-      <template [ngIf]='!parti.is_member'>
-        <button (click)='onClickJoinParti()' ion-button>가입하기</button>
-      </template>
-      <template [ngIf]='parti.is_member &amp;&amp; !parti.is_made_by'>
-        <button (click)='onClickJoinedParti($event)' ion-button>
-          가입함
-          <ion-icon name='arrow-dropdown'></ion-icon>
-        </button>
-      </template>
-      <template [ngIf]='parti.is_made_by'>
-        <button ion-button>
-          빠띠메이커
-        </button>
-      </template>
+    <div [ngStyle]="{ 'background-image': 'url(' + parti.logo_url + ')' }" class='cover'>
+      <div class='parti-panel'>
+        <div [ngStyle]="{ 'background-image': 'url(' + parti.logo_url + ')' }" class='parti-logo'></div>
+        <div class='parti-title'>{{ parti.title }}</div>
+        <div class='parti-description'>
+          기본적인 삶을 살아가는데 필요한 비용을 보장받을 수 있다면 어떨까요? 기본소득 자료와 쟁점을 모으고 이야기를 나눕니다.
+        </div>
+        <div class='parti-info'>
+          <div class='parti-info--members'>
+            멤버 123명
+          </div>
+          <div class='parti-info--posts'>
+            게시 글 123개
+          </div>
+        </div>
+        <div class='parti-btns-panel'>
+          <div class='parti-invite-btn'>
+            <button ion-button>
+              친구초대
+            </button>
+          </div>
+          <template [ngIf]='!parti.is_member'>
+            <div class='parti-join-btn'>
+              <button (click)='onClickJoinParti()' ion-button>가입하기</button>
+            </div>
+          </template>
+          <template [ngIf]='parti.is_member &amp;&amp; !parti.is_made_by'>
+            <div class='parti-join-btn'>
+              <button (click)='onClickJoinedParti($event)' ion-button>
+                가입함
+                <ion-icon name='arrow-dropdown'></ion-icon>
+              </button>
+            </div>
+          </template>
+          <template [ngIf]='parti.is_made_by'>
+            <div class='parti-maker-btn'>
+              <button ion-button>
+                빠띠메이커
+              </button>
+            </div>
+          </template>
+        </div>
+      </div>
     </div>
     <parti-post-panel *ngFor='let post of posts' [isCollection]='true' [post]='post' class='post'></parti-post-panel>
     <ion-infinite-scroll #infiniteScroll (ionInfinite)='loadMore($event)'>

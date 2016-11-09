@@ -1,21 +1,87 @@
 page-parti-home {
   parti-post-panel {
     margin-top: 12px;
-    &:first-child {
+    &:first-of-type {
       margin: 0;
     }
   }
 
   .cover {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    .parti-logo {
-      height: 30px;
-      width: 30px;
-      @include background-thumbnail();
+    padding: 200px 0 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    .parti-panel {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #fff;
+      .parti-logo {
+        margin-top: -56px;
+        height: 79px;
+        width: 79px;
+        @include background-thumbnail();
+      }
+      .parti-title {
+        font-size: 24px;
+        color: $text-color;
+        font-weight: bold;
+        padding: 18px 0 10px;
+      }
+      .parti-description {
+        color: $gray-dark;
+      }
+      .parti-info {
+        padding-top: 8px;
+        display: flex;
+        &--members {
+          color: $gray-dark;
+          font-weight: bold;
+        }
+        &--posts {
+          margin-left: 15px;
+          color: $gray-dark;
+          font-weight: bold;
+        }
+      }
+    }
+    .parti-btns-panel {
+      display: flex;
+      margin-top: 12px;
+      .parti-invite-btn {
+        margin-right: 6px;
+        .button-md {
+          background-color: #fff;
+          color: $brand-primary-dark;
+          border: 1px solid $brand-primary;
+          border-radius: 2px;
+          padding: 10px 12px;
+          margin: 0;
+          box-shadow: none;
+        }
+      }
+      .parti-join-btn {
+        .button-md {
+          background-color: #fff;
+          color: $brand-primary-dark;
+          border: 1px solid $brand-primary;
+          padding: 10px 12px;
+          margin: 0;
+          box-shadow: none;
+        }
+      }
+      .parti-maker-btn {
+        .button-md {
+          background-color: #fff;
+          color: $brand-primary-dark;
+          border: 1px solid $brand-primary;
+          border-radius: 2px;
+          padding: 10px 12px;
+          margin: 0;
+          box-shadow: none;
+        }
+      }
     }
   }
 }

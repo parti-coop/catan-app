@@ -13,7 +13,7 @@ page-parties {
           &.segment-activated {
             color: $gray-dark;
             border-bottom: 3px solid $brand-primary;
-            background-color: #fafafa;
+            background-color: $gray-more-lightest;
             border-radius: 0;
           }
           &:first-of-type {
@@ -30,7 +30,7 @@ page-parties {
     }
   }
   .select-tag-panel {
-    background-color: $gray-more-lightest;
+    background-color: $gray-lightest;
     padding: 12px 12px;
     p {
       margin: 0;
@@ -51,7 +51,7 @@ page-parties {
     }
   }
   ion-scroll {
-    background-color: $gray-more-lightest;
+    background-color: $gray-lightest;
   }
   .list-md {
     margin: 0;
