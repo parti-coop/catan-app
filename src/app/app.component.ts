@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, NavController, Events } from 'ionic-angular';
-import { StatusBar, Network } from 'ionic-native';
+import { StatusBar, Network, Deeplinks } from 'ionic-native';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { SignInPage } from '../pages/sign-in/sign-in';
@@ -14,8 +14,9 @@ import { MyselfData } from '../providers/myself-data';
 export class PartiApp {
   @ViewChild('appNav') navCtrl: NavController;
   rootPage;
+
   constructor(
-    platform: Platform,
+    private platform: Platform,
     private events: Events,
     private myselfData: MyselfData
   ) {
@@ -28,6 +29,28 @@ export class PartiApp {
       this.listenToNetworkStatus();
     });
     this.listenToBaseEvents();
+  }
+
+  ngAfterViewInit() {
+    this.platform.ready().then(() => {
+      Deeplinks.route({
+        '/parti/:deepLinkPartiSlug': { page: 'partiHome' }
+      }).subscribe(match => {
+        if('partiHome' == match.$route.page) {
+          this.myselfData.hasSignedIn()
+            .then(hasSignedIn => {
+              this.events.publish('tabs:parti-deeplink', match.$args);
+            }).catch((error) => {
+              console.log("PartiApp#ngAfterViewInit : " + error);
+              throw error;
+            });
+        }
+      },
+        nomatch => {
+          console.log("nomatch: " + nomatch)
+        }
+      );
+    });
   }
 
   defaultRoot(cb) {
@@ -61,8 +84,13 @@ export class PartiApp {
       alert('로그아웃 되었습니다. 다시 로그인해 주세요!');
       this.navCtrl.setRoot(SignInPage);
     });
-    this.events.subscribe('app:error', () => {
-      alert('오류가 발생했습니다.');
+    this.events.subscribe('app:error', (data) => {
+      let error = data[0];
+      if(error["status"] == 404) {
+        alert('찾을 수 없네요.');
+      } else {
+        alert('오류가 발생했습니다.');
+      }
     });
     this.events.subscribe('refresh', () => {
       this.defaultRoot((page) => {

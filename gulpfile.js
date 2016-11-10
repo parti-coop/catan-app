@@ -56,7 +56,8 @@ gulp.task('settings', function() {
 });
 
 gulp.task('reset', ['settings'], function() {
-  let cmd = 'ionic state reset && '
+  let cmd = 'ionic state reset'
+    + ' && '
     + 'ionic plugin add twitter-connect-plugin --variable FABRIC_KEY='
     + configVariables().secrets.fabricKey;
   exec(cmd, function (err, stdout, stderr) {

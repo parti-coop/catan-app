@@ -21,36 +21,44 @@ export class PartiHomePage {
   posts: Post[];
   lastPost: Post;
   hasMoreData: boolean = true;
+
   parti: Parti;
-  isFirstPartiHomePage: boolean = false;
+  deepLinkPartiSlug: string;
 
   constructor(
     public navCtrl: NavController,
     private toastCtrl: ToastController,
     public popoverCtrl: PopoverController,
     private navParams: NavParams,
+    private events: Events,
     private partiData: PartiData,
     private postData: PostData,
-    private memberData: MemberData,
-    private events: Events
+    private memberData: MemberData
   ) {
     this.parti = navParams.get('parti');
+    this.deepLinkPartiSlug = navParams.get('deepLinkPartiSlug');
   }
 
   ionViewDidLoad() {
-    if(this.isFirstPartiHomePage) {
-      this.partiData.first()
-        .subscribe((parti: Parti) => {
-          this.parti = parti;
-          this.load(() => {
-            this.disableInfiniteScrollIfNoMoreData(this.infiniteScroll);
-          });
-        });
-    }
-    else {
+    if(this.parti) {
       this.load(() => {
         this.disableInfiniteScrollIfNoMoreData(this.infiniteScroll);
       });
+    }
+  }
+
+  ionViewDidEnter() {
+    if(!this.parti && !!this.deepLinkPartiSlug) {
+      this.partiData.get(this.deepLinkPartiSlug)
+        .subscribe((parti: Parti) => {
+          this.parti = parti;
+          this.deepLinkPartiSlug = null;
+          this.load(() => {
+            this.disableInfiniteScrollIfNoMoreData(this.infiniteScroll);
+          });
+        }, (error) => {
+          this.navCtrl.parent.select(0);
+        });
     }
   }
 

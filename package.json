@@ -47,7 +47,8 @@
     "gulp-ruby-haml": "^0.0.9",
     "npm-run-all": "^3.1.1",
     "gulp-watch": "^4.3.10",
-    "assign-deep": "^0.4.5"
+    "assign-deep": "^0.4.5",
+    "run-sequence": ""
   },
   "cordovaPlugins": [
     "cordova-plugin-device",
@@ -62,7 +63,16 @@
     "cordova-plugin-inappbrowser",
     "cordova-plugin-file-transfer",
     "cordova-plugin-file-opener2",
-    "cordova-plugin-network-information"
+    "cordova-plugin-network-information",
+    {
+      "id": "ionic-plugin-deeplinks",
+      "locator": "ionic-plugin-deeplinks",
+      "variables": {
+        "URL_SCHEME": "partixyz",
+        "DEEPLINK_SCHEME": "https",
+        "DEEPLINK_HOST": "parti.xyz"
+      }
+    }
   ],
   "cordovaPlatforms": [
     "ios",

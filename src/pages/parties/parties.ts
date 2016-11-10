@@ -16,7 +16,6 @@ import { PartiHomePage } from '../../pages/parti-home/parti-home';
 })
 export class PartiesPage {
   parties: { [id: string] : Parti[]; } = {};
-  currentParti: Parti;
   selection: string = 'joined';
 
   constructor(
@@ -53,7 +52,6 @@ export class PartiesPage {
 
   onClickParti(parti: Parti) {
     this.navCtrl.push(PartiHomePage, { parti: parti });
-    this.currentParti = parti;
   }
 
   listenToMemberEvents() {

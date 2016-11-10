@@ -1,6 +1,7 @@
-<ion-tabs>
+<ion-tabs #tabs>
   <ion-tab [root]='homeRoot' tabIcon='list-box' tabTitle='타임라인'></ion-tab>
   <ion-tab [root]='partiesRoot' tabIcon='information-circle' tabTitle='빠띠'></ion-tab>
   <ion-tab [root]='messagesRoot' tabIcon='notifications' tabTitle='알림'></ion-tab>
   <ion-tab [root]='moreRoot' tabIcon='more' tabTitle='더보기'></ion-tab>
+  <ion-tab #deepLinkTab [root]='deepLinkRoot' [show]='false'></ion-tab>
 </ion-tabs>

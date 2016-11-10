@@ -105,8 +105,8 @@ export class ApiHttp {
         }
 
         this.sessionStamp = new Date();
-        this.events.publish('app:error');
-        console.log("ApiHttps#intercept : error - " + error);
+        console.log("ApiHttps#intercept : error - " + JSON.stringify(error));
+        this.events.publish('app:error', error);
         return Observable.throw(error);
       }
     });
