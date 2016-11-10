@@ -42,9 +42,17 @@ export class TabsPage {
 
   listenToDeepLiknEvents() {
     this.events.subscribe('tabs:parti-deeplink', (data) => {
-      this.deepLinkTabRef.root = PartiHomePage;
-      this.deepLinkTabRef.rootParams = data[0];
-      this.tabsRef.select(this.deepLinkTabRef);
+      if(!this.deepLinkTabRef.root) {
+        this.deepLinkTabRef.root = PartiHomePage;
+        this.deepLinkTabRef.rootParams = data[0];
+        this.tabsRef.select(this.deepLinkTabRef);
+      } else {
+        console.log(JSON.stringify(data[0]));
+        this.deepLinkTabRef.setRoot(PartiHomePage, data[0]).then(() => {
+          this.tabsRef.select(this.deepLinkTabRef);
+        })
+      }
+
     });
   }
 }
