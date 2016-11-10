@@ -1,6 +1,7 @@
 %ion-header
   %ion-navbar
-    %ion-title {{ partiEnvironment.appTitle }}
+    %ion-title.text-center
+      알림
 %ion-content.ion-parti
   %ion-list
     %ion-item{ '*ngFor': 'let message of messages', 'text-wrap': true, '(click)': 'onClickMessage(message)' }

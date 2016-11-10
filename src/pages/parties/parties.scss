@@ -6,7 +6,7 @@ page-parties {
         top: 8px;
         position: relative;
         .segment-button {
-          color: $gray-less-light;
+          color: $gray-light;
           border: 0;
           border-radius: 0;
           height: 40px;
@@ -125,23 +125,23 @@ page-parties {
             }
           }
           &--members {
-            color: $gray-less-light;
+            color: $gray-light;
             font-size: $font-size-small;
           }
           &--posts {
             margin-left: 15px;
-            color: $gray-less-light;
+            color: $gray-light;
             font-size: $font-size-small;
           }
           &--date {
             font-size: $font-size-base;
-            color: $gray-less-light;
+            color: $gray-light;
           }
         }
       }
       .parti-star {
         width: 18px;
-        color: $gray-less-light;
+        color: $gray-light;
       }
       .parti-join-btn {
         width: 42px;

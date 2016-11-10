@@ -39,7 +39,7 @@ parti-post-panel {
     }
   }
   .post-upvotes-count {
-    color: $gray-less-light;
+    color: $gray-light;
   }
   .post-buttons {
     display: flex;
@@ -79,7 +79,7 @@ parti-post-panel {
   .post-footer {
     padding: 12px 0 0;
     border-top: 1px solid $gray-less-lighter;
-    color: $gray-less-light;
+    color: $gray-light;
     .post-reaction-info {
       padding: 0 12px;
       .post-comments-count {

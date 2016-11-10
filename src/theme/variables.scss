@@ -10,31 +10,29 @@
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
 
-$text-color:        #000;
-$background-color:  #fff;
+$text-color:        #161616;
+$background-color:  #fff !important;
 
+$font-size-small:         12px;
 $font-size-base:          14px;
 $font-size-large:         18px;
-$font-size-small:         12px;
 
 
 $gray-base:              #000;
 $gray-darker:            #161616;
 $gray-dark:              #44444a;
 $gray:                   #777777;
-$gray-less-light:        #aaaaaf;
-$gray-light:             #c0c0c2;
+$gray-light:             #aaaaaf;
 $gray-less-lighter:      #d2d2d2;
 $gray-lighter:           #eaeaeb;
 $gray-lightest:          #f3f3f7;
 $gray-more-lightest:     #f9f9f9;
 
 $brand-primary:         #966fd6;
-$brand-light:           #f1ebfb;
-$brand-primary-light:   lighten($brand-primary, 25%);
+$brand-primary-light:   lighten($brand-primary, 30%); // #e3bcff
 $brand-primary-lighter: #f1ebfb;
-$brand-primary-dark:    darken($brand-primary, 15%);
-$brand-primary-darker:  darken($brand-primary, 40%);
+$brand-primary-dark:    darken($brand-primary, 20%); // #633ca3
+$brand-primary-darker:  darken($brand-primary, 40%); // #300970
 
 $brand-success:         #59baa3;
 $brand-success-dark:    #367264;
