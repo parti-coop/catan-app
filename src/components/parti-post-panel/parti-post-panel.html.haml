@@ -9,12 +9,12 @@
 .post-title{ '[innerHTML]': "post.parsed_title | partiSimpleFormat" }
 .post-body{ '[innerHTML]': "post.parsed_body | partiSimpleFormat" }
 %ion-row.post-link-reference{ '(click)': 'onClickLinkReference(post.link_reference)', '*ngIf': '!!post.link_reference' }
+  %ion-col.link-reference-image-wrapper
+    .link-reference-image{ '[ngStyle]': "{ 'background-image': 'url(' + post.link_reference.image_url + ')' }" }
   %ion-col
     .link-reference-title {{ post.link_reference.title }}
     .link-reference-body {{ post.link_reference.body }}
     .link-reference-site-name {{ post.link_reference.site_name | uppercase }} 원글보기
-  %ion-col.link-reference-image-wrapper
-    .link-reference-image{ '[ngStyle]': "{ 'background-image': 'url(' + post.link_reference.image_url + ')' }" }
 %ion-row.post-file-reference{ '(click)': 'onClickFileReference(post.file_reference)', '*ngIf': '!!post.file_reference' }
   %ion-col
     .file-reference-name {{ post.file_reference.name }}

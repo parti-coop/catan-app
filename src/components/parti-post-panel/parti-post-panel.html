@@ -12,13 +12,13 @@
 <div [innerHTML]='post.parsed_title | partiSimpleFormat' class='post-title'></div>
 <div [innerHTML]='post.parsed_body | partiSimpleFormat' class='post-body'></div>
 <ion-row (click)='onClickLinkReference(post.link_reference)' *ngIf='!!post.link_reference' class='post-link-reference'>
+  <ion-col class='link-reference-image-wrapper'>
+    <div [ngStyle]="{ 'background-image': 'url(' + post.link_reference.image_url + ')' }" class='link-reference-image'></div>
+  </ion-col>
   <ion-col>
     <div class='link-reference-title'>{{ post.link_reference.title }}</div>
     <div class='link-reference-body'>{{ post.link_reference.body }}</div>
     <div class='link-reference-site-name'>{{ post.link_reference.site_name | uppercase }} 원글보기</div>
-  </ion-col>
-  <ion-col class='link-reference-image-wrapper'>
-    <div [ngStyle]="{ 'background-image': 'url(' + post.link_reference.image_url + ')' }" class='link-reference-image'></div>
   </ion-col>
 </ion-row>
 <ion-row (click)='onClickFileReference(post.file_reference)' *ngIf='!!post.file_reference' class='post-file-reference'>
