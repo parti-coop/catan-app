@@ -52,20 +52,40 @@ parti-post-panel {
     padding: 12px 0;
     margin: 0 12px;
     border-top: 1px solid $gray-lighter;
-    color: $gray-dark;
+    color: $gray;
+    font-size: $font-size-small;
   }
   .post-link-reference {
-    border: 1px solid #777;
-    .link-reference-title {
-      font-weight: bold;
-    }
+    border: 1px solid $gray-light;
+    margin: 0 6px;
     .link-reference-image-wrapper {
       flex: 0 0 130px;
       .link-reference-image {
         width: 100%;
-        height: 130px;
+        height: 173px;
         @include background-thumbnail();
       }
+    }
+    .link-reference-detail-wrapper {
+      padding: 12px;
+      .link-reference-title {
+        font-weight: bold;
+      }
+      .link-reference-body {
+        padding-top: 6px;
+        font-size: $font-size-small;
+        color: $gray;
+      }
+      .link-reference-footer {
+        padding-top: 6px;
+        .link-reference-site-name,
+        .link-reference-view-link {
+          font-size: $font-size-small;
+          color: $gray;
+          display: inline-block;
+        }
+      }
+
     }
     .parti-logo {
       height: 20px;
@@ -86,6 +106,7 @@ parti-post-panel {
     border-top: 1px solid $gray-less-lighter;
     color: $gray-light;
     .post-reaction-info {
+      font-size: $font-size-small;
       padding: 0 12px;
       .post-comments-count {
         padding-left: 14px;
