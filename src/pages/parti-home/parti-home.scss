@@ -24,25 +24,26 @@ page-parti-home {
         @include background-thumbnail();
       }
       .parti-title {
+        text-align: center;
         font-size: 24px;
         color: $text-color;
         font-weight: bold;
         padding: 18px 0 10px;
       }
       .parti-description {
+        text-align: center;
         color: $gray-dark;
+        font-size: $font-size-small;
       }
       .parti-info {
         padding-top: 8px;
         display: flex;
         &--members {
           color: $gray-dark;
-          font-weight: bold;
         }
         &--posts {
           margin-left: 15px;
           color: $gray-dark;
-          font-weight: bold;
         }
       }
     }
@@ -71,16 +72,14 @@ page-parti-home {
           box-shadow: none;
         }
       }
-      .parti-maker-btn {
-        .button-md {
-          background-color: #fff;
-          color: $brand-primary-dark;
-          border: 1px solid $brand-primary;
-          border-radius: 2px;
-          padding: 10px 12px;
-          margin: 0;
-          box-shadow: none;
-        }
+      .parti-maker {
+        background-color: #fff;
+        color: $brand-primary-dark;
+        border: 1px solid $brand-primary;
+        border-radius: 2px;
+        padding: 9px 12px;
+        margin: 0;
+        box-shadow: none;
       }
     }
   }

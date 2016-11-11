@@ -13,14 +13,14 @@
         <div [ngStyle]="{ 'background-image': 'url(' + parti.logo_url + ')' }" class='parti-logo'></div>
         <div class='parti-title'>{{ parti.title }}</div>
         <div class='parti-description'>
-          기본적인 삶을 살아가는데 필요한 비용을 보장받을 수 있다면 어떨까요? 기본소득 자료와 쟁점을 모으고 이야기를 나눕니다.
+          {{ parti.body }}
         </div>
         <div class='parti-info'>
           <div class='parti-info--members'>
-            멤버 123명
+            멤버 {{ parti.members_count }}명
           </div>
           <div class='parti-info--posts'>
-            게시 글 123개
+            게시 글 {{ parti.posts_count }}개
           </div>
         </div>
         <div class='parti-btns-panel'>
@@ -43,10 +43,8 @@
             </div>
           </template>
           <template [ngIf]='parti.is_made_by'>
-            <div class='parti-maker-btn'>
-              <button ion-button>
-                빠띠메이커
-              </button>
+            <div class='parti-maker'>
+              빠띠메이커
             </div>
           </template>
         </div>
