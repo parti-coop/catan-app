@@ -1,13 +1,15 @@
 %ion-header
   %ion-navbar
-    %ion-title {{partiEnvironment.appTitle}}
+    .parti-header
+      %ion-title {{partiEnvironment.appTitle}}
+      .search-btn
+        %button{ 'ion-button': true }
+          %ion-icon{ name: 'search' }
   .parti-toolbar
     %ion-toolbar{ 'no-border': true }
       %ion-segment{ '[(ngModel)]': 'selection' }
         %ion-segment-button{ value: 'joined' }
-          내가 가입한 빠띠
-        %ion-segment-button{ value: 'making'}
-          내가 만든 빠띠
+          내 빠띠
         %ion-segment-button{ value: 'all' }
           전체 빠띠
         %ion-segment-button{ value: 'marked' }
@@ -18,46 +20,55 @@
     %ion-scroll.full{ scrollY: 'true' }
       .parti-list
         %ion-list
-          %template{'[ngIf]': '!parties["joinedOnly"]'}
-            %ion-item{ 'text-center': true }
-              %ion-spinner
-          %template{'[ngIf]': '!!parties["joinedOnly"]'}
-            %ion-item{ '*ngFor': 'let parti of parties["joinedOnly"]', '(click)': 'onClickParti(parti)' }
-              .parti-item
-                .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }
-                .parti-body
-                  .parti-title {{ parti.title }}
-                  .parti-info
-                    .parti-info--new-post
-                      .parti-info--new-post__icon N
-                      .parti-info--new-post__number 26
-                    .parti-info--new-member
-                      .parti-info--new-member__icon
-                        %ion-icon{ name: 'person' }
-                      .parti-info--new-member__number 12
-                    / .parti-info--date
-                    /   2016.10.26
-                .parti-star
-                  %ion-icon{ name: 'star' }
-  %div.full{ '[hidden]': "selection !== 'making'"}
-    %ion-scroll.full{ scrollY: 'true' }
-      %ion-list
-        .parti-list
-          %template{'[ngIf]': '!parties["making"]'}
-            %ion-item{ 'text-center': true }
-              %ion-spinner
-          %template{'[ngIf]': '!!parties["making"]'}
-            %ion-item{ '*ngFor': 'let parti of parties["making"]', '(click)': 'onClickParti(parti)' }
-              .parti-item
-                .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }
-                .parti-body
-                  .parti-title {{ parti.title }}
-                  .parti-info
-                    .parti-info--date
-                      2016.10.26
+          %ion-item-group
+            %ion-item-divider
+              내가 가입한 빠띠
+            %template{'[ngIf]': '!parties["joinedOnly"]'}
+              %ion-item{ 'text-center': true }
+                %ion-spinner
+            %template{'[ngIf]': '!!parties["joinedOnly"]'}
+              %ion-item{ '*ngFor': 'let parti of parties["joinedOnly"]', '(click)': 'onClickParti(parti)' }
+                .parti-item
+                  .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }
+                  .parti-body
+                    .parti-title {{ parti.title }}
+                    .parti-info
+                      .parti-info--new-post{ '*ngIf': "parti.latest_posts_count !== 0"}
+                        .parti-info--new-post__icon N
+                        .parti-info--new-post__number {{ parti.latest_posts_count }}
+                      .parti-info--new-member{ '*ngIf': "parti.latest_members_count !== 0"}
+                        .parti-info--new-member__icon
+                          %ion-icon{ name: 'person' }
+                        .parti-info--new-member__number {{ parti.latest_members_count }}
+                      .parti-info--date{ '*ngIf': "parti.latest_posts_count + parti.latest_members_count === 0"}
+                        {{ parti.updated_at | partiDateTimeFormatObservable | async }}
+                  .parti-star
+                    %ion-icon{ name: 'star' }
+          %ion-item-group
+            %ion-item-divider
+              내가 메이커인 빠띠
+            %template{'[ngIf]': '!parties["making"]'}
+              %ion-item{ 'text-center': true }
+                %ion-spinner
+            %template{'[ngIf]': '!!parties["making"]'}
+              %ion-item{ '*ngFor': 'let parti of parties["making"]', '(click)': 'onClickParti(parti)' }
+                .parti-item
+                  .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }
+                  .parti-body
+                    .parti-title {{ parti.title }}
+                    .parti-info
+                      .parti-info--new-post{ '*ngIf': "parti.latest_posts_count !== 0"}
+                        .parti-info--new-post__icon N
+                        .parti-info--new-post__number {{ parti.latest_posts_count }}
+                      .parti-info--new-member{ '*ngIf': "parti.latest_members_count !== 0"}
+                        .parti-info--new-member__icon
+                          %ion-icon{ name: 'person' }
+                        .parti-info--new-member__number {{ parti.latest_members_count }}
+                      .parti-info--date{ '*ngIf': "parti.latest_posts_count + parti.latest_members_count === 0"}
+                        {{ parti.updated_at | partiDateTimeFormatObservable | async }}
       .parti-make-panel
         %p 관심있는 이슈가 없다면, 직접 만들어보세요
-        .parti-make-btn
+        .parti-make-btn{ '(click)': 'onClickPartiMakeBtn()' }
           빠띠 만들기
   %div.full{ '[hidden]': "selection !== 'all'" }
     %ion-scroll.full{ scrollY: 'true' }
@@ -81,11 +92,17 @@
                   .parti-title {{ parti.title }}
                   .parti-info
                     .parti-info--members
-                      멤버 123명
+                      멤버 {{ parti.members_count }}명
                     .parti-info--posts
-                      게시글 123개
-                .parti-join-btn
-                  가입
+                      게시글 {{ parti.posts_count }}개
+                %template{ '[ngIf]': '!parti.is_member' }
+                  .parti-join-btn
+                    %button{ 'ion-button': true }
+                      가입
+                %template{ '[ngIf]': 'parti.is_member && !parti.is_made_by' }
+                  .parti-joined-btn
+                    %ion-icon{ name: 'checkmark' }
+                %template{ '[ngIf]': 'parti.is_made_by' }
   %div.full{ '[hidden]': "selection !== 'marked'" }
     %ion-scroll.full{ scrollY: 'true' }
       %ion-list

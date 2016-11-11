@@ -9,6 +9,8 @@ import { Parti } from '../../models/parti';
 import { PartiEnvironment } from '../../config/constant';
 import { PartiData } from '../../providers/parti-data';
 import { PartiHomePage } from '../../pages/parti-home/parti-home';
+import { Platform } from 'ionic-angular';
+import { InAppBrowser, Transfer, FileOpener } from 'ionic-native';
 
 @Component({
   selector: 'page-parties',
@@ -22,6 +24,7 @@ export class PartiesPage {
     public navCtrl: NavController,
     public partiEnvironment: PartiEnvironment,
     private events: Events,
+    private platform: Platform,
     private partiData: PartiData
   ) {
     this.listenToMemberEvents();
@@ -52,6 +55,13 @@ export class PartiesPage {
 
   onClickParti(parti: Parti) {
     this.navCtrl.push(PartiHomePage, { parti: parti });
+  }
+
+  onClickPartiMakeBtn() {
+    this.platform.ready().then(() => {
+      let browser = new InAppBrowser('http://parti.xyz/parties/new_intro', "_system", "location=true");
+      browser.show();
+    });
   }
 
   listenToMemberEvents() {

@@ -1,12 +1,33 @@
 page-parties {
+  .parti-header{
+    padding: 26px 16px 0px;
+    ion-title {
+      text-align: center;
+      font-size: $font-size-large;
+      color: $gray-dark;
+    }
+    .search-btn {
+      text-align: right;
+      margin-top: -30px;
+      .button-md {
+        background-color: $gray-more-lightest;
+        color: $gray-dark;
+        box-shadow: none;
+        font-size: $font-size-large;
+        margin: 0;
+        padding-right: 0;
+      }
+    }
+  }
   .parti-toolbar {
+    margin-top: -13px;
     ion-toolbar {
       padding: 0;
       ion-segment {
         top: 8px;
         position: relative;
         .segment-button {
-          color: $gray-light;
+          color: $gray;
           border: 0;
           border-radius: 0;
           height: 40px;
@@ -34,8 +55,8 @@ page-parties {
     padding: 12px 12px;
     p {
       margin: 0;
-      color: $gray;
-      font-size: $font-size-base;
+      color: $gray-light;
+      font-size: $font-size-small;
     }
     .tags {
       display: flex;
@@ -44,19 +65,26 @@ page-parties {
         margin: 0;
       }
       .tag {
-        color: $brand-primary;
-        font-size: 16px;
+        color: $brand-primary-dark;
+        font-size: $font-size-base;
         margin-left: 12px;
       }
     }
   }
   ion-scroll {
     background-color: $gray-lightest;
+    margin-top: 0;
   }
   .list-md {
     margin: 0;
   }
   .parti-list {
+    ion-item-divider {
+      padding-left: 12px;
+      color: $brand-primary-dark;
+      background-color: $gray-lightest;
+      border: none;
+    }
     ion-item {
       padding: 0;
       &.item-block{
@@ -88,8 +116,8 @@ page-parties {
         flex-flow: column;
         justify-content: center;
         .parti-title {
-          font-size: 16px;
-          color: $gray-dark;
+          font-size: $font-size-base;
+          color: $gray-darker;
         }
         .parti-info {
           display: flex;
@@ -144,27 +172,42 @@ page-parties {
         color: $gray-light;
       }
       .parti-join-btn {
-        width: 42px;
-        font-size: $font-size-small;
-        padding: 6px 9px;
-        border: 1px solid $gray-lighter;
-        color: $gray-dark;
+        .button-md {
+          width: 40px;
+          font-size: $font-size-base;
+          padding: 7px 3px;
+          border: 1px solid $gray-lighter;
+          color: $gray;
+          margin: 0;
+          box-shadow: none;
+          background-color: #fff;
+        }
+      }
+      .parti-joined-btn {
+        width: 38px;
+        padding: 2px 9px 0;
+        color: #fff;
+        background-color: $brand-primary;
         border-radius: 2px;
+        text-align: center;
+        ion-icon {
+          font-size: $font-size-large;
+        }
       }
     }
   }
   .parti-make-panel {
-    padding: 12px;
+    padding: 23px 12px;
     text-align: center;
     p {
       margin: 0;
       color: $gray-dark;
     }
     .parti-make-btn {
-      color: #fff;
-      background-color: $brand-primary;
+      background-color: #966fd6;
       padding: 10px 12px;
-      margin: 10px 120px;
+      margin: 12px 120px;
+      color: #fff;
       border-radius: 2px;
     }
   }
