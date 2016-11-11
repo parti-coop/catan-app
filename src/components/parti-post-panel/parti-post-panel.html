@@ -27,15 +27,13 @@
     </div>
   </div>
 </div>
-<ion-row (click)='onClickFileReference(post.file_reference)' *ngIf='!!post.file_reference' class='post-file-reference'>
-  <ion-col>
-    <div class='file-reference-name'>{{ post.file_reference.name }}</div>
-    <div class='file-reference-file-size'>{{ post.file_reference.file_size }} byte</div>
-  </ion-col>
-  <ion-col class='file-reference-file-type-wrapper'>
-    <div class='file-reference-file-type'>{{ post.file_reference.file_type }}</div>
-  </ion-col>
-</ion-row>
+<div *ngIf='!!post.file_reference' class='post-file-reference'>
+  <span class='file-reference-name'>{{ post.file_reference.name }}</span>
+  <span class='file-reference-file-size'>{{ post.file_reference.file_size }} byte</span>
+  <button (click)='onClickFileReference(post.file_reference)' class='file-reference-button' color='gray' ion-button outline>
+    다운로드
+  </button>
+</div>
 <div *ngIf='!!post.poll' class='post-poll'>
   <div class='poll-title'>{{ post.poll.title }}</div>
   <ion-row class='poll-voting-btns'>

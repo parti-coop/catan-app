@@ -19,12 +19,11 @@
       .link-reference-view-link.pull-right
         원글보기
         %ion-icon{ name: 'exit' }
-%ion-row.post-file-reference{ '(click)': 'onClickFileReference(post.file_reference)', '*ngIf': '!!post.file_reference' }
-  %ion-col
-    .file-reference-name {{ post.file_reference.name }}
-    .file-reference-file-size {{ post.file_reference.file_size }} byte
-  %ion-col.file-reference-file-type-wrapper
-    .file-reference-file-type {{ post.file_reference.file_type }}
+.post-file-reference{ '*ngIf': '!!post.file_reference' }
+  %span.file-reference-name {{ post.file_reference.name }}
+  %span.file-reference-file-size {{ post.file_reference.file_size }} byte
+  %button.file-reference-button{ 'ion-button': true, 'outline': true, color: 'gray', '(click)': 'onClickFileReference(post.file_reference)' }
+    다운로드
 .post-poll{ '*ngIf': '!!post.poll' }
   .poll-title {{ post.poll.title }}
   %ion-row.poll-voting-btns
