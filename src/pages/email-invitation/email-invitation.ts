@@ -31,8 +31,6 @@ export class EmailInvitationPage {
     this.invitationForm = this.formBuilder.group({
       emails: this.emailArray
     });
-
-    console.log(this.invitationForm);
   }
 
   initEmailArray() {
@@ -54,16 +52,15 @@ export class EmailInvitationPage {
   }
 
   invite() {
-    let loader = this.loadingCtrl.create();
-    loader.present();
+    let loading = this.loadingCtrl.create();
+    loading.present();
 
-    console.log(JSON.stringify(this.emailArray.value))
     this.invitationData.inviteEmails(this.parti, this.emailArray.value)
       .finally(() => {
-        loader.dismiss();
+        loading.dismiss();
       }).subscribe(() => {
         this.initEmailArray();
-        loader.dismiss().then(() => {
+        loading.dismiss().then(() => {
           let alert = this.alertCtrl.create({
             title: '완료',
             subTitle: '초대 메일을 발송 했습니다.',

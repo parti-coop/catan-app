@@ -2,21 +2,20 @@
   %ion-navbar
     %ion-title 아이디 초대
 %ion-content{ 'padding': true }
-  %div
-    .help-text
-      %p 초대하려는 아이디를 넣어주세요.
-    %form{ '[formGroup]': 'invitationForm', '(ngSubmit)': 'invite()' }
-      %div{ 'formArrayName': 'nicknames' }
-        %div{ '*ngFor': 'let nicknameField of nicknameArray.controls; let i=index' }
-          %ion-item
-            %span{ 'item-left': true } {{ nicknameField.status }}
-            %ion-input{ '[formControlName]': 'i', type: 'nicknameField', placeholder: '예) red@test.com' }
-            %button{ '(click)': 'removeNicknameControl(i)', clear: true,  'item-right': true }
-              %ion-icon{ name: 'close' }
-          %ion-item{ 'no-lines': true, '*ngIf': 'nicknameField.hasError("notFound") && nicknameField.touched'}
-            %p
-              * 찾을 수 없는 아이디네요.
+  .help-text
+    %p 초대하려는 아이디를 넣어주세요.
+  %form{ '[formGroup]': 'invitationForm', '(ngSubmit)': 'invite()' }
+    %div{ 'formArrayName': 'nicknames' }
+      %div{ '*ngFor': 'let nickname of nicknameArray.controls; let i=index' }
         %ion-item
-          %button{ 'ion-button': true, '(click)': 'addNicknameControl($event)' } 추가
-      %div
-        %button{ 'ion-button': true, block: true, type: 'submit', '[disabled]': '!invitationForm.valid' } 보내기
+          %span{ 'item-left': true } {{ nickname.status }}
+          %ion-input{ '[formControlName]': 'i', type: 'text', placeholder: '예) red@test.com' }
+          %button{ '(click)': 'removeNicknameControl(i)', clear: true,  'item-right': true }
+            %ion-icon{ name: 'close' }
+        %ion-item{ 'no-lines': true, '*ngIf': 'nickname.hasError("notFound") && nickname.touched' }
+          %p
+            * 찾을 수 없는 아이디네요.
+      %ion-item
+        %button{ 'ion-button': true, '(click)': 'addNicknameControl($event)' } 추가
+    %div
+      %button{ 'ion-button': true, block: true, type: 'submit', '[disabled]': '!invitationForm.valid' } 보내기

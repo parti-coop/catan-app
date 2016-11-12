@@ -18,6 +18,7 @@ import { MorePage } from '../pages/more/more';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SignInPage } from '../pages/sign-in/sign-in';
+import { SignUpPage } from '../pages/sign-up/sign-up';
 import { PostPage } from '../pages/post/post';
 import { PartiesPage } from '../pages/parties/parties';
 import { MessagesPage } from '../pages/messages/messages';
@@ -52,6 +53,7 @@ moment.locale('ko');
     HomePage,
     TabsPage,
     SignInPage,
+    SignUpPage,
     PostPage,
     PartiesPage,
     MessagesPage,
@@ -78,6 +80,7 @@ moment.locale('ko');
     HomePage,
     TabsPage,
     SignInPage,
+    SignUpPage,
     PostPage,
     PartiesPage,
     MessagesPage,

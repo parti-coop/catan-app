@@ -34,7 +34,7 @@ export class PartiApp {
   ngAfterViewInit() {
     this.platform.ready().then(() => {
       Deeplinks.route({
-        '/parti/:deepLinkPartiSlug': { page: 'partiHome' }
+        '/p/:deepLinkPartiSlug': { page: 'partiHome' }
       }).subscribe(match => {
         setTimeout(() => {
           if('partiHome' == match.$route.page) {

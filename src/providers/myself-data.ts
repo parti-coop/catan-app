@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
-
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Platform } from 'ionic-angular';
 import { NativeStorage } from 'ionic-native';
 
@@ -64,15 +63,28 @@ export class MyselfData {
     });
   }
 
-  auth(snsProvider: string, snsAccessToken: string,  snsSecretToken: string = '') {
+  auth(snsProvider: string, snsAccessToken: string,  snsSecretToken: string = null, nickname: string = null, email: string = null) {
     let tokenRequestBody = {
       provider: snsProvider,
       assertion: snsAccessToken,
       secret: snsSecretToken,
       grant_type: 'assertion',
       client_id: this.partiEnvironment.apiClientId,
-      client_secret: this.partiEnvironment.apiClientSecret
+      client_secret: this.partiEnvironment.apiClientSecret,
     };
+    if(!!snsSecretToken) {
+      tokenRequestBody['secret'] = snsSecretToken;
+    }
+    if(!!nickname || !!email) {
+      tokenRequestBody['user'] = {};
+      if(!!nickname) {
+        tokenRequestBody['user']['nickname'] = nickname;
+      }
+      if(!!email) {
+        tokenRequestBody['user']['email'] = email;
+      }
+    }
+
     return this.http.post(`${this.partiEnvironment.apiBaseUrl}/oauth/token`, tokenRequestBody)
       .map(res => <AuthToken>res.json())
       .mergeMap(response => {
@@ -89,6 +101,23 @@ export class MyselfData {
         console.log("MyselfData#auth : " + error);
         return this.storeHasSignedIn(false)
           .map(() => {
+            if (error instanceof Response && error.status == 401) {
+              if("need_nickname" == error.json()["error"] || "need_nickname_and_email" == error.json()["error"]) {
+                console.log("MyselfData#auth : new user!");
+                let signUpError = new NeedToSignUpError();
+                signUpError.snsProvider = snsProvider;
+                signUpError.snsAccessToken = snsAccessToken;
+                signUpError.snsSecretToken = snsSecretToken;
+                if("need_nickname_and_email" == error.json()["error"]) {
+                  signUpError.needEmail = true;
+                }
+
+                throw signUpError;
+              } else if("duplicate_nickname" == error.json()["error"]) {
+                console.log("MyselfData#auth : duplicated nickname!");
+                throw new DuplicateNicknameError();
+              }
+            }
             throw error
           });
       });
@@ -138,6 +167,7 @@ export class MyselfData {
     return Observable.from(NativeStorage.setItem(this.STORAGE_REFERENCE_HAS_SIGNED_IN, hasSignedIn)
       .then(value => {
         this._hasSignedIn = value;
+        return value;
       }));
   }
 
@@ -204,4 +234,20 @@ export class MyselfData {
     return <Myself>{id: this.id, nickname: this.nickname, image_url: this.imageUrl};
   }
 
+}
+
+export class NeedToSignUpError extends Error {
+  public snsProvider: string;
+  public snsAccessToken: string;
+  public snsSecretToken: string;
+  public needEmail: boolean = false;
+
+  constructor() {
+    super("가입해야 합니다.");
+    this.name = "NeedToSignUpError";
+    this.stack = (<any> new Error()).stack;
+  }
+}
+
+export class DuplicateNicknameError extends Error {
 }

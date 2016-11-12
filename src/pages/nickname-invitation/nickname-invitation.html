@@ -4,33 +4,31 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <div>
-    <div class='help-text'>
-      <p>초대하려는 아이디를 넣어주세요.</p>
-    </div>
-    <form (ngSubmit)='invite()' [formGroup]='invitationForm'>
-      <div formArrayName='nicknames'>
-        <div *ngFor='let nicknameField of nicknameArray.controls; let i=index'>
-          <ion-item>
-            <span item-left>{{ nicknameField.status }}</span>
-            <ion-input [formControlName]='i' placeholder='예) red@test.com' type='nicknameField'></ion-input>
-            <button (click)='removeNicknameControl(i)' clear item-right>
-              <ion-icon name='close'></ion-icon>
-            </button>
-          </ion-item>
-          <ion-item *ngIf='nicknameField.hasError("notFound") &amp;&amp; nicknameField.touched' no-lines>
-            <p>
-              * 찾을 수 없는 아이디네요.
-            </p>
-          </ion-item>
-        </div>
+  <div class='help-text'>
+    <p>초대하려는 아이디를 넣어주세요.</p>
+  </div>
+  <form (ngSubmit)='invite()' [formGroup]='invitationForm'>
+    <div formArrayName='nicknames'>
+      <div *ngFor='let nickname of nicknameArray.controls; let i=index'>
         <ion-item>
-          <button (click)='addNicknameControl($event)' ion-button>추가</button>
+          <span item-left>{{ nickname.status }}</span>
+          <ion-input [formControlName]='i' placeholder='예) red@test.com' type='text'></ion-input>
+          <button (click)='removeNicknameControl(i)' clear item-right>
+            <ion-icon name='close'></ion-icon>
+          </button>
+        </ion-item>
+        <ion-item *ngIf='nickname.hasError("notFound") &amp;&amp; nickname.touched' no-lines>
+          <p>
+            * 찾을 수 없는 아이디네요.
+          </p>
         </ion-item>
       </div>
-      <div>
-        <button [disabled]='!invitationForm.valid' block ion-button type='submit'>보내기</button>
-      </div>
-    </form>
-  </div>
+      <ion-item>
+        <button (click)='addNicknameControl($event)' ion-button>추가</button>
+      </ion-item>
+    </div>
+    <div>
+      <button [disabled]='!invitationForm.valid' block ion-button type='submit'>보내기</button>
+    </div>
+  </form>
 </ion-content>

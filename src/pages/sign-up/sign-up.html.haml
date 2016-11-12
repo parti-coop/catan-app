@@ -1,0 +1,23 @@
+%ion-header
+  %ion-navbar
+    %ion-title 가입
+
+%ion-content{ 'padding': true }
+  %h2 가입
+  .help-text
+    %p 빠띠에서 사용할 아이디를 넣어 주세요.
+    %p 영어, 한글, '-'로만 만들어 주세요.
+  %form{ '[formGroup]': 'signUpForm', '(ngSubmit)': 'signUp()' }
+    %ion-item
+      %ion-label 아이디
+      %span {{ nicknameField.status }}
+      %ion-input{ 'formControlName': 'nickname', type: 'text'}
+    %ion-item{ 'no-lines': true, '*ngIf': 'nicknameField.hasError("found") && nicknameField.touched' }
+      %p * 이미 다른 회원이 사용 중인 아이디입니다.
+    %ion-item{ '*ngIf': 'needEmail' }
+      %ion-label 이메일
+      %ion-input{ 'formControlName': 'email', type: 'email'}
+    %ion-item{ 'no-lines': true, '*ngIf': 'emailField.hasError("invalidEmail") && emailField.touched' }
+      %p * 올바른 이메일 형식이 아니예요.
+    %div
+      %button{ 'ion-button': true, block: true, type: 'submit', '[disabled]': '!signUpForm.valid' } 계속하기

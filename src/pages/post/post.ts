@@ -67,13 +67,13 @@ export class PostPage {
   }
 
   save() {
-    let loader = this.loadingCtrl.create();
-    loader.present();
+    let loading = this.loadingCtrl.create();
+    loading.present();
 
     let formValue = this.commentForm.value;
     this.commentData.create(this.post, formValue.body)
       .finally(() => {
-        loader.dismiss();
+        loading.dismiss();
       }).subscribe((comment: Comment) => {
         if(!this.post.comments) {
           this.post.comments = [];

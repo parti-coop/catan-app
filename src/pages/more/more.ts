@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { App, NavController, AlertController } from 'ionic-angular';
+import { App, NavController, AlertController, LoadingController } from 'ionic-angular';
 
 import 'rxjs/add/operator/finally';
 
@@ -12,36 +12,42 @@ import { MyselfData } from '../../providers/myself-data';
   templateUrl: 'more.html'
 })
 export class MorePage {
-  disableSignOutButton: boolean = false;
 
   constructor(
     public navCtrl: NavController,
     public partiEnvironment: PartiEnvironment,
+    private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private myselfData: MyselfData,
     private app: App
   ) {}
 
   onClickSignOutButton() {
-    this.disableSignOutButton = true;
+    let loading = this.loadingCtrl.create();
+    loading.present();
+
     this.myselfData.signOut()
       .finally(() => {
-        this.disableSignOutButton = false;
+        loading.dismiss();
       }).subscribe(() => {
-        let alert = this.alertCtrl.create({
-          title: '로그아웃',
-          subTitle: '로그아웃 되었습니다. 나중에 다시 만나요.',
-          buttons: ['확인']
+        loading.dismiss().then(() => {
+          let alert = this.alertCtrl.create({
+            title: '로그아웃',
+            subTitle: '로그아웃 되었습니다. 나중에 다시 만나요.',
+            buttons: ['확인']
+          });
+          alert.present();
+          this.app.getRootNav().setRoot(SignInPage);
         });
-        alert.present();
-        this.app.getRootNav().setRoot(SignInPage);
       }, (error) => {
-        let alert = this.alertCtrl.create({
-          title: '로그아웃 실패',
-          subTitle: '뭔가 잘못되었네요.',
-          buttons: ['확인']
+        loading.dismiss().then(() => {
+          let alert = this.alertCtrl.create({
+            title: '로그아웃 실패',
+            subTitle: '뭔가 잘못되었네요.',
+            buttons: ['확인']
+          });
+          alert.present();
         });
-        alert.present();
       })
   }
 }

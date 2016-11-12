@@ -49,7 +49,7 @@ export class NicknameInvitationPage {
     if(!!event) { event.preventDefault(); }
 
     let control = this.formBuilder.control('', null, (control: FormControl) => {
-      return NicknameAsyncValidator.checkNickname(control, this.userData);
+      return NicknameAsyncValidator.existsNickname(control, this.userData);
     });
     this.nicknameArray.push(control);
   }
@@ -59,16 +59,16 @@ export class NicknameInvitationPage {
   }
 
   invite() {
-    let loader = this.loadingCtrl.create();
-    loader.present();
+    let loading = this.loadingCtrl.create();
+    loading.present();
 
     console.log(JSON.stringify(this.nicknameArray.value))
     this.invitationData.inviteNicknames(this.parti, this.nicknameArray.value)
       .finally(() => {
-        loader.dismiss();
+        loading.dismiss();
       }).subscribe(() => {
         this.initNicknameArray();
-        loader.dismiss().then(() => {
+        loading.dismiss().then(() => {
           let alert = this.alertCtrl.create({
             title: '완료',
             subTitle: '초대했습니다.',

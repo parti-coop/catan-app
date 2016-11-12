@@ -4,7 +4,15 @@ import { UserData } from '../providers/user-data';
 
 export class NicknameAsyncValidator {
 
-  static checkNickname(control: FormControl, userData: UserData): Promise<any> {
+  static existsNickname(control: FormControl, userData: UserData): Promise<any> {
+    return NicknameAsyncValidator.checkNickname(control, userData, null, { "notFound": true });
+  }
+
+  static notExistsNickname(control: FormControl, userData: UserData): Promise<any> {
+    return NicknameAsyncValidator.checkNickname(control, userData, { "found": true }, null);
+  }
+
+  static checkNickname(control: FormControl, userData: UserData, foundResult, notFoundResult): Promise<any> {
     return new Promise((resolve, reject) => {
       if(!control.value) {
         resolve(null);
@@ -13,12 +21,12 @@ export class NicknameAsyncValidator {
       userData.byNickname(control.value).subscribe(
         user => {
           if(!!user) {
-            resolve(null);
+            resolve(foundResult);
           } else{
-            resolve({ "notFound": true });
+            resolve(notFoundResult);
           }
         },
-        err => resolve({ "notFound": true })
+        err => resolve(notFoundResult)
       );
     });
   }
