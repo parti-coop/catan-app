@@ -93,6 +93,9 @@ parti-post-panel {
       @include background-thumbnail();
     }
   }
+  .post-image-reference {
+    padding: 0 6px 12px;
+  }
   .post-file-reference {
     border: 1px solid $gray-light;
     margin: 0 6px;

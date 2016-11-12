@@ -51,6 +51,10 @@ export class PartiPostPanelComponent {
     return !!this.post.poll.my_choice;
   }
 
+  isImage() {
+    return this.post.file_reference.file_type.startsWith("image");
+  }
+
   onClickCommentButton() {
     this.navCtrl.push(PostPage, {
       post: this.post,
@@ -146,4 +150,3 @@ export class PartiPostPanelComponent {
     console.log(`user ${user.nickname}`);
   }
 }
-

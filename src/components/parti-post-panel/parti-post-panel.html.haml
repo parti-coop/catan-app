@@ -19,7 +19,10 @@
       .link-reference-view-link.pull-right
         원글보기
         %ion-icon{ name: 'exit' }
-.post-file-reference{ '*ngIf': '!!post.file_reference' }
+.post-image-reference{ '*ngIf': '!!post.file_reference && isImage()'}
+  %img{src: "{{ post.file_reference.attachment_url }}"}
+
+.post-file-reference{ '*ngIf': '!!post.file_reference && !isImage()' }
   %span.file-reference-name {{ post.file_reference.name }}
   %span.file-reference-file-size {{ post.file_reference.file_size }} byte
   %button.file-reference-button{ 'ion-button': true, 'outline': true, color: 'gray', '(click)': 'onClickFileReference(post.file_reference)' }
