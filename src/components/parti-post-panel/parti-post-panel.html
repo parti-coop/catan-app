@@ -11,7 +11,7 @@
 </div>
 <div [innerHTML]='post.parsed_title | partiSimpleFormat' class='post-title'></div>
 <div [innerHTML]='post.parsed_body | partiSimpleFormat' class='post-body'></div>
-<div (click)='onClickLinkReference(post.link_reference)' *ngIf='!!post.link_reference' class='post-link-reference'>
+<div (click)='onClickLinkReference(post.link_reference)' *ngIf='!!post.link_reference &amp;&amp; !isVideo()' class='post-link-reference'>
   <div class='link-reference-image-wrapper'>
     <div [ngStyle]="{ 'background-image': 'url(' + post.link_reference.image_url + ')' }" class='link-reference-image'></div>
   </div>
@@ -26,6 +26,9 @@
       </div>
     </div>
   </div>
+</div>
+<div *ngIf='!!post.link_reference &amp;&amp; isVideo()' class='post-video-reference'>
+  비디오
 </div>
 <div *ngIf='!!post.file_reference &amp;&amp; isImage()' class='post-image-reference'>
   <img src='{{ post.file_reference.attachment_url }}'>

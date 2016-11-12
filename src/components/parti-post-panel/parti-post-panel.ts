@@ -55,6 +55,10 @@ export class PartiPostPanelComponent {
     return this.post.file_reference.file_type.startsWith("image");
   }
 
+  isVideo() {
+    return this.post.link_reference.page_type == "video";
+  }
+
   onClickCommentButton() {
     this.navCtrl.push(PostPage, {
       post: this.post,
