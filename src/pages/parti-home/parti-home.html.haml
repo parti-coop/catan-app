@@ -17,9 +17,10 @@
           .parti-info--posts
             게시 글 {{ parti.posts_count }}개
         .parti-btns-panel
-          .parti-invite-btn
-            %button{ 'ion-button': true, '(click)': 'onClickInvitation()' }
-              친구초대
+          %template{ '[ngIf]': 'parti.is_member' }
+            .parti-invite-btn
+              %button{ 'ion-button': true, '(click)': 'onClickInvitation()' }
+                친구초대
           %template{ '[ngIf]': '!parti.is_member' }
             .parti-join-btn
               %button{ 'ion-button': true, '(click)': 'onClickJoinParti()' } 가입하기

@@ -24,11 +24,13 @@
           </div>
         </div>
         <div class='parti-btns-panel'>
-          <div class='parti-invite-btn'>
-            <button (click)='onClickInvitation()' ion-button>
-              친구초대
-            </button>
-          </div>
+          <template [ngIf]='parti.is_member'>
+            <div class='parti-invite-btn'>
+              <button (click)='onClickInvitation()' ion-button>
+                친구초대
+              </button>
+            </div>
+          </template>
           <template [ngIf]='!parti.is_member'>
             <div class='parti-join-btn'>
               <button (click)='onClickJoinParti()' ion-button>가입하기</button>
