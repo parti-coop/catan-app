@@ -34,13 +34,6 @@ $brand-primary-lighter: #f1ebfb;
 $brand-primary-dark:    darken($brand-primary, 20%); // #633ca3
 $brand-primary-darker:  darken($brand-primary, 40%); // #300970
 
-$brand-success:         #59baa3;
-$brand-success-dark:    #367264;
-$brand-info:            #66b7e1;
-$brand-warning:         #ffc152;
-$brand-danger:          #f0646d;
-$brand-danger-dark:     #c0575d;
-
 
 // Named Color Variables
 // --------------------------------------------------
@@ -57,7 +50,9 @@ $colors: (
   light:      #f4f4f4,
   dark:       #222,
   favorite:   #69BB7B,
-  gray:       #f9f9f9
+  gray:       #f9f9f9,
+  agree:      #59baa3,
+  disagree:   #f0646d
 );
 
 

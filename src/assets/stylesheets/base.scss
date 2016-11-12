@@ -54,6 +54,11 @@ body.keyboard-is-open
   text-align: right;
 }
 
+// 텍스트 색상
+.text-primary-dark {
+  color: $brand-primary-dark;
+}
+
 // 요소 정렬
 .pull-right {
   float: right;

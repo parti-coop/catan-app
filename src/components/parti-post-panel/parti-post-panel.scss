@@ -119,6 +119,48 @@ parti-post-panel {
     }
   }
   .post-poll {
+    border: 1px solid $gray-light;
+    margin: 0 6px;
+    padding: 24px;
+    text-align: center;
+    .poll-title {
+      font-size: $font-size-large;
+      font-weight: bold;
+    }
+    .poll-voting-btns {
+      margin: 24px 0 14px;
+      button {
+        margin: 0;
+        margin-right: 10px;
+      }
+      .voting-btns-wrapper {
+        display: flex;
+        justify-content: center;
+        .agreed-voting-btn {
+          ion-icon {
+            font-size: $font-size-large;
+            padding-right: 3px;
+            padding-bottom: 3px;
+          }
+        }
+        .disagreed-voting-btn {
+          ion-icon {
+            font-size: $font-size-large;
+            padding-right: 3px;
+            padding-top: 6px;
+          }
+        }
+      }
+      .unsure-voting {
+        padding-top: 18px;
+        font-size: $font-size-small;
+        color: $gray-light;
+      }
+    }
+    .poll-recommend-voting {
+      line-height: 20px;
+      color: $gray;
+    }
     .voting-users {
       height: 20px;
       width: 20px;

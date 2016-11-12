@@ -28,25 +28,32 @@
   %button.file-reference-button{ 'ion-button': true, 'outline': true, color: 'gray', '(click)': 'onClickFileReference(post.file_reference)' }
     다운로드
 .post-poll{ '*ngIf': '!!post.poll' }
-  .poll-title {{ post.poll.title }}
-  %ion-row.poll-voting-btns
-    %ion-col
-      %button.agreed-voting-btn{ 'ion-button': true, '[class.voted]': 'isAgreed()', '(click)': 'onClickVotingButton("agree")', '[disabled]': 'disableVotingButtons' }
+  .poll-title "{{ post.poll.title }}"
+  .poll-voting-btns
+    .voting-btns-wrapper
+      %button.agreed-voting-btn{ 'ion-button': true, 'outline': true, color: 'agree', '[class.voted]': 'isAgreed()', '(click)': 'onClickVotingButton("agree")', '[disabled]': 'disableVotingButtons' }
+        %ion-icon{ name: "thumbs-up" }
         찬성
-        %br
-        {{ post.poll.agreed_votings_count }}
-    %ion-col
-      %button.disagreed-voting-btn{ 'ion-button': true, '[class.voted]': 'isDisagreed()', '(click)': 'onClickVotingButton("disagree")', '[disabled]': 'disableVotingButtons' }
+        / %br
+        / {{ post.poll.agreed_votings_count }}
+      %button.disagreed-voting-btn{ 'ion-button': true, 'outline': true, color: 'disagree', '[class.voted]': 'isDisagreed()', '(click)': 'onClickVotingButton("disagree")', '[disabled]': 'disableVotingButtons' }
+        %ion-icon{ name: "thumbs-down" }
         반대
-        %br
-        {{ post.poll.disagreed_votings_count }}
-  %ion-row.poll-votings{ '*ngIf': 'isVoted()' }
-    %ion-col.agreed-voting-users
+        / %br
+        / {{ post.poll.disagreed_votings_count }}
+    .unsure-voting
+      잘 모르겠습니다
+  .poll-votings{ '*ngIf': 'isVoted()' }
+    .agreed-voting-users
       .voting-users{ '*ngFor': 'let user of post.poll.agreed_voting_users', '(click)': 'onClickVotingUser(user)', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
-    %ion-col.disagreed-voting-users
+    .disagreed-voting-users
       %span.voting-users{ '*ngFor': 'let user of post.poll.disagreed_voting_users', '(click)': 'onClickVotingUser(user)', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
-  %ion-row.poll-recommend-voting{ '*ngIf': '!isVoted()' }
-    {{ post.poll.votings_count }}명이 투표했습니다. 투표하면 결과를 볼 수 있어요.
+  .poll-recommend-voting{ '*ngIf': '!isVoted()' }
+    현재
+    %span.text-primary-dark {{ post.poll.votings_count }}
+    명이 투표했습니다.
+    %br
+    투표하면 결과를 볼 수 있습니다.
 .post-buttons{ '*ngIf': 'isCollection' }
   %parti-upvote-button{ '[post]': 'post' }
   %span.comment-button{ '(click)': 'onClickCommentButton()' }

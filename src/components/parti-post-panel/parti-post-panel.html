@@ -38,34 +38,41 @@
   </button>
 </div>
 <div *ngIf='!!post.poll' class='post-poll'>
-  <div class='poll-title'>{{ post.poll.title }}</div>
-  <ion-row class='poll-voting-btns'>
-    <ion-col>
-      <button (click)='onClickVotingButton("agree")' [class.voted]='isAgreed()' [disabled]='disableVotingButtons' class='agreed-voting-btn' ion-button>
+  <div class='poll-title'>"{{ post.poll.title }}"</div>
+  <div class='poll-voting-btns'>
+    <div class='voting-btns-wrapper'>
+      <button (click)='onClickVotingButton("agree")' [class.voted]='isAgreed()' [disabled]='disableVotingButtons' class='agreed-voting-btn' color='agree' ion-button outline>
+        <ion-icon name='thumbs-up'></ion-icon>
         찬성
-        <br>
-        {{ post.poll.agreed_votings_count }}
+        <!-- %br -->
+        <!-- {{ post.poll.agreed_votings_count }} -->
       </button>
-    </ion-col>
-    <ion-col>
-      <button (click)='onClickVotingButton("disagree")' [class.voted]='isDisagreed()' [disabled]='disableVotingButtons' class='disagreed-voting-btn' ion-button>
+      <button (click)='onClickVotingButton("disagree")' [class.voted]='isDisagreed()' [disabled]='disableVotingButtons' class='disagreed-voting-btn' color='disagree' ion-button outline>
+        <ion-icon name='thumbs-down'></ion-icon>
         반대
-        <br>
-        {{ post.poll.disagreed_votings_count }}
+        <!-- %br -->
+        <!-- {{ post.poll.disagreed_votings_count }} -->
       </button>
-    </ion-col>
-  </ion-row>
-  <ion-row *ngIf='isVoted()' class='poll-votings'>
-    <ion-col class='agreed-voting-users'>
+    </div>
+    <div class='unsure-voting'>
+      잘 모르겠습니다
+    </div>
+  </div>
+  <div *ngIf='isVoted()' class='poll-votings'>
+    <div class='agreed-voting-users'>
       <div (click)='onClickVotingUser(user)' *ngFor='let user of post.poll.agreed_voting_users' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='voting-users'></div>
-    </ion-col>
-    <ion-col class='disagreed-voting-users'>
+    </div>
+    <div class='disagreed-voting-users'>
       <span (click)='onClickVotingUser(user)' *ngFor='let user of post.poll.disagreed_voting_users' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='voting-users'></span>
-    </ion-col>
-  </ion-row>
-  <ion-row *ngIf='!isVoted()' class='poll-recommend-voting'>
-    {{ post.poll.votings_count }}명이 투표했습니다. 투표하면 결과를 볼 수 있어요.
-  </ion-row>
+    </div>
+  </div>
+  <div *ngIf='!isVoted()' class='poll-recommend-voting'>
+    현재
+    <span class='text-primary-dark'>{{ post.poll.votings_count }}</span>
+    명이 투표했습니다.
+    <br>
+    투표하면 결과를 볼 수 있습니다.
+  </div>
 </div>
 <div *ngIf='isCollection' class='post-buttons'>
   <parti-upvote-button [post]='post'></parti-upvote-button>
