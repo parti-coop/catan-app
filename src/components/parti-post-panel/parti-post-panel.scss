@@ -42,6 +42,11 @@ parti-post-panel {
     p {
       margin: 0 0 12px;
     }
+    .video-container {
+      iframe {
+        width: 100%;
+      }
+    }
   }
   .post-upvotes-count {
     color: $gray-light;
@@ -49,8 +54,8 @@ parti-post-panel {
   .post-buttons {
     display: flex;
     justify-content: space-between;
-    padding: 12px 0;
-    margin: 0 12px;
+    padding: 12px 6px;
+    margin: 12px 6px 0;
     border-top: 1px solid $gray-lighter;
     color: $gray;
     font-size: $font-size-small;
@@ -94,7 +99,8 @@ parti-post-panel {
     }
   }
   .post-image-reference {
-    padding: 0 6px 12px;
+
+
   }
   .post-file-reference {
     border: 1px solid $gray-light;
@@ -183,7 +189,6 @@ parti-post-panel {
     .post-comments {
       margin-top: 12px;
       padding: 12px 6px;
-      border-top: 1px solid $gray-less-lighter;
       .comment {
         &:first-child {
           border-top: none;
