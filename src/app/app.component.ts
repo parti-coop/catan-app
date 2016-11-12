@@ -36,15 +36,18 @@ export class PartiApp {
       Deeplinks.route({
         '/parti/:deepLinkPartiSlug': { page: 'partiHome' }
       }).subscribe(match => {
-        if('partiHome' == match.$route.page) {
-          this.myselfData.hasSignedIn()
-            .then(hasSignedIn => {
-              this.events.publish('tabs:parti-deeplink', match.$args);
-            }).catch((error) => {
-              console.log("PartiApp#ngAfterViewInit : " + error);
-              throw error;
-            });
-        }
+        setTimeout(() => {
+          if('partiHome' == match.$route.page) {
+            console.log("Deeplinks : " + JSON.stringify(match.$args));
+            this.myselfData.hasSignedIn()
+              .then(hasSignedIn => {
+                this.events.publish('tabs:parti-deeplink', match.$args);
+              }).catch((error) => {
+                console.log("PartiApp#ngAfterViewInit : " + error);
+                throw error;
+              });
+          }
+        }, 800);
       },
         nomatch => {
           console.log("nomatch: " + nomatch)

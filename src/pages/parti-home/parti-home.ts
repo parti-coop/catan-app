@@ -1,12 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams,
-  InfiniteScroll, ToastController, PopoverController, Events } from 'ionic-angular';
+  InfiniteScroll, ToastController, PopoverController, Events, ActionSheetController } from 'ionic-angular';
 
 import 'rxjs/add/operator/mergeMap';
 
 import { Parti } from '../../models/parti';
 import { Post } from '../../models/post';
 import { CancelPartiMemberPage } from '../../pages/cancel-parti-member/cancel-parti-member';
+import { EmailInvitationPage } from '../../pages/email-invitation/email-invitation';
+import { NicknameInvitationPage } from '../../pages/nickname-invitation/nickname-invitation';
 import { PostData } from '../../providers/post-data';
 import { PartiData } from '../../providers/parti-data';
 import { MemberData } from '../../providers/member-data';
@@ -31,6 +33,7 @@ export class PartiHomePage {
     public popoverCtrl: PopoverController,
     private navParams: NavParams,
     private events: Events,
+    private actionSheetCtrl: ActionSheetController,
     private partiData: PartiData,
     private postData: PostData,
     private memberData: MemberData
@@ -137,5 +140,35 @@ export class PartiHomePage {
     popover.present({
       ev: event
     });
+  }
+
+  onClickInvitation() {
+    if(!this.parti) {
+      return;
+    }
+
+    let actionSheet = this.actionSheetCtrl.create({
+      title: `${this.parti.title} 초대합니다`,
+      buttons: [
+        {
+          text: '이메일로 초대',
+          handler: () => {
+            this.navCtrl.push(EmailInvitationPage, { parti: this.parti });
+          }
+        },{
+          text: '빠띠회원을 초대',
+          handler: () => {
+            this.navCtrl.push(NicknameInvitationPage, { parti: this.parti });
+          }
+        },{
+          text: '취소',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 }

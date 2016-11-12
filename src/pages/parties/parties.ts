@@ -10,7 +10,7 @@ import { PartiEnvironment } from '../../config/constant';
 import { PartiData } from '../../providers/parti-data';
 import { PartiHomePage } from '../../pages/parti-home/parti-home';
 import { Platform } from 'ionic-angular';
-import { InAppBrowser, Transfer, FileOpener } from 'ionic-native';
+import { InAppBrowser } from 'ionic-native';
 
 @Component({
   selector: 'page-parties',

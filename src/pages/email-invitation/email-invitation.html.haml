@@ -1,0 +1,20 @@
+%ion-header
+  %ion-navbar
+    %ion-title 이메일 초대
+%ion-content{ 'padding': true }
+  %div
+    .help-text
+      %p 초대할 이메일 주소를 넣어주세요.
+    %form{ '[formGroup]': 'invitationForm', '(ngSubmit)': 'invite()' }
+      %div{ 'formArrayName': 'emails' }
+        %div{ '*ngFor': 'let email of emailArray.controls; let i=index' }
+          %ion-item
+            %ion-input{ '[formControlName]': 'i', type: 'email', placeholder: '예) red@test.com' }
+            %button{ '(click)': 'removeEmailControl(i)', clear: true,  'item-right': true }
+              %ion-icon{ name: 'close' }
+            %p{ '*ngIf': 'email.hasError("invalidEmail") && email.touched'}
+              * 올바른 이메일이 아니네요.
+        %ion-item
+          %button{ 'ion-button': true, '(click)': 'addEmailControl($event)' } 추가
+      %div
+        %button{ 'ion-button': true, block: true, type: 'submit', '[disabled]': '!invitationForm.valid' } 보내기

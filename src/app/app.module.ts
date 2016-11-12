@@ -24,6 +24,8 @@ import { MessagesPage } from '../pages/messages/messages';
 import { PartiHomePage } from '../pages/parti-home/parti-home';
 import { CancelPartiMemberPage } from '../pages/cancel-parti-member/cancel-parti-member';
 import { DisconnectedPage } from '../pages/disconnected/disconnected';
+import { EmailInvitationPage } from '../pages/email-invitation/email-invitation';
+import { NicknameInvitationPage } from '../pages/nickname-invitation/nickname-invitation';
 
 import { PartiEnvironment } from '../config/constant';
 import { PartiData } from '../providers/parti-data';
@@ -34,6 +36,8 @@ import { UpvoteData } from '../providers/upvote-data';
 import { VotingData } from '../providers/voting-data';
 import { MessageData } from '../providers/message-data';
 import { MemberData } from '../providers/member-data';
+import { UserData } from '../providers/user-data';
+import { InvitationData } from '../providers/invitation-data';
 import { ApiHttp } from '../providers/api-http';
 
 // monent settings
@@ -53,7 +57,9 @@ moment.locale('ko');
     MessagesPage,
     PartiHomePage,
     CancelPartiMemberPage,
+    EmailInvitationPage,
     DisconnectedPage,
+    NicknameInvitationPage,
     PartiPostBylineComponent,
     PartiPostPanelComponent,
     PartiUpvoteButton,
@@ -77,7 +83,9 @@ moment.locale('ko');
     MessagesPage,
     PartiHomePage,
     DisconnectedPage,
-    CancelPartiMemberPage
+    CancelPartiMemberPage,
+    EmailInvitationPage,
+    NicknameInvitationPage
   ],
   providers: [
     PartiEnvironment,
@@ -89,6 +97,8 @@ moment.locale('ko');
     PartiData,
     MessageData,
     MemberData,
+    InvitationData,
+    UserData,
     ApiHttp,
     Storage
   ],

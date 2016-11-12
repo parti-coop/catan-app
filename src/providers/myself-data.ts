@@ -172,6 +172,7 @@ export class MyselfData {
       }).mergeMap(myself => {
         return this.storeMyselfData(myself);
       }).map(() => {
+        console.log("MyselfData#refresh : OK");
         this._hasSignedIn = true;
         return this._hasSignedIn;
       }).catch((error) => {

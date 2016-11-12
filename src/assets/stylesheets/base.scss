@@ -4,11 +4,17 @@
 }
 
 // 키보드가 열릴 때 자동으로 탭 숨기기
-body.keyboard-is-open ion-footer {
-  bottom: 0 !important;
-}
-body.keyboard-is-open .scroll-content {
-  margin-bottom: 0 !important;
+body.keyboard-is-open
+  {
+  ion-footer {
+    bottom: 0 !important;
+  }
+  .ion-page ion-tabs .tabbar {
+    display: none;
+  }
+ .scroll-content {
+    margin-bottom: 0 !important;
+  }
 }
 
 // 백그라운드 속성의 썸네일

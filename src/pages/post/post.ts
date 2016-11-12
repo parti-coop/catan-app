@@ -57,9 +57,6 @@ export class PostPage {
     }
   }
 
-  ionViewLoaded() {
-  }
-
   ionViewDidEnter() {
     this.commentForm.controls['body'].setValue(null);
     if(this.navParams.get('needFocusCommentInut')) {
