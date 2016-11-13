@@ -28,6 +28,8 @@ import { DisconnectedPage } from '../pages/disconnected/disconnected';
 import { EmailInvitationPage } from '../pages/email-invitation/email-invitation';
 import { NicknameInvitationPage } from '../pages/nickname-invitation/nickname-invitation';
 import { OpeningPage } from '../pages/opening/opening';
+import { IntroPage } from '../pages/intro/intro';
+import { DevPage } from '../pages/dev/dev';
 
 import { PartiEnvironment } from '../config/constant';
 import { PartiData } from '../providers/parti-data';
@@ -65,6 +67,8 @@ moment.locale('ko');
     DisconnectedPage,
     NicknameInvitationPage,
     OpeningPage,
+    IntroPage,
+    DevPage,
     PartiPostBylineComponent,
     PartiPostPanelComponent,
     PartiUpvoteButton,
@@ -92,7 +96,9 @@ moment.locale('ko');
     CancelPartiMemberPage,
     EmailInvitationPage,
     NicknameInvitationPage,
-    OpeningPage
+    OpeningPage,
+    IntroPage,
+    DevPage
   ],
   providers: [
     PartiEnvironment,

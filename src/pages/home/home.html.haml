@@ -2,8 +2,8 @@
   %ion-navbar
     %ion-title {{partiEnvironment.appTitle}}
     %ion-buttons{ 'end': true }
-      %button{ 'icon-only': true, 'ion-button': true, '(click)': 'onClickSearch()' }
-        %ion-icon{ name: 'search' }
+      %button{ 'icon-only': true, 'ion-button': true, '(click)': 'onClickBug()' }
+        %ion-icon{ name: 'ios-bug' }
 %ion-content.ion-parti
   .spinner-center-wrapper{ '*ngIf': 'isLoading()' }
     %ion-spinner

@@ -1,8 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, NavController, Events } from 'ionic-angular';
 import { StatusBar, Network, Deeplinks } from 'ionic-native';
+import { NativeStorage } from 'ionic-native';
 
 import { TabsPage } from '../pages/tabs/tabs';
+import { IntroPage } from '../pages/intro/intro';
 import { SignInPage } from '../pages/sign-in/sign-in';
 import { DisconnectedPage } from '../pages/disconnected/disconnected';
 
@@ -12,6 +14,8 @@ import { MyselfData } from '../providers/myself-data';
   templateUrl: 'app.html'
 })
 export class PartiApp {
+  STORAGE_REFERENCE_SHOWN_INTRO = 'PartiApp_shownIntro';
+
   @ViewChild('appNav') navCtrl: NavController;
   rootPage;
 
@@ -22,13 +26,29 @@ export class PartiApp {
   ) {
     platform.ready().then(() => {
       StatusBar.styleDefault();
+      NativeStorage.getItem(this.STORAGE_REFERENCE_SHOWN_INTRO).then(
+        (shown) => {
+          if(shown) {
+            this.defaultRoot((page) => {
+              this.rootPage = page;
+            });
+          } else {
+            this.goToIntro();
+          }
+        },
+        (error) => {
+          this.goToIntro();
+        }
+      );
 
-      this.defaultRoot((page) => {
-        this.rootPage = page;
-      });
       this.listenToNetworkStatus();
     });
     this.listenToBaseEvents();
+  }
+
+  goToIntro() {
+    NativeStorage.setItem(this.STORAGE_REFERENCE_SHOWN_INTRO, true);
+    this.rootPage = IntroPage;
   }
 
   ngAfterViewInit() {

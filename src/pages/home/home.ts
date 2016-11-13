@@ -8,6 +8,7 @@ import { PartiEnvironment } from '../../config/constant';
 import { MyselfData } from '../../providers/myself-data';
 import { PostData } from '../../providers/post-data';
 import { Post } from '../../models/post';
+import { DevPage } from '../../pages/dev/dev';
 
 @Component({
   selector: 'page-home',
@@ -71,7 +72,7 @@ export class HomePage {
     return !this.posts;
   }
 
-  onClickSearch() {
-
+  onClickBug() {
+    this.app.getRootNav().setRoot(DevPage);
   }
 }
