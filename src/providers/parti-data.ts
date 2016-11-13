@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
@@ -23,6 +24,16 @@ export class PartiData {
 
   all(): Observable<Parti[]> {
     return this.http.get('/api/v1/parties')
+      .map(res => <Parti[]>(res.json().parties));
+  }
+
+  tagged(tagNames): Observable<Parti[]> {
+    let searchParams = new URLSearchParams();
+    searchParams.set('tags', tagNames.join());
+    let requestOptions = new RequestOptions();
+    requestOptions.search = searchParams;
+
+    return this.http.get('/api/v1/parties/tagged', requestOptions)
       .map(res => <Parti[]>(res.json().parties));
   }
 

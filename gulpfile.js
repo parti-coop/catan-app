@@ -31,19 +31,18 @@ let configVariables = function (file, enc) { // file and enc are optional in cas
   return {constants: constants, secrets: secrets, useProxy: useProxy};
 }
 
-gulp.task('build-haml', function(done) {
+gulp.task('build-haml', function() {
   gulp.src('./src/**/*.html.haml')
     .pipe(haml({trace: true}).on('error', function(e) { console.log(e.message); }))
     .pipe(ext.crop())
-    .pipe(gulp.dest('./src'))
-    .on('end', done);
+    .pipe(gulp.dest('./src'));
 });
 
 gulp.task('watch-haml', [ 'build-haml' ], function() {
   watch([ './src/**/*.haml' ], function() { gulp.start('build-haml'); });
 });
 
-gulp.task('watch-settings', [ 'build-haml' ], function() {
+gulp.task('watch-settings', function() {
   watch([ './settings/**/*' ], function() { gulp.start('settings'); });
 });
 

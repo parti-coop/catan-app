@@ -1,0 +1,54 @@
+<ion-content>
+  <ion-slides #openingSliders [options]='{onlyExternal: true}'>
+    <ion-slide class='slide0'>
+      <h2>{{ myselfData.nickname }}님 어서오세요.</h2>
+    </ion-slide>
+    <ion-slide class='slide1'>
+      <div class='header'>
+        <h2>{{ myselfData.nickname }}님, 관심있는 단어를 선택해 보세요.</h2>
+      </div>
+      <div class='body'>
+        <div *ngIf='!tags' class='spinner-center-wrapper'>
+          <ion-spinner></ion-spinner>
+        </div>
+        <ion-grid>
+          <ion-row wrap>
+            <ion-col *ngFor='let tag of tags' width-50>
+              <div (click)='onClickTag(tag)' [class.checked]='tag.checked'>
+                <ion-icon *ngIf='!tag.checked' name='ios-square-outline'></ion-icon>
+                <ion-icon *ngIf='tag.checked' name='ios-checkbox-outline'></ion-icon>
+                {{ tag.name }}
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-slide>
+    <ion-slide class='slide2'>
+      <div class='header'>
+        <h2>{{ myselfData.nickname }}님, 빠띠를 선택해 보세요.</h2>
+      </div>
+      <div class='body'>
+        <div *ngIf='!parties' class='spinner-center-wrapper'>
+          <ion-spinner></ion-spinner>
+        </div>
+        <ion-grid>
+          <ion-row wrap>
+            <ion-col *ngFor='let parti of parties' width-50>
+              <div (click)='onClickParti(parti)' [class.joined]='parti.is_member' [class.pending]='parti.pending'>
+                <ion-icon *ngIf='!parti.is_member' name='ios-square-outline'></ion-icon>
+                <ion-icon *ngIf='parti.is_member' name='ios-checkbox-outline'></ion-icon>
+                {{ parti.title }}
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+<ion-footer>
+  <button (click)='onClickNext()' block ion-button>
+    계속하기
+  </button>
+</ion-footer>

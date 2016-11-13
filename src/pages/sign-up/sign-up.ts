@@ -6,7 +6,7 @@ import { NicknameAsyncValidator } from '../../validators/nickname';
 import { UserData } from '../../providers/user-data';
 import { MyselfData, DuplicateNicknameError } from '../../providers/myself-data';
 import { EmailValidator } from '../../validators/email';
-import { TabsPage } from '../../pages/tabs/tabs';
+import { OpeningPage } from '../../pages/opening/opening';
 
 @Component({
   selector: 'page-sign-up',
@@ -66,7 +66,7 @@ export class SignUpPage {
         this.emailField.reset();
         loading.dismiss().then(() => {
           if(hasSignedIn) {
-            this.app.getRootNav().setRoot(TabsPage);
+            this.app.getRootNav().setRoot(OpeningPage);
           }
         });
       }, (error) => {

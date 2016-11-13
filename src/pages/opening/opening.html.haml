@@ -1,0 +1,34 @@
+%ion-content
+  %ion-slides{ '#openingSliders': true, '[options]': '{onlyExternal: true}' }
+    %ion-slide.slide0
+      %h2 {{ myselfData.nickname }}님 어서오세요.
+    %ion-slide.slide1
+      .header
+        %h2 {{ myselfData.nickname }}님, 관심있는 단어를 선택해 보세요.
+      .body
+        .spinner-center-wrapper{ '*ngIf': '!tags' }
+          %ion-spinner
+        %ion-grid
+          %ion-row{ 'wrap': true }
+            %ion-col{ '*ngFor': 'let tag of tags', 'width-50': true }
+              %div{ '(click)': 'onClickTag(tag)', '[class.checked]': 'tag.checked' }
+                %ion-icon{ 'name': 'ios-square-outline', '*ngIf': '!tag.checked'}
+                %ion-icon{ 'name': 'ios-checkbox-outline', '*ngIf': 'tag.checked'}
+                {{ tag.name }}
+    %ion-slide.slide2
+      .header
+        %h2 {{ myselfData.nickname }}님, 빠띠를 선택해 보세요.
+      .body
+        .spinner-center-wrapper{ '*ngIf': '!parties' }
+          %ion-spinner
+        %ion-grid
+          %ion-row{ 'wrap': true }
+            %ion-col{ '*ngFor': 'let parti of parties', 'width-50': true }
+              %div{ '(click)': 'onClickParti(parti)', '[class.joined]': 'parti.is_member', '[class.pending]': 'parti.pending' }
+                %ion-icon{ 'name': 'ios-square-outline', '*ngIf': '!parti.is_member'}
+                %ion-icon{ 'name': 'ios-checkbox-outline', '*ngIf': 'parti.is_member'}
+                {{ parti.title }}
+
+%ion-footer
+  %button{ 'ion-button': true, block: true, '(click)': 'onClickNext()' }
+    계속하기

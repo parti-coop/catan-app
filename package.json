@@ -4,6 +4,8 @@
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
+    "ionic:build": "ionic-app-scripts build",
+    "ionic:serve": "ionic-app-scripts serve",
     "build": "ionic-app-scripts build",
     "serve:before": "watch",
     "emulate:before": "build",
@@ -38,7 +40,7 @@
     "zone.js": "0.6.26"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "0.0.36",
+    "@ionic/app-scripts": "0.0.43",
     "gulp": "^3.9.1",
     "js-yaml": "^3.6.1",
     "gulp-template": "^4.0.0",

@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Events, InfiniteScroll } from 'ionic-angular';
+import { App, Events, InfiniteScroll } from 'ionic-angular';
 
 import 'rxjs/add/operator/finally';
 
@@ -23,6 +23,7 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     private events: Events,
+    private app: App,
     public partiEnvironment: PartiEnvironment,
     public myselfData: MyselfData,
     private postData: PostData
@@ -68,5 +69,9 @@ export class HomePage {
 
   isLoading() {
     return !this.posts;
+  }
+
+  onClickSearch() {
+
   }
 }

@@ -1,0 +1,39 @@
+page-opening {
+  .slide1 {
+    .checked {
+      background-color: $brand-primary-lighter;
+    }
+  }
+
+  .slide2 {
+    .pending {
+      background-color: $gray-light;
+    }
+
+    .joined {
+      background-color: $brand-primary-lighter;
+    }
+  }
+
+  .slide1,
+  .slide2 {
+    .slide-zoom {
+      height: 100%;
+      overflow-y: scroll;
+    }
+
+    $opening-header-height: 100px;
+
+    .header {
+      background-color: $brand-primary-lighter;
+
+      position: fixed;
+      height: $opening-header-height;
+      width: 100%;
+    }
+
+    .body {
+      margin-top: $opening-header-height;
+    }
+  }
+}
