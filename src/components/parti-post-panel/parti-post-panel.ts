@@ -55,6 +55,10 @@ export class PartiPostPanelComponent {
     return this.post.file_reference.file_type.startsWith("image");
   }
 
+  hasComment() {
+    return this.post.comments_count > 0;
+  }
+
   onClickCommentButton() {
     this.navCtrl.push(PostPage, {
       post: this.post,

@@ -92,7 +92,7 @@
   <parti-upvote-button [post]='post'></parti-upvote-button>
   <span (click)='onClickCommentButton()' class='comment-button'>
     <ion-icon name='chatbubbles'></ion-icon>
-    댓글달기2
+    댓글달기
   </span>
   <parti-share-button>
     <ion-icon md='md-share'></ion-icon>
@@ -108,7 +108,7 @@
       댓글 {{ post.comments_count }}
     </span>
   </div>
-  <div class='post-comments'>
+  <div *ngIf='hasComment()' class='post-comments'>
     <div *ngFor='let comment of post.comments' class='comment'>
       <div class='comment-header'>
         <div class='comment-byline'>

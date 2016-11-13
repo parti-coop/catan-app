@@ -68,7 +68,7 @@
   %parti-upvote-button{ '[post]': 'post' }
   %span.comment-button{ '(click)': 'onClickCommentButton()' }
     %ion-icon{ name: 'chatbubbles' }
-    댓글달기2
+    댓글달기
   %parti-share-button
     %ion-icon{ md: 'md-share' }
     공유하기
@@ -78,7 +78,7 @@
       공감 {{ post.upvotes_count }}
     %span.post-comments-count
       댓글 {{ post.comments_count }}
-  .post-comments
+  .post-comments{ '*ngIf': 'hasComment()' }
     .comment{ '*ngFor': 'let comment of post.comments' }
       .comment-header
         .comment-byline
