@@ -11,7 +11,7 @@
 </div>
 <div [innerHTML]='post.parsed_title | partiSimpleFormat' class='post-title'></div>
 <div [innerHTML]='post.parsed_body | partiSimpleFormat' class='post-body'></div>
-<div (click)='onClickLinkReference(post.link_reference)' *ngIf='!!post.link_reference &amp;&amp; !isVideo()' class='post-link-reference'>
+<div (click)='onClickLinkReference(post.link_reference)' *ngIf='!!post.link_reference &amp;&amp; !post.link_reference.is_video' class='post-link-reference'>
   <div class='link-reference-image-wrapper'>
     <div [ngStyle]="{ 'background-image': 'url(' + post.link_reference.image_url + ')' }" class='link-reference-image'></div>
   </div>
@@ -27,8 +27,19 @@
     </div>
   </div>
 </div>
-<div *ngIf='!!post.link_reference &amp;&amp; isVideo()' class='post-video-reference'>
-  비디오
+<div *ngIf='!!post.link_reference &amp;&amp; !!post.link_reference.is_video' class='post-video-reference'>
+  <div class='link-reference-video-wrapper'>
+    <div [innerHTML]='post.link_reference.video_embeded_code | partiSimpleFormat ' class='link-reference-video'></div>
+  </div>
+  <div class='link-reference-detail-wrapper'>
+    <div class='link-reference-footer'>
+      <div class='link-reference-site-name'>{{ post.link_reference.site_name | uppercase }}</div>
+      <div class='link-reference-view-link pull-right'>
+        원글보기
+        <ion-icon name='exit'></ion-icon>
+      </div>
+    </div>
+  </div>
 </div>
 <div *ngIf='!!post.file_reference &amp;&amp; isImage()' class='post-image-reference'>
   <img src='{{ post.file_reference.attachment_url }}'>
@@ -81,7 +92,7 @@
   <parti-upvote-button [post]='post'></parti-upvote-button>
   <span (click)='onClickCommentButton()' class='comment-button'>
     <ion-icon name='chatbubbles'></ion-icon>
-    댓글달기
+    댓글달기2
   </span>
   <parti-share-button>
     <ion-icon md='md-share'></ion-icon>

@@ -8,7 +8,7 @@
   %parti-post-byline{ '[post]': 'post' }
 .post-title{ '[innerHTML]': "post.parsed_title | partiSimpleFormat" }
 .post-body{ '[innerHTML]': "post.parsed_body | partiSimpleFormat" }
-.post-link-reference{ '(click)': 'onClickLinkReference(post.link_reference)', '*ngIf': '!!post.link_reference && !isVideo()' }
+.post-link-reference{ '(click)': 'onClickLinkReference(post.link_reference)', '*ngIf': '!!post.link_reference && !post.link_reference.is_video' }
   .link-reference-image-wrapper
     .link-reference-image{ '[ngStyle]': "{ 'background-image': 'url(' + post.link_reference.image_url + ')' }" }
   .link-reference-detail-wrapper
@@ -19,8 +19,15 @@
       .link-reference-view-link.pull-right
         원글보기
         %ion-icon{ name: 'exit' }
-.post-video-reference{ '*ngIf': '!!post.link_reference && isVideo()'}
-  비디오
+.post-video-reference{ '*ngIf': '!!post.link_reference && !!post.link_reference.is_video' }
+  .link-reference-video-wrapper
+    .link-reference-video{  '[innerHTML]': "post.link_reference.video_embeded_code | partiSimpleFormat " }
+  .link-reference-detail-wrapper
+    .link-reference-footer
+      .link-reference-site-name {{ post.link_reference.site_name | uppercase }}
+      .link-reference-view-link.pull-right
+        원글보기
+        %ion-icon{ name: 'exit' }
 
 .post-image-reference{ '*ngIf': '!!post.file_reference && isImage()'}
   %img{src: "{{ post.file_reference.attachment_url }}"}
@@ -61,7 +68,7 @@
   %parti-upvote-button{ '[post]': 'post' }
   %span.comment-button{ '(click)': 'onClickCommentButton()' }
     %ion-icon{ name: 'chatbubbles' }
-    댓글달기
+    댓글달기2
   %parti-share-button
     %ion-icon{ md: 'md-share' }
     공유하기

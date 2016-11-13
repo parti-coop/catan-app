@@ -39,6 +39,7 @@ parti-post-panel {
     padding: 12px 6px 0;
     color: $gray-dark;
     line-height: 20px;
+    margin-bottom: 12px;
     p {
       margin: 0 0 12px;
     }
@@ -60,6 +61,7 @@ parti-post-panel {
     color: $gray;
     font-size: $font-size-small;
   }
+  .post-video-reference,
   .post-link-reference {
     border: 1px solid $gray-light;
     margin: 0 6px;
@@ -96,6 +98,18 @@ parti-post-panel {
       height: 20px;
       width: 20px;
       @include background-thumbnail();
+    }
+  }
+  .post-video-reference {
+    border: 1px solid $gray-light;
+    margin: 0 6px;
+    .link-reference-video-wrapper {
+      .link-reference-video {
+        height: 145px;
+        iframe {
+          width: 100%;
+        }
+      }
     }
   }
   .post-file-reference {
