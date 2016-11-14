@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
 import { RequestOptions, URLSearchParams } from '@angular/http';
@@ -10,7 +11,7 @@ export class TagData {
     private http: ApiHttp
   ) {}
 
-  mostUsedOnParties(limit: number = 100) {
+  mostUsedOnParties(limit: number = 100): Observable<string[]> {
     let searchParams = new URLSearchParams();
     searchParams.set('limit', String(limit));
 

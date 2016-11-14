@@ -11,12 +11,12 @@ import { PartiData } from '../../providers/parti-data';
 import { MemberData } from '../../providers/member-data';
 import { Parti } from '../../models/parti';
 
-interface CheckableTag {
+export interface CheckableTag {
   name: string;
   checked: boolean;
 }
 
-interface JoinableParti extends Parti {
+export interface JoinableParti extends Parti {
   pending: boolean;
 }
 
