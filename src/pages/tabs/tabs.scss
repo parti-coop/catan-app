@@ -1,0 +1,39 @@
+.tabs-md {
+  .tab-button {
+    padding: 7px 0 18px;
+    color: $gray-less-lighter;
+    .ion-md-parti:before{
+      content: url('../../../assets/icon/icon_parti.png');
+    }
+  }
+  .tab-button[aria-selected=true] {
+    padding: 7px 0 18px;
+    color: $gray;
+    font-size: $font-size-small;
+    .tab-button-text {
+      -webkit-transform: none;
+      transform: none;
+    }
+    .ion-md-parti:before{
+      content: url('../../../assets/icon/icon_parti_active.png');
+    }
+  }
+}
+.tabs-md[tabsLayout=icon-top] .has-icon .tab-button-text {
+  margin-top: -4px;
+  margin-bottom: 6px;
+  color: $gray;
+  font-size: $font-size-small;
+  transform: scale(.85);
+}
+.ion-md-create{
+  margin-top: -12px;
+  &:before {
+    background-color: $brand-primary;
+    border-radius: 50%;
+    width: 42px;
+    height: 34px;
+    padding-top: 8px;
+    color: #fff;
+  }
+}
