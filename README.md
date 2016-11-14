@@ -18,6 +18,7 @@ $ npm install
 
 ```
 $ cp ./settings/config-extends.yml.sample ./settings/config-extends.yml
+$ cp ./settings/config-secrets.yml.sample ./settings/config-secrets.yml
 ```
 
 위 파일에 내용을 채웁니다. 우선 development 환경만 설정합니다.
