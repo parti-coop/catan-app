@@ -1,8 +1,10 @@
-%ion-header
-  %ion-navbar
-    %ion-title {{partiEnvironment.appTitle}}
-
-%ion-content{ 'padding': true }
-  %h2 가입/로그인
-  %button{ 'ion-button': true,  '(click)': 'facebookSignIn()' } 페이스북으로 빠띠하기
-  %button{ 'ion-button': true,  '(click)': 'twitterSignIn()' } 트위터로 빠띠하기
+%ion-content.sign-in-container
+  %button{ 'ion-button': true, '(click)': 'facebookSignIn()' }
+    %ion-icon{ name: "logo-facebook" }
+    페이스북 계정으로 빠띠 / 로그인하기
+  %button{ 'ion-button': true,  '(click)': 'twitterSignIn()' }
+    %ion-icon{ name: "logo-twitter" }
+    트위터 계정으로 빠띠 / 로그인하기
+  %button{ 'ion-button': true,  '(click)': 'twitterSignIn()' }
+    %ion-icon{ name: "logo-googleplus" }
+    구글플러스 계정으로 빠띠 / 로그인하기

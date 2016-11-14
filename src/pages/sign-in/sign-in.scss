@@ -1,3 +1,35 @@
 page-sign-in {
+  .sign-in-container {
+    background-color: $brand-primary;
+    .scroll-content {
+      margin-top: 60%;
 
+      button {
+        color: $brand-primary-dark;
+        background-color: $background-color;
+        font-weight: bold;
+        display: block;
+        padding: 14px 12px;
+        height: 48px;
+        width: 283px;
+        margin: 6px auto;
+
+        .ion-logo-facebook {
+          font-size: 24px;
+          padding-right: 10px;
+          margin-left: -16px;
+        }
+        .ion-logo-twitter {
+          font-size: 22px;
+          padding-right: 9px;
+          margin-left: -28px;
+        }
+        .ion-logo-googleplus {
+          font-size: 24px;
+          padding-right: 4px;
+          margin-left: -3px;
+        }
+      }
+    }
+  }
 }

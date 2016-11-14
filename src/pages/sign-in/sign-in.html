@@ -1,10 +1,14 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>{{partiEnvironment.appTitle}}</ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content padding>
-  <h2>가입/로그인</h2>
-  <button (click)='facebookSignIn()' ion-button>페이스북으로 빠띠하기</button>
-  <button (click)='twitterSignIn()' ion-button>트위터로 빠띠하기</button>
+<ion-content class='sign-in-container'>
+  <button (click)='facebookSignIn()' ion-button>
+    <ion-icon name='logo-facebook'></ion-icon>
+    페이스북 계정으로 빠띠 / 로그인하기
+  </button>
+  <button (click)='twitterSignIn()' ion-button>
+    <ion-icon name='logo-twitter'></ion-icon>
+    트위터 계정으로 빠띠 / 로그인하기
+  </button>
+  <button (click)='twitterSignIn()' ion-button>
+    <ion-icon name='logo-googleplus'></ion-icon>
+    구글플러스 계정으로 빠띠 / 로그인하기
+  </button>
 </ion-content>
