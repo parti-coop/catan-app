@@ -10,7 +10,7 @@
   <allow-intent href="*" />
   <% } else { %>
   <access origin="<%= constants.apiBaseUrl %>"/>
-  <allow-navigation href="<%= constants.apiBaseUrl %>" />
+  <allow-navigation href="*" />
   <allow-intent href="<%= constants.apiBaseUrl %>" />
   <% } %>
   <allow-intent href="http://*/*"/>
@@ -59,4 +59,13 @@
   <plugin name="twitter-connect-plugin" source="npm" spec="0.6.0">
     <param name="FABRIC_KEY" value="<%= secrets.fabricKey %>" />
   </plugin>
+  <% if (!useProxy) { %>
+  <plugin name="cordova-plugin-crosswalk-webview" spec="~2.2.0">
+    <variable name="XWALK_VERSION" value="22+" />
+    <variable name="XWALK_LITEVERSION" value="xwalk_core_library_canary:17+" />
+    <variable name="XWALK_COMMANDLINE" value="--disable-pull-to-refresh-effect" />
+    <variable name="XWALK_MODE" value="embedded" />
+    <variable name="XWALK_MULTIPLEAPK" value="true" />
+  </plugin>
+  <% } %>
 </widget>

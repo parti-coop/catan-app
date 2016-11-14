@@ -9,7 +9,7 @@ var haml = require('gulp-ruby-haml');
 var watch = require('gulp-watch');
 var assign = require('assign-deep');
 
-let configVariables = function (file, enc) { // file and enc are optional in case you want to modify the file object
+let getConfigVariables = function (file, enc) { // file and enc are optional in case you want to modify the file object
   var env = 'development';
   if(process.env.PARTI_ENV) {
     env = process.env.PARTI_ENV;
@@ -47,18 +47,26 @@ gulp.task('watch-settings', function() {
 });
 
 gulp.task('settings', function() {
-
   gulp.src('./settings/templates/**/*.tpl')
-    .pipe(template(configVariables()))
+    .pipe(template(getConfigVariables()))
     .pipe(ext.crop())
     .pipe(gulp.dest("./"));
 });
 
 gulp.task('reset', ['settings'], function() {
-  let cmd = 'ionic state reset'
+  let configVariables = getConfigVariables();
+  var cmd = 'ionic state reset'
     + ' && '
     + 'ionic plugin add twitter-connect-plugin --variable FABRIC_KEY='
-    + configVariables().secrets.fabricKey;
+    + configVariables.secrets.fabricKey
+    + ' && '
+    + 'ionic plugin add https://github.com/phonegap/phonegap-plugin-push --variable SENDER_ID='
+    + configVariables.constants.fcmSenderId;
+  if(!configVariables.useProxy) {
+    cmd = cmd
+      + ' && '
+      + 'ionic plugin add cordova-plugin-crosswalk-webview';
+  }
   exec(cmd, function (err, stdout, stderr) {
     console.log(err);
     console.log(stdout);

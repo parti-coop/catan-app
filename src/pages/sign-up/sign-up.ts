@@ -7,6 +7,7 @@ import { UserData } from '../../providers/user-data';
 import { MyselfData, DuplicateNicknameError } from '../../providers/myself-data';
 import { EmailValidator } from '../../validators/email';
 import { OpeningPage } from '../../pages/opening/opening';
+import { PushService } from '../../providers/push-service';
 
 @Component({
   selector: 'page-sign-up',
@@ -28,6 +29,7 @@ export class SignUpPage {
     private formBuilder: FormBuilder,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
+    private pushService: PushService,
     private app: App,
     private myselfData: MyselfData,
     private userData: UserData
@@ -66,6 +68,7 @@ export class SignUpPage {
         this.emailField.reset();
         loading.dismiss().then(() => {
           if(hasSignedIn) {
+            this.pushService.init();
             this.app.getRootNav().setRoot(OpeningPage);
           }
         });

@@ -10,6 +10,7 @@ import { SignUpPage } from '../../pages/sign-up/sign-up';
 
 import { PartiEnvironment } from '../../config/constant';
 import { MyselfData, NeedToSignUpError } from '../../providers/myself-data';
+import { PushService } from '../../providers/push-service';
 
 @Component({
   selector: 'page-sign-in',
@@ -22,6 +23,7 @@ export class SignInPage {
     public loadingCtrl: LoadingController,
     private platform: Platform,
     private alertCtrl: AlertController,
+    private pushService: PushService,
     private app: App,
     private myselfData: MyselfData
   ) {}
@@ -57,6 +59,7 @@ export class SignInPage {
       authPromise().then((hasSignedIn) => {
         loading.dismiss().then(() => {
           if(hasSignedIn) {
+            this.pushService.init();
             this.app.getRootNav().setRoot(TabsPage);
           }
         });

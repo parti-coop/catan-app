@@ -23,18 +23,37 @@ $ cp ./settings/config-secrets.yml.sample ./settings/config-secrets.yml
 
 위 파일에 내용을 채웁니다. 우선 development 환경만 설정합니다.
 
+./settings/config-extends.yml
 ```
 development:
   apiClientId: "클라이언트 아이디키"
   apiClientSecret: "클라이언트 비밀키"
+  fcmSenderId: "x"
 staging:
   apiClientId: "x"
   apiClientSecret: "x"
+  fcmSenderId: "x"
 production:
   apiClientId: "x"
   apiClientSecret: "x"
+  fcmSenderId: "x"
 ```
 
+./settings/config-secrets.yml
+```
+development:
+  twitterConsumerSecret: "x"
+  twitterConsumerKey: "x"
+  fabricKey: "x"
+staging:
+  twitterConsumerSecret: "x"
+  twitterConsumerKey: "x"
+  fabricKey: "x"
+production:
+  twitterConsumerSecret: "x"
+  twitterConsumerKey: "x"
+  fabricKey: "x"
+```
 클라이언트 아이디키와 클라이언트 비밀키는 로컬 카탄( https://github.com/parti-xyz/catan-web ) http://parti.dev/oauth/applications 을 접속해 테스트할 어플리케이션에 설정된 키 값들을 넣습니다. 적절한 어플리케이션이 없으면 등록합니다. 등록할 때 redirect_uri는 urn:ietf:wg:oauth:2.0:oob로 입력하면 됩니다.
 
 아래 명령을 수행하여 세팅을 수행합니다.

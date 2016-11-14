@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Http, Headers } from "@angular/http";
-import { Events } from 'ionic-angular';
+import { Events, AlertController } from 'ionic-angular';
 import { RequestOptions, RequestMethod, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
@@ -20,6 +20,7 @@ export class ApiHttp {
     private myselfData: MyselfData,
     private partiEnvironment: PartiEnvironment,
     private events: Events,
+    private alertCtrl: AlertController,
     private http: Http
   ) {
     this.sessionStamp = new Date();
@@ -88,27 +89,36 @@ export class ApiHttp {
               return Observable.empty();
             }
 
-            this.sessionStamp = new Date();
             if(this.myselfData.hasSignedIn) {
-              this.events.publish('user:signError');
-              return Observable.throw(new Error("Can't refresh the token"));
+              return this.handleError(error, usedSessionStamp);
             } else {
-              this.events.publish('user:signOut');
+              this.sessionStamp = new Date();
+              this.events.publish('refreshToken:fail');
               console.log("ApiHttp#intercept : signout out!");
               return Observable.empty();
             }
           });
       } else {
-        if(usedSessionStamp != this.sessionStamp) {
-          console.log("ApiHttp#intercept : old session");
-          return Observable.empty();
-        }
-
-        this.sessionStamp = new Date();
-        console.log("ApiHttps#intercept : error - " + JSON.stringify(error));
-        this.events.publish('app:error', error);
-        return Observable.throw(error);
+        return this.handleError(error, usedSessionStamp);
       }
     });
+   }
+
+   handleError(error, usedSessionStamp) {
+     if(usedSessionStamp != this.sessionStamp) {
+        console.log("ApiHttp#intercept : old session");
+        return Observable.empty();
+      }
+
+      this.sessionStamp = new Date();
+      console.log("ApiHttps#intercept : error - " + JSON.stringify(error));
+
+      let alert = this.alertCtrl.create({
+        title: '오류',
+        subTitle: '죄송합니다. 뭔가 잘못되었습니다.',
+        buttons: ['확인']
+      });
+      alert.present();
+      return Observable.throw(error);
    }
 }

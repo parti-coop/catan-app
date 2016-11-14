@@ -5,8 +5,7 @@
   "private": true,
   "scripts": {
     "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve",
-    "build": "ionic-app-scripts build",
+    "build": "gulp build-haml",
     "serve:before": "watch",
     "emulate:before": "build",
     "deploy:before": "build",
@@ -16,7 +15,6 @@
     "watch:haml": "gulp watch-haml",
     "watch:settings": "gulp watch-settings",
     "watch": "npm-run-all --parallel watch:*",
-    "prebuild": "gulp build-haml",
     "prewatch": "npm install && gulp settings"
   },
   "dependencies": {

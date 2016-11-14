@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, NavController, Events } from 'ionic-angular';
-import { StatusBar, Network, Deeplinks } from 'ionic-native';
-import { NativeStorage } from 'ionic-native';
+import { Platform, NavController, Events, AlertController } from 'ionic-angular';
+import { NativeStorage, StatusBar, Network, Deeplinks } from 'ionic-native';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { IntroPage } from '../pages/intro/intro';
@@ -9,6 +8,8 @@ import { SignInPage } from '../pages/sign-in/sign-in';
 import { DisconnectedPage } from '../pages/disconnected/disconnected';
 
 import { MyselfData } from '../providers/myself-data';
+import { PushService } from '../providers/push-service';
+import { PartiEnvironment } from '../config/constant';
 
 @Component({
   templateUrl: 'app.html'
@@ -22,28 +23,36 @@ export class PartiApp {
   constructor(
     private platform: Platform,
     private events: Events,
-    private myselfData: MyselfData
+    private alertCtrl: AlertController,
+    private myselfData: MyselfData,
+    private partiEnvironment: PartiEnvironment,
+    private pushService: PushService
   ) {
     platform.ready().then(() => {
       StatusBar.styleDefault();
-      NativeStorage.getItem(this.STORAGE_REFERENCE_SHOWN_INTRO).then(
-        (shown) => {
-          if(shown) {
-            this.defaultRoot((page) => {
-              this.rootPage = page;
-            });
-          } else {
-            this.goToIntro();
-          }
-        },
-        (error) => {
-          this.goToIntro();
-        }
-      );
 
+      this.initRootPage();
+      this.pushService.init();
       this.listenToNetworkStatus();
     });
     this.listenToBaseEvents();
+  }
+
+  initRootPage() {
+    NativeStorage.getItem(this.STORAGE_REFERENCE_SHOWN_INTRO).then(
+      (shown) => {
+        if(shown) {
+          this.defaultRoot((page) => {
+            this.rootPage = page;
+          });
+        } else {
+          this.goToIntro();
+        }
+      },
+      (error) => {
+        this.goToIntro();
+      }
+    );
   }
 
   goToIntro() {
@@ -99,21 +108,15 @@ export class PartiApp {
   }
 
   listenToBaseEvents() {
-    this.events.subscribe('user:signError', () => {
-      alert('로그인 하는 중에 뭔가 잘못되었네요. 다시 로그인해 주세요!');
+    this.events.subscribe('refreshToken:fail', () => {
+      this.pushService.cancel();
+      let alert = this.alertCtrl.create({
+        title: '로그아웃',
+        subTitle: '로그아웃 되셨네요. 다시 로그인 해주세요.',
+        buttons: ['확인']
+      });
+      alert.present();
       this.navCtrl.setRoot(SignInPage);
-    });
-    this.events.subscribe('user:signOut', () => {
-      alert('로그아웃 되었습니다. 다시 로그인해 주세요!');
-      this.navCtrl.setRoot(SignInPage);
-    });
-    this.events.subscribe('app:error', (data) => {
-      let error = data[0];
-      if(error["status"] == 404) {
-        alert('찾을 수 없네요.');
-      } else {
-        alert('오류가 발생했습니다.');
-      }
     });
     this.events.subscribe('refresh', () => {
       this.defaultRoot((page) => {

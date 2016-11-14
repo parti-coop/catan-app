@@ -68,8 +68,7 @@ export class PartiPostPanelComponent {
 
   onClickLinkReference(linkSource: LinkSource) {
     this.platform.ready().then(() => {
-      let browser = new InAppBrowser(linkSource.url, "_system", "location=true");
-      browser.show();
+      let browser = new InAppBrowser(linkSource.url, "_blank", "location=true");
     });
   }
 

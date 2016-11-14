@@ -43,6 +43,8 @@ import { MemberData } from '../providers/member-data';
 import { UserData } from '../providers/user-data';
 import { InvitationData } from '../providers/invitation-data';
 import { TagData } from '../providers/tag-data';
+import { DeviceTokenData } from '../providers/device-token-data';
+import { PushService } from '../providers/push-service';
 import { ApiHttp } from '../providers/api-http';
 
 // monent settings
@@ -113,6 +115,8 @@ moment.locale('ko');
     InvitationData,
     UserData,
     TagData,
+    DeviceTokenData,
+    PushService,
     ApiHttp,
     Storage
   ],

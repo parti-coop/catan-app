@@ -59,8 +59,7 @@ export class PartiesPage {
 
   onClickPartiMakeBtn() {
     this.platform.ready().then(() => {
-      let browser = new InAppBrowser('http://parti.xyz/parties/new_intro', "_system", "location=true");
-      browser.show();
+      new InAppBrowser('http://parti.xyz/parties/new_intro', "_blank", "location=true");
     });
   }
 

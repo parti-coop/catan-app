@@ -11,7 +11,9 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#4e8ef7">
   <% if (useProxy) { %>
-  <meta http-equiv="Content-Security-Policy" content="default-src * gap: 'unsafe-inline' 'unsafe-eval' http:; connect-src ws: http:;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: http: ws: data:; style-src 'self' 'unsafe-inline'; script-src 'self' http: https: 'unsafe-inline' 'unsafe-eval'">
+  <% } else { %>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: http: data:; style-src 'self' 'unsafe-inline'; script-src 'self' https: 'unsafe-inline' 'unsafe-eval'">
   <% } %>
   <!-- un-comment this code to enable service worker
   <script>
