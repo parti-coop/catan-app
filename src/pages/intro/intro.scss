@@ -1,3 +1,34 @@
 page-intro {
+  background-color: #966fd6;
+  color: $background-color;
+  .intro-slide {
+    .slide-zoom {
+      justify-content: space-between;
+      display: flex;
+      flex-direction: column;
+      .intro-title {
+        font-size: $font-size-h2;
+        margin-top: 225px;
+        font-weight: bold;
+        line-height: 38px;
+      }
+      .intro-button {
+        margin-top: 240px;
+        margin-bottom: 47px;
+        button {
+          color: $brand-primary-dark;
+          font-size: $font-size-base;
+          font-weight: bold;
+          padding: 12px 105px;
+        }
+      }
+    }
+  }
 
+  .swiper-pagination {
+    bottom: 134px !important;
+    .swiper-pagination-bullet {
+      background-color: #fff;
+    }
+  }
 }

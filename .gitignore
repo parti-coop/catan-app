@@ -34,6 +34,7 @@ Thumbs.db
 UserInterfaceState.xcuserstate
 
 settings/config-extends.yml
+settings/config-secrets.yml
 config.xml
 src/config/constant.ts
 src/index.html

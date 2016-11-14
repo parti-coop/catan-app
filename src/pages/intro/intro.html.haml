@@ -1,9 +1,23 @@
-%ion-slides{ 'pager': true }
-  - ['인트로1', '인트로2', '인트로3', '인트로4'].each do |data|
-    %ion-slide
-      %ion-row
-        %ion-col
-          = data
-      %ion-row
-        %ion-col
-          %button{ 'light': true, '(click)': 'goToHome()' } 시작하기
+%ion-slides{ '[options]': "mySlideOptions" }
+  %ion-slide.intro-slide
+    .intro-title
+      함께 만드는
+      %br
+      온라인 광장 빠띠
+    .intro-button
+      %button{ 'ion-button': true, 'light': true, '(click)': 'goToHome()', color: 'background' } 시작하기
+  %ion-slide.intro-slide
+    .intro-title
+      인트로1
+    .intro-button
+      %button{ 'ion-button': true, 'light': true, '(click)': 'goToHome()', color: 'background' } 시작하기
+  %ion-slide.intro-slide
+    .intro-title
+      인트로2
+    .intro-button
+      %button{ 'ion-button': true, 'light': true, '(click)': 'goToHome()', color: 'background' } 시작하기
+  %ion-slide.intro-slide
+    .intro-title
+      인트로3
+    .intro-button
+      %button{ 'ion-button': true, 'light': true, '(click)': 'goToHome()', color: 'background' } 시작하기

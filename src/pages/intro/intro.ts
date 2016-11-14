@@ -14,4 +14,8 @@ export class IntroPage {
   goToHome() {
     this.events.publish('refresh');
   }
+
+  mySlideOptions = {
+    pager: true
+  };
 }
