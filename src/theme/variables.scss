@@ -16,6 +16,7 @@ $background-color:  #fff;
 $font-size-small:         12px;
 $font-size-base:          14px;
 $font-size-large:         18px;
+$font-size-h3:            24px;
 $font-size-h2:            30px;
 
 
@@ -30,10 +31,10 @@ $gray-lightest:          #f3f3f7;
 $gray-more-lightest:     #f9f9f9;
 
 $brand-primary:         #966fd6;
-$brand-primary-light:   lighten($brand-primary, 30%); // #e3bcff
+$brand-primary-light:   #e3bcff;
 $brand-primary-lighter: #f1ebfb;
-$brand-primary-dark:    darken($brand-primary, 20%); // #633ca3
-$brand-primary-darker:  darken($brand-primary, 40%); // #300970
+$brand-primary-dark:    #633ca3;
+$brand-primary-darker:  #300970;
 
 
 // Named Color Variables

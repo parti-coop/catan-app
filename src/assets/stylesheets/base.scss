@@ -1,6 +1,7 @@
 // 기본 폰트
 * , body {
   font-family: 'Apple SD Gothic Neo', 'Noto Sans CJK KR', 'Noto Sans KR', 'Source Sans Pro', 'Helvetica Neue', Helvetica, '맑은 고딕', 'Malgun Gothic', '돋움', dotum, Arial, sans-serif;
+  line-height: 150%;
 }
 
 // 키보드가 열릴 때 자동으로 탭 숨기기
@@ -14,6 +15,22 @@ body.keyboard-is-open
   }
  .scroll-content {
     margin-bottom: 0 !important;
+  }
+}
+
+// placeholder 색상 변경
+@mixin chagne-palceholder-color($color) {
+  input::-webkit-input-placeholder {
+    color: $color;
+  }
+  input:-moz-placeholder {
+    color: $color;
+  }
+  input::-moz-placeholder {
+    color: $color;
+  }
+  input:-ms-input-placeholder {
+    color: $color;
   }
 }
 

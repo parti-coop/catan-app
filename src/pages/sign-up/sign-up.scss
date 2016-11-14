@@ -1,3 +1,67 @@
 page-sign-up {
-
+  .sign-up-container {
+    line-height: 150%;
+    background-color: $brand-primary;
+    color: $background-color;
+    .scroll-content {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      .sign-up-title {
+        font-size: $font-size-h3;
+        font-weight: bold;
+        text-align: center;
+        flex-basis: 30%;
+      }
+      .sign-up-form {
+        flex-basis: 30%;
+        ion-item {
+          padding-left: 0;
+          margin: 0 22px;
+          width: initial;
+          font-size: $font-size-base;
+          .item-inner {
+            border-bottom: 1px solid #fff;
+          }
+        }
+        .nickname-help-block {
+          margin: 7px 22px 0;
+          font-size: $font-size-small;
+        }
+        .sign-up-next-help-block {
+          margin: 0 22px;
+          position: absolute;
+          bottom: 66px;
+          font-size: $font-size-small;
+          a {
+            color: #ffc152;
+            font-weight: bold;
+            text-decoration: none;
+          }
+        }
+        .item-input {
+          background-color: transparent;
+          input {
+            margin: 12px 0;
+            color: #fff;
+            font-weight: bold;
+          }
+          @include chagne-palceholder-color($brand-primary-light);
+        }
+        .sign-up-next-button {
+          button {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            margin: 0;
+            color: $brand-primary-dark;
+            background-color: #fff;
+            opacity: 1;
+            font-weight: bold;
+            height: 42px;
+          }
+        }
+      }
+    }
+  }
 }

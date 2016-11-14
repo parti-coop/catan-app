@@ -1,20 +1,17 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>가입</ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content padding>
-  <h2>가입</h2>
-  <div class='help-text'>
-    <p>빠띠에서 사용할 아이디를 넣어 주세요.</p>
-    <p>영어, 한글, '-'로만 만들어 주세요.</p>
+<ion-content class='sign-up-container'>
+  <div class='sign-up-title'>
+    빠띠에서 당신의 이름이 될
+    <br>
+    멋진 아이디를 만들어주세요.
   </div>
-  <form (ngSubmit)='signUp()' [formGroup]='signUpForm'>
+  <form (ngSubmit)='signUp()' [formGroup]='signUpForm' class='sign-up-form'>
     <ion-item>
-      <ion-label>아이디</ion-label>
       <span>{{ nicknameField.status }}</span>
-      <ion-input formControlName='nickname' type='text'></ion-input>
+      <ion-input formControlName='nickname' placeholder='빠띠에서 사용 할 아이디' type='text'></ion-input>
     </ion-item>
+    <div class='nickname-help-block'>
+      한글, 알파벳, 숫자, _만 가능합니다
+    </div>
     <ion-item *ngIf='nicknameField.hasError("found") &amp;&amp; nicknameField.touched' no-lines>
       <p>* 이미 다른 회원이 사용 중인 아이디입니다.</p>
     </ion-item>
@@ -25,7 +22,14 @@
     <ion-item *ngIf='emailField.hasError("invalidEmail") &amp;&amp; emailField.touched' no-lines>
       <p>* 올바른 이메일 형식이 아니예요.</p>
     </ion-item>
-    <div>
+    <div class='sign-up-next-help-block'>
+      “계속하기”를 클릭하면
+      <span><a href='http://parti.xyz/terms'>이용약관</a>과
+      </span><span><a href='http://parti.xyz/privacy'>
+        개인정보처리정책
+      </a>
+      의 내용을 이해하고 동의하게 됩니다.</span></div>
+    <div class='sign-up-next-button'>
       <button [disabled]='!signUpForm.valid' block ion-button type='submit'>계속하기</button>
     </div>
   </form>
