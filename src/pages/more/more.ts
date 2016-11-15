@@ -7,6 +7,8 @@ import { SignInPage } from '../../pages/sign-in/sign-in';
 import { PartiEnvironment } from '../../config/constant';
 import { MyselfData } from '../../providers/myself-data';
 import { PushService } from '../../providers/push-service';
+import { Platform } from 'ionic-angular';
+import { InAppBrowser } from 'ionic-native';
 
 @Component({
   selector: 'page-more',
@@ -21,8 +23,15 @@ export class MorePage {
     private alertCtrl: AlertController,
     private myselfData: MyselfData,
     private pushService: PushService,
+    private platform: Platform,
     private app: App
   ) {}
+
+  onClickToWebBtn(url: string) {
+    this.platform.ready().then(() => {
+      new InAppBrowser(url, "_blank", "location=true");
+    });
+  }
 
   onClickSignOutButton() {
     let loading = this.loadingCtrl.create();

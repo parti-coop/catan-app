@@ -1,7 +1,34 @@
 %ion-header
   %ion-navbar
-    %ion-title {{partiEnvironment.appTitle}}
+    %ion-title {{'설정'}}
 %ion-content.ion-parti
-  .more
-    %h5 더보기
-    %button{ 'ion-button': true, '(click)': 'onClickSignOutButton()' } 로그아웃
+  %ion-scroll.full{ scrollY: 'true' }
+    .parti-list
+      %ion-list
+        %ion-item-group
+          %ion-item-divider
+            알림 설정
+          %ion-item
+            알림
+          %ion-item
+            알림을 이메일로 받기
+        %ion-item-group
+          %ion-item-divider
+            법적 고지
+          %ion-item{ '(click)': 'onClickToWebBtn("http://parti.xyz/terms")' }
+            이용약관
+          %ion-item{ '(click)': 'onClickToWebBtn("http://parti.xyz/privacy")' }
+            개인정보 취급약관
+        %ion-item-group
+          %ion-item-divider
+            서비스 지원
+          %ion-item{ '(click)': 'onClickToWebBtn("https://github.com/parti-xyz/catan-web/wiki/%EB%B9%A0%EB%9D%A0-%ED%99%9C%EC%9A%A9-%EA%B0%80%EC%9D%B4%EB%93%9C")' }
+            도움말
+          %ion-item{ '(click)': 'onClickToWebBtn("http://m.me/parti.xyz")' }
+            오류 및 버그 신고
+        %ion-item-group
+          %ion-item-divider
+          %ion-item
+            %button{ 'ion-button': true, '(click)': 'onClickSignOutButton()' } 로그아웃
+          %ion-item
+            서비스 탈퇴
