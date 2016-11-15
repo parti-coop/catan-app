@@ -1,24 +1,28 @@
 %ion-header
   %ion-navbar
-    %ion-title {{'설정'}}
+    %ion-title 설정
 %ion-content.ion-parti
   %ion-scroll.full{ scrollY: 'true' }
-    .parti-list
+    .setting-list
       %ion-list
         %ion-item-group
           %ion-item-divider
             알림 설정
-          %ion-item
-            알림
-          %ion-item
-            알림을 이메일로 받기
+          .setting-item
+            %ion-item
+              알림
+            %ion-toggle
+          .setting-item
+            %ion-item
+              알림을 이메일로 받기
+            %ion-toggle
         %ion-item-group
           %ion-item-divider
             법적 고지
           %ion-item{ '(click)': 'onClickToWebBtn("http://parti.xyz/terms")' }
             이용약관
           %ion-item{ '(click)': 'onClickToWebBtn("http://parti.xyz/privacy")' }
-            개인정보 취급약관
+            개인정보 취급방침
         %ion-item-group
           %ion-item-divider
             서비스 지원

@@ -1,22 +1,28 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{'설정'}}</ion-title>
+    <ion-title>설정</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content class='ion-parti'>
   <ion-scroll class='full' scrollY='true'>
-    <div class='parti-list'>
+    <div class='setting-list'>
       <ion-list>
         <ion-item-group>
           <ion-item-divider>
             알림 설정
           </ion-item-divider>
-          <ion-item>
-            알림
-          </ion-item>
-          <ion-item>
-            알림을 이메일로 받기
-          </ion-item>
+          <div class='setting-item'>
+            <ion-item>
+              알림
+            </ion-item>
+            <ion-toggle></ion-toggle>
+          </div>
+          <div class='setting-item'>
+            <ion-item>
+              알림을 이메일로 받기
+            </ion-item>
+            <ion-toggle></ion-toggle>
+          </div>
         </ion-item-group>
         <ion-item-group>
           <ion-item-divider>
@@ -26,7 +32,7 @@
             이용약관
           </ion-item>
           <ion-item (click)='onClickToWebBtn("http://parti.xyz/privacy")'>
-            개인정보 취급약관
+            개인정보 취급방침
           </ion-item>
         </ion-item-group>
         <ion-item-group>

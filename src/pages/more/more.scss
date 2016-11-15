@@ -4,7 +4,7 @@ page-more {
     font-size: $font-size-large;
     color: $gray-dark;
   }
-  .parti-list {
+  .setting-list {
     ion-item-divider {
       background-color: $gray-lightest;
       border: none;
@@ -12,6 +12,13 @@ page-more {
       border: none;
       padding: 16px 18px 3px;
       font-size: $font-size-small;
+    }
+    .setting-item {
+      display: flex;
+      ion-toggle {
+        padding: 12px 18px;
+        border-bottom: 1px solid $gray-lighter;
+      }
     }
     ion-item {
       padding: 0;
@@ -34,7 +41,7 @@ page-more {
         font-size: $font-size-base;
       }
     }
-    .label-md {
+    .label-md, .list-md {
       margin: 0;
     }
   }
