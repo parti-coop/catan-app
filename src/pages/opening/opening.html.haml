@@ -1,24 +1,38 @@
-%ion-content
+%ion-content.opening-content-container
   %ion-slides{ '#openingSliders': true, '[options]': '{onlyExternal: true}' }
     %ion-slide.slide0
-      %h2 {{ myselfData.nickname }}님 어서오세요.
+      .opening-header
+        {{ myselfData.nickname }}님 만나서 반가워요.
+      .opening-body
+        덕업일치를 하려는 사람들을 위한
+        %br
+        오픈 커뮤니티, 빠띠!
+        %br
+        내가 관심있는 이슈로
+        %br
+        파티하듯 수다를 떠는 곳입니다.
+        %br
+        관심사를 알려주시면 설정을 도와드릴게요!
+
     %ion-slide.slide1
-      .header
-        %h2 {{ myselfData.nickname }}님, 관심있는 단어를 선택해 보세요.
-      .body
+      .opening-header
+        {{ myselfData.nickname }}님의 관심분야를
+        %br
+        선택해 보세요.
+      .opening-body
         .spinner-center-wrapper{ '*ngIf': '!tags' }
           %ion-spinner
         %ion-grid
           %ion-row{ 'wrap': true }
-            %ion-col{ '*ngFor': 'let tag of tags', 'width-50': true }
-              %div{ '(click)': 'onClickTag(tag)', '[class.checked]': 'tag.checked' }
-                %ion-icon{ 'name': 'ios-square-outline', '*ngIf': '!tag.checked'}
-                %ion-icon{ 'name': 'ios-checkbox-outline', '*ngIf': 'tag.checked'}
+            %ion-col{ '*ngFor': 'let tag of tags', 'width-50': true, '[class.checked]': 'tag.checked' }
+              .tag-content{ '(click)': 'onClickTag(tag)' }
                 {{ tag.name }}
+                %ion-icon{ 'name': 'add-circle', '*ngIf': '!tag.checked'}
+                %ion-icon{ 'name': 'checkmark', '*ngIf': 'tag.checked'}
     %ion-slide.slide2
-      .header
+      .opening-header
         %h2 {{ myselfData.nickname }}님, 빠띠를 선택해 보세요.
-      .body
+      .opening-body
         .spinner-center-wrapper{ '*ngIf': '!parties' }
           %ion-spinner
         %ion-grid
@@ -29,6 +43,6 @@
                 %ion-icon{ 'name': 'ios-checkbox-outline', '*ngIf': 'parti.is_member'}
                 {{ parti.title }}
 
-%ion-footer
+%ion-footer.opening-footer-container
   %button{ 'ion-button': true, block: true, '(click)': 'onClickNext()' }
     계속하기

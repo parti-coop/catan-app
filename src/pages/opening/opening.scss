@@ -1,39 +1,85 @@
 page-opening {
-  .slide1 {
-    .checked {
-      background-color: $brand-primary-lighter;
+  .opening-content-container {
+    background-color: $brand-primary;
+    .slide0,
+    .slide1,
+    .slide2 {
+      .opening-header {
+        font-size: $font-size-h3;
+        font-weight: bold;
+        color: #fff;
+      }
+    }
+
+
+    .slide0 {
+      .opening-body {
+        margin-top: 54px;
+        font-size: $font-size-base;
+        color: $brand-primary-lighter;
+      }
+    }
+
+    .slide1 {
+      .slide-zoom {
+        height: 100%;
+        overflow-y: scroll;
+      }
+      .opening-header {
+        margin-top: 66px;
+      }
+      .opening-body {
+        margin-top: 32px;
+        color: $brand-primary-lighter;
+        ion-col {
+          border: 1px solid $brand-primary-lighter;
+          flex: 0 0 48%;
+          max-width: 48%;
+          margin: 1%;
+          border-radius: $border-radius;
+          text-align: left;
+          &.checked {
+            background-color: $brand-primary-dark;
+            border-color: $brand-primary-dark;
+            .tag-content {
+              ion-icon {
+                opacity: 1;
+              }
+            }
+          }
+          .tag-content {
+            padding-left: 6px;
+            ion-icon {
+              float: right;
+              padding-right: 6px;
+              opacity: 0.3;
+            }
+          }
+        }
+      }
+
+
+    }
+
+    .slide2 {
+      .pending {
+        background-color: $gray-light;
+      }
+
+      .joined {
+        background-color: $brand-primary-lighter;
+      }
     }
   }
-
-  .slide2 {
-    .pending {
-      background-color: $gray-light;
-    }
-
-    .joined {
-      background-color: $brand-primary-lighter;
-    }
-  }
-
-  .slide1,
-  .slide2 {
-    .slide-zoom {
-      height: 100%;
-      overflow-y: scroll;
-    }
-
-    $opening-header-height: 100px;
-
-    .header {
-      background-color: $brand-primary-lighter;
-
-      position: fixed;
-      height: $opening-header-height;
-      width: 100%;
-    }
-
-    .body {
-      margin-top: $opening-header-height;
+  .opening-footer-container {
+    button {
+      margin: 0;
+      padding: 12px 0;
+      font-size: 18px;
+      height: inherit;
+      background-color: #fff;
+      color: #633ca3;
+      font-weight: bold;
     }
   }
 }
