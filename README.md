@@ -28,15 +28,12 @@ $ cp ./settings/config-secrets.yml.sample ./settings/config-secrets.yml
 development:
   apiClientId: "클라이언트 아이디키"
   apiClientSecret: "클라이언트 비밀키"
-  fcmSenderId: "x"
 staging:
   apiClientId: "x"
   apiClientSecret: "x"
-  fcmSenderId: "x"
 production:
   apiClientId: "x"
   apiClientSecret: "x"
-  fcmSenderId: "x"
 ```
 
 ./settings/config-secrets.yml
@@ -54,7 +51,10 @@ production:
   twitterConsumerKey: "x"
   fabricKey: "x"
 ```
+
 클라이언트 아이디키와 클라이언트 비밀키는 로컬 카탄( https://github.com/parti-xyz/catan-web ) http://parti.dev/oauth/applications 을 접속해 테스트할 어플리케이션에 설정된 키 값들을 넣습니다. 적절한 어플리케이션이 없으면 등록합니다. 등록할 때 redirect_uri는 urn:ietf:wg:oauth:2.0:oob로 입력하면 됩니다.
+
+./settings/resoures 아래 로컬 개발용 firebase google-services.json을 다운받아 google-services.json.development.json 라는 이름으로 넣어 둡니다. https://support.google.com/firebase/answer/7015592 여기를 참조합니다.
 
 아래 명령을 수행하여 세팅을 수행합니다.
 

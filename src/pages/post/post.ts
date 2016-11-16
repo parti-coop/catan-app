@@ -31,6 +31,7 @@ export class PostPage {
     private loadingCtrl: LoadingController
   ){
     this.post = navParams.get('post');
+    console.log(this.post);
     this.commentForm = this.formBuilder.group({
       body: ['', Validators.required]
     });

@@ -60,8 +60,9 @@ gulp.task('reset', ['settings'], function() {
     + 'ionic plugin add twitter-connect-plugin --variable FABRIC_KEY='
     + configVariables.secrets.fabricKey
     + ' && '
-    + 'ionic plugin add https://github.com/phonegap/phonegap-plugin-push --variable SENDER_ID='
-    + configVariables.constants.fcmSenderId;
+    + `cp -rf ./settings/resources/google-services.json.${configVariables.constants.env}.json ./platforms/android/google-services.json`
+    + ' && '
+    + 'ionic plugin add cordova-plugin-fcm';
   if(!configVariables.useProxy) {
     cmd = cmd
       + ' && '

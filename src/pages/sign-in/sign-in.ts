@@ -59,7 +59,7 @@ export class SignInPage {
       authPromise().then((hasSignedIn) => {
         loading.dismiss().then(() => {
           if(hasSignedIn) {
-            this.pushService.init();
+            this.pushService.subscribe();
             this.app.getRootNav().setRoot(TabsPage);
           }
         });

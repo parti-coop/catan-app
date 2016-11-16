@@ -68,7 +68,7 @@ export class SignUpPage {
         this.emailField.reset();
         loading.dismiss().then(() => {
           if(hasSignedIn) {
-            this.pushService.init();
+            this.pushService.subscribe();
             this.app.getRootNav().setRoot(OpeningPage);
           }
         });

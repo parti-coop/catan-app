@@ -37,7 +37,7 @@ export class MorePage {
     let loading = this.loadingCtrl.create();
     loading.present();
 
-    this.pushService.cancel((isSuccess: boolean) => {
+    this.pushService.unsubscribe((isSuccess: boolean) => {
       this.myselfData.signOut()
         .finally(() => {
           loading.dismiss();

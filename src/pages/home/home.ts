@@ -68,10 +68,6 @@ export class HomePage {
     }
   }
 
-  isLoading() {
-    return !this.posts;
-  }
-
   onClickBug() {
     this.app.getRootNav().setRoot(DevPage);
   }

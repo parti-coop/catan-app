@@ -1,25 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Push, PushNotification, Device } from 'ionic-native';
-import { AlertController } from 'ionic-angular';
+import { AlertController, ToastController, Events } from 'ionic-angular';
 
+import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/map';
 
 import { MyselfData } from '../providers/myself-data';
 import { DeviceTokenData } from '../providers/device-token-data';
 import { PartiEnvironment } from '../config/constant';
 
+declare var FCMPlugin;
+
 @Injectable()
 export class PushService {
-
-  push: PushNotification;
   registrationId: string;
 
   constructor(
     private myselfData: MyselfData,
     private deviceTokenData: DeviceTokenData,
     private partiEnvironment: PartiEnvironment,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private toastCtrl: ToastController,
+    private events: Events
   ) {}
 
   init() {
@@ -28,101 +31,117 @@ export class PushService {
       return;
     }
 
-    this.myselfData.hasSignedIn()
-      .then(hasSignedIn => {
-        if(!hasSignedIn) {
-          return;
-        }
+    FCMPlugin.getToken(
+      (token) => {
+        console.log('token: ' + token);
+        this.registrationId = token;
+        this.subscribe();
+      },
+      (err) => {
+        console.log('error retrieving token: ' + err);
+      });
 
-        this.push = Push.init({
-          android: {
-            senderID: this.partiEnvironment.fcmSenderId
-          },
-          ios: {
-            alert: "true",
-            badge: false,
-            sound: "true"
-          },
-          windows: {}
-        });
-
-        this.push.on('registration', (data) => {
-          this.registrationId = data.registrationId;
-          console.log("device token ->", this.registrationId);
-          this.deviceTokenData.register(this.registrationId)
-            .subscribe(() => { console.log(`푸쉬키 등록 ${this.myselfData} : ${this.registrationId}`); });
-        });
-
-        this.push.on('notification', (data) => {
-          console.log('message', data.message);
-          let self = this;
-          //if user using app and push notification comes
-          if (data.additionalData.foreground) {
-            // if application open, show popup
-            let confirmAlert = this.alertCtrl.create({
-              title: '알림',
-              message: data.message,
-              buttons: [{
-                text: '나중에 보기',
-                role: 'cancel'
-              }, {
-                text: 'View',
-                handler: () => {
-                  //TODO: Your logic here
-                  //로그인 전이라면?
-                  //로그인한 유저의 메시지가 아니라면?
-                  console.log(data.message);
-                  //self.nav.push(DetailsPage, {message: data.message});
+    FCMPlugin.onNotification(
+      (data) => {
+        if(data.wasTapped){
+          //Notification was received on device tray and tapped by the user.
+          this.myselfData.hasSignedIn()
+            .then(hasSignedIn => {
+              if(!hasSignedIn) {
+                console.log("로그인 안되어 있어서 무시합니다");
+                return;
+              }
+              setTimeout(() => {
+                if(!!data.message && !!data.type) {
+                  this.events.publish(`tabs:${data.type}-deeplink`, data.param);
+                } else {
+                  console.log("파라미터가 맞질 않습니다");
+                  console.log(data);
                 }
-              }]
+              }, 500);
             });
-            confirmAlert.present();
-          } else {
-            //if user NOT using app and push notification comes
-            //TODO: Your logic on click of push notification directly
-            //self.nav.push(DetailsPage, {message: data.message});
-            console.log("Push notification clicked");
-          }
-        });
-        this.push.on('error', (e) => {
-          console.log(e.message);
-        });
-      }).catch((error) => {
-        console.log("PartiApp#initPush : 로그인 확인 실패 - " + error);
-        throw error;
+        }else{
+          //Notification was received in foreground. Maybe the user needs to be notified.
+          this.myselfData.hasSignedIn()
+            .then(hasSignedIn => {
+              if(!hasSignedIn) {
+                console.log("로그인 안되어 있어서 무시합니다");
+                return;
+              }
+              if(!!data.message && !!data.type) {
+                let toast = this.toastCtrl.create({
+                  message: data.message,
+                  duration: 5000,
+                  position: 'top',
+                  showCloseButton: true,
+                  closeButtonText: '보기'
+                });
+
+                toast.onDidDismiss((ignored, role) => {
+                  console.log('Dismissed toast');
+                  if (role== "close") {
+                    this.events.publish(`tabs:${data.type}-deeplink`, data.param);
+                  }
+                });
+
+                toast.present();
+              } else {
+                console.log("파라미터가 맞질 않습니다");
+                console.log(data);
+              }
+            });
+        }
+      },
+      (msg) => {
+        console.log('onNotification callback successfully registered: ' + msg);
+      },
+      (err) => {
+        console.log('Error registering onNotification callback: ' + err);
       });
   }
 
-  cancel(cb?: (boolean) => void) {
-    if(!this.isActive()) {
-      cb(true);
+  subscribe() {
+    if(!this.registrationId) {
+      console.log("registrationId가 없습니다.");
       return;
     }
 
-    let currentRegistrationId = this.registrationId;
-    console.log("Start push unregister");
-    this.push.unregister(
-      () => {
-        this.myselfData.hasSignedIn()
-          .then(hasSignedIn => {
-            this.deviceTokenData.unregister(currentRegistrationId)
-              .subscribe(() => {
-                console.log(`푸쉬키 삭제 ${this.myselfData} : ${currentRegistrationId}`);
-              }, () => {
-                console.log(`푸쉬키가 삭제되지 않음 ${this.myselfData} : ${currentRegistrationId}`);
-              });
-          }).then(() => {
-            if(!!cb) { cb(true); }
+    this.myselfData.hasSignedIn()
+      .then(hasSignedIn => {
+        if(!hasSignedIn) {
+          console.log("로그인 안되어 있어서 키를 저장하지 않습니다.");
+          return;
+        }
+        this.deviceTokenData.register(this.registrationId)
+          .subscribe(() => {
+            console.log(`푸쉬키 등록 ${this.myselfData} : ${this.registrationId}`);
           });
-      },
-      () => {
-        console.log('푸쉬 중단 실패');
-        if(!!cb) { cb(false); }
       });
-    this.registrationId = null;
   }
 
-  isActive() {
-    return (!!this.push && !!this.registrationId);
+  unsubscribe(cb?: (boolean) => void) {
+    if(!this.registrationId) {
+      console.log("registrationId가 없습니다.");
+      return;
+    }
+
+    this.myselfData.hasSignedIn()
+      .then(hasSignedIn => {
+        if(!hasSignedIn) {
+          console.log("로그인 안되어 있어서 키를 삭제할 수 없습니다.");
+          return;
+        }
+        this.deviceTokenData.unregister(this.registrationId)
+          .finally(() => {
+            if(!!cb) { cb(true); }
+          })
+          .subscribe(
+            () => {
+              console.log(`푸쉬키 삭제 ${this.myselfData} : ${this.registrationId}`);
+            },
+            () => {
+              console.log(`푸쉬키가 삭제되지 않음 ${this.myselfData} : ${this.registrationId}`);
+            });
+      });
   }
 }

@@ -40,3 +40,4 @@ src/config/constant.ts
 src/index.html
 ionic.config.json
 
+settings/resources/*

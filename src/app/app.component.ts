@@ -63,14 +63,14 @@ export class PartiApp {
   ngAfterViewInit() {
     this.platform.ready().then(() => {
       Deeplinks.route({
-        '/p/:deepLinkPartiSlug': { page: 'partiHome' }
+        '/p/:partiSlug': { page: 'partiHome' }
       }).subscribe(match => {
         setTimeout(() => {
           if('partiHome' == match.$route.page) {
             console.log("Deeplinks : " + JSON.stringify(match.$args));
             this.myselfData.hasSignedIn()
               .then(hasSignedIn => {
-                this.events.publish('tabs:parti-deeplink', match.$args);
+                this.events.publish('tabs:parti-deeplink', match.$args.partiSlug);
               }).catch((error) => {
                 console.log("PartiApp#ngAfterViewInit : " + error);
                 throw error;
@@ -109,7 +109,7 @@ export class PartiApp {
 
   listenToBaseEvents() {
     this.events.subscribe('refreshToken:fail', () => {
-      this.pushService.cancel();
+      this.pushService.unsubscribe();
       let alert = this.alertCtrl.create({
         title: '로그아웃',
         subTitle: '로그아웃 되셨네요. 다시 로그인 해주세요.',

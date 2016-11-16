@@ -35,4 +35,9 @@ export class PostData {
     return this.http.get(`/api/v1/parties/${parti.slug}/posts`, requestOptions)
       .map(res => <InfinitPage<Post>>(res.json()));
   }
+
+  get(id: number): Observable<Post> {
+    return this.http.get(`/api/v1/posts/${id}`)
+      .map(res => <Post>(res.json().post));
+  }
 }

@@ -23,9 +23,9 @@ export class PartiHomePage {
   posts: Post[];
   lastPost: Post;
   hasMoreData: boolean = true;
+  isLoading: boolean = false;
 
   parti: Parti;
-  deepLinkPartiSlug: string;
 
   constructor(
     public navCtrl: NavController,
@@ -39,7 +39,6 @@ export class PartiHomePage {
     private memberData: MemberData
   ) {
     this.parti = navParams.get('parti');
-    this.deepLinkPartiSlug = navParams.get('deepLinkPartiSlug');
   }
 
   ionViewDidLoad() {
@@ -47,21 +46,6 @@ export class PartiHomePage {
       this.load(() => {
         this.disableInfiniteScrollIfNoMoreData(this.infiniteScroll);
       });
-    }
-  }
-
-  ionViewDidEnter() {
-    if(!this.parti && !!this.deepLinkPartiSlug) {
-      this.partiData.get(this.deepLinkPartiSlug)
-        .subscribe((parti: Parti) => {
-          this.parti = parti;
-          this.deepLinkPartiSlug = null;
-          this.load(() => {
-            this.disableInfiniteScrollIfNoMoreData(this.infiniteScroll);
-          });
-        }, (error) => {
-          this.navCtrl.parent.select(0);
-        });
     }
   }
 
@@ -87,6 +71,7 @@ export class PartiHomePage {
         if(this.posts.length) {
           this.lastPost = this.posts[this.posts.length-1];
         }
+        this.updateIsLoading();
       });
   }
 
@@ -104,8 +89,8 @@ export class PartiHomePage {
     return '빠띠';
   }
 
-  isLoading(): boolean {
-    return !this.parti || !this.posts;
+  updateIsLoading() {
+    this.isLoading = (!this.parti || !this.posts);
   }
 
   onClickJoinParti() {
