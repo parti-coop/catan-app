@@ -6,15 +6,20 @@ page-intro {
       justify-content: space-between;
       display: flex;
       flex-direction: column;
+      .intro-logo {
+        margin-top: 114px;
+        img {
+          width: 114px;
+        }
+      }
       .intro-title {
         font-size: $font-size-h2;
-        margin-top: 225px;
+        margin-top: 30px;
         font-weight: bold;
         line-height: 38px;
       }
       .intro-button {
-        margin-top: 240px;
-        margin-bottom: 47px;
+        margin-top: 166px;
         button {
           color: $brand-primary-dark;
           font-size: $font-size-base;
