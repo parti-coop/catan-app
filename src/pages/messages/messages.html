@@ -8,14 +8,13 @@
 <ion-content class='ion-parti'>
   <ion-list>
     <ion-item (click)='onClickMessage(message)' *ngFor='let message of messages' text-wrap>
-      <div class='byline'>
-        <div [ngStyle]="{ 'background-image': 'url(' + message.sender.image_url + ')' }" class='sender-image'></div>
-        <div class='sender-nickname'>{{ message.sender.nickname }}</div>
-        <div class='message-created-at'>
+      <div class='message-header'>
+        <div class='message-header--parti'>{{ message.parti.title }}빠띠</div>
+        <div class='message-header--created-at'>
           {{ message.created_at | partiDateTimeFormatObservable | async }}
         </div>
       </div>
-      <div [innerHTML]='message.desc' class='desc'></div>
+      <div [innerHTML]='message.desc' class='message-desc'></div>
     </ion-item>
   </ion-list>
 </ion-content>

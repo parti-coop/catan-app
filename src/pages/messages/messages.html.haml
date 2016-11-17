@@ -5,10 +5,9 @@
 %ion-content.ion-parti
   %ion-list
     %ion-item{ '*ngFor': 'let message of messages', 'text-wrap': true, '(click)': 'onClickMessage(message)' }
-      .byline
-        .sender-image{ '[ngStyle]': "{ 'background-image': 'url(' + message.sender.image_url + ')' }" }
-        .sender-nickname {{ message.sender.nickname }}
-        .message-created-at
+      .message-header
+        .message-header--parti {{ message.parti.title }}빠띠
+        .message-header--created-at
           {{ message.created_at | partiDateTimeFormatObservable | async }}
-      .desc{ '[innerHTML]': "message.desc" }
+      .message-desc{ '[innerHTML]': "message.desc" }
 

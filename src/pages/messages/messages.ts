@@ -5,6 +5,7 @@ import { PartiEnvironment } from '../../config/constant';
 import { Message } from '../../models/message';
 import { MessageData } from '../../providers/message-data';
 import { PostPage } from '../../pages/post/post';
+import { PartiHomePage } from '../../pages/parti-home/parti-home';
 
 @Component({
   selector: 'page-messages',
@@ -27,8 +28,15 @@ export class MessagesPage {
   }
 
   onClickMessage(message: Message) {
-    this.navCtrl.push(PostPage, {
-      post: message.post
-    });
+    if(message.messagable_type === 'Upvote' || message.messagable_type === 'Comment'){
+      this.navCtrl.push(PostPage, {
+        post: message.post
+      });
+    }
+    else {
+      this.navCtrl.push(PartiHomePage, {
+        parti: message.parti
+      });
+    }
   }
 }

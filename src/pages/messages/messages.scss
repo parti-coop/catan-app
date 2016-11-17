@@ -1,15 +1,27 @@
 page-messages {
-  .sender-image {
-    height: 20px;
-    width: 20px;
-    background-repeat: none;
-    background-position: center;
-    background-size: contain;
-    vertical-align: middle;
+  .item-md {
+    padding: 0;
+    &.item-block .item-inner {
+      padding: 0;
+      ion-label {
+        padding: 12px;
+        margin: 0;
+      }
+    }
   }
-  .sender-image,
-  .sender-nickname,
-  .message-created-at {
-    display: inline-block;
+  .message-header {
+    display: flex;
+    font-size: $font-size-small;
+    &--parti {
+      color: $brand-primary;
+      flex: 1;
+    }
+    &--created-at {
+      text-align: right;
+      color: $gray;
+    }
+  }
+  .message-desc {
+    padding-top: 5px;
   }
 }
