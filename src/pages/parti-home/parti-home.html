@@ -4,57 +4,59 @@
   </ion-navbar>
 </ion-header>
 <ion-content class='ion-parti'>
-  <div *ngIf='!posts' class='spinner-center-wrapper'>
-    <ion-spinner></ion-spinner>
-  </div>
-  <template [ngIf]='!!posts'>
-    <div [ngStyle]="{ 'background-image': 'url(' + parti.logo_url + ')' }" class='cover'>
-      <div class='parti-panel'>
-        <div [ngStyle]="{ 'background-image': 'url(' + parti.logo_url + ')' }" class='parti-logo'></div>
-        <div class='parti-title'>{{ parti.title }}</div>
-        <div class='parti-description'>
-          {{ parti.body }}
-        </div>
-        <div class='parti-info'>
-          <div class='parti-info--members'>
-            멤버 {{ parti.members_count }}명
+  <div [ngSwitch]='isLoading'>
+    <div *ngSwitchCase='true' class='spinner-center-wrapper'>
+      <ion-spinner></ion-spinner>
+    </div>
+    <div *ngSwitchCase='false'>
+      <div [ngStyle]="{ 'background-image': 'url(' + parti.logo_url + ')' }" class='cover'>
+        <div class='parti-panel'>
+          <div [ngStyle]="{ 'background-image': 'url(' + parti.logo_url + ')' }" class='parti-logo'></div>
+          <div class='parti-title'>{{ parti.title }}</div>
+          <div class='parti-description'>
+            {{ parti.body }}
           </div>
-          <div class='parti-info--posts'>
-            게시 글 {{ parti.posts_count }}개
+          <div class='parti-info'>
+            <div class='parti-info--members'>
+              멤버 {{ parti.members_count }}명
+            </div>
+            <div class='parti-info--posts'>
+              게시 글 {{ parti.posts_count }}개
+            </div>
           </div>
-        </div>
-        <div class='parti-btns-panel'>
-          <template [ngIf]='parti.is_member'>
-            <div class='parti-invite-btn'>
-              <button (click)='onClickInvitation()' ion-button>
-                친구초대
-              </button>
-            </div>
-          </template>
-          <template [ngIf]='!parti.is_member'>
-            <div class='parti-join-btn'>
-              <button (click)='onClickJoinParti()' ion-button>가입하기</button>
-            </div>
-          </template>
-          <template [ngIf]='parti.is_member &amp;&amp; !parti.is_made_by'>
-            <div class='parti-join-btn'>
-              <button (click)='onClickJoinedParti($event)' ion-button>
-                가입함
-                <ion-icon name='arrow-dropdown'></ion-icon>
-              </button>
-            </div>
-          </template>
-          <template [ngIf]='parti.is_made_by'>
-            <div class='parti-maker'>
-              빠띠메이커
-            </div>
-          </template>
+          <div class='parti-btns-panel'>
+            <template [ngIf]='parti.is_member'>
+              <div class='parti-invite-btn'>
+                <button (click)='onClickInvitation()' ion-button>
+                  친구초대
+                </button>
+              </div>
+            </template>
+            <template [ngIf]='!parti.is_member'>
+              <div class='parti-join-btn'>
+                <button (click)='onClickJoinParti()' ion-button>가입하기</button>
+              </div>
+            </template>
+            <template [ngIf]='parti.is_member &amp;&amp; !parti.is_made_by'>
+              <div class='parti-join-btn'>
+                <button (click)='onClickJoinedParti($event)' ion-button>
+                  가입함
+                  <ion-icon name='arrow-dropdown'></ion-icon>
+                </button>
+              </div>
+            </template>
+            <template [ngIf]='parti.is_made_by'>
+              <div class='parti-maker'>
+                빠띠메이커
+              </div>
+            </template>
+          </div>
         </div>
       </div>
+      <parti-post-panel *ngFor='let post of posts' [isCollection]='true' [post]='post' class='post'></parti-post-panel>
+      <ion-infinite-scroll #infiniteScroll (ionInfinite)='loadMore($event)'>
+        <ion-infinite-scroll-content loadingSpinner='bubbles'></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
     </div>
-    <parti-post-panel *ngFor='let post of posts' [isCollection]='true' [post]='post' class='post'></parti-post-panel>
-    <ion-infinite-scroll #infiniteScroll (ionInfinite)='loadMore($event)'>
-      <ion-infinite-scroll-content loadingSpinner='bubbles'></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-  </template>
+  </div>
 </ion-content>

@@ -2,37 +2,38 @@
   %ion-navbar
     %ion-title {{ pageTitle() }}
 %ion-content.ion-parti
-  .spinner-center-wrapper{ '*ngIf': '!posts' }
-    %ion-spinner
-  %template{ '[ngIf]': '!!posts'}
-    .cover{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }
-      .parti-panel
-        .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }
-        .parti-title {{ parti.title }}
-        .parti-description
-          {{ parti.body }}
-        .parti-info
-          .parti-info--members
-            멤버 {{ parti.members_count }}명
-          .parti-info--posts
-            게시 글 {{ parti.posts_count }}개
-        .parti-btns-panel
-          %template{ '[ngIf]': 'parti.is_member' }
-            .parti-invite-btn
-              %button{ 'ion-button': true, '(click)': 'onClickInvitation()' }
-                친구초대
-          %template{ '[ngIf]': '!parti.is_member' }
-            .parti-join-btn
-              %button{ 'ion-button': true, '(click)': 'onClickJoinParti()' } 가입하기
-          %template{ '[ngIf]': 'parti.is_member && !parti.is_made_by' }
-            .parti-join-btn
-              %button{ 'ion-button': true, '(click)': 'onClickJoinedParti($event)' }
-                가입함
-                %ion-icon{ name: "arrow-dropdown" }
-          %template{ '[ngIf]': 'parti.is_made_by' }
-            .parti-maker
-              빠띠메이커
+  %div{ '[ngSwitch]': 'isLoading' }
+    .spinner-center-wrapper{ '*ngSwitchCase': 'true' }
+      %ion-spinner
+    %div{ '*ngSwitchCase': 'false' }
+      .cover{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }
+        .parti-panel
+          .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }
+          .parti-title {{ parti.title }}
+          .parti-description
+            {{ parti.body }}
+          .parti-info
+            .parti-info--members
+              멤버 {{ parti.members_count }}명
+            .parti-info--posts
+              게시 글 {{ parti.posts_count }}개
+          .parti-btns-panel
+            %template{ '[ngIf]': 'parti.is_member' }
+              .parti-invite-btn
+                %button{ 'ion-button': true, '(click)': 'onClickInvitation()' }
+                  친구초대
+            %template{ '[ngIf]': '!parti.is_member' }
+              .parti-join-btn
+                %button{ 'ion-button': true, '(click)': 'onClickJoinParti()' } 가입하기
+            %template{ '[ngIf]': 'parti.is_member && !parti.is_made_by' }
+              .parti-join-btn
+                %button{ 'ion-button': true, '(click)': 'onClickJoinedParti($event)' }
+                  가입함
+                  %ion-icon{ name: "arrow-dropdown" }
+            %template{ '[ngIf]': 'parti.is_made_by' }
+              .parti-maker
+                빠띠메이커
 
-    %parti-post-panel.post{ '[post]': 'post', '*ngFor': 'let post of posts', '[isCollection]': 'true' }
-    %ion-infinite-scroll{ '(ionInfinite)': 'loadMore($event)', '#infiniteScroll': true }
-      %ion-infinite-scroll-content{ loadingSpinner: "bubbles" }
+      %parti-post-panel.post{ '[post]': 'post', '*ngFor': 'let post of posts', '[isCollection]': 'true' }
+      %ion-infinite-scroll{ '(ionInfinite)': 'loadMore($event)', '#infiniteScroll': true }
+        %ion-infinite-scroll-content{ loadingSpinner: "bubbles" }
