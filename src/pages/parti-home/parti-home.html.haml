@@ -2,9 +2,9 @@
   %ion-navbar
     %ion-title {{ pageTitle() }}
 %ion-content.ion-parti
-  .spinner-center-wrapper{ '*ngIf': '!post' }
+  .spinner-center-wrapper{ '*ngIf': '!posts' }
     %ion-spinner
-  %template{ '[ngIf]': '!!post'}
+  %template{ '[ngIf]': '!!posts'}
     .cover{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }
       .parti-panel
         .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }

@@ -4,10 +4,10 @@
   </ion-navbar>
 </ion-header>
 <ion-content class='ion-parti'>
-  <div *ngIf='isLoading' class='spinner-center-wrapper'>
+  <div *ngIf='!posts' class='spinner-center-wrapper'>
     <ion-spinner></ion-spinner>
   </div>
-  <template [ngIf]='!isLoading'>
+  <template [ngIf]='!!posts'>
     <div [ngStyle]="{ 'background-image': 'url(' + parti.logo_url + ')' }" class='cover'>
       <div class='parti-panel'>
         <div [ngStyle]="{ 'background-image': 'url(' + parti.logo_url + ')' }" class='parti-logo'></div>

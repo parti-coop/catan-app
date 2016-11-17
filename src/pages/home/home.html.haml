@@ -5,9 +5,9 @@
       %button{ 'icon-only': true, 'ion-button': true, '(click)': 'onClickBug()' }
         %ion-icon{ name: 'ios-bug' }
 %ion-content.ion-parti
-  .spinner-center-wrapper{ '*ngIf': 'isLoading()' }
+  .spinner-center-wrapper{ '*ngIf': '!posts' }
     %ion-spinner
-  %template{ '[ngIf]': '!isLoading()'}
+  %template{ '[ngIf]': '!!posts'}
     %parti-post-panel.post{ '[post]': 'post', '*ngFor': 'let post of posts', '[isCollection]': 'true' }
     %ion-infinite-scroll{ '(ionInfinite)': 'loadMore($event)', '#infiniteScroll': true }
       %ion-infinite-scroll-content{ loadingSpinner: "bubbles" }
