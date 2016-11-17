@@ -122,6 +122,7 @@ export class PushService {
   unsubscribe(cb?: (boolean) => void) {
     if(!this.registrationId) {
       console.log("registrationId가 없습니다.");
+      if(!!cb) { cb(true); }
       return;
     }
 
