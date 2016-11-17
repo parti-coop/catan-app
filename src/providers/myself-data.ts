@@ -124,6 +124,7 @@ export class MyselfData {
   }
 
   storeTokenData(accessToken, refreshToken) {
+    this.syncedStorage = false;
     return Observable.from(Promise.all([
       NativeStorage.setItem(this.STORAGE_REFERENCE_ACCESS_TOKEN, accessToken),
       NativeStorage.setItem(this.STORAGE_REFERENCE_REFRESH_TOKEN, refreshToken)])
@@ -131,10 +132,13 @@ export class MyselfData {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
         return accessToken
-      }));
+      })).finally(() => {
+        this.syncedStorage = true;
+      });
   }
 
   storeMyselfData(myself: Myself) {
+    this.syncedStorage = false;
     return Observable.from(Promise.all([
       NativeStorage.setItem(this.STORAGE_REFERENCE_ID, myself.id),
       NativeStorage.setItem(this.STORAGE_REFERENCE_NICKNAME, myself.nickname),
@@ -143,10 +147,13 @@ export class MyselfData {
         this.id = myself.id;
         this.nickname = myself.nickname;
         this.imageUrl = myself.image_url;
-      }));
+      })).finally(() => {
+        this.syncedStorage = true;
+      });
   }
 
   clearMyselfData() {
+    this.syncedStorage = false;
     return Observable.from(Promise.all([
         NativeStorage.remove(this.STORAGE_REFERENCE_HAS_SIGNED_IN),
         NativeStorage.remove(this.STORAGE_REFERENCE_NICKNAME),
@@ -160,7 +167,10 @@ export class MyselfData {
         this.id = -1;
         this.imageUrl = null;
         this._hasSignedIn = false;
-      }));
+        return this._hasSignedIn;
+      })).finally(() => {
+        this.syncedStorage = true;
+      });
   }
 
   storeHasSignedIn(hasSignedIn) {
@@ -205,10 +215,14 @@ export class MyselfData {
         console.log("MyselfData#refresh : OK");
         this._hasSignedIn = true;
         return this._hasSignedIn;
-      }).catch((error) => {
-        this._hasSignedIn = false;
+      }).catch((error, source) => {
         console.log("MyselfData#refresh : " + error);
-        throw error;
+        if(error && error.status  == 401) {
+          return this.clearMyselfData().finally(() => {
+          });
+        } else {
+          throw error;
+        }
       });
   }
 
@@ -220,9 +234,7 @@ export class MyselfData {
     };
     return this.http.post(`${this.partiEnvironment.apiBaseUrl}/oauth/revoke`, tokenRequestBody)
       .mergeMap(response => {
-        this.syncedStorage = false;
         return this.clearMyselfData().finally(() => {
-          this.syncedStorage = true;
         });
       }).catch((error) => {
         console.log("MyselfData#signOut : " + error);

@@ -81,22 +81,20 @@ export class ApiHttp {
       if (error && error.status  == 401) {
         return this.myselfData.refresh()
           .mergeMap(succeed => {
-            requestOptions = this.getRequestOption(method, url, options);
-            return this.http.request(apiUrl, requestOptions);
-          }).catch(error => {
-            if(usedSessionStamp != this.sessionStamp) {
-              console.log("ApiHttp#intercept : old session");
-              return Observable.empty();
-            }
-
-            if(this.myselfData.hasSignedIn) {
-              return this.handleError(error, usedSessionStamp);
+            if(succeed) {
+              requestOptions = this.getRequestOption(method, url, options);
+              return this.http.request(apiUrl, requestOptions);
             } else {
+              if(usedSessionStamp != this.sessionStamp) {
+                console.log("ApiHttp#intercept : old session");
+                return Observable.empty();
+              }
               this.sessionStamp = new Date();
               this.events.publish('refreshToken:fail');
-              console.log("ApiHttp#intercept : signout out!");
-              return Observable.empty();
+              return Observable.throw(error);
             }
+          }).catch((error) => {
+            return this.handleError(error, usedSessionStamp);
           });
       } else {
         return this.handleError(error, usedSessionStamp);
@@ -105,13 +103,13 @@ export class ApiHttp {
    }
 
    handleError(error, usedSessionStamp) {
-     if(usedSessionStamp != this.sessionStamp) {
-        console.log("ApiHttp#intercept : old session");
+      if(usedSessionStamp != this.sessionStamp) {
+        console.log("ApiHttp#handleError : old session");
         return Observable.empty();
       }
 
       this.sessionStamp = new Date();
-      console.log("ApiHttps#intercept : error - " + JSON.stringify(error));
+      console.log("ApiHttps#handleError : error - " + JSON.stringify(error));
 
       let alert = this.alertCtrl.create({
         title: '오류',
