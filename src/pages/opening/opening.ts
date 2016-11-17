@@ -4,7 +4,7 @@ import 'rxjs/add/operator/finally';
 
 import _ from 'lodash';
 
-import { HomePage } from '../../pages/home/home';
+import { TabsPage } from '../../pages/tabs/tabs';
 import { MyselfData } from '../../providers/myself-data';
 import { TagData } from '../../providers/tag-data';
 import { PartiData } from '../../providers/parti-data';
@@ -54,7 +54,7 @@ export class OpeningPage {
     let lastIndex = 2;
     let index = this.slider.getActiveIndex();
     if(index == lastIndex) {
-      this.app.getRootNav().setRoot(HomePage);
+      this.app.getRootNav().setRoot(TabsPage);
     } else {
       this.slider.slideNext(500);
     }
