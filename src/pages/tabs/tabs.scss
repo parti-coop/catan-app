@@ -3,7 +3,7 @@
     padding: 7px 0 18px;
     color: $gray-less-lighter;
     .ion-md-parti:before{
-      content: url('../../../assets/icon/icon_parti.png');
+      content: url('../../../assets/images/icon_parti_tab.png');
     }
   }
   .tab-button[aria-selected=true] {
@@ -15,7 +15,7 @@
       transform: none;
     }
     .ion-md-parti:before{
-      content: url('../../../assets/icon/icon_parti_active.png');
+      content: url('../../../assets/images/icon_parti_tab_active.png');
     }
   }
 }
