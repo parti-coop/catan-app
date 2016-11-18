@@ -1,13 +1,13 @@
 .tabs-md {
   .tab-button {
-    padding: 7px 0 18px;
+    padding: 0;
     color: $gray-less-lighter;
     .ion-md-parti:before{
       content: url('../../../assets/images/icon_parti_tab.png');
     }
   }
   .tab-button[aria-selected=true] {
-    padding: 7px 0 18px;
+    padding: 0;
     color: $gray;
     font-size: $font-size-small;
     .tab-button-text {
@@ -20,14 +20,14 @@
   }
 }
 .tabs-md[tabsLayout=icon-top] .has-icon .tab-button-text {
-  margin-top: -4px;
+  margin-top: -12px;
   margin-bottom: 6px;
   color: $gray;
   font-size: $font-size-small;
   transform: scale(.85);
 }
 .ion-md-create{
-  margin-top: -12px;
+  margin-top: -5px;
   &:before {
     background-color: $brand-primary;
     border-radius: 50%;
