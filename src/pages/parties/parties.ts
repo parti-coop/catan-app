@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Events } from 'ionic-angular';
+import { NavController, ToastController, Events } from 'ionic-angular';
 
 import 'rxjs/add/operator/finally';
 
@@ -8,6 +8,7 @@ import _ from 'lodash';
 import { Parti } from '../../models/parti';
 import { PartiEnvironment } from '../../config/constant';
 import { PartiData } from '../../providers/parti-data';
+import { MemberData } from '../../providers/member-data';
 import { PartiHomePage } from '../../pages/parti-home/parti-home';
 import { Platform } from 'ionic-angular';
 import { InAppBrowser } from 'ionic-native';
@@ -25,7 +26,9 @@ export class PartiesPage {
     public partiEnvironment: PartiEnvironment,
     private events: Events,
     private platform: Platform,
-    private partiData: PartiData
+    private toastCtrl: ToastController,
+    private partiData: PartiData,
+    private memberData: MemberData
   ) {
     this.listenToMemberEvents();
   }
@@ -55,6 +58,19 @@ export class PartiesPage {
 
   onClickParti(parti: Parti) {
     this.navCtrl.push(PartiHomePage, { parti: parti });
+  }
+
+  onClickJoinParti(parti: Parti) {
+    this.memberData.join(parti)
+      .subscribe(() => {
+        parti.is_member = true;
+        this.events.publish('parti:join', parti);
+        let toast = this.toastCtrl.create({
+          message: '가입되었습니다.',
+          duration: 3000
+        });
+        toast.present();
+      });
   }
 
   onClickPartiMakeBtn() {

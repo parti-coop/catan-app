@@ -3,10 +3,10 @@
     %ion-item{ 'text-center': true }
       %ion-spinner
   %template{'[ngIf]': '!!parties'}
-    %ion-item{ '*ngFor': 'let parti of parties', '(click)': 'onClickParti(parti)' }
+    %ion-item{ '*ngFor': 'let parti of parties' }
       .parti-item
         .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }
-        .parti-body
+        .parti-body{'(click)': 'onClickParti(parti)'}
           .parti-title {{ parti.title }}
           .parti-info
             .parti-info--members
@@ -15,7 +15,7 @@
               게시글 {{ parti.posts_count }}개
         %template{ '[ngIf]': '!parti.is_member' }
           .parti-join-btn
-            %button{ 'ion-button': true }
+            %button{ 'ion-button': true, '(click)': 'onClickJoinParti(parti)' }
               가입
         %template{ '[ngIf]': 'parti.is_member && !parti.is_made_by' }
           .parti-joined-btn

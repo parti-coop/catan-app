@@ -5,10 +5,10 @@
     </ion-item>
   </template>
   <template [ngIf]='!!parties'>
-    <ion-item (click)='onClickParti(parti)' *ngFor='let parti of parties'>
+    <ion-item *ngFor='let parti of parties'>
       <div class='parti-item'>
         <div [ngStyle]="{ 'background-image': 'url(' + parti.logo_url + ')' }" class='parti-logo'></div>
-        <div class='parti-body'>
+        <div (click)='onClickParti(parti)' class='parti-body'>
           <div class='parti-title'>{{ parti.title }}</div>
           <div class='parti-info'>
             <div class='parti-info--members'>
@@ -21,7 +21,7 @@
         </div>
         <template [ngIf]='!parti.is_member'>
           <div class='parti-join-btn'>
-            <button ion-button>
+            <button (click)='onClickJoinParti(parti)' ion-button>
               가입
             </button>
           </div>
