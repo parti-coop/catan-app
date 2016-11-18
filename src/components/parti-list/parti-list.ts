@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Parti } from '../../models/parti';
+import { NavController } from 'ionic-angular';
+
+import { PartiHomePage } from '../../pages/parti-home/parti-home';
 
 @Component({
   selector: 'parti-list',
@@ -11,9 +14,12 @@ export class PartiList {
   parties: Parti[];
   text: string;
 
-  constructor() {
-    console.log('Hello PartiList Component');
-    this.text = 'Hello World';
+  constructor(
+    public navCtrl: NavController
+  ) {}
+
+  onClickParti(parti: Parti) {
+    this.navCtrl.push(PartiHomePage, { parti: parti });
   }
 
 }

@@ -38,13 +38,6 @@
         .spinner-center-wrapper{ '*ngIf': '!parties' }
           %ion-spinner
         %parti-list{ '[parties]': 'parties' }
-        / %ion-grid
-        /   %ion-row{ 'wrap': true }
-        /     %ion-col{ '*ngFor': 'let parti of parties', 'width-50': true }
-        /       %div{ '(click)': 'onClickParti(parti)', '[class.joined]': 'parti.is_member', '[class.pending]': 'parti.pending' }
-        /         %ion-icon{ 'name': 'ios-square-outline', '*ngIf': '!parti.is_member'}
-        /         %ion-icon{ 'name': 'ios-checkbox-outline', '*ngIf': 'parti.is_member'}
-        /         {{ parti.title }}
 
 %ion-footer.opening-footer-container
   %button{ 'ion-button': true, block: true, '(click)': 'onClickNext()' }
