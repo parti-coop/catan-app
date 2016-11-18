@@ -50,24 +50,35 @@ page-parties {
       }
     }
   }
-  .select-tag-panel {
-    background-color: $gray-lightest;
+  .select-tag-or-group-panel {
+    background-color: #fff;
     padding: 12px 12px;
+    margin-bottom: 6px;
+    box-shadow: 0 0px 3px rgba(0, 0, 0, 0.3);
     p {
       margin: 0;
       color: $gray-light;
       font-size: $font-size-small;
     }
-    .tags {
+    .tags,
+    .groups {
       display: flex;
-      margin-top: 12px;
-      .tag:first-child {
+      margin-top: 9px;
+      .tag:first-child,
+      .group:first-child {
         margin: 0;
       }
       .tag {
         color: $brand-primary-dark;
         font-size: $font-size-base;
         margin-left: 12px;
+      }
+      .group {
+        color: $brand-primary-dark;
+        font-size: $font-size-base;
+        margin-left: 12px;
+        border: 1px solid $gray-less-lighter;
+        padding: 7px 9px 5px;
       }
     }
   }
@@ -77,6 +88,9 @@ page-parties {
   }
   .list-md {
     margin: 0;
+    .item-block:first-child {
+      border-top: none;
+    }
   }
   .parti-list {
     ion-item-divider {

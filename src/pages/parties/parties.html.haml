@@ -12,17 +12,17 @@
           내 빠띠
         %ion-segment-button{ value: 'all' }
           전체 빠띠
-        %ion-segment-button{ value: 'marked' }
-          %ion-icon{ name: 'star' }
-          빠띠
 %ion-content
   %div.full{ '[hidden]': "selection !== 'joined'" }
     %ion-scroll.full{ scrollY: 'true' }
+      .select-tag-or-group-panel
+        %p 내 그룹
+        .groups
+          .group 나는 알아야겠당
+          .group 세상을 바꾸는 꿈 - 바꿈
       .parti-list
         %ion-list
           %ion-item-group
-            %ion-item-divider
-              내가 가입한 빠띠
             %template{'[ngIf]': '!parties["joinedOnly"]'}
               %ion-item{ 'text-center': true }
                 %ion-spinner
@@ -42,11 +42,7 @@
                         .parti-info--new-member__number {{ parti.latest_members_count }}
                       .parti-info--date{ '*ngIf': "parti.latest_posts_count + parti.latest_members_count === 0"}
                         {{ parti.updated_at | partiDateTimeFormatObservable | async }}
-                  .parti-star
-                    %ion-icon{ name: 'star' }
           %ion-item-group
-            %ion-item-divider
-              내가 메이커인 빠띠
             %template{'[ngIf]': '!parties["making"]'}
               %ion-item{ 'text-center': true }
                 %ion-spinner
@@ -72,15 +68,15 @@
           빠띠 만들기
   %div.full{ '[hidden]': "selection !== 'all'" }
     %ion-scroll.full{ scrollY: 'true' }
-      .select-tag-panel
+      .select-tag-or-group-panel
         %p 관심있는 태그를 선택해 보세요
         .tags
           .tag #우주당
           .tag #기본소득
           .tag #정치
           .tag #노동
-      %ion-list
-        .parti-list
+      .parti-list
+        %ion-list
           %template{'[ngIf]': '!parties["all"]'}
             %ion-item{ 'text-center': true }
               %ion-spinner
@@ -103,8 +99,4 @@
                   .parti-joined-btn
                     %ion-icon{ name: 'checkmark' }
                 %template{ '[ngIf]': 'parti.is_made_by' }
-  %div.full{ '[hidden]': "selection !== 'marked'" }
-    %ion-scroll.full{ scrollY: 'true' }
-      %ion-list
-        %ion-item all 준비중
 

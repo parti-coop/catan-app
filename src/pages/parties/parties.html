@@ -18,10 +18,6 @@
         <ion-segment-button value='all'>
           전체 빠띠
         </ion-segment-button>
-        <ion-segment-button value='marked'>
-          <ion-icon name='star'></ion-icon>
-          빠띠
-        </ion-segment-button>
       </ion-segment>
     </ion-toolbar>
   </div>
@@ -29,12 +25,16 @@
 <ion-content>
   <div [hidden]="selection !== 'joined'" class='full'>
     <ion-scroll class='full' scrollY='true'>
+      <div class='select-tag-or-group-panel'>
+        <p>내 그룹</p>
+        <div class='groups'>
+          <div class='group'>나는 알아야겠당</div>
+          <div class='group'>세상을 바꾸는 꿈 - 바꿈</div>
+        </div>
+      </div>
       <div class='parti-list'>
         <ion-list>
           <ion-item-group>
-            <ion-item-divider>
-              내가 가입한 빠띠
-            </ion-item-divider>
             <template [ngIf]='!parties["joinedOnly"]'>
               <ion-item text-center>
                 <ion-spinner></ion-spinner>
@@ -62,17 +62,11 @@
                       </div>
                     </div>
                   </div>
-                  <div class='parti-star'>
-                    <ion-icon name='star'></ion-icon>
-                  </div>
                 </div>
               </ion-item>
             </template>
           </ion-item-group>
           <ion-item-group>
-            <ion-item-divider>
-              내가 메이커인 빠띠
-            </ion-item-divider>
             <template [ngIf]='!parties["making"]'>
               <ion-item text-center>
                 <ion-spinner></ion-spinner>
@@ -116,7 +110,7 @@
   </div>
   <div [hidden]="selection !== 'all'" class='full'>
     <ion-scroll class='full' scrollY='true'>
-      <div class='select-tag-panel'>
+      <div class='select-tag-or-group-panel'>
         <p>관심있는 태그를 선택해 보세요</p>
         <div class='tags'>
           <div class='tag'>#우주당</div>
@@ -125,8 +119,8 @@
           <div class='tag'>#노동</div>
         </div>
       </div>
-      <ion-list>
-        <div class='parti-list'>
+      <div class='parti-list'>
+        <ion-list>
           <template [ngIf]='!parties["all"]'>
             <ion-item text-center>
               <ion-spinner></ion-spinner>
@@ -163,15 +157,8 @@
               </div>
             </ion-item>
           </template>
-        </div>
-      </ion-list>
-    </ion-scroll>
-  </div>
-  <div [hidden]="selection !== 'marked'" class='full'>
-    <ion-scroll class='full' scrollY='true'>
-      <ion-list>
-        <ion-item>all 준비중</ion-item>
-      </ion-list>
+        </ion-list>
+      </div>
     </ion-scroll>
   </div>
 </ion-content>
