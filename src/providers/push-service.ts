@@ -52,7 +52,7 @@ export class PushService {
                 return;
               }
               setTimeout(() => {
-                if(!!data.message && !!data.type) {
+                if(!!data.title && !!data.body && !!data.type) {
                   this.events.publish(`tabs:${data.type}-deeplink`, data.param);
                 } else {
                   console.log("파라미터가 맞질 않습니다");
@@ -68,9 +68,9 @@ export class PushService {
                 console.log("로그인 안되어 있어서 무시합니다");
                 return;
               }
-              if(!!data.message && !!data.type) {
+              if(!!data.title && !!data.body && !!data.type) {
                 let toast = this.toastCtrl.create({
-                  message: data.message,
+                  message: `${data.title} : ${data.body}`,
                   duration: 5000,
                   position: 'top',
                   showCloseButton: true,
