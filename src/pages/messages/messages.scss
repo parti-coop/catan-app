@@ -12,9 +12,12 @@ page-messages {
   .message-header {
     display: flex;
     font-size: $font-size-small;
-    &--parti {
+    &--parti-title {
       color: $brand-primary;
       flex: 1;
+    }
+    &--parti-group {
+      color: $brand-primary;
     }
     &--created-at {
       text-align: right;

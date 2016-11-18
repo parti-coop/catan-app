@@ -6,7 +6,10 @@
   %ion-list
     %ion-item{ '*ngFor': 'let message of messages', 'text-wrap': true, '(click)': 'onClickMessage(message)' }
       .message-header
-        .message-header--parti {{ message.parti.title }}빠띠
+        .message-header--parti-group{ '*ngIf': 'message.parti.group' }
+          {{ message.parti.group.name }}
+          >
+        .message-header--parti-title {{ message.parti.title }}빠띠
         .message-header--created-at
           {{ message.created_at | partiDateTimeFormatObservable | async }}
       .message-desc{ '[innerHTML]': "message.desc" }

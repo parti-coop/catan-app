@@ -9,7 +9,11 @@
   <ion-list>
     <ion-item (click)='onClickMessage(message)' *ngFor='let message of messages' text-wrap>
       <div class='message-header'>
-        <div class='message-header--parti'>{{ message.parti.title }}빠띠</div>
+        <div *ngIf='message.parti.group' class='message-header--parti-group'>
+          {{ message.parti.group.name }}
+          >
+        </div>
+        <div class='message-header--parti-title'>{{ message.parti.title }}빠띠</div>
         <div class='message-header--created-at'>
           {{ message.created_at | partiDateTimeFormatObservable | async }}
         </div>
