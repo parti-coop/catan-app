@@ -29,6 +29,7 @@ export class OpeningPage {
 
   tags: CheckableTag[];
   parties: JoinableParti[];
+  buttonLabel: string = '계속하기';
 
   constructor(
     public navCtrl: NavController,
@@ -57,6 +58,10 @@ export class OpeningPage {
       this.app.getRootNav().setRoot(TabsPage);
     } else {
       this.slider.slideNext(500);
+      this.buttonLabel = '계속하기';
+      if (index == (lastIndex-1)) {
+        this.buttonLabel = '자, 이제 시작해 볼까요?';
+      }
     }
   }
 
