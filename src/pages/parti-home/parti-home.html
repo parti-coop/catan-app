@@ -17,7 +17,7 @@
             {{ parti.body }}
           </div>
           <div class='parti-info'>
-            <div class='parti-info--members'>
+            <div (click)='onClickMember()' class='parti-info--members'>
               멤버 {{ parti.members_count }}명
             </div>
             <div class='parti-info--posts'>

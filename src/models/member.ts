@@ -4,6 +4,6 @@ import { Post } from '../models/post';
 
 export interface Member {
   id: number;
-  parti: Post;
+  parti: Parti;
   user: User;
 }

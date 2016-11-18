@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Push, PushNotification, Device } from 'ionic-native';
+import { Device } from 'ionic-native';
 import { AlertController, ToastController, Events } from 'ionic-angular';
 
 import 'rxjs/add/operator/finally';

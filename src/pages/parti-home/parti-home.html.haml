@@ -13,7 +13,7 @@
           .parti-description
             {{ parti.body }}
           .parti-info
-            .parti-info--members
+            .parti-info--members{ '(click)': 'onClickMember()' }
               멤버 {{ parti.members_count }}명
             .parti-info--posts
               게시 글 {{ parti.posts_count }}개

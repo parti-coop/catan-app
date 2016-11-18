@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams,
-  InfiniteScroll, ToastController, PopoverController, Events, ActionSheetController } from 'ionic-angular';
+  InfiniteScroll, ToastController, PopoverController, Events,
+  ActionSheetController, ModalController } from 'ionic-angular';
 
 import 'rxjs/add/operator/mergeMap';
 
@@ -12,6 +13,7 @@ import { NicknameInvitationPage } from '../../pages/nickname-invitation/nickname
 import { PostData } from '../../providers/post-data';
 import { PartiData } from '../../providers/parti-data';
 import { MemberData } from '../../providers/member-data';
+import { MembersPage } from '../../pages/members/members';
 
 @Component({
   selector: 'page-parti-home',
@@ -34,6 +36,7 @@ export class PartiHomePage {
     private navParams: NavParams,
     private events: Events,
     private actionSheetCtrl: ActionSheetController,
+    private modalCtrl: ModalController,
     private partiData: PartiData,
     private postData: PostData,
     private memberData: MemberData
@@ -155,5 +158,10 @@ export class PartiHomePage {
       ]
     });
     actionSheet.present();
+  }
+
+  onClickMember() {
+    let profileModal = this.modalCtrl.create(MembersPage, { parti: this.parti });
+    profileModal.present();
   }
 }

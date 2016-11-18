@@ -30,6 +30,7 @@ import { NicknameInvitationPage } from '../pages/nickname-invitation/nickname-in
 import { OpeningPage } from '../pages/opening/opening';
 import { IntroPage } from '../pages/intro/intro';
 import { DevPage } from '../pages/dev/dev';
+import { MembersPage } from '../pages/members/members';
 
 import { PartiEnvironment } from '../config/constant';
 import { PartiData } from '../providers/parti-data';
@@ -71,6 +72,7 @@ moment.locale('ko');
     OpeningPage,
     IntroPage,
     DevPage,
+    MembersPage,
     PartiPostBylineComponent,
     PartiPostPanelComponent,
     PartiUpvoteButton,
@@ -100,7 +102,8 @@ moment.locale('ko');
     NicknameInvitationPage,
     OpeningPage,
     IntroPage,
-    DevPage
+    DevPage,
+    MembersPage
   ],
   providers: [
     PartiEnvironment,

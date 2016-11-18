@@ -1,0 +1,10 @@
+%ion-header
+  %ion-toolbar
+    %ion-title Members
+    %ion-buttons{ 'start': true}
+      %button{ 'ion-button': true, '(click)': 'dismiss()' }
+        닫기
+%ion-content{ 'padding': true }
+  %ion-list
+    %ion-item{ '*ngFor': 'let member of members' }
+      %span {{ member.user.nickname }}

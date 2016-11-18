@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 
 import { ApiHttp } from '../providers/api-http'
 import { Parti } from '../models/parti'
+import { Member } from '../models/member'
 
 @Injectable()
 export class MemberData {
@@ -19,5 +20,10 @@ export class MemberData {
   cancel(parti: Parti): Observable<void> {
     return this.http.delete(`/api/v1/parties/${parti.slug}/members`)
       .map(res => {});
+  }
+
+  allOfParti(parti: Parti): Observable<Member[]> {
+    return this.http.get(`/api/v1/parties/${parti.slug}/members`)
+      .map(res => <Member[]>(res.json().members));
   }
 }

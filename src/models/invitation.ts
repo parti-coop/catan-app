@@ -4,7 +4,7 @@ import { Post } from '../models/post';
 
 export interface Invitation {
   id: number;
-  parti: Post;
+  parti: Parti;
   user: User;
   recipient: User;
 }
