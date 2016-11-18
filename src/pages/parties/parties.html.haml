@@ -76,27 +76,5 @@
           .tag #정치
           .tag #노동
       .parti-list
-        %ion-list
-          %template{'[ngIf]': '!parties["all"]'}
-            %ion-item{ 'text-center': true }
-              %ion-spinner
-          %template{'[ngIf]': '!!parties["all"]'}
-            %ion-item{ '*ngFor': 'let parti of parties["all"]', '(click)': 'onClickParti(parti)' }
-              .parti-item
-                .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }
-                .parti-body
-                  .parti-title {{ parti.title }}
-                  .parti-info
-                    .parti-info--members
-                      멤버 {{ parti.members_count }}명
-                    .parti-info--posts
-                      게시글 {{ parti.posts_count }}개
-                %template{ '[ngIf]': '!parti.is_member' }
-                  .parti-join-btn
-                    %button{ 'ion-button': true }
-                      가입
-                %template{ '[ngIf]': 'parti.is_member && !parti.is_made_by' }
-                  .parti-joined-btn
-                    %ion-icon{ name: 'checkmark' }
-                %template{ '[ngIf]': 'parti.is_made_by' }
+        %parti-list{ '[parties]': 'parties["all"]' }
 

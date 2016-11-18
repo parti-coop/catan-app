@@ -11,6 +11,7 @@ import { PartiDateTimeFormatObservablePipe } from '../pipes/parti-datetime-forma
 import { PartiPostPanelComponent } from '../components/parti-post-panel/parti-post-panel';
 import { PartiPostBylineComponent } from '../components/parti-post-byline/parti-post-byline';
 import { PartiUpvoteButton } from '../components/parti-upvote-button/parti-upvote-button';
+import { PartiList } from '../components/parti-list/parti-list';
 
 import { KeyboardAttachDirective } from '../directives/keyboard-attach';
 
@@ -76,6 +77,7 @@ moment.locale('ko');
     PartiPostBylineComponent,
     PartiPostPanelComponent,
     PartiUpvoteButton,
+    PartiList,
     PartiSimpleFormatPipe,
     KeyboardAttachDirective,
     PartiDateTimeFormatObservablePipe

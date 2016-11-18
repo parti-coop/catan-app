@@ -41,23 +41,22 @@
     </ion-slide>
     <ion-slide class='slide2'>
       <div class='opening-header'>
-        <h2>{{ myselfData.nickname }}님, 빠띠를 선택해 보세요.</h2>
+        {{ myselfData.nickname }}님께
+        <br>
+        어울리는 추천 빠띠입니다.
       </div>
       <div class='opening-body'>
         <div *ngIf='!parties' class='spinner-center-wrapper'>
           <ion-spinner></ion-spinner>
         </div>
-        <ion-grid>
-          <ion-row wrap>
-            <ion-col *ngFor='let parti of parties' width-50>
-              <div (click)='onClickParti(parti)' [class.joined]='parti.is_member' [class.pending]='parti.pending'>
-                <ion-icon *ngIf='!parti.is_member' name='ios-square-outline'></ion-icon>
-                <ion-icon *ngIf='parti.is_member' name='ios-checkbox-outline'></ion-icon>
-                {{ parti.title }}
-              </div>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+        <parti-list [parties]='parties'></parti-list>
+        <!-- %ion-grid -->
+        <!-- %ion-row{ 'wrap': true } -->
+        <!-- %ion-col{ '*ngFor': 'let parti of parties', 'width-50': true } -->
+        <!-- %div{ '(click)': 'onClickParti(parti)', '[class.joined]': 'parti.is_member', '[class.pending]': 'parti.pending' } -->
+        <!-- %ion-icon{ 'name': 'ios-square-outline', '*ngIf': '!parti.is_member'} -->
+        <!-- %ion-icon{ 'name': 'ios-checkbox-outline', '*ngIf': 'parti.is_member'} -->
+        <!-- {{ parti.title }} -->
       </div>
     </ion-slide>
   </ion-slides>
