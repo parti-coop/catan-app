@@ -31,7 +31,7 @@ export class PartiesPage {
   }
 
   ionViewDidLoad() {
-    for (let key of ['joinedOnly', 'making', 'all']) {
+    for (let key of ['joined', 'all']) {
       if(!this.parties[key]) {
         this.partiData[key]()
           .subscribe((parties: Parti[]) => {
@@ -66,13 +66,13 @@ export class PartiesPage {
   listenToMemberEvents() {
     this.events.subscribe('parti:join', (data) => {
       let parti: Parti = <Parti>data[0];
-      if (!_.includes(this.parties['joinedOnly'], {id: parti.id})) {
-        this.parties['joinedOnly'].unshift(parti);
+      if (!_.includes(this.parties['joined'], {id: parti.id})) {
+        this.parties['joined'].unshift(parti);
       }
     });
     this.events.subscribe('parti:cancel', (data) => {
       let parti: Parti = <Parti>data[0];
-      _.remove(this.parties['joinedOnly'], { id: parti.id });
+      _.remove(this.parties['joined'], { id: parti.id });
       _.remove(this.parties['making'], { id: parti.id });
     });
   }

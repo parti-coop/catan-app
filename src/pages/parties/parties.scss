@@ -130,8 +130,15 @@ page-parties {
         flex-flow: column;
         justify-content: center;
         .parti-title {
+          display: flex;
           font-size: $font-size-base;
-          color: $gray-darker;
+          &--title {
+            color: $gray-darker;
+          }
+          &--maker {
+            color: $brand-primary-dark;
+            margin-left: 6px;
+          }
         }
         .parti-info {
           display: flex;

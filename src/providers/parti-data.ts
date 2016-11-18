@@ -17,6 +17,11 @@ export class PartiData {
       .map(res => <Parti[]>(res.json().parties));
   }
 
+  joined(): Observable<Parti[]> {
+    return this.http.get('/api/v1/parties/joined')
+      .map(res => <Parti[]>(res.json().parties));
+  }
+
   making(): Observable<Parti[]> {
     return this.http.get('/api/v1/parties/making')
       .map(res => <Parti[]>(res.json().parties));
