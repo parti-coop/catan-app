@@ -30,7 +30,7 @@
         </template>
         <template [ngIf]='parti.is_member &amp;&amp; !parti.is_made_by'>
           <div class='parti-joined-btn'>
-            <ion-icon name='checkmark'></ion-icon>
+            <ion-icon (click)='onClickCancelParti(parti)' name='checkmark'></ion-icon>
           </div>
         </template>
         <template [ngIf]='parti.is_made_by'></template>

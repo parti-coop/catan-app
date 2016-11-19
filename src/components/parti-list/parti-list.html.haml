@@ -20,5 +20,5 @@
               가입
         %template{ '[ngIf]': 'parti.is_member && !parti.is_made_by' }
           .parti-joined-btn
-            %ion-icon{ name: 'checkmark' }
+            %ion-icon{ name: 'checkmark', '(click)': 'onClickCancelParti(parti)' }
         %template{ '[ngIf]': 'parti.is_made_by' }

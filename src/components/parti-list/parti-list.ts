@@ -38,4 +38,17 @@ export class PartiList {
         toast.present();
       });
   }
+
+  onClickCancelParti(parti: Parti) {
+    this.memberData.cancel(parti)
+      .subscribe(() => {
+        parti.is_member = false;
+        this.events.publish('parti:cancel', parti);
+        let toast = this.toastCtrl.create({
+          message: '탈퇴되었습니다.',
+          duration: 3000
+        });
+        toast.present();
+      });
+  }
 }
