@@ -8,14 +8,16 @@
     <ion-item *ngFor='let parti of parties'>
       <div class='parti-item'>
         <div [ngStyle]="{ 'background-image': 'url(' + parti.logo_url + ')' }" class='parti-logo'></div>
-        <div (click)='onClickParti(parti)' class='parti-body'>
-          <div class='parti-title'>{{ parti.title }}</div>
-          <div class='parti-info'>
-            <div class='parti-info--members'>
-              멤버 {{ parti.members_count }}명
-            </div>
-            <div class='parti-info--posts'>
-              게시글 {{ parti.posts_count }}개
+        <div class='parti-body'>
+          <div (click)='onClickParti(parti)'>
+            <div class='parti-title'>{{ parti.title }}</div>
+            <div class='parti-info'>
+              <div class='parti-info--members'>
+                멤버 {{ parti.members_count }}명
+              </div>
+              <div class='parti-info--posts'>
+                게시글 {{ parti.posts_count }}개
+              </div>
             </div>
           </div>
         </div>

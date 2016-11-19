@@ -6,13 +6,14 @@
     %ion-item{ '*ngFor': 'let parti of parties' }
       .parti-item
         .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }
-        .parti-body{'(click)': 'onClickParti(parti)'}
-          .parti-title {{ parti.title }}
-          .parti-info
-            .parti-info--members
-              멤버 {{ parti.members_count }}명
-            .parti-info--posts
-              게시글 {{ parti.posts_count }}개
+        .parti-body
+          %div{'(click)': 'onClickParti(parti)'}
+            .parti-title {{ parti.title }}
+            .parti-info
+              .parti-info--members
+                멤버 {{ parti.members_count }}명
+              .parti-info--posts
+                게시글 {{ parti.posts_count }}개
         %template{ '[ngIf]': '!parti.is_member' }
           .parti-join-btn
             %button{ 'ion-button': true, '(click)': 'onClickJoinParti(parti)' }
