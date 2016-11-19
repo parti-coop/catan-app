@@ -1,13 +1,13 @@
 page-intro {
   background-color: #966fd6;
   color: $background-color;
-  .intro-slide {
+  ion-slide {
     .slide-zoom {
       justify-content: space-between;
       display: flex;
       flex-direction: column;
+      margin-bottom: 142px;
       .intro-logo {
-        margin-top: 114px;
         img {
           width: 114px;
         }
@@ -18,20 +18,52 @@ page-intro {
         font-weight: bold;
         line-height: 38px;
       }
-      .intro-button {
-        margin-top: 166px;
-        button {
-          color: $brand-primary-dark;
-          font-size: $font-size-base;
-          font-weight: bold;
-          padding: 12px 105px;
-        }
+
+    }
+  }
+  .intro-slide1 {
+    background-image: url('../../../assets/images/intro01.png');
+  }
+  .intro-slide2 {
+    background-image: url('../../../assets/images/intro02.png');
+  }
+  .intro-slide3 {
+    background-image: url('../../../assets/images/intro03.png');
+  }
+  .intro-slide4 {
+    background-image: url('../../../assets/images/intro04.png');
+  }
+
+  .intro-slide-sub {
+    .slide-zoom {
+      .intro-title {
+        font-size: $font-size-base;
+        font-weight: normal;
+        line-height: 20px;
       }
+    }
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .intro-button {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 34px;
+    text-align: center;
+    z-index: 999;
+    button {
+      color: $brand-primary-dark;
+      font-size: $font-size-base;
+      font-weight: bold;
+      padding: 12px 105px;
     }
   }
 
   .swiper-pagination {
-    bottom: 134px !important;
+    bottom: 102px !important;
     .swiper-pagination-bullet {
       background-color: #fff;
     }
