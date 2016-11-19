@@ -23,6 +23,7 @@ parti-post-panel {
   .parti-title {
     display: inline-block;
     color: $brand-primary;
+    width: 80%;
   }
   .parti-group {
     color: $brand-primary;
@@ -60,6 +61,13 @@ parti-post-panel {
     border-top: 1px solid $gray-lighter;
     color: $gray;
     font-size: $font-size-small;
+    text-align: center;
+    .comment-button {
+      width: 33%;
+    }
+    parti-share-button {
+      width: 33%;
+    }
   }
   .post-video-reference,
   .post-link-reference {
