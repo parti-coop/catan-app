@@ -4,6 +4,7 @@ import { Comment } from '../models/comment';
 import { LinkSource } from '../models/link-source';
 import { FileSource } from '../models/file-source';
 import { Poll } from '../models/poll';
+import { Share } from '../models/share';
 
 export interface Post {
   id: number;
@@ -19,4 +20,5 @@ export interface Post {
   link_reference: LinkSource;
   file_reference: FileSource;
   poll: Poll;
+  share: Share;
 }
