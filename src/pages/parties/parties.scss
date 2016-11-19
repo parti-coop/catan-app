@@ -1,4 +1,9 @@
 page-parties {
+  ion-scroll .scroll-x{
+      white-space: nowrap;
+      height: 45px;
+      background-color: #fff;
+  }
   .parti-header{
     padding: 26px 16px 0px;
     ion-title {
@@ -67,6 +72,9 @@ page-parties {
       .tag:first-child,
       .group:first-child {
         margin: 0;
+      }
+      .group:last-child {
+        margin-right: 12px;
       }
       .tag {
         color: $brand-primary-dark;

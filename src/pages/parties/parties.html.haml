@@ -17,9 +17,10 @@
     %ion-scroll.full{ scrollY: 'true' }
       .select-tag-or-group-panel
         %p 내 그룹
-        .groups
-          .group 나는 알아야겠당
-          .group 세상을 바꾸는 꿈 - 바꿈
+        %ion-scroll{ scrollX: 'true' }
+          .groups
+            .group{ '*ngFor': 'let group of groups' }
+              {{group.name}}
       .parti-list
         %ion-list
           %ion-item-group
@@ -52,11 +53,10 @@
     %ion-scroll.full{ scrollY: 'true' }
       .select-tag-or-group-panel
         %p 관심있는 태그를 선택해 보세요
-        .tags
-          .tag #우주당
-          .tag #기본소득
-          .tag #정치
-          .tag #노동
+        %ion-scroll{ scrollX: 'true' }
+          .tags
+            .tag{ '*ngFor': 'let tag of tags' }
+              # {{tag.name}}
       .parti-list
         %parti-list{ '[parties]': 'parties["all"]' }
 

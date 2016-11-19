@@ -35,6 +35,7 @@ import { MembersPage } from '../pages/members/members';
 
 import { PartiEnvironment } from '../config/constant';
 import { PartiData } from '../providers/parti-data';
+import { GroupData } from '../providers/group-data';
 import { MyselfData } from '../providers/myself-data';
 import { PostData } from '../providers/post-data';
 import { CommentData } from '../providers/comment-data';
@@ -115,6 +116,7 @@ moment.locale('ko');
     UpvoteData,
     VotingData,
     PartiData,
+    GroupData,
     MessageData,
     MemberData,
     InvitationData,

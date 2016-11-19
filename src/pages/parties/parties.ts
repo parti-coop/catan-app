@@ -1,17 +1,23 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController, Events } from 'ionic-angular';
+import { NavController, ToastController, Events, Platform } from 'ionic-angular';
+import { InAppBrowser } from 'ionic-native';
 
 import 'rxjs/add/operator/finally';
 
 import _ from 'lodash';
 
 import { Parti } from '../../models/parti';
+import { Group } from '../../models/group';
 import { PartiEnvironment } from '../../config/constant';
 import { PartiData } from '../../providers/parti-data';
 import { MemberData } from '../../providers/member-data';
+import { TagData } from '../../providers/tag-data';
+import { GroupData } from '../../providers/group-data';
 import { PartiHomePage } from '../../pages/parti-home/parti-home';
-import { Platform } from 'ionic-angular';
-import { InAppBrowser } from 'ionic-native';
+
+export interface Tag {
+  name: string;
+}
 
 @Component({
   selector: 'page-parties',
@@ -20,6 +26,8 @@ import { InAppBrowser } from 'ionic-native';
 export class PartiesPage {
   parties: { [id: string] : Parti[]; } = {};
   selection: string = 'joined';
+  groups: Group[];
+  tags: Tag[];
 
   constructor(
     public navCtrl: NavController,
@@ -27,7 +35,9 @@ export class PartiesPage {
     private events: Events,
     private platform: Platform,
     private toastCtrl: ToastController,
+    private tagData: TagData,
     private partiData: PartiData,
+    private groupData: GroupData,
     private memberData: MemberData
   ) {
     this.listenToMemberEvents();
@@ -46,6 +56,12 @@ export class PartiesPage {
           });
       }
     }
+    this.groupData.joined().subscribe((groups: Group[]) => {
+      this.groups = groups;
+    });
+    this.tagData.mostUsedOnParties(100).subscribe((tagNames: string[]) => {
+      this.tags = _.map(tagNames, (tagName) => <Tag>({ name: tagName}));
+    });
   }
 
   partiesMakingCount() {
