@@ -13,6 +13,9 @@
         <div class='parti-panel'>
           <div [ngStyle]="{ 'background-image': 'url(' + parti.logo_url + ')' }" class='parti-logo'></div>
           <div class='parti-title'>{{ parti.title }}</div>
+          <div class='parti-share'>
+            <ion-icon (click)='onClickShare()' name='md-share'></ion-icon>
+          </div>
           <div class='parti-description'>
             {{ parti.body }}
           </div>

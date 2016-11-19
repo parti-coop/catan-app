@@ -10,6 +10,8 @@
         .parti-panel
           .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }
           .parti-title {{ parti.title }}
+          .parti-share
+            %ion-icon{ name: 'md-share', '(click)': 'onClickShare()' }
           .parti-description
             {{ parti.body }}
           .parti-info

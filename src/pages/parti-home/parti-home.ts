@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams,
   InfiniteScroll, ToastController, PopoverController, Events,
-  ActionSheetController, ModalController } from 'ionic-angular';
+  ActionSheetController, ModalController, AlertController } from 'ionic-angular';
+import { Facebook, SocialSharing, InAppBrowser, AppAvailability, Device } from 'ionic-native';
 
 import 'rxjs/add/operator/mergeMap';
 
@@ -14,6 +15,8 @@ import { PostData } from '../../providers/post-data';
 import { PartiData } from '../../providers/parti-data';
 import { MemberData } from '../../providers/member-data';
 import { MembersPage } from '../../pages/members/members';
+
+declare var KakaoTalk;
 
 @Component({
   selector: 'page-parti-home',
@@ -37,6 +40,7 @@ export class PartiHomePage {
     private events: Events,
     private actionSheetCtrl: ActionSheetController,
     private modalCtrl: ModalController,
+    private alertCtrl: AlertController,
     private partiData: PartiData,
     private postData: PostData,
     private memberData: MemberData
@@ -136,7 +140,7 @@ export class PartiHomePage {
     }
 
     let actionSheet = this.actionSheetCtrl.create({
-      title: `${this.parti.title} 초대합니다`,
+      title: `${this.parti.title}에 초대합니다`,
       buttons: [
         {
           text: '이메일로 초대',
@@ -156,6 +160,112 @@ export class PartiHomePage {
           }
         }
       ]
+    });
+    actionSheet.present();
+  }
+
+  onClickShare() {
+    if(!this.parti) {
+      return;
+    }
+
+    let successHandler = () => {
+      let toast = this.toastCtrl.create({
+        message: '공유되었습니다.',
+        duration: 3000
+      });
+      toast.present();
+    }
+    let failHandler = (error) => {
+      if(error['errorMessage'] == 'User cancelled dialog') {
+        return;
+      }
+      let alert = this.alertCtrl.create({
+        title: '오류',
+        subTitle: '아! 뭔가 잘못되었습니다.',
+        buttons: ['확인']
+      });
+      alert.present();
+    }
+
+    let share = this.parti.share;
+    let actionSheet = this.actionSheetCtrl.create({
+      buttons: [{
+          text: '페이스북으로 공유',
+          handler: () => {
+            SocialSharing.shareViaFacebook("", "", share.url)
+              .then(successHandler)
+              .catch(() => {
+                Facebook.showDialog({
+                  method: "share",
+                  href: share.url
+                }).then(successHandler).catch(failHandler);
+              });
+          }
+        },{
+          text: '트위터로 공유',
+          handler: () => {
+            SocialSharing.shareViaTwitter(share.twitter_text, "", share.url)
+              .then(successHandler)
+              .catch(() => {
+                let text = share.twitter_text;
+                let tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(share.url)}`
+                let browser = new InAppBrowser(tweetUrl, "_blank");
+              });
+          }
+        },{
+          text: '카카오톡으로 공유',
+          handler: () => {
+            var app = null;
+            if (Device.device.platform === 'iOS') {
+              app = 'kakaolink://';
+            } else if (Device.device.platform === 'Android') {
+              app = 'com.kakao.talk';
+            }
+
+            AppAvailability.check(app).then(
+              (yes: boolean) => {
+                var data = {
+                  text: share.kakaotalk_text,
+                  weblink: {
+                    url: share.url,
+                    text: share.kakaotalk_link_text,
+                  },
+                  applink: {
+                    url: share.url,
+                    text: share.kakaotalk_link_text,
+                  }
+                };
+                if(!!share.kakaotalk_image_url && !!share.kakaotalk_image_width && !!share.kakaotalk_image_height) {
+                  data["image"] = {
+                    src: share.kakaotalk_image_url,
+                    width: share.kakaotalk_image_width,
+                    height: share.kakaotalk_image_height,
+                  };
+                }
+                data
+                KakaoTalk.share(data,
+                  (success) => successHandler,
+                  (error) => failHandler);
+              },
+              () => {
+                console.log("XXX");
+                let alert = this.alertCtrl.create({
+                  title: '확인',
+                  subTitle: `카카오톡 앱이 없습니다.`,
+                  buttons: ['확인']
+                });
+                alert.present();
+              }
+            );
+          }
+        },{
+          text: '취소',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }]
     });
     actionSheet.present();
   }

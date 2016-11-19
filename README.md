@@ -131,6 +131,13 @@ $ PARTI_ENV=development-proxy gulp reset
 $ PARTI_ENV=development-proxy gulp settings
 ```
 
+### 개발을 위한 실제 android device에 띄우기
+
+```
+$ PARTI_ENV=development gulp settings
+$ ionic run android
+```
+
 ### 개발 중에 화면 디버깅
 
 https://ionicframework.com/docs/v2/resources/developer-tips/#debugging-ios-safari

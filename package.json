@@ -63,7 +63,10 @@
     "cordova-plugin-inappbrowser",
     "cordova-plugin-file-transfer",
     "cordova-plugin-file-opener2",
+    "cordova-plugin-x-socialsharing",
     "cordova-plugin-network-information",
+    "cordova-plugin-fcm",
+    "cordova-plugin-appavailability",
     {
       "id": "ionic-plugin-deeplinks",
       "locator": "ionic-plugin-deeplinks",

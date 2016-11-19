@@ -62,7 +62,8 @@ gulp.task('reset', ['settings'], function() {
     + ' && '
     + `cp -rf ./settings/resources/google-services.${configVariables.constants.env}.json ./platforms/android/google-services.json`
     + ' && '
-    + 'ionic plugin add cordova-plugin-fcm';
+    + 'ionic plugin add https://github.com/taejaehan/cordova-kakaotalk.git --variable KAKAO_APP_KEY='
+    + configVariables.constants.kakaoKey;
   if(!configVariables.useProxy) {
     cmd = cmd
       + ' && '

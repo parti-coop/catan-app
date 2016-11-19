@@ -13,7 +13,7 @@
   <% if (useProxy) { %>
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: http: ws: data:; style-src 'self' 'unsafe-inline'; script-src 'self' http: https: 'unsafe-inline' 'unsafe-eval'">
   <% } else { %>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: http: data:; style-src 'self' 'unsafe-inline'; script-src 'self' https: 'unsafe-inline' 'unsafe-eval'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: http: data:; style-src 'self' 'unsafe-inline'; script-src 'self' https: 'unsafe-inline' 'unsafe-eval' http:">
   <% } %>
   <!-- un-comment this code to enable service worker
   <script>

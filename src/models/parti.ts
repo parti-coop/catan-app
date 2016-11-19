@@ -1,4 +1,5 @@
 import { Group } from '../models/group';
+import { Share } from '../models/share';
 
 export interface Parti {
   id: number;
@@ -14,4 +15,5 @@ export interface Parti {
   posts_count: number;
   is_member: boolean;
   is_made_by: boolean;
+  share: Share;
 }

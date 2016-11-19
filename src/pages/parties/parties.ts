@@ -73,7 +73,7 @@ export class PartiesPage {
   }
 
   onClickParti(parti: Parti) {
-    this.navCtrl.push(PartiHomePage, { parti: parti });
+    this.navCtrl.push(PartiHomePage, { parti: parti }, {'animate':false});
   }
 
   onClickJoinParti(parti: Parti) {
