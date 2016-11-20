@@ -62,6 +62,12 @@ export class PartiPostPanelComponent {
     return this.post.comments_count > 0;
   }
 
+  onClickPostContent() {
+    this.navCtrl.push(PostPage, {
+      post: this.post
+    });
+  }
+
   onClickCommentButton() {
     this.navCtrl.push(PostPage, {
       post: this.post,

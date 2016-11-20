@@ -1,7 +1,15 @@
 %ion-header
   %ion-navbar
-    %ion-title {{ postBodyOrTitle() }}
-%ion-content{ 'padding': true, '#content': true }
+    %ion-title
+      .parti-info
+        .parti-title {{ post.parti.title }}
+        .parti-group{ '*ngIf': 'post.parti.group' }
+          <
+          {{ post.parti.group.name }}
+      .parti-home-link{'(click)': 'onClickParti(post.parti)'}
+        빠띠 보기
+
+%ion-content{ '#content': true }
   %parti-post-panel{ '[post]': 'post', '[isCollection]': 'false' }
 
 %ion-footer{ '[keyboardAttach]': 'content' }

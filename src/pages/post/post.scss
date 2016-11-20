@@ -1,4 +1,36 @@
 page-post {
+  ion-header {
+    ion-navbar {
+      height: 42px !important;
+      padding-bottom: 0 !important;
+      min-height: 0 !important;
+    }
+    ion-title {
+      text-align: center;
+      .parti-info {
+        font-size: $font-size-large;
+        color: $gray-dark;
+        display: inline-block;
+        font-weight: bold;
+        max-width: 72%;
+        overflow: hidden;
+        vertical-align: text-bottom;
+
+        .parti-title {
+          display: inline-block;
+        }
+        .parti-group {
+          display: inline-block;
+        }
+      }
+      .parti-home-link {
+        font-size: $font-size-base;
+        color: $gray-light;
+        float: right;
+        margin-top: 6px;
+      }
+    }
+  }
   .scroll-content {
     //height: 100%;
   }

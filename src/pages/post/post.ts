@@ -3,11 +3,13 @@ import { Platform, Content, NavController, NavParams, TextArea, LoadingControlle
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Keyboard } from 'ionic-native';
 import { Subscription } from 'rxjs/rx';
+import { Parti } from '../../models/parti';
 
 import { CommentData } from '../../providers/comment-data';
 
 import { Post } from '../../models/post';
 import { Comment } from '../../models/comment';
+import { PartiHomePage } from '../../pages/parti-home/parti-home';
 
 @Component({
   selector: 'page-post',
@@ -98,5 +100,9 @@ export class PostPage {
     }
 
     return this.post.parsed_title || this.post.parsed_body;
+  }
+
+  onClickParti(parti: Parti) {
+    this.navCtrl.push(PartiHomePage, { parti: parti });
   }
 }

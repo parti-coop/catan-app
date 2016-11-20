@@ -1,9 +1,20 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{ postBodyOrTitle() }}</ion-title>
+    <ion-title>
+      <div class='parti-info'>
+        <div class='parti-title'>{{ post.parti.title }}</div>
+        <div *ngIf='post.parti.group' class='parti-group'>
+          <
+          {{ post.parti.group.name }}
+        </div>
+      </div>
+      <div (click)='onClickParti(post.parti)' class='parti-home-link'>
+        빠띠 보기
+      </div>
+    </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content #content padding>
+<ion-content #content>
   <parti-post-panel [isCollection]='false' [post]='post'></parti-post-panel>
 </ion-content>
 <ion-footer [keyboardAttach]='content'>

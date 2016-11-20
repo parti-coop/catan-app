@@ -1,16 +1,18 @@
-<div class='post-parti'>
+<div *ngIf='isCollection' class='post-parti'>
   <div [ngStyle]="{ 'background-image': 'url(' + post.parti.logo_url + ')' }" class='parti-logo'></div>
-  <div class='parti-title'>{{ post.parti.title }}</div>
-  <div *ngIf='post.parti.group' class='parti-group'>
-    <
-    {{ post.parti.group.name }}
+  <div class='parti-info'>
+    <div class='parti-title'>{{ post.parti.title }}</div>
+    <div *ngIf='post.parti.group' class='parti-group'>
+      <
+      {{ post.parti.group.name }}
+    </div>
   </div>
 </div>
 <div class='post-head'>
   <parti-post-byline [post]='post'></parti-post-byline>
 </div>
-<div [innerHTML]='post.parsed_title | partiSimpleFormat' class='post-title'></div>
-<div [innerHTML]='post.parsed_body | partiSimpleFormat' class='post-body'></div>
+<div (click)='onClickPostContent()' [innerHTML]='post.parsed_title | partiSimpleFormat' class='post-title'></div>
+<div (click)='onClickPostContent()' [innerHTML]='post.parsed_body | partiSimpleFormat' class='post-body'></div>
 <div (click)='onClickLinkReference(post.link_reference)' *ngIf='!!post.link_reference &amp;&amp; !post.link_reference.is_video' class='post-link-reference'>
   <div class='link-reference-image-wrapper'>
     <div [ngStyle]="{ 'background-image': 'url(' + post.link_reference.image_url + ')' }" class='link-reference-image'></div>
@@ -88,9 +90,9 @@
     투표하면 결과를 볼 수 있습니다.
   </div>
 </div>
-<div *ngIf='isCollection' class='post-buttons'>
+<div class='post-buttons'>
   <parti-upvote-button [post]='post'></parti-upvote-button>
-  <span (click)='onClickCommentButton()' class='comment-button'>
+  <span (click)='onClickCommentButton()' *ngIf='isCollection' class='comment-button'>
     <ion-icon name='chatbubbles'></ion-icon>
     댓글달기
   </span>

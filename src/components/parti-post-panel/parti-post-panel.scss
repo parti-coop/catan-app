@@ -1,10 +1,10 @@
 parti-post-panel {
   display: block;
-  background-color: $gray-lighter;
-  padding: 6px 6px 12px;
+  background-color: $background-color;
+  padding: 6px 6px 0;
   .post-parti {
     border-bottom: 1px solid #d2d2d2;
-    padding: 0 12px 6px;
+    padding: 0 6px 6px;
 
     .parti-logo {
       display: inline-block;
@@ -13,20 +13,23 @@ parti-post-panel {
       border-radius: 2px;
       @include background-thumbnail();
     }
+    .parti-info {
+      display: inline-block;
+      width: 80%;
+      .parti-title {
+        display: inline-block;
+        color: $brand-primary;
+      }
+      .parti-group {
+        color: $brand-primary;
+      }
+    }
   }
   .post-head {
     padding: 12px 6px 0;
   }
   .parti-group {
     display: inline-block;
-  }
-  .parti-title {
-    display: inline-block;
-    color: $brand-primary;
-    width: 80%;
-  }
-  .parti-group {
-    color: $brand-primary;
   }
   .post-title {
     font-size: $font-size-large;
@@ -193,20 +196,23 @@ parti-post-panel {
     }
   }
   .post-footer {
-    padding: 12px 0 0;
+    padding: 12px 6px 0;
     border-top: 1px solid $gray-less-lighter;
     color: $gray-light;
+    background-color: $gray-lightest;
+    margin-left: -6px;
+    margin-right: -6px;
     .post-reaction-info {
       font-size: $font-size-small;
-      padding: 0 12px;
+      padding: 0 12px 12px;
       .post-comments-count {
         padding-left: 14px;
       }
     }
 
     .post-comments {
-      margin-top: 12px;
       padding: 12px 6px;
+      border-top: 1px solid $gray-lighter;
       .comment {
         &:first-child {
           border-top: none;

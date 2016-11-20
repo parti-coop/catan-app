@@ -1,13 +1,14 @@
-.post-parti
+.post-parti{ '*ngIf': 'isCollection' }
   .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + post.parti.logo_url + ')' }" }
-  .parti-title {{ post.parti.title }}
-  .parti-group{ '*ngIf': 'post.parti.group' }
-    <
-    {{ post.parti.group.name }}
+  .parti-info
+    .parti-title {{ post.parti.title }}
+    .parti-group{ '*ngIf': 'post.parti.group' }
+      <
+      {{ post.parti.group.name }}
 .post-head
   %parti-post-byline{ '[post]': 'post' }
-.post-title{ '[innerHTML]': "post.parsed_title | partiSimpleFormat" }
-.post-body{ '[innerHTML]': "post.parsed_body | partiSimpleFormat" }
+.post-title{ '[innerHTML]': "post.parsed_title | partiSimpleFormat", '(click)': 'onClickPostContent()' }
+.post-body{ '[innerHTML]': "post.parsed_body | partiSimpleFormat", '(click)': 'onClickPostContent()' }
 .post-link-reference{ '(click)': 'onClickLinkReference(post.link_reference)', '*ngIf': '!!post.link_reference && !post.link_reference.is_video' }
   .link-reference-image-wrapper
     .link-reference-image{ '[ngStyle]': "{ 'background-image': 'url(' + post.link_reference.image_url + ')' }" }
@@ -64,9 +65,9 @@
     명이 투표했습니다.
     %br
     투표하면 결과를 볼 수 있습니다.
-.post-buttons{ '*ngIf': 'isCollection' }
+.post-buttons
   %parti-upvote-button{ '[post]': 'post' }
-  %span.comment-button{ '(click)': 'onClickCommentButton()' }
+  %span.comment-button{ '*ngIf': 'isCollection', '(click)': 'onClickCommentButton()' }
     %ion-icon{ name: 'chatbubbles' }
     댓글달기
   %span.parti-share-button{ '(click)': 'onClickShare()' }
