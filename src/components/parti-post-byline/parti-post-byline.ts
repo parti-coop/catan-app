@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
+import { NavController } from 'ionic-angular';
+
 import { Post } from '../../models/post';
+import { ProfilePage } from '../../pages/profile/profile';
 
 @Component({
   selector: 'parti-post-byline',
@@ -9,5 +12,11 @@ export class PartiPostBylineComponent {
   @Input()
   post: Post;
 
-  constructor() {}
+  constructor(
+    private navCtrl: NavController
+  ) {}
+
+  onClickUser() {
+    this.navCtrl.push(ProfilePage, { user: this.post.user });
+  }
 }

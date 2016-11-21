@@ -3,10 +3,11 @@ import { RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
-import { ApiHttp } from '../providers/api-http'
-import { Post } from '../models/post'
-import { Parti } from '../models/parti'
-import { InfinitPage } from '../models/infinit-page'
+import { ApiHttp } from '../providers/api-http';
+import { Post } from '../models/post';
+import { Parti } from '../models/parti';
+import { User } from '../models/user';
+import { InfinitPage } from '../models/infinit-page';
 
 @Injectable()
 export class PostData {
@@ -17,7 +18,7 @@ export class PostData {
   dashboard(lastPost: Post = null): Observable<InfinitPage<Post>> {
     let requestOptions = new RequestOptions();
     let searchParams = new URLSearchParams();
-    if(lastPost) {
+    if(!!lastPost) {
       searchParams.set('last_id', String(lastPost.id));
       requestOptions.search = searchParams;
     }
@@ -28,11 +29,23 @@ export class PostData {
   parti(parti: Parti, lastPost: Post = null): Observable<InfinitPage<Post>> {
     let requestOptions = new RequestOptions();
     let searchParams = new URLSearchParams();
-    if(lastPost) {
+    if(!!lastPost) {
       searchParams.set('last_id', String(lastPost.id));
       requestOptions.search = searchParams;
     }
     return this.http.get(`/api/v1/parties/${parti.slug}/posts`, requestOptions)
+      .map(res => <InfinitPage<Post>>(res.json()));
+  }
+
+  byUser(user: User, lastPost: Post = null): Observable<InfinitPage<Post>> {
+    let requestOptions = new RequestOptions();
+    let searchParams = new URLSearchParams();
+    searchParams.set('user_id', String(user.id));
+    if(lastPost) {
+      searchParams.set('last_id', String(lastPost.id));
+    }
+    requestOptions.search = searchParams;
+    return this.http.get(`/api/v1/posts/by_user`, requestOptions)
       .map(res => <InfinitPage<Post>>(res.json()));
   }
 

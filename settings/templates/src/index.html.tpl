@@ -25,7 +25,7 @@
   </script>-->
 
   <link href="build/main.css" rel="stylesheet">
-
+  <script src="assets/js/web-animations.min.js"></script>
 </head>
 <body>
 

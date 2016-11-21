@@ -14,6 +14,7 @@ import { PartiUpvoteButton } from '../components/parti-upvote-button/parti-upvot
 import { PartiList } from '../components/parti-list/parti-list';
 
 import { KeyboardAttachDirective } from '../directives/keyboard-attach';
+import { Shrinkage } from '../directives/shrinkage';
 
 import { MorePage } from '../pages/more/more';
 import { HomePage } from '../pages/home/home';
@@ -33,6 +34,7 @@ import { OpeningPage } from '../pages/opening/opening';
 import { IntroPage } from '../pages/intro/intro';
 import { DevPage } from '../pages/dev/dev';
 import { MembersPage } from '../pages/members/members';
+import { ProfilePage } from '../pages/profile/profile';
 
 import { PartiEnvironment } from '../config/constant';
 import { PartiData } from '../providers/parti-data';
@@ -77,12 +79,14 @@ moment.locale('ko');
     IntroPage,
     DevPage,
     MembersPage,
+    ProfilePage,
     PartiPostBylineComponent,
     PartiPostPanelComponent,
     PartiUpvoteButton,
     PartiList,
     PartiSimpleFormatPipe,
     KeyboardAttachDirective,
+    Shrinkage,
     PartiDateTimeFormatObservablePipe
   ],
   imports: [
@@ -109,7 +113,8 @@ moment.locale('ko');
     OpeningPage,
     IntroPage,
     DevPage,
-    MembersPage
+    MembersPage,
+    ProfilePage
   ],
   providers: [
     PartiEnvironment,

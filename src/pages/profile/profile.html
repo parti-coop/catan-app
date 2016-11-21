@@ -1,0 +1,49 @@
+<ion-header (onExtended)='onExtended($event)' (onShrinked)='onShrinked($event)' [scrolls]='[partiesScroll, postsScroll]' [shrinkage]='content' [target]='cover' no-shadow>
+  <ion-navbar no-border>
+    <ion-title (click)='onClickExtendCover()'>
+      <div [@fadeInOut]='titleState' class='title'>
+        {{user.nickname}}
+        <ion-icon name='ios-arrow-dropdown'></ion-icon>
+      </div>
+    </ion-title>
+  </ion-navbar>
+  <ion-toolbar no-border>
+    <div #cover class='cover'>
+      <div [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='user-image'></div>
+      <div class='user-nickname'>{{user.nickname}}</div>
+    </div>
+    <ion-segment [(ngModel)]='selection'>
+      <ion-segment-button value='parties'>
+        내 빠띠
+      </ion-segment-button>
+      <ion-segment-button value='posts'>
+        내 게시물
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div [hidden]="selection !== 'parties'" class='full'>
+    <ion-scroll #partiesScroll class='full' scrollY='true'>
+      <parti-list [parties]='parties'></parti-list>
+    </ion-scroll>
+  </div>
+  <div [hidden]="selection !== 'posts'" class='full'>
+    <ion-scroll #postsScroll class='full' scrollY='true'>
+      <div *ngIf='!posts' class='spinner-center-wrapper'>
+        <ion-spinner></ion-spinner>
+      </div>
+      <template [ngIf]='!!posts'>
+        <ion-item *ngFor='let post of posts'>
+          {{ post.parsed_title }}
+          {{ post.parsed_body }}
+        </ion-item>
+        <template [ngIf]='hasMorePost'>
+          <ion-infinite-scroll #infiniteScroll (ionInfinite)='loadMorePosts($event)'>
+            <ion-infinite-scroll-content loadingSpinner='bubbles'></ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+        </template>
+      </template>
+    </ion-scroll>
+  </div>
+</ion-content>

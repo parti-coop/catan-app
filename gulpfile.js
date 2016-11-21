@@ -9,6 +9,7 @@ var haml = require('gulp-ruby-haml');
 var watch = require('gulp-watch');
 var assign = require('assign-deep');
 var print = require('gulp-print');
+var newer = require('gulp-newer');
 
 let getConfigVariables = function (file, enc) { // file and enc are optional in case you want to modify the file object
   var env = 'development';
@@ -44,16 +45,22 @@ gulp.task('build-haml', function() {
 });
 
 gulp.task('watch-haml', [ 'build-haml' ], function() {
-  gulp.src(HAML_PATH, {read: false})
-    .pipe(watch(HAML_PATH))
-    .pipe(haml({trace: true})
-      .on('error', function(e) { console.log(e.message); }))
-    .pipe(ext.crop())
-    .pipe(print(function(filepath) {
-      return "processing: " + filepath;
-    }))
-    .pipe(gulp.dest(SRC_ROOT));
+  watch([ HAML_PATH ],  function() {
+    gulp.src(HAML_PATH)
+      .pipe(newer({
+        dest: SRC_ROOT,
+        map: function(path) { return path.replace(".html.haml", ".html"); }
+      }))
+      .pipe(print(function(filepath) {
+        return "processing: " + filepath;
+      }))
+      .pipe(haml({trace: true})
+        .on('error', function(e) { console.log(e.message); }))
+      .pipe(ext.crop())
+      .pipe(gulp.dest(SRC_ROOT));
+  });
 });
+
 
 gulp.task('watch-settings', function() {
   watch([ './settings/**/*' ], function() { gulp.start('settings'); });

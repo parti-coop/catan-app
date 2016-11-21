@@ -1,0 +1,25 @@
+page-profile {
+  ion-navbar, ion-toolbar {
+    background-color: $brand-primary;
+    .cover {
+      .user-image {
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+        @include background-thumbnail();
+      }
+    }
+    ion-segment {
+      background-color: $toolbar-background;
+    }
+  }
+
+  .user-cover {
+    .user-image {
+      height: 200px;
+      width: 200px;
+      border-radius: 50%;
+      @include background-thumbnail();
+    }
+  }
+}

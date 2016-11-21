@@ -1,6 +1,6 @@
 .byline{ '*ngIf': 'post' }
   .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + post.user.image_url + ')' }" }
   .byline-info
-    .user-nickname {{ post.user.nickname }}
+    .user-nickname{ '(click)': 'onClickUser()' } {{ post.user.nickname }}
     .post-created-at
       {{ post.created_at | partiDateTimeFormatObservable | async }}

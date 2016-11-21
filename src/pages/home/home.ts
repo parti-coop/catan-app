@@ -19,7 +19,7 @@ export class HomePage {
 
   posts: Post[];
   lastPost: Post;
-  hasMoreData: boolean = true;
+  hasMorePost: boolean = true;
 
   constructor(
     public navCtrl: NavController,
@@ -32,9 +32,7 @@ export class HomePage {
 
   ionViewDidLoad() {
     console.log('home view loading');
-    this.load(() => {
-      this.disableInfiniteScrollIfNoMoreData(this.infiniteScroll);
-    });
+    this.load();
   }
 
   loadMore(infiniteScroll) {
@@ -47,11 +45,11 @@ export class HomePage {
   load(onCompleted: () => void = null) {
     this.postData.dashboard(this.lastPost)
       .finally(() => {
-        if(onCompleted) {
+        if(!!onCompleted) {
           onCompleted();
         }
       }).subscribe(pagedPosts => {
-        this.hasMoreData = pagedPosts.has_more_item;
+        this.hasMorePost = pagedPosts.has_more_item;
         if(this.posts == null) {
           this.posts = [];
         }
@@ -63,7 +61,7 @@ export class HomePage {
   }
 
   private disableInfiniteScrollIfNoMoreData(infiniteScroll) {
-    if(!this.hasMoreData) {
+    if(!this.hasMorePost) {
       infiniteScroll.enable(false);
     }
   }

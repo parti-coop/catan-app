@@ -3,8 +3,9 @@ import { RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
-import { ApiHttp } from '../providers/api-http'
-import { Parti } from '../models/parti'
+import { ApiHttp } from '../providers/api-http';
+import { Parti } from '../models/parti';
+import { User } from '../models/user';
 
 @Injectable()
 export class PartiData {
@@ -17,8 +18,14 @@ export class PartiData {
       .map(res => <Parti[]>(res.json().parties));
   }
 
-  joined(): Observable<Parti[]> {
-    return this.http.get('/api/v1/parties/joined')
+  joined(user: User = null): Observable<Parti[]> {
+    let requestOptions = new RequestOptions();
+    if(!!user) {
+      let searchParams = new URLSearchParams();
+      searchParams.set('user_id', String(user.id));
+      requestOptions.search = searchParams;
+    }
+    return this.http.get('/api/v1/parties/joined', requestOptions)
       .map(res => <Parti[]>(res.json().parties));
   }
 
