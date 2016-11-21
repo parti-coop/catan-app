@@ -68,7 +68,7 @@ gulp.task('settings', function() {
 
 gulp.task('reset', ['settings'], function() {
   let configVariables = getConfigVariables();
-  var cmd = 'ionic state reset'
+  var cmd = 'npm install && ionic state reset'
     + ' && '
     + 'ionic plugin add twitter-connect-plugin --variable FABRIC_KEY='
     + configVariables.secrets.fabricKey
