@@ -37,25 +37,22 @@ let HAML_PATH = SRC_ROOT + '/**/*.html.haml'
 
 gulp.task('build-haml', function() {
   gulp.src(HAML_PATH)
-    .pipe(print(function(filepath) {
-      return "haml: " + filepath;
-    }))
     .pipe(haml({trace: true})
       .on('error', function(e) { console.log(e.message); }))
     .pipe(ext.crop())
-    .pipe(gulp.dest('./src'));
+    .pipe(gulp.dest(SRC_ROOT));
 });
 
-gulp.task('watch-haml', function() {
-  gulp.src(HAML_PATH)
-    .pipe(watch(HAML_PATH, {base: SRC_ROOT}))
-    .pipe(print(function(filepath) {
-      return "haml: " + filepath;
-    }))
+gulp.task('watch-haml', [ 'build-haml' ], function() {
+  gulp.src(HAML_PATH, {read: false})
+    .pipe(watch(HAML_PATH))
     .pipe(haml({trace: true})
       .on('error', function(e) { console.log(e.message); }))
     .pipe(ext.crop())
-    .pipe(gulp.dest('./src'));
+    .pipe(print(function(filepath) {
+      return "processing: " + filepath;
+    }))
+    .pipe(gulp.dest(SRC_ROOT));
 });
 
 gulp.task('watch-settings', function() {
