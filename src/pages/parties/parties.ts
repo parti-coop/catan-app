@@ -14,6 +14,7 @@ import { MemberData } from '../../providers/member-data';
 import { TagData } from '../../providers/tag-data';
 import { GroupData } from '../../providers/group-data';
 import { PartiHomePage } from '../../pages/parti-home/parti-home';
+import { GroupPartiesPage } from '../../pages/group-parties/group-parties';
 
 export interface Tag {
   name: string;
@@ -93,6 +94,10 @@ export class PartiesPage {
     this.platform.ready().then(() => {
       new InAppBrowser('http://parti.xyz/parties/new_intro', "_blank", "location=true");
     });
+  }
+
+  onClickGroup(group: Group) {
+    this.navCtrl.push(GroupPartiesPage, { group: group }, {'animate':false});
   }
 
   listenToMemberEvents() {

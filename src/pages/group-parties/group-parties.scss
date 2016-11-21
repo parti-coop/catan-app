@@ -1,0 +1,227 @@
+page-group-parties {
+  .parti-header{
+    ion-title {
+      text-align: center;
+      font-size: $font-size-large;
+      color: $gray-dark;
+      margin-left: -30px;
+    }
+  }
+  .parti-toolbar {
+    margin-top: -13px;
+    ion-toolbar {
+      padding: 0;
+      ion-segment {
+        top: 8px;
+        position: relative;
+        .segment-button {
+          color: $gray;
+          border: 0;
+          border-radius: 0;
+          height: 40px;
+          &.segment-activated {
+            color: $gray-dark;
+            border-bottom: 3px solid $brand-primary;
+            background-color: $gray-more-lightest;
+            border-radius: 0;
+          }
+          &:first-of-type {
+            padding-left: 18px;
+          }
+          &:last-of-type {
+            padding-right: 18px;
+          }
+          ion-icon {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+  .select-tag-or-group-panel {
+    background-color: #fff;
+    padding: 12px 12px;
+    margin-bottom: 6px;
+    box-shadow: 0 0px 3px rgba(0, 0, 0, 0.3);
+    p {
+      margin: 0;
+      color: $gray-light;
+      font-size: $font-size-small;
+    }
+    .tags,
+    .groups {
+      display: flex;
+      margin-top: 9px;
+      .tag:first-child,
+      .group:first-child {
+        margin: 0;
+      }
+      .group:last-child {
+        margin-right: 12px;
+      }
+      .tag {
+        color: $brand-primary-dark;
+        font-size: $font-size-base;
+        margin-left: 12px;
+      }
+      .group {
+        color: $brand-primary-dark;
+        font-size: $font-size-base;
+        margin-left: 12px;
+        border: 1px solid $gray-less-lighter;
+        padding: 7px 9px 5px;
+      }
+    }
+  }
+  ion-scroll {
+    background-color: $gray-lightest;
+    margin-top: 0;
+  }
+  .list-md {
+    margin: 0;
+    .item-block:first-child {
+      border-top: none;
+    }
+  }
+  .parti-list {
+    ion-item-divider {
+      padding-left: 12px;
+      color: $brand-primary-dark;
+      background-color: $gray-lightest;
+      border: none;
+    }
+    ion-item {
+      padding: 0;
+      &.item-block{
+        .item-inner {
+          padding: 0;
+          border-bottom: 1px solid $gray-lighter;
+        }
+      }
+      ion-label {
+        margin: 12px 0px;
+      }
+    }
+    .parti-item {
+      display: flex;
+      flex-flow: row nowrap;
+      padding: 0 12px 0;
+      align-items: center;
+      .parti-logo {
+        height: 42px;
+        width: 42px;
+        margin-right: 6px;
+        border-radius: 2px;
+        @include background-thumbnail();
+      }
+      .parti-body {
+        flex: 1;
+        overflow: hidden;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        .parti-title {
+          display: flex;
+          font-size: $font-size-base;
+          &--title {
+            color: $gray-darker;
+          }
+          &--maker {
+            color: $brand-primary-dark;
+            margin-left: 6px;
+          }
+        }
+        .parti-info {
+          display: flex;
+          padding-top: 6px;
+          &--new-post {
+            display:flex;
+            margin-right: 12px;
+            &__icon {
+              background-color: $brand-primary;
+              font-size: 11px;
+              color: #fff;
+              padding: 2px 4px 1px;
+            }
+            &__number {
+              padding-left: 3px;
+              padding-top: 3px;
+              font-size: $font-size-small;
+              color: $brand-primary;
+            }
+          }
+          &--new-member {
+            display:flex;
+            &__icon {
+              color: $brand-primary;
+              width: 12px;
+              height: 12px;
+            }
+            &__number {
+              padding-left: 3px;
+              padding-top: 3px;
+              font-size: $font-size-small;
+              color: $brand-primary;
+            }
+          }
+          &--members {
+            color: $gray-light;
+            font-size: $font-size-small;
+          }
+          &--posts {
+            margin-left: 15px;
+            color: $gray-light;
+            font-size: $font-size-small;
+          }
+          &--date {
+            font-size: $font-size-base;
+            color: $gray-light;
+          }
+        }
+      }
+      .parti-star {
+        width: 18px;
+        color: $gray-light;
+      }
+      .parti-join-btn {
+        .button-md {
+          width: 40px;
+          font-size: $font-size-base;
+          padding: 7px 3px;
+          border: 1px solid $gray-lighter;
+          color: $gray;
+          margin: 0;
+          box-shadow: none;
+          background-color: #fff;
+        }
+      }
+      .parti-joined-btn {
+        width: 38px;
+        padding: 2px 9px 0;
+        color: #fff;
+        background-color: $brand-primary;
+        border-radius: 2px;
+        text-align: center;
+        ion-icon {
+          font-size: $font-size-large;
+        }
+      }
+    }
+  }
+  .parti-make-panel {
+    padding: 23px 12px;
+    text-align: center;
+    p {
+      margin: 0;
+      color: $gray-dark;
+    }
+    .parti-make-btn {
+      background-color: #966fd6;
+      padding: 10px 12px;
+      margin: 12px 120px;
+      color: #fff;
+      border-radius: 2px;
+    }
+  }
+}
+

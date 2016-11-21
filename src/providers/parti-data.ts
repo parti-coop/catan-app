@@ -32,6 +32,11 @@ export class PartiData {
       .map(res => <Parti[]>(res.json().parties));
   }
 
+  on_group(group_slug: string): Observable<Parti[]> {
+    return this.http.get(`/api/v1/groups/${group_slug}/parties`)
+      .map(res => <Parti[]>(res.json().parties));
+  }
+
   tagged(tagNames): Observable<Parti[]> {
     let searchParams = new URLSearchParams();
     searchParams.set('tags', tagNames.join());
@@ -41,6 +46,7 @@ export class PartiData {
     return this.http.get('/api/v1/parties/tagged', requestOptions)
       .map(res => <Parti[]>(res.json().parties));
   }
+
 
   get(slug: string): Observable<Parti> {
     return this.http.get(`/api/v1/parties/${slug}`)

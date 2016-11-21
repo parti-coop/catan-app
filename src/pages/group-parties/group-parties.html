@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar>
+    <div class='parti-header'>
+      <ion-title>{{ pageTitle() }}</ion-title>
+    </div>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-scroll class='full' scrollY='true'>
+    <div class='parti-list'>
+      <ion-list>
+        <ion-item-group>
+          <template [ngIf]='!parties["on_group"]'>
+            <ion-item text-center>
+              <ion-spinner></ion-spinner>
+            </ion-item>
+          </template>
+          <template [ngIf]='!!parties["on_group"]'>
+            <ion-item *ngFor='let parti of parties["on_group"]'>
+              <div class='parti-item'>
+                <div [ngStyle]="{ 'background-image': 'url(' + parti.logo_url + ')' }" class='parti-logo'></div>
+                <div class='parti-body'>
+                  <div (click)='onClickParti(parti)'>
+                    <div class='parti-title'>
+                      <div class='parti-title--title'>{{ parti.title }}</div>
+                      <div *ngIf='parti.is_made_by' class='parti-title--maker'>빠띠 메이커</div>
+                    </div>
+                    <div class='parti-info'>
+                      <div *ngIf='parti.latest_posts_count !== 0' class='parti-info--new-post'>
+                        <div class='parti-info--new-post__icon'>N</div>
+                        <div class='parti-info--new-post__number'>{{ parti.latest_posts_count }}</div>
+                      </div>
+                      <div *ngIf='parti.latest_members_count !== 0' class='parti-info--new-member'>
+                        <div class='parti-info--new-member__icon'>
+                          <ion-icon name='person'></ion-icon>
+                        </div>
+                        <div class='parti-info--new-member__number'>{{ parti.latest_members_count }}</div>
+                      </div>
+                      <div *ngIf='parti.latest_posts_count + parti.latest_members_count === 0' class='parti-info--date'>
+                        {{ parti.updated_at | partiDateTimeFormatObservable | async }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <template [ngIf]='!parti.is_member'>
+                  <div class='parti-join-btn'>
+                    <button (click)='onClickJoinParti(parti)' ion-button>
+                      가입
+                    </button>
+                  </div>
+                </template>
+              </div>
+            </ion-item>
+          </template>
+        </ion-item-group>
+      </ion-list>
+    </div>
+  </ion-scroll>
+</ion-content>

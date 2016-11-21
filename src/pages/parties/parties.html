@@ -29,8 +29,8 @@
         <p>내 그룹</p>
         <ion-scroll scrollX='true'>
           <div class='groups'>
-            <div *ngFor='let group of groups' class='group'>
-              {{group.name}}
+            <div (click)='onClickGroup(group)' *ngFor='let group of groups' class='group'>
+              <div class='group-content'>{{group.name}}</div>
             </div>
           </div>
         </ion-scroll>

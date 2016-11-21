@@ -19,8 +19,8 @@
         %p 내 그룹
         %ion-scroll{ scrollX: 'true' }
           .groups
-            .group{ '*ngFor': 'let group of groups' }
-              {{group.name}}
+            .group{ '*ngFor': 'let group of groups', '(click)': 'onClickGroup(group)' }
+              .group-content {{group.name}}
       .parti-list
         %ion-list
           %ion-item-group

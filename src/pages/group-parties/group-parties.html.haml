@@ -1,0 +1,38 @@
+%ion-header
+  %ion-navbar
+    .parti-header
+      %ion-title {{ pageTitle() }}
+
+%ion-content
+  %ion-scroll.full{ scrollY: 'true' }
+    .parti-list
+      %ion-list
+        %ion-item-group
+          %template{'[ngIf]': '!parties["on_group"]'}
+            %ion-item{ 'text-center': true }
+              %ion-spinner
+          %template{'[ngIf]': '!!parties["on_group"]'}
+            %ion-item{ '*ngFor': 'let parti of parties["on_group"]' }
+              .parti-item
+                .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }
+                .parti-body
+                  %div{'(click)': 'onClickParti(parti)'}
+                    .parti-title
+                      .parti-title--title {{ parti.title }}
+                      .parti-title--maker{ '*ngIf': "parti.is_made_by" } 빠띠 메이커
+                    .parti-info
+                      .parti-info--new-post{ '*ngIf': "parti.latest_posts_count !== 0"}
+                        .parti-info--new-post__icon N
+                        .parti-info--new-post__number {{ parti.latest_posts_count }}
+                      .parti-info--new-member{ '*ngIf': "parti.latest_members_count !== 0"}
+                        .parti-info--new-member__icon
+                          %ion-icon{ name: 'person' }
+                        .parti-info--new-member__number {{ parti.latest_members_count }}
+                      .parti-info--date{ '*ngIf': "parti.latest_posts_count + parti.latest_members_count === 0"}
+                        {{ parti.updated_at | partiDateTimeFormatObservable | async }}
+                %template{ '[ngIf]': '!parti.is_member' }
+                  .parti-join-btn
+                    %button{ 'ion-button': true, '(click)': 'onClickJoinParti(parti)' }
+                      가입
+
+

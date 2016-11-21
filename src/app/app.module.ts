@@ -22,6 +22,7 @@ import { SignInPage } from '../pages/sign-in/sign-in';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { PostPage } from '../pages/post/post';
 import { PartiesPage } from '../pages/parties/parties';
+import { GroupPartiesPage } from '../pages/group-parties/group-parties';
 import { MessagesPage } from '../pages/messages/messages';
 import { PartiHomePage } from '../pages/parti-home/parti-home';
 import { CancelPartiMemberPage } from '../pages/cancel-parti-member/cancel-parti-member';
@@ -65,6 +66,7 @@ moment.locale('ko');
     SignUpPage,
     PostPage,
     PartiesPage,
+    GroupPartiesPage,
     MessagesPage,
     PartiHomePage,
     CancelPartiMemberPage,
@@ -97,6 +99,7 @@ moment.locale('ko');
     SignUpPage,
     PostPage,
     PartiesPage,
+    GroupPartiesPage,
     MessagesPage,
     PartiHomePage,
     DisconnectedPage,
