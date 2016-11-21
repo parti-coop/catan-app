@@ -8,33 +8,36 @@
     %div{ '*ngSwitchCase': 'false' }
       .cover{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }
         .parti-panel
-          .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + parti.logo_url + ')' }" }
           .parti-title {{ parti.title }}
-          .parti-share
-            %ion-icon{ name: 'md-share', '(click)': 'onClickShare()' }
-          .parti-description
-            {{ parti.body }}
           .parti-info
             .parti-info--members{ '(click)': 'onClickMember()' }
               멤버 {{ parti.members_count }}명
             .parti-info--posts
               게시 글 {{ parti.posts_count }}개
+        %template{ '[ngIf]': 'parti.is_member' }
           .parti-btns-panel
-            %template{ '[ngIf]': 'parti.is_member' }
-              .parti-invite-btn
-                %button{ 'ion-button': true, '(click)': 'onClickInvitation()' }
-                  친구초대
-            %template{ '[ngIf]': '!parti.is_member' }
-              .parti-join-btn
-                %button{ 'ion-button': true, '(click)': 'onClickJoinParti()' } 가입하기
-            %template{ '[ngIf]': 'parti.is_member && !parti.is_made_by' }
-              .parti-join-btn
-                %button{ 'ion-button': true, '(click)': 'onClickJoinedParti($event)' }
-                  가입함
-                  %ion-icon{ name: "arrow-dropdown" }
-            %template{ '[ngIf]': 'parti.is_made_by' }
-              .parti-maker
-                빠띠메이커
+            .parti-btn{ '(click)': 'onClickJoinedParti($event)' }
+              .parti-btn--icon
+                %ion-icon{ name: 'checkmark' }
+              .parti-btn--text
+                가입함
+                %ion-icon{ name: "arrow-dropdown" }
+            .parti-btn{ '(click)': 'onClickInvitation()' }
+              .parti-btn--icon
+                %ion-icon{ name: 'person-add' }
+              .parti-btn--text
+                친구 초대
+            .parti-btn{ '(click)': 'onClickShare()' }
+              .parti-btn--icon
+                %ion-icon{ name: 'md-share' }
+              .parti-btn--text
+                공유하기
+        %template{ '[ngIf]': '!parti.is_member' }
+          .parti-btns-panel--not-member
+            .parti-join-btn
+              %div{ '(click)': 'onClickJoinParti()' } 가입하기
+            .parti-description
+              {{ parti.body }}
 
       %parti-post-panel.post{ '[post]': 'post', '*ngFor': 'let post of posts', '[isCollection]': 'true' }
       %ion-infinite-scroll{ '(ionInfinite)': 'loadMore($event)', '#infiniteScroll': true }

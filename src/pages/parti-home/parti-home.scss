@@ -2,84 +2,89 @@ page-parti-home {
   parti-post-panel {
     margin-top: 12px;
     &:first-of-type {
-      margin: 0;
+      margin-top: 0;
     }
+  }
+  .scroll-content {
+    background-color: $gray-lightest;
   }
 
   .cover {
-    padding: 200px 0 0;
-    background-repeat: no-repeat;
+    padding: 130px 0 0;
+    background-repeat: round;
     background-size: contain;
+    margin-bottom: 36px;
     .parti-panel {
       padding: 18px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
-      background-color: #fff;
-      .parti-logo {
-        margin-top: -56px;
-        height: 79px;
-        width: 79px;
-        @include background-thumbnail();
-      }
+      align-items: baseline;
       .parti-title {
-        text-align: center;
-        font-size: 24px;
-        color: $text-color;
+        text-align: left;
+        font-size: $font-size-h2;
+        color: #fff;
         font-weight: bold;
-        padding: 18px 0 10px;
-      }
-      .parti-description {
-        text-align: center;
-        color: $gray-dark;
-        font-size: $font-size-small;
+        padding: 18px 0 0;
+        text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
       }
       .parti-info {
         padding-top: 8px;
         display: flex;
+        text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
         &--members {
-          color: $gray-dark;
+          color: #fff;
         }
         &--posts {
           margin-left: 15px;
-          color: $gray-dark;
+          color: #fff;
         }
       }
     }
     .parti-btns-panel {
       display: flex;
-      margin-top: 12px;
-      .parti-invite-btn {
-        margin-right: 6px;
-        .button-md {
-          background-color: #fff;
-          color: $brand-primary-dark;
-          border: 1px solid $brand-primary;
-          border-radius: 2px;
-          padding: 10px 12px;
-          margin: 0;
-          box-shadow: none;
-        }
-      }
-      .parti-join-btn {
-        .button-md {
-          background-color: #fff;
-          color: $brand-primary-dark;
-          border: 1px solid $brand-primary;
-          padding: 10px 12px;
-          margin: 0;
-          box-shadow: none;
-        }
-      }
-      .parti-maker {
+      background-color: #fff;
+      border-top: 1px solid $gray-less-lighter;
+      border-bottom: 1px solid $gray-less-lighter;
+      .parti-btn {
+        width: 33%;
         background-color: #fff;
-        color: $brand-primary-dark;
-        border: 1px solid $brand-primary;
-        border-radius: 2px;
-        padding: 9px 12px;
-        margin: 0;
+        color: $gray;
+        border-left: 1px solid $gray-lighter;
+        border-radius: 0;
+        margin: 9px 0;
         box-shadow: none;
+        &--icon {
+          text-align: center;
+          color: $brand-primary-dark;
+          font-size: $font-size-large;
+        }
+        &--text {
+          text-align: center;
+          margin-top: -6px;
+        }
+        &:first-of-type {
+          border-left: none;
+        }
+      }
+      &--not-member {
+        padding: 11px;
+        background-color: #fff;
+        border-top: 1px solid $gray-less-lighter;
+        border-bottom: 1px solid $gray-less-lighter;
+        .parti-join-btn {
+          text-align: center;
+          padding: 8px 0;
+          background-color: $brand-primary;
+          color: #fff;
+          border-radius: 2px;
+          box-shadow: none;
+
+        }
+        .parti-description {
+          margin-top: 12px;
+          color: $gray;
+        }
       }
     }
   }
