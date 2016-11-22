@@ -1,36 +1,13 @@
 page-parties {
-  .select-group-panel ion-scroll{
-    white-space: nowrap;
-    height: 45px;
-    background-color: #fff;
-  }
-  .select-tag-panel ion-scroll{
-    white-space: nowrap;
-    height: 30px;
-    background-color: #fff;
-  }
-  .parti-header{
-    padding: 26px 16px 0px;
+  .parti-header {
     ion-title {
       text-align: center;
       font-size: $font-size-large;
       color: $gray-dark;
     }
-    .search-btn {
-      text-align: right;
-      margin-top: -30px;
-      .button-md {
-        background-color: $gray-more-lightest;
-        color: $gray-dark;
-        box-shadow: none;
-        font-size: $font-size-large;
-        margin: 0;
-        padding-right: 0;
-      }
-    }
   }
   .parti-toolbar {
-    margin-top: -13px;
+    margin-top: -19px;
     ion-toolbar {
       padding: 0;
       ion-segment {
@@ -92,9 +69,19 @@ page-parties {
         font-size: $font-size-base;
         margin-left: 12px;
         border: 1px solid $gray-less-lighter;
-        padding: 7px 9px 5px;
+        padding: 7px 9px 3px;
       }
     }
+  }
+  .select-group-panel ion-scroll{
+    white-space: nowrap;
+    height: 45px;
+    background-color: #fff;
+  }
+  .select-tag-panel ion-scroll{
+    white-space: nowrap;
+    height: 30px;
+    background-color: #fff;
   }
   ion-scroll {
     background-color: $gray-lightest;
@@ -202,10 +189,6 @@ page-parties {
           }
         }
       }
-      .parti-star {
-        width: 18px;
-        color: $gray-light;
-      }
       .parti-join-btn {
         .button-md {
           width: 40px;
@@ -229,21 +212,6 @@ page-parties {
           font-size: $font-size-large;
         }
       }
-    }
-  }
-  .parti-make-panel {
-    padding: 23px 12px;
-    text-align: center;
-    p {
-      margin: 0;
-      color: $gray-dark;
-    }
-    .parti-make-btn {
-      background-color: #966fd6;
-      padding: 10px 12px;
-      margin: 12px 120px;
-      color: #fff;
-      border-radius: 2px;
     }
   }
 }

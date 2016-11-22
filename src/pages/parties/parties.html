@@ -2,11 +2,6 @@
   <ion-navbar>
     <div class='parti-header'>
       <ion-title>{{partiEnvironment.appTitle}}</ion-title>
-      <div class='search-btn'>
-        <button ion-button>
-          <ion-icon name='search'></ion-icon>
-        </button>
-      </div>
     </div>
   </ion-navbar>
   <div class='parti-toolbar'>
@@ -83,7 +78,9 @@
         <ion-scroll scrollX='true'>
           <div class='tags'>
             <div (click)='onClickTag(tag)' *ngFor='let tag of tags' class='tag'>
-              <div class='tag-content'>\# {{tag.name}}</div>
+              <div class='tag-content'>
+                # {{tag.name}}
+              </div>
             </div>
           </div>
         </ion-scroll>

@@ -2,9 +2,6 @@
   %ion-navbar
     .parti-header
       %ion-title {{partiEnvironment.appTitle}}
-      .search-btn
-        %button{ 'ion-button': true }
-          %ion-icon{ name: 'search' }
   .parti-toolbar
     %ion-toolbar{ 'no-border': true }
       %ion-segment{ '[(ngModel)]': 'selection' }
@@ -52,7 +49,8 @@
         %ion-scroll{ scrollX: 'true' }
           .tags
             .tag{ '*ngFor': 'let tag of tags', '(click)': 'onClickTag(tag)' }
-              .tag-content \# {{tag.name}}
+              .tag-content
+                \# {{tag.name}}
       .parti-list{ '[hidden]': "selection !== 'all'" }
         %parti-list{ '[parties]': 'parties["all"]' }
       .parti-list{ '[hidden]': "selection !== 'tagged'" }
