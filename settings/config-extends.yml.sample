@@ -1,9 +1,12 @@
 development:
   apiClientId: "x"
   apiClientSecret: "x"
+  kakaoKey: "x"
 staging:
   apiClientId: "x"
   apiClientSecret: "x"
+  kakaoKey: "x"
 production:
   apiClientId: "x"
   apiClientSecret: "x"
+  kakaoKey: "x"

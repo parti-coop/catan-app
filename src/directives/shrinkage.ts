@@ -64,6 +64,9 @@ export class Shrinkage implements AfterViewInit {
 
     if (event.target.scrollTop > 0) {
       this.isShrinkedStared = true;
+      setTimeout(() => {
+        this.renderer.setElementStyle(this.target, 'height', '0');
+      }, 10);
     }
   }
 
@@ -72,16 +75,11 @@ export class Shrinkage implements AfterViewInit {
       return;
     }
 
-    this.lastHeaderTop += -60;
-
-    if (this.lastHeaderTop <= 0) {
+    if (this.target.clientHeight <= 0) {
       this.isShrinked = true;
       this.lastHeaderTop = 0;
       this.onShrinked.emit();
     }
-
-    this.renderer.setElementStyle(this.target, 'height', `${this.lastHeaderTop}px`);
-    this.renderer.setElementStyle(this.target, 'overflow', 'hidden');
     this.content.resize();
   }
 
