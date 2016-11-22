@@ -20,10 +20,12 @@
 <ion-footer [keyboardAttach]='content'>
   <ion-toolbar>
     <form (ngSubmit)='save()' [formGroup]='commentForm'>
-      <ion-item>
-        <ion-textarea #inputCommentBody formControlName='body' fz-elastic placeholder='댓글을 입력하세요!...'></ion-textarea>
-      </ion-item>
-      <button [disabled]='!commentForm.valid' block ion-button type='submit'>게시</button>
+      <div class='container'>
+        <ion-item>
+          <ion-textarea #inputCommentBody formControlName='body' fz-elastic placeholder='댓글을 입력해주세요.' rows='1'></ion-textarea>
+        </ion-item>
+        <button [disabled]='!commentForm.valid' type='submit'>게시</button>
+      </div>
     </form>
   </ion-toolbar>
 </ion-footer>

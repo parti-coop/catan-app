@@ -15,7 +15,8 @@
 %ion-footer{ '[keyboardAttach]': 'content' }
   %ion-toolbar
     %form{ '[formGroup]': 'commentForm', '(ngSubmit)': 'save()' }
-      %ion-item
-        %ion-textarea{ 'formControlName': 'body', '#inputCommentBody': true, 'fz-elastic': true, placeholder: "댓글을 입력하세요!..." }
-      %button{ 'ion-button': true, block: true, type: 'submit', '[disabled]': '!commentForm.valid' } 게시
+      .container
+        %ion-item
+          %ion-textarea{ 'formControlName': 'body', '#inputCommentBody': true, 'rows': 1, 'fz-elastic': true, placeholder: "댓글을 입력해주세요." }
+        %button{ type: 'submit', '[disabled]': '!commentForm.valid' } 게시
 
