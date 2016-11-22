@@ -17,6 +17,7 @@
       <div class='member'>
         <div [ngStyle]="{ 'background-image': 'url(' + member.user.image_url + ')' }" class='member-image'></div>
         <div class='member-name'>{{ member.user.nickname }}</div>
+        <div *ngIf='member.is_maker' class='member-maker'>빠띠메이커</div>
       </div>
     </ion-item>
   </ion-list>

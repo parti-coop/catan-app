@@ -5,4 +5,5 @@ export interface Member {
   id: number;
   parti: Parti;
   user: User;
+  is_maker: boolean;
 }

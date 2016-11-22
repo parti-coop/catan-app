@@ -15,6 +15,9 @@ page-members {
       padding-left: 9px;
       .item-inner {
         border: none;
+        .label-md {
+          margin: 8px 0;
+        }
       }
       &:first-of-type,
       &:last-of-type {
@@ -36,6 +39,12 @@ page-members {
     .member-name {
       padding-top: 5px;
       margin-left: 12px;
+    }
+    .member-maker {
+      padding-top: 8px;
+      margin-left: 5px;
+      color: $brand-primary;
+      font-size: $font-size-small;
     }
   }
 }

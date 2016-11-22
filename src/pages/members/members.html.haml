@@ -12,3 +12,4 @@
       .member
         .member-image{ '[ngStyle]': "{ 'background-image': 'url(' + member.user.image_url + ')' }" }
         .member-name {{ member.user.nickname }}
+        .member-maker{ '*ngIf': "member.is_maker" } 빠띠메이커
