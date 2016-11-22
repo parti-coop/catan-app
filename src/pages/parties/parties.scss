@@ -1,8 +1,13 @@
 page-parties {
-  ion-scroll .scroll-x{
-      white-space: nowrap;
-      height: 45px;
-      background-color: #fff;
+  .select-group-panel ion-scroll{
+    white-space: nowrap;
+    height: 45px;
+    background-color: #fff;
+  }
+  .select-tag-panel ion-scroll{
+    white-space: nowrap;
+    height: 30px;
+    background-color: #fff;
   }
   .parti-header{
     padding: 26px 16px 0px;
@@ -55,7 +60,8 @@ page-parties {
       }
     }
   }
-  .select-tag-or-group-panel {
+  .select-tag-panel,
+  .select-group-panel {
     background-color: #fff;
     padding: 12px 12px;
     margin-bottom: 6px;

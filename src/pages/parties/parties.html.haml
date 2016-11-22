@@ -15,7 +15,7 @@
 %ion-content
   %div.full{ '[hidden]': "selection !== 'joined'" }
     %ion-scroll.full{ scrollY: 'true' }
-      .select-tag-or-group-panel
+      .select-group-panel
         %p 내 그룹
         %ion-scroll{ scrollX: 'true' }
           .groups
@@ -45,18 +45,16 @@
                         .parti-info--new-member__number {{ parti.latest_members_count }}
                       .parti-info--date{ '*ngIf': "parti.latest_posts_count + parti.latest_members_count === 0"}
                         {{ parti.updated_at | partiDateTimeFormatObservable | async }}
-      .parti-make-panel
-        %p 관심있는 이슈가 없다면, 직접 만들어보세요
-        .parti-make-btn{ '(click)': 'onClickPartiMakeBtn()' }
-          빠띠 만들기
-  %div.full{ '[hidden]': "selection !== 'all'" }
+  %div.full{ '[hidden]': "selection !== 'all' && selection!== 'tagged'" }
     %ion-scroll.full{ scrollY: 'true' }
-      .select-tag-or-group-panel
+      .select-tag-panel
         %p 관심있는 태그를 선택해 보세요
         %ion-scroll{ scrollX: 'true' }
           .tags
-            .tag{ '*ngFor': 'let tag of tags' }
-              \# {{tag.name}}
-      .parti-list
+            .tag{ '*ngFor': 'let tag of tags', '(click)': 'onClickTag(tag)' }
+              .tag-content \# {{tag.name}}
+      .parti-list{ '[hidden]': "selection !== 'all'" }
         %parti-list{ '[parties]': 'parties["all"]' }
+      .parti-list{ '[hidden]': "selection !== 'tagged'" }
+        %parti-list{ '[parties]': 'parties["tagged"]' }
 

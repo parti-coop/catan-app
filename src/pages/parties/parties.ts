@@ -65,14 +65,6 @@ export class PartiesPage {
     });
   }
 
-  partiesMakingCount() {
-    return (!!this.parties['making'] ? this.parties['making'].length : "");
-  }
-
-  partiesJoinedOnlyCount() {
-    return (!!this.parties['joinedOnly'] ? this.parties['joinedOnly'].length : "");
-  }
-
   onClickParti(parti: Parti) {
     this.navCtrl.push(PartiHomePage, { parti: parti }, {'animate':false});
   }
@@ -90,14 +82,19 @@ export class PartiesPage {
       });
   }
 
-  onClickPartiMakeBtn() {
-    this.platform.ready().then(() => {
-      new InAppBrowser('http://parti.xyz/parties/new_intro', "_blank", "location=true");
-    });
-  }
-
   onClickGroup(group: Group) {
     this.navCtrl.push(GroupPartiesPage, { group: group }, {'animate':false});
+  }
+
+  onClickTag(tag: Tag) {
+    this.selection = "tagged";
+    this.partiData.tagged([tag.name]).subscribe((parties: Parti[]) => {
+            this.parties['tagged'] = parties;
+          }, (error) => {
+            this.parties['tagged'] = this.parties['tagged'] || [];
+          }, () => {
+            this.parties['tagged'] = this.parties['tagged'] || [];
+          });
   }
 
   listenToMemberEvents() {

@@ -25,7 +25,7 @@
 <ion-content>
   <div [hidden]="selection !== 'joined'" class='full'>
     <ion-scroll class='full' scrollY='true'>
-      <div class='select-tag-or-group-panel'>
+      <div class='select-group-panel'>
         <p>내 그룹</p>
         <ion-scroll scrollX='true'>
           <div class='groups'>
@@ -74,28 +74,25 @@
           </ion-item-group>
         </ion-list>
       </div>
-      <div class='parti-make-panel'>
-        <p>관심있는 이슈가 없다면, 직접 만들어보세요</p>
-        <div (click)='onClickPartiMakeBtn()' class='parti-make-btn'>
-          빠띠 만들기
-        </div>
-      </div>
     </ion-scroll>
   </div>
-  <div [hidden]="selection !== 'all'" class='full'>
+  <div [hidden]="selection !== 'all' &amp;&amp; selection!== 'tagged'" class='full'>
     <ion-scroll class='full' scrollY='true'>
-      <div class='select-tag-or-group-panel'>
+      <div class='select-tag-panel'>
         <p>관심있는 태그를 선택해 보세요</p>
         <ion-scroll scrollX='true'>
           <div class='tags'>
-            <div *ngFor='let tag of tags' class='tag'>
-              # {{tag.name}}
+            <div (click)='onClickTag(tag)' *ngFor='let tag of tags' class='tag'>
+              <div class='tag-content'>\# {{tag.name}}</div>
             </div>
           </div>
         </ion-scroll>
       </div>
-      <div class='parti-list'>
+      <div [hidden]="selection !== 'all'" class='parti-list'>
         <parti-list [parties]='parties["all"]'></parti-list>
+      </div>
+      <div [hidden]="selection !== 'tagged'" class='parti-list'>
+        <parti-list [parties]='parties["tagged"]'></parti-list>
       </div>
     </ion-scroll>
   </div>
