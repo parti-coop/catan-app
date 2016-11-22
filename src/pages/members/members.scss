@@ -1,3 +1,41 @@
 page-members {
-
+  ion-title {
+    text-align: center;
+    .title-member {
+      font-size: $font-size-base;
+      font-weight: bold;
+    }
+    .title-parti {
+      color: $gray-light;
+      font-size: $font-size-small;
+    }
+  }
+  .list-md {
+    .item-block {
+      padding-left: 9px;
+      .item-inner {
+        border: none;
+      }
+      &:first-of-type,
+      &:last-of-type {
+        border: none;
+      }
+    }
+  }
+  .member {
+    display: flex;
+    .member-image {
+      background-image: url(https://catan-file.s3.amazonaws.com/uploads/user/0/sm_bbaf990a97.jpg);
+      height: 36px;
+      width: 36px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .member-name {
+      padding-top: 5px;
+      margin-left: 12px;
+    }
+  }
 }

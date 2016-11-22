@@ -30,6 +30,19 @@ export class MembersPage {
       });
   }
 
+  pageTitle() {
+    if(!!this.parti) {
+      return this.parti.members_count;
+    }
+    return 0;
+  }
+  partiTitle() {
+    if(!!this.parti) {
+      return this.parti.title;
+    }
+    return '빠띠';
+  }
+
   dismiss() {
     this.viewCtrl.dismiss();
   }

@@ -1,10 +1,14 @@
 %ion-header
   %ion-toolbar
-    %ion-title Members
     %ion-buttons{ 'start': true}
       %button{ 'ion-button': true, '(click)': 'dismiss()' }
-        닫기
+        X
+    %ion-title
+      .title-member 멤버 {{ parti.members_count }}
+      .title-parti {{ partiTitle() }}
 %ion-content{ 'padding': true }
   %ion-list
     %ion-item{ '*ngFor': 'let member of members' }
-      %span {{ member.user.nickname }}
+      .member
+        .member-image{ '[ngStyle]': "{ 'background-image': 'url(' + member.user.image_url + ')' }" }
+        .member-name {{ member.user.nickname }}
