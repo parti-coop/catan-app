@@ -22,7 +22,7 @@ export class PostData {
       searchParams.set('last_id', String(lastPost.id));
       requestOptions.search = searchParams;
     }
-    return this.http.get('/api/v1/dashboard/posts', requestOptions)
+    return this.http.get('/api/v1/posts/dashboard', requestOptions)
       .map(res => <InfinitPage<Post>>(res.json()));
   }
 

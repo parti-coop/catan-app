@@ -54,14 +54,8 @@ export class PartiData {
       .map(res => <Parti[]>(res.json().parties));
   }
 
-
   get(slug: string): Observable<Parti> {
     return this.http.get(`/api/v1/parties/${slug}`)
-      .map(res => <Parti>(res.json().parti));
-  }
-
-  first(): Observable<Parti> {
-    return this.http.get('/api/v1/parties/first')
       .map(res => <Parti>(res.json().parti));
   }
 }
