@@ -1,5 +1,0 @@
-<span #upvoteButton (click)='onClickUpvoteButton()' *ngIf='!isLoading' [class.upvotable]='post.is_upvotable' [class.upvoted]='!post.is_upvotable' class='upvote-button'>
-  <ion-icon name='heart'></ion-icon>
-  {{ post.upvotes_count > 0 ? post.upvotes_count : '공감해요' }}
-</span>
-<ion-spinner *ngIf='isLoading'></ion-spinner>

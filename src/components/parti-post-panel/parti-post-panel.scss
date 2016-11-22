@@ -68,8 +68,17 @@ parti-post-panel {
     ion-icon {
       font-size: 22px;
     }
+    .upvote-button,
     .comment-button {
       width: 33%;
+    }
+    .upvote-button {
+      .upvoted {
+        color: $brand-primary;
+      }
+      .upvotable {
+        color: $gray;
+      }
     }
     parti-share-button {
       width: 33%;

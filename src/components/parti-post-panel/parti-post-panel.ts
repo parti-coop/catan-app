@@ -12,6 +12,7 @@ import { FileSource } from '../../models/file-source';
 import { User } from '../../models/user';
 import { Post } from '../../models/post';
 import { PostPage } from '../../pages/post/post';
+import { UpvoteData } from '../../providers/upvote-data';
 
 import { VotingData } from '../../providers/voting-data';
 import { MyselfData } from '../../providers/myself-data';
@@ -30,6 +31,8 @@ export class PartiPostPanelComponent {
   @Input()
   isCollection: boolean;
 
+  isLoading: boolean = false;
+
   disableVotingButtons: boolean = false;
 
   constructor(
@@ -39,6 +42,7 @@ export class PartiPostPanelComponent {
     private toastCtrl: ToastController,
     private actionSheetCtrl: ActionSheetController,
     private votingData: VotingData,
+    private upvoteData: UpvoteData,
     private myselfData: MyselfData
   ) {}
 
@@ -160,6 +164,29 @@ export class PartiPostPanelComponent {
 
   onClickVotingUser(user: User) {
     console.log(`user ${user.nickname}`);
+  }
+
+  onClickUpvoteButton() {
+    this.isLoading = true;
+    if(this.post.is_upvotable) {
+      this.upvoteData.create(this.post.id, 'Post')
+        .finally(() => {
+          this.isLoading = false;
+        })
+        .subscribe(() => {
+          this.post.is_upvotable = false;
+          this.post.upvotes_count++;
+        });
+    } else {
+      this.upvoteData.destroy(this.post.id, 'Post')
+        .finally(() => {
+          this.isLoading = false;
+        })
+        .subscribe(() => {
+          this.post.is_upvotable = true;
+          this.post.upvotes_count--;
+        });
+    }
   }
 
   onClickShare() {
