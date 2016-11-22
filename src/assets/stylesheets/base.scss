@@ -80,3 +80,24 @@ body.keyboard-is-open
 .pull-right {
   float: right;
 }
+
+// 공유하기 팝업
+ion-action-sheet {
+  .action-sheet-container {
+    .action-sheet-button {
+      padding: 18px 16px;
+      border-bottom: 1px solid #ececed;
+      .button-inner {
+        font-size: $font-size-base;
+      }
+    }
+    .action-sheet-cancel {
+      border-bottom: none;
+      margin-top: 76px;
+      margin-bottom: 0;
+      .button-inner {
+        justify-content: center;
+      }
+    }
+  }
+}

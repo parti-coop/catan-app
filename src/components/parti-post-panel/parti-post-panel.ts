@@ -285,7 +285,7 @@ export class PartiPostPanelComponent {
             );
           }
         },{
-          text: '취소',
+          text: '닫기',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
