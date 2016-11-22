@@ -49,7 +49,8 @@
     "gulp-watch": "^4.3.10",
     "assign-deep": "^0.4.5",
     "gulp-print": "",
-    "run-sequence": ""
+    "run-sequence": "",
+    "gulp-newer": ""
   },
   "cordovaPlugins": [
     "cordova-plugin-device",
