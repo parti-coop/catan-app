@@ -72,9 +72,9 @@
     %span.post-comments-count{ '*ngIf': 'post.comments_count > 0' }
       댓글 {{ post.comments_count }}
 .post-buttons
-  %span.upvote-button{ '(click)': 'onClickUpvoteButton()', '#upvoteButton': true, '[class.upvoted]': '!post.is_upvotable', '[class.upvotable]': 'post.is_upvotable', '*ngIf': '!isLoading' }
-    %ion-icon{ name: 'heart' }
-    {{ post.upvotes_count > 0 ? post.upvotes_count : '공감해요' }}
+  %span.upvote-button{ '(click)': 'onClickUpvoteButton()', '#upvoteButton': true, '[class.upvotable]': 'post.is_upvotable', '*ngIf': '!isLoading' }
+    %ion-icon{ name: 'heart', '[class.upvoted]': '!post.is_upvotable' }
+    {{ post.is_upvotable ? '공감해요' : '공감해요 취소' }}
     %ion-spinner{ '*ngIf': 'isLoading' }
   %span.comment-button{ '*ngIf': 'isCollection', '(click)': 'onClickCommentButton()' }
     %ion-icon{ name: 'chatbubbles' }
