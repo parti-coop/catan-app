@@ -54,17 +54,20 @@ parti-post-panel {
     }
   }
   .post-upvotes-count {
-    color: $gray-light;
+    color: $brand-primary;
+    padding-right: 14px;
   }
   .post-buttons {
     display: flex;
     justify-content: space-between;
-    padding: 12px 6px;
-    margin: 12px 6px 0;
+    padding: 6px 6px;
     border-top: 1px solid $gray-lighter;
     color: $gray;
     font-size: $font-size-small;
     text-align: center;
+    ion-icon {
+      font-size: 22px;
+    }
     .comment-button {
       width: 33%;
     }
@@ -76,6 +79,7 @@ parti-post-panel {
   .post-link-reference {
     border: 1px solid $gray-light;
     margin: 0 6px;
+    margin-bottom: 12px;
     .link-reference-image-wrapper {
       flex: 0 0 130px;
       .link-reference-image {
@@ -113,7 +117,7 @@ parti-post-panel {
   }
   .post-video-reference {
     border: 1px solid $gray-light;
-    margin: 0 6px;
+    margin: 0 6px 12px;
     .link-reference-video-wrapper {
       .link-reference-video {
         height: 145px;
@@ -125,7 +129,7 @@ parti-post-panel {
   }
   .post-file-reference {
     border: 1px solid $gray-light;
-    margin: 0 6px;
+    margin: 0 6px 12px;
     padding: 24px;
     text-align: center;
     .file-reference-file-size {
@@ -147,7 +151,7 @@ parti-post-panel {
   }
   .post-poll {
     border: 1px solid $gray-light;
-    margin: 0 6px;
+    margin: 0 6px 12px;
     padding: 24px;
     text-align: center;
     .poll-title {
@@ -196,62 +200,60 @@ parti-post-panel {
     }
   }
   .post-footer {
-    padding: 12px 6px 0;
-    border-top: 1px solid $gray-less-lighter;
     color: $gray-light;
+    .post-reaction-info {
+      font-size: $font-size-small;
+      padding: 0 6px 12px;
+      color: $brand-primary;
+      .post-comments-count {
+        padding-right: 14px;
+      }
+    }
+  }
+  .post-comments {
+    padding: 12px 6px;
+    border-top: 1px solid $gray-lighter;
     background-color: $gray-lightest;
     margin-left: -6px;
     margin-right: -6px;
-    .post-reaction-info {
-      font-size: $font-size-small;
-      padding: 0 12px 12px;
-      .post-comments-count {
-        padding-left: 14px;
+    .comment {
+      &:first-child {
+        border-top: none;
+        padding-top: 0;
       }
-    }
-
-    .post-comments {
-      padding: 12px 6px;
-      border-top: 1px solid $gray-lighter;
-      .comment {
-        &:first-child {
-          border-top: none;
-          padding-top: 0;
-        }
-        &:last-child {
-          padding-bottom: 0;
-        }
-        border-top: 1px solid $gray-less-lighter;
-        padding: 12px 0;
-        color: $gray-dark;
-        .comment-header {
-          .comment-byline {
-            display: flex;
-            justify-content: flex-start;
-            .user-image {
+      &:last-child {
+        padding-bottom: 0;
+      }
+      border-top: 1px solid $gray-less-lighter;
+      padding: 12px 0;
+      color: $gray-dark;
+      .comment-header {
+        .comment-byline {
+          display: flex;
+          justify-content: flex-start;
+          .user-image {
+            display: inline-block;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            @include background-thumbnail();
+          }
+          .byline-info {
+            padding-left: 8px;
+            .user-nickname{
               display: inline-block;
-              height: 24px;
-              width: 24px;
-              border-radius: 50%;
-              @include background-thumbnail();
+              color: $brand-primary-dark;
             }
-            .byline-info {
-              padding-left: 8px;
-              .user-nickname{
-                display: inline-block;
-                color: $brand-primary-dark;
-              }
-              .comment-created-at {
-                color: $gray-light;
-                display: inline-block;
-                font-size: $font-size-small;
-              }
+            .comment-created-at {
+              color: $gray-light;
+              display: inline-block;
+              font-size: $font-size-small;
             }
           }
         }
-        .comment-body {
-          padding-left: 32px;
-        }
+      }
+      .comment-body {
+        padding-left: 32px;
       }
     }
   }
