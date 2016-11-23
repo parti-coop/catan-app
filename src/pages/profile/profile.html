@@ -5,22 +5,32 @@
         {{user.nickname}}
         <ion-icon name='ios-arrow-dropdown'></ion-icon>
       </div>
+      <div class='settings-btn'>
+        <ion-icon name='settings'></ion-icon>
+      </div>
     </ion-title>
   </ion-navbar>
-  <ion-toolbar no-border>
-    <div #cover class='cover'>
-      <div [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='user-image'></div>
-      <div class='user-nickname'>{{user.nickname}}</div>
-    </div>
-    <ion-segment [(ngModel)]='selection'>
-      <ion-segment-button value='parties'>
-        내 빠띠
-      </ion-segment-button>
-      <ion-segment-button value='posts'>
-        내 게시물
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
+  <div class='profile-toolbar'>
+    <ion-toolbar no-border>
+      <div #cover class='cover'>
+        <div class='cover-top'>
+          <div [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='user-image'></div>
+        </div>
+        <div class='cover-bottom'>
+          <div class='user-nickname'>{{user.nickname}}</div>
+          <div class='user-edit-btn'>프로필 수정</div>
+        </div>
+      </div>
+      <ion-segment [(ngModel)]='selection'>
+        <ion-segment-button value='parties'>
+          내 빠띠
+        </ion-segment-button>
+        <ion-segment-button value='posts'>
+          내가 쓴 글
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </div>
 </ion-header>
 <ion-content>
   <div [hidden]="selection !== 'parties'" class='full'>

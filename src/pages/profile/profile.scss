@@ -1,17 +1,88 @@
 page-profile {
-  ion-navbar, ion-toolbar {
-    background-color: $brand-primary;
+  ion-navbar {
+    .toolbar-background-md {
+      background-color: $brand-primary-dark;
+    }
+    .back-button {
+      color: #fff;
+    }
+    .toolbar-title-md {
+      color: #fff;
+      display: flex;
+      .title {
+        flex: 1;
+      }
+      .settings-btn {
+        width: 20px;
+      }
+    }
+  }
+  .profile-toolbar ion-toolbar {
+    .toolbar-background-md {
+      background-color: $gray-lightest;
+    }
     .cover {
-      .user-image {
-        height: 200px;
-        width: 200px;
-        border-radius: 50%;
-        @include background-thumbnail();
+      .cover-top {
+        background-color: $brand-primary-dark;
+        display: flex;
+        padding-top: 20px;
+        .user-image {
+          height: 103px;
+          width: 103px;
+          margin: auto;
+          margin-bottom: -16px;
+          border: 1px solid $gray-less-lighter;
+          border-radius: 50%;
+          @include background-thumbnail();
+        }
+      }
+      .cover-bottom {
+        text-align: center;
+        background-color: $gray-lightest;
+        .user-nickname {
+          font-size: $font-size-large;
+          padding-top: 24px;
+        }
+        .user-edit-btn {
+          color: #fff;
+          background-color: $brand-primary-dark;
+          padding: 4px 9px;
+          margin: 5px 0 24px;
+          color: #fff;
+          border-radius: 2px;
+          font-size: $font-size-small;
+          display: inline-block;
+        }
       }
     }
     ion-segment {
-      background-color: $toolbar-background;
+      background-color: #fff;
+      .segment-button {
+        color: $gray;
+        border: 0;
+        border-radius: 0;
+        height: 45px;
+        padding-top: 5px;
+        border-bottom: 1px solid $gray-less-lighter;
+        &.segment-activated {
+          color: $gray-dark;
+          border-bottom: 3px solid $brand-primary;
+          border-radius: 0;
+        }
+        &:first-of-type {
+          padding-left: 18px;
+        }
+        &:last-of-type {
+          padding-right: 18px;
+        }
+      }
     }
+    .segment-md {
+      margin-bottom: 6px;
+    }
+  }
+  .toolbar-md {
+    padding: 0;
   }
 
   .user-cover {

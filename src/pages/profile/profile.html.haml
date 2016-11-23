@@ -4,15 +4,21 @@
       .title{'[@fadeInOut]': 'titleState'}
         {{user.nickname}}
         %ion-icon{ name: 'ios-arrow-dropdown' }
-  %ion-toolbar{ 'no-border': true }
-    .cover{ '#cover': true }
-      .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
-      .user-nickname {{user.nickname}}
-    %ion-segment{ '[(ngModel)]': 'selection' }
-      %ion-segment-button{ value: 'parties' }
-        내 빠띠
-      %ion-segment-button{ value: 'posts' }
-        내 게시물
+      .settings-btn
+        %ion-icon{ name: 'settings' }
+  .profile-toolbar
+    %ion-toolbar{ 'no-border': true }
+      .cover{ '#cover': true }
+        .cover-top
+          .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
+        .cover-bottom
+          .user-nickname {{user.nickname}}
+          .user-edit-btn 프로필 수정
+      %ion-segment{ '[(ngModel)]': 'selection' }
+        %ion-segment-button{ value: 'parties' }
+          내 빠띠
+        %ion-segment-button{ value: 'posts' }
+          내가 쓴 글
 %ion-content
   %div.full{ '[hidden]': "selection !== 'parties'" }
     %ion-scroll.full{ scrollY: 'true', '#partiesScroll': true }
