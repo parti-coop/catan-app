@@ -60,7 +60,7 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
-    this.partiData.joined(this.user)
+    this.partiData.joinedByUser(this.user)
       .subscribe((parties: Parti[]) => {
         this.parties = parties;
       });
