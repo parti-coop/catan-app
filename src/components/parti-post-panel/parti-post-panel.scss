@@ -168,10 +168,18 @@ parti-post-panel {
       font-weight: bold;
     }
     .poll-voting-btns {
-      margin: 24px 0 14px;
+      margin: 24px 0 6px;
       button {
         margin: 0;
         margin-right: 10px;
+        height: inherit;
+        .button-inner {
+          display: inline-block;
+          .voting-count {
+            margin-top: -6px;
+            font-weight: bold;
+          }
+        }
       }
       .voting-btns-wrapper {
         display: flex;
@@ -182,6 +190,10 @@ parti-post-panel {
             padding-right: 3px;
             padding-bottom: 3px;
           }
+          &.voted {
+            background-color: color($colors, agree);
+            color: #fff;
+          }
         }
         .disagreed-voting-btn {
           ion-icon {
@@ -189,24 +201,55 @@ parti-post-panel {
             padding-right: 3px;
             padding-top: 6px;
           }
+          &.voted {
+            background-color: color($colors, disagree);
+            color: #fff;
+          }
         }
       }
+      .unsure-voted,
       .unsure-voting {
         padding-top: 18px;
         font-size: $font-size-small;
         color: $gray-light;
       }
     }
+    .poll-before-voting,
     .poll-recommend-voting {
+      margin-top: 18px;
       line-height: 20px;
       color: $gray;
+      .poll-voted-counts {
+        color: $brand-primary-dark;
+        font-weight: bold;
+      }
     }
-    .voting-users {
-      height: 20px;
-      width: 20px;
-      @include background-thumbnail();
-      display: inline-block;
+
+    .poll-votings {
+      .agreed-voting-users,
+      .disagreed-voting-users {
+        display: inline-block;
+        width: 45%;
+        vertical-align: text-top;
+      }
+      .agreed-voting-users {
+        text-align: right;
+        padding-right: 8px;
+      }
+      .disagreed-voting-users {
+        text-align: left;
+      }
+      .voting-user {
+        height: 20px;
+        width: 20px;
+        @include background-thumbnail();
+        display: inline-block;
+        margin-left: 1px;
+        margin-right: 1px;
+        border-radius: 50%;
+      }
     }
+
   }
   .post-footer {
     color: $gray-light;

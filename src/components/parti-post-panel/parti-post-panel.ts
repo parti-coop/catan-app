@@ -54,6 +54,10 @@ export class PartiPostPanelComponent {
     return this.post.poll.my_choice === "disagree";
   }
 
+  isUnsured() {
+    return this.post.poll.my_choice === "unsure";
+  }
+
   isVoted() {
     return !!this.post.poll.my_choice;
   }
@@ -152,10 +156,13 @@ export class PartiPostPanelComponent {
         }
         else {
           let antiChoice = (choice == 'agree' ? 'disagree' : 'agree');
+
           if(!this.isVoted()) {
             this.post.poll.votings_count++;
           } else {
-            this.post.poll[`${antiChoice}d_votings_count`]--;
+            if (this.post.poll.my_choice != 'unsure') {
+              this.post.poll[`${antiChoice}d_votings_count`]--;
+            }
           }
 
           this.post.poll[`${choice}d_voting_users`].push(this.myselfData.asModel());

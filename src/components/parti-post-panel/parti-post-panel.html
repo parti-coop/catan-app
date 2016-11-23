@@ -60,34 +60,40 @@
       <button (click)='onClickVotingButton("agree")' [class.voted]='isAgreed()' [disabled]='disableVotingButtons' class='agreed-voting-btn' color='agree' ion-button outline>
         <ion-icon name='thumbs-up'></ion-icon>
         찬성
-        <!-- %br -->
-        <!-- {{ post.poll.agreed_votings_count }} -->
+        <div *ngIf='isVoted()' class='voting-count'>
+          {{ post.poll.agreed_votings_count }}
+        </div>
       </button>
       <button (click)='onClickVotingButton("disagree")' [class.voted]='isDisagreed()' [disabled]='disableVotingButtons' class='disagreed-voting-btn' color='disagree' ion-button outline>
         <ion-icon name='thumbs-down'></ion-icon>
         반대
-        <!-- %br -->
-        <!-- {{ post.poll.disagreed_votings_count }} -->
+        <div *ngIf='isVoted()' class='voting-count'>
+          {{ post.poll.disagreed_votings_count }}
+        </div>
       </button>
     </div>
-    <div (click)='onClickVotingButton("unsure")' class='unsure-voting'>
+    <div (click)='onClickVotingButton("unsure")' *ngIf='!isVoted()' class='unsure-voting'>
       잘 모르겠습니다
     </div>
+    <div (click)='onClickCommentButton()' *ngIf='isUnsured()' class='unsure-voted'>
+      댓글로 의견을 나눠 보세요
+    </div>
   </div>
-  <div *ngIf='isVoted()' class='poll-votings'>
+  <div *ngIf='isVoted() &amp;&amp; !isCollection' class='poll-votings'>
     <div class='agreed-voting-users'>
-      <div (click)='onClickVotingUser(user)' *ngFor='let user of post.poll.agreed_voting_users' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='voting-users'></div>
+      <div (click)='onClickVotingUser(user)' *ngFor='let user of post.poll.agreed_voting_users' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='voting-user'></div>
     </div>
     <div class='disagreed-voting-users'>
-      <span (click)='onClickVotingUser(user)' *ngFor='let user of post.poll.disagreed_voting_users' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='voting-users'></span>
+      <div (click)='onClickVotingUser(user)' *ngFor='let user of post.poll.disagreed_voting_users' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='voting-users'></div>
     </div>
   </div>
-  <div *ngIf='!isVoted()' class='poll-recommend-voting'>
+  <div class='poll-recommend-voting'>
     현재
-    <span class='text-primary-dark'>{{ post.poll.votings_count }}</span>
+    <span class='poll-voted-counts'>{{ post.poll.agreed_votings_count + post.poll.disagreed_votings_count }}</span>
     명이 투표했습니다.
-    <br>
-    투표하면 결과를 볼 수 있습니다.
+  </div>
+  <div *ngIf='!isVoted()' class='poll-before-voting'>
+    찬반 투표하면 현재 결과를 볼 수 있습니다.
   </div>
 </div>
 <div *ngIf='post.upvotes_count &gt; 0 || post.comments_count &gt; 0' class='post-footer'>

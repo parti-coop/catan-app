@@ -45,26 +45,28 @@
       %button.agreed-voting-btn{ 'ion-button': true, 'outline': true, color: 'agree', '[class.voted]': 'isAgreed()', '(click)': 'onClickVotingButton("agree")', '[disabled]': 'disableVotingButtons' }
         %ion-icon{ name: "thumbs-up" }
         찬성
-        / %br
-        / {{ post.poll.agreed_votings_count }}
+        .voting-count{ '*ngIf': 'isVoted()' }
+          {{ post.poll.agreed_votings_count }}
       %button.disagreed-voting-btn{ 'ion-button': true, 'outline': true, color: 'disagree', '[class.voted]': 'isDisagreed()', '(click)': 'onClickVotingButton("disagree")', '[disabled]': 'disableVotingButtons' }
         %ion-icon{ name: "thumbs-down" }
         반대
-        / %br
-        / {{ post.poll.disagreed_votings_count }}
-    .unsure-voting{ '(click)': 'onClickVotingButton("unsure")' }
+        .voting-count{ '*ngIf': 'isVoted()' }
+          {{ post.poll.disagreed_votings_count }}
+    .unsure-voting{ '*ngIf': '!isVoted()', '(click)': 'onClickVotingButton("unsure")' }
       잘 모르겠습니다
-  .poll-votings{ '*ngIf': 'isVoted()' }
+    .unsure-voted{ '*ngIf': 'isUnsured()', '(click)': 'onClickCommentButton()' }
+      댓글로 의견을 나눠 보세요
+  .poll-votings{ '*ngIf': 'isVoted() && !isCollection' }
     .agreed-voting-users
-      .voting-users{ '*ngFor': 'let user of post.poll.agreed_voting_users', '(click)': 'onClickVotingUser(user)', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
+      .voting-user{ '*ngFor': 'let user of post.poll.agreed_voting_users', '(click)': 'onClickVotingUser(user)', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
     .disagreed-voting-users
-      %span.voting-users{ '*ngFor': 'let user of post.poll.disagreed_voting_users', '(click)': 'onClickVotingUser(user)', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
-  .poll-recommend-voting{ '*ngIf': '!isVoted()' }
+      .voting-users{ '*ngFor': 'let user of post.poll.disagreed_voting_users', '(click)': 'onClickVotingUser(user)', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
+  .poll-recommend-voting
     현재
-    %span.text-primary-dark {{ post.poll.votings_count }}
+    %span.poll-voted-counts {{ post.poll.agreed_votings_count + post.poll.disagreed_votings_count }}
     명이 투표했습니다.
-    %br
-    투표하면 결과를 볼 수 있습니다.
+  .poll-before-voting{ '*ngIf': '!isVoted()' }
+    찬반 투표하면 현재 결과를 볼 수 있습니다.
 .post-footer{ '*ngIf': 'post.upvotes_count > 0 || post.comments_count > 0' }
   .post-reaction-info
     %span.post-upvotes-count{ '*ngIf': 'post.upvotes_count > 0' }
