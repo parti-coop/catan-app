@@ -22,7 +22,7 @@
 %ion-content
   %div.full{ '[hidden]': "selection !== 'parties'" }
     %ion-scroll.full{ scrollY: 'true', '#partiesScroll': true }
-      %parti-list{ '[parties]': 'parties' }
+      %joined-parti-list{ '[parties]': 'parties' }
   %div.full{ '[hidden]': "selection !== 'posts'" }
     %ion-scroll.full{ scrollY: 'true', '#postsScroll': true }
       .spinner-center-wrapper{ '*ngIf': '!posts' }

@@ -11,6 +11,7 @@ import { PartiDateTimeFormatObservablePipe } from '../pipes/parti-datetime-forma
 import { PartiPostPanelComponent } from '../components/parti-post-panel/parti-post-panel';
 import { PartiPostBylineComponent } from '../components/parti-post-byline/parti-post-byline';
 import { PartiList } from '../components/parti-list/parti-list';
+import { JoinedPartiList } from '../components/joined-parti-list/joined-parti-list';
 
 import { KeyboardAttachDirective } from '../directives/keyboard-attach';
 import { Shrinkage } from '../directives/shrinkage';
@@ -82,6 +83,7 @@ moment.locale('ko');
     PartiPostBylineComponent,
     PartiPostPanelComponent,
     PartiList,
+    JoinedPartiList,
     PartiSimpleFormatPipe,
     KeyboardAttachDirective,
     Shrinkage,

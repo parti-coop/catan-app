@@ -30,44 +30,8 @@
           </div>
         </ion-scroll>
       </div>
-      <div class='parti-list'>
-        <ion-list>
-          <ion-item-group>
-            <template [ngIf]='!parties["joined"]'>
-              <ion-item text-center>
-                <ion-spinner></ion-spinner>
-              </ion-item>
-            </template>
-            <template [ngIf]='!!parties["joined"]'>
-              <ion-item (click)='onClickParti(parti)' *ngFor='let parti of parties["joined"]'>
-                <div class='parti-item'>
-                  <div [ngStyle]="{ 'background-image': 'url(' + parti.logo_url + ')' }" class='parti-logo'></div>
-                  <div class='parti-body'>
-                    <div class='parti-title'>
-                      <div class='parti-title--title'>{{ parti.title }}</div>
-                      <div *ngIf='parti.is_made_by' class='parti-title--maker'>빠띠 메이커</div>
-                    </div>
-                    <div class='parti-info'>
-                      <div *ngIf='parti.latest_posts_count !== 0' class='parti-info--new-post'>
-                        <div class='parti-info--new-post__icon'>N</div>
-                        <div class='parti-info--new-post__number'>{{ parti.latest_posts_count }}</div>
-                      </div>
-                      <div *ngIf='parti.latest_members_count !== 0' class='parti-info--new-member'>
-                        <div class='parti-info--new-member__icon'>
-                          <ion-icon name='person'></ion-icon>
-                        </div>
-                        <div class='parti-info--new-member__number'>{{ parti.latest_members_count }}</div>
-                      </div>
-                      <div *ngIf='parti.latest_posts_count + parti.latest_members_count === 0' class='parti-info--date'>
-                        {{ parti.updated_at | partiDateTimeFormatObservable | async }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </ion-item>
-            </template>
-          </ion-item-group>
-        </ion-list>
+      <div [hidden]="selection !== 'joined'" class='parti-list'>
+        <joined-parti-list [parties]='parties["joined"]'></joined-parti-list>
       </div>
     </ion-scroll>
   </div>

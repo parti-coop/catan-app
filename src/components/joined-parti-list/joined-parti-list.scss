@@ -1,0 +1,100 @@
+joined-parti-list {
+  .parti-list-joined {
+    ion-item-divider {
+      padding-left: 12px;
+      color: $brand-primary-dark;
+      background-color: $gray-lightest;
+      border: none;
+    }
+    ion-item {
+      padding: 0;
+      &.item-block{
+        .item-inner {
+          padding: 0;
+          border-bottom: 1px solid $gray-lighter;
+        }
+      }
+      ion-label {
+        margin: 12px 0px;
+      }
+    }
+    .parti-item {
+      display: flex;
+      flex-flow: row nowrap;
+      padding: 0 12px 0;
+      align-items: center;
+      .parti-logo {
+        height: 42px;
+        width: 42px;
+        margin-right: 6px;
+        border-radius: 2px;
+        @include background-thumbnail();
+      }
+      .parti-body {
+        flex: 1;
+        overflow: hidden;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        .parti-title {
+          display: flex;
+          font-size: $font-size-base;
+          &--title {
+            color: $gray-darker;
+          }
+          &--maker {
+            color: $brand-primary-dark;
+            margin-left: 6px;
+          }
+        }
+        .parti-info {
+          display: flex;
+          padding-top: 6px;
+          &--new-post {
+            display:flex;
+            margin-right: 12px;
+            &__icon {
+              background-color: $brand-primary;
+              font-size: 11px;
+              color: #fff;
+              padding: 2px 4px 1px;
+            }
+            &__number {
+              padding-left: 3px;
+              padding-top: 3px;
+              font-size: $font-size-small;
+              color: $brand-primary;
+            }
+          }
+          &--new-member {
+            display:flex;
+            &__icon {
+              color: $brand-primary;
+              width: 12px;
+              height: 12px;
+            }
+            &__number {
+              padding-left: 3px;
+              padding-top: 3px;
+              font-size: $font-size-small;
+              color: $brand-primary;
+            }
+          }
+          &--members {
+            color: $gray-light;
+            font-size: $font-size-small;
+          }
+          &--posts {
+            margin-left: 15px;
+            color: $gray-light;
+            font-size: $font-size-small;
+          }
+          &--date {
+            font-size: $font-size-base;
+            color: $gray-light;
+          }
+        }
+      }
+    }
+  }
+}

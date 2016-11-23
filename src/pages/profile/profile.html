@@ -35,7 +35,7 @@
 <ion-content>
   <div [hidden]="selection !== 'parties'" class='full'>
     <ion-scroll #partiesScroll class='full' scrollY='true'>
-      <parti-list [parties]='parties'></parti-list>
+      <joined-parti-list [parties]='parties'></joined-parti-list>
     </ion-scroll>
   </div>
   <div [hidden]="selection !== 'posts'" class='full'>
