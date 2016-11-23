@@ -147,18 +147,22 @@ export class PartiPostPanelComponent {
         if(choice === this.post.poll.my_choice) {
           return;
         }
-
-        let antiChoice = (choice == 'agree' ? 'disagree' : 'agree');
-        if(!this.isVoted()) {
-          this.post.poll.votings_count++;
-        } else {
-          this.post.poll[`${antiChoice}d_votings_count`]--;
+        if(choice == 'unsure') {
+          this.post.poll.my_choice = choice;
         }
+        else {
+          let antiChoice = (choice == 'agree' ? 'disagree' : 'agree');
+          if(!this.isVoted()) {
+            this.post.poll.votings_count++;
+          } else {
+            this.post.poll[`${antiChoice}d_votings_count`]--;
+          }
 
-        this.post.poll[`${choice}d_voting_users`].push(this.myselfData.asModel());
-        this.post.poll[`${choice}d_votings_count`]++;
-        this.post.poll[`${antiChoice}d_voting_users`] = _.reject(this.post.poll[`${antiChoice}d_voting_users`], { id: this.myselfData.id });
-        this.post.poll.my_choice = choice;
+          this.post.poll[`${choice}d_voting_users`].push(this.myselfData.asModel());
+          this.post.poll[`${choice}d_votings_count`]++;
+          this.post.poll[`${antiChoice}d_voting_users`] = _.reject(this.post.poll[`${antiChoice}d_voting_users`], { id: this.myselfData.id });
+          this.post.poll.my_choice = choice;
+        }
       });
   }
 

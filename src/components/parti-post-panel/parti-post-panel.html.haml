@@ -52,7 +52,7 @@
         반대
         / %br
         / {{ post.poll.disagreed_votings_count }}
-    .unsure-voting
+    .unsure-voting{ '(click)': 'onClickVotingButton("unsure")' }
       잘 모르겠습니다
   .poll-votings{ '*ngIf': 'isVoted()' }
     .agreed-voting-users
