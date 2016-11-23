@@ -54,8 +54,16 @@ export class PartiData {
       .map(res => <Parti[]>(res.json().parties));
   }
 
-  get(slug: string): Observable<Parti> {
-    return this.http.get(`/api/v1/parties/${slug}`)
+  get(slug: string, group_slug: string): Observable<Parti> {
+    let requestOptions = new RequestOptions();
+
+    if(!!group_slug) {
+      let searchParams = new URLSearchParams();
+      searchParams.set('group_slug', String(group_slug));
+      requestOptions.search = searchParams;
+    }
+
+    return this.http.get(`/api/v1/parties/${slug}`, requestOptions)
       .map(res => <Parti>(res.json().parti));
   }
 }

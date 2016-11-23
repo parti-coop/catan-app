@@ -48,7 +48,8 @@ export class TabsPage {
   listenToDeepLiknEvents() {
     this.events.subscribe('tabs:parti-deeplink', (data) => {
       let partiSlug = data[0]
-      this.partiData.get(partiSlug)
+      let groupSlug = data[1]
+      this.partiData.get(partiSlug, groupSlug)
         .subscribe(
           (parti: Parti) => {
             this.goToDeepLink(PartiHomePage, { parti: parti });

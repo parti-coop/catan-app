@@ -31,8 +31,11 @@ export class PostData {
     let searchParams = new URLSearchParams();
     if(!!lastPost) {
       searchParams.set('last_id', String(lastPost.id));
-      requestOptions.search = searchParams;
     }
+    if(!!parti.group) {
+      searchParams.set('group_slug', parti.group.slug);
+    }
+    requestOptions.search = searchParams;
     return this.http.get(`/api/v1/parties/${parti.slug}/posts`, requestOptions)
       .map(res => <InfinitPage<Post>>(res.json()));
   }

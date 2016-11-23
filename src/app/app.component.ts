@@ -63,14 +63,18 @@ export class PartiApp {
   ngAfterViewInit() {
     this.platform.ready().then(() => {
       Deeplinks.route({
-        '/p/:partiSlug': { page: 'partiHome' }
+        '/p/:partiSlug': { page: 'indiePartiHome' },
+        '/g/:groupSlug/:partiSlug': { page: 'groupPartiHome' }
       }).subscribe(match => {
+        console.log("match : ", match);
+
         setTimeout(() => {
-          if('partiHome' == match.$route.page) {
+          if('indiePartiHome' == match.$route.page || 'groupPartiHome' == match.$route.page) {
             console.log("Deeplinks : " + JSON.stringify(match.$args));
             this.myselfData.hasSignedIn()
               .then(hasSignedIn => {
-                this.events.publish('tabs:parti-deeplink', match.$args.partiSlug);
+                let groupSlug = match.$args.groupSlug;
+                this.events.publish('tabs:parti-deeplink', match.$args.partiSlug, groupSlug);
               }).catch((error) => {
                 console.log("PartiApp#ngAfterViewInit : " + error);
                 throw error;
