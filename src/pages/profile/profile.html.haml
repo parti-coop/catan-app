@@ -25,12 +25,16 @@
       %joined-parti-list{ '[parties]': 'parties' }
   %div.full{ '[hidden]': "selection !== 'posts'" }
     %ion-scroll.full{ scrollY: 'true', '#postsScroll': true }
-      .spinner-center-wrapper{ '*ngIf': '!posts' }
-        %ion-spinner
-      %template{ '[ngIf]': '!!posts'}
-        %ion-item{ '*ngFor': 'let post of posts' }
-          {{ post.parsed_title }}
-          {{ post.parsed_body }}
-        %template{ '[ngIf]': 'hasMorePost'}
-          %ion-infinite-scroll{ '(ionInfinite)': 'loadMorePosts($event)', '#infiniteScroll': true }
-            %ion-infinite-scroll-content{ loadingSpinner: "bubbles" }
+      .post-list
+        .spinner-center-wrapper{ '*ngIf': '!posts' }
+          %ion-spinner
+        %template{ '[ngIf]': '!!posts'}
+          %ion-item{ '*ngFor': 'let post of posts' }
+            .post-item
+              .post-info
+                .post-info--parti {{ post.parti.title }}
+                .post-info--date {{ post.created_at | partiDateTimeFormatObservable | async }}
+              .post-desc {{ post.specific_desc_striped_tags }}
+          %template{ '[ngIf]': 'hasMorePost'}
+            %ion-infinite-scroll{ '(ionInfinite)': 'loadMorePosts($event)', '#infiniteScroll': true }
+              %ion-infinite-scroll-content{ loadingSpinner: "bubbles" }

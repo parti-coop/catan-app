@@ -84,6 +84,40 @@ page-profile {
   .toolbar-md {
     padding: 0;
   }
+  .post-list {
+    ion-item {
+      padding: 0;
+      &.item-block{
+        .item-inner {
+          padding: 0;
+          border-bottom: 1px solid $gray-lighter;
+        }
+      }
+      ion-label {
+        margin: 12px 0px;
+      }
+    }
+    .post-item {
+      padding: 0 12px 0;
+      .post-info {
+        display: flex;
+        &--parti {
+          flex: 1;
+          font-size: $font-size-small;
+          color: $brand-primary;
+        }
+        &--date {
+          text-align: right;
+          font-size: $font-size-small;
+          color: $gray;
+        }
+      }
+      .post-desc {
+        margin-top: 7px;
+        font-size: $font-size-base;
+      }
+    }
+  }
 
   .user-cover {
     .user-image {

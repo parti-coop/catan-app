@@ -40,20 +40,27 @@
   </div>
   <div [hidden]="selection !== 'posts'" class='full'>
     <ion-scroll #postsScroll class='full' scrollY='true'>
-      <div *ngIf='!posts' class='spinner-center-wrapper'>
-        <ion-spinner></ion-spinner>
-      </div>
-      <template [ngIf]='!!posts'>
-        <ion-item *ngFor='let post of posts'>
-          {{ post.parsed_title }}
-          {{ post.parsed_body }}
-        </ion-item>
-        <template [ngIf]='hasMorePost'>
-          <ion-infinite-scroll #infiniteScroll (ionInfinite)='loadMorePosts($event)'>
-            <ion-infinite-scroll-content loadingSpinner='bubbles'></ion-infinite-scroll-content>
-          </ion-infinite-scroll>
+      <div class='post-list'>
+        <div *ngIf='!posts' class='spinner-center-wrapper'>
+          <ion-spinner></ion-spinner>
+        </div>
+        <template [ngIf]='!!posts'>
+          <ion-item *ngFor='let post of posts'>
+            <div class='post-item'>
+              <div class='post-info'>
+                <div class='post-info--parti'>{{ post.parti.title }}</div>
+                <div class='post-info--date'>{{ post.created_at | partiDateTimeFormatObservable | async }}</div>
+              </div>
+              <div class='post-desc'>{{ post.specific_desc_striped_tags }}</div>
+            </div>
+          </ion-item>
+          <template [ngIf]='hasMorePost'>
+            <ion-infinite-scroll #infiniteScroll (ionInfinite)='loadMorePosts($event)'>
+              <ion-infinite-scroll-content loadingSpinner='bubbles'></ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+          </template>
         </template>
-      </template>
+      </div>
     </ion-scroll>
   </div>
 </ion-content>
