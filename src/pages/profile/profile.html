@@ -6,7 +6,7 @@
         <ion-icon name='ios-arrow-dropdown'></ion-icon>
       </div>
       <div [hidden]='!isMe' class='settings-btn'>
-        <ion-icon name='settings'></ion-icon>
+        <ion-icon (click)='onClickSettings()' name='settings'></ion-icon>
       </div>
     </ion-title>
   </ion-navbar>

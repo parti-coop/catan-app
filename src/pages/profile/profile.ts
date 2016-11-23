@@ -9,6 +9,7 @@ import { MyselfData } from '../../providers/myself-data';
 import { Parti } from '../../models/parti';
 import { User } from '../../models/user';
 import { Post } from '../../models/post';
+import { MorePage } from '../../pages/more/more';
 import { InfinitPage } from '../../models/infinit-page';
 import { Shrinkage } from '../../directives/shrinkage';
 
@@ -54,6 +55,8 @@ export class ProfilePage {
     private postData: PostData
   ) {
     this.user = navParams.get('user');
+    if (!this.user)
+      this.user = <User>{id: this.myselfData.id, nickname: this.myselfData.nickname, image_url: this.myselfData.imageUrl};
     if (this.user.id == myselfData.id)
       this.isMe = true;
     //this.app.setScrollDisabled(true);
@@ -91,6 +94,10 @@ export class ProfilePage {
           this.lastPost = this.posts[this.posts.length-1];
         }
       });
+  }
+
+  onClickSettings() {
+    this.navCtrl.push(MorePage, {'animate':false});
   }
 
   private disableInfiniteScrollPostIfNoMoreData(infiniteScroll) {

@@ -5,7 +5,7 @@
         {{user.nickname}}
         %ion-icon{ name: 'ios-arrow-dropdown' }
       .settings-btn{ '[hidden]': "!isMe" }
-        %ion-icon{ name: 'settings' }
+        %ion-icon{ name: 'settings', '(click)': 'onClickSettings()' }
   .profile-toolbar
     %ion-toolbar{ 'no-border': true }
       .cover{ '#cover': true }

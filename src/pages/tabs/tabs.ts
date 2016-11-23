@@ -7,7 +7,7 @@ import { PartiesPage } from '../parties/parties';
 import { PostPage } from '../post/post';
 import { PartiHomePage } from '../parti-home/parti-home';
 import { MessagesPage } from '../messages/messages';
-import { MorePage } from '../more/more';
+import { ProfilePage } from '../profile/profile';
 import { PostData } from '../../providers/post-data';
 import { PartiData } from '../../providers/parti-data';
 import { Parti } from '../../models/parti';
@@ -23,7 +23,7 @@ export class TabsPage {
   homeRoot: any = HomePage;
   partiesRoot: any = PartiesPage;
   messagesRoot: any = MessagesPage;
-  moreRoot: any = MorePage;
+  profileRoot: any = ProfilePage;
 
   constructor(
     platform: Platform,
