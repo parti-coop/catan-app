@@ -5,6 +5,7 @@ import 'rxjs/add/operator/finally';
 
 import { PartiData } from '../../providers/parti-data';
 import { PostData } from '../../providers/post-data';
+import { MyselfData } from '../../providers/myself-data';
 import { Parti } from '../../models/parti';
 import { User } from '../../models/user';
 import { Post } from '../../models/post';
@@ -41,16 +42,20 @@ export class ProfilePage {
   hasMorePost: boolean = true;
 
   titleState: string = "out";
+  isMe: boolean = false;
 
   constructor(
     public navCtrl: NavController,
     private viewCtrl: ViewController,
     private navParams: NavParams,
     private app: App,
+    public myselfData: MyselfData,
     private partiData: PartiData,
     private postData: PostData
   ) {
     this.user = navParams.get('user');
+    if (this.user.id == myselfData.id)
+      this.isMe = true;
     //this.app.setScrollDisabled(true);
   }
 

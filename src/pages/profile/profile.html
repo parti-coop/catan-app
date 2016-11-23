@@ -5,7 +5,7 @@
         {{user.nickname}}
         <ion-icon name='ios-arrow-dropdown'></ion-icon>
       </div>
-      <div class='settings-btn'>
+      <div [hidden]='!isMe' class='settings-btn'>
         <ion-icon name='settings'></ion-icon>
       </div>
     </ion-title>
@@ -18,7 +18,7 @@
         </div>
         <div class='cover-bottom'>
           <div class='user-nickname'>{{user.nickname}}</div>
-          <div class='user-edit-btn'>프로필 수정</div>
+          <div [hidden]='!isMe' class='user-edit-btn'>프로필 수정</div>
         </div>
       </div>
       <ion-segment [(ngModel)]='selection'>
