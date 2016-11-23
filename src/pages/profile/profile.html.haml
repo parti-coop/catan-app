@@ -34,7 +34,14 @@
               .post-info
                 .post-info--parti {{ post.parti.title }}
                 .post-info--date {{ post.created_at | partiDateTimeFormatObservable | async }}
-              .post-desc {{ post.specific_desc_striped_tags }}
+              .post-desc
+                {{ post.specific_desc_striped_tags }}
+              .post-footer{ '*ngIf': 'post.upvotes_count > 0 || post.comments_count > 0' }
+                .post-reaction-info
+                  %span.post-upvotes-count{ '*ngIf': 'post.upvotes_count > 0' }
+                    공감 {{ post.upvotes_count }}
+                  %span.post-comments-count{ '*ngIf': 'post.comments_count > 0' }
+                    댓글 {{ post.comments_count }}
           %template{ '[ngIf]': 'hasMorePost'}
             %ion-infinite-scroll{ '(ionInfinite)': 'loadMorePosts($event)', '#infiniteScroll': true }
               %ion-infinite-scroll-content{ loadingSpinner: "bubbles" }

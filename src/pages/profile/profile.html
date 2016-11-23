@@ -51,7 +51,19 @@
                 <div class='post-info--parti'>{{ post.parti.title }}</div>
                 <div class='post-info--date'>{{ post.created_at | partiDateTimeFormatObservable | async }}</div>
               </div>
-              <div class='post-desc'>{{ post.specific_desc_striped_tags }}</div>
+              <div class='post-desc'>
+                {{ post.specific_desc_striped_tags }}
+              </div>
+              <div *ngIf='post.upvotes_count &gt; 0 || post.comments_count &gt; 0' class='post-footer'>
+                <div class='post-reaction-info'>
+                  <span *ngIf='post.upvotes_count &gt; 0' class='post-upvotes-count'>
+                    공감 {{ post.upvotes_count }}
+                  </span>
+                  <span *ngIf='post.comments_count &gt; 0' class='post-comments-count'>
+                    댓글 {{ post.comments_count }}
+                  </span>
+                </div>
+              </div>
             </div>
           </ion-item>
           <template [ngIf]='hasMorePost'>
