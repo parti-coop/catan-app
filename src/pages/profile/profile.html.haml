@@ -8,7 +8,7 @@
         %ion-icon{ name: 'settings', '(click)': 'onClickSettings()' }
   .profile-toolbar
     %ion-toolbar{ 'no-border': true }
-      .cover{ '#cover': true }
+      .cover{ '#cover': true, '[hidden]': "titleState === 'in'" }
         .cover-top
           .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
         .cover-bottom

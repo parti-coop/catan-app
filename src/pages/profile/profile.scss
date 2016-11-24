@@ -111,11 +111,13 @@ page-profile {
           text-align: right;
           font-size: $font-size-small;
           color: $gray;
+          width: 70px;
         }
       }
       .post-desc {
         margin: 5px 0;
         font-size: $font-size-base;
+        white-space: normal;
       }
       .post-footer {
         color: $gray-light;

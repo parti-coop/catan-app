@@ -12,7 +12,7 @@
   </ion-navbar>
   <div class='profile-toolbar'>
     <ion-toolbar no-border>
-      <div #cover class='cover'>
+      <div #cover [hidden]="titleState === 'in'" class='cover'>
         <div class='cover-top'>
           <div [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='user-image'></div>
         </div>
