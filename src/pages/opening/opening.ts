@@ -28,6 +28,7 @@ export class OpeningPage {
   @ViewChild('openingSliders') slider: Slides;
 
   tags: CheckableTag[];
+  checked_tags: CheckableTag[] = [];
   parties: JoinableParti[];
   buttonLabel: string = '계속하기';
 
@@ -67,7 +68,7 @@ export class OpeningPage {
 
   onClickTag(tag) {
     tag.checked = !tag.checked;
-
+    this.checked_tags.push(<CheckableTag>({ name: tag.name, checked: tag.checked }));
     this.loadParties();
   }
 
@@ -96,7 +97,7 @@ export class OpeningPage {
 
   loadParties() {
     this.parties = null;
-    this.partiData.tagged(_.map(this.tags, (tag) => tag.name))
+    this.partiData.tagged(_.map(this.checked_tags, (tag) => tag.name))
       .subscribe((parties: Parti[]) => {
         this.parties = <JoinableParti[]>(parties);
       });
