@@ -47,7 +47,7 @@
           <ion-spinner></ion-spinner>
         </div>
         <template [ngIf]='!!posts'>
-          <ion-item *ngFor='let post of posts'>
+          <ion-item (click)='onClickPost(post)' *ngFor='let post of posts'>
             <div class='post-item'>
               <div class='post-info'>
                 <div class='post-info--parti'>{{ post.parti.title }}</div>

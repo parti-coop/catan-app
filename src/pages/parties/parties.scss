@@ -149,9 +149,10 @@ page-parties {
             margin-right: 12px;
             &__icon {
               background-color: $brand-primary;
-              font-size: 11px;
+              font-size: $font-size-small;
               color: #fff;
-              padding: 2px 4px 1px;
+              padding: 0 4px;
+              margin-bottom: 3px;
             }
             &__number {
               padding-left: 3px;

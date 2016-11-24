@@ -12,6 +12,7 @@ import { Post } from '../../models/post';
 import { MorePage } from '../../pages/more/more';
 import { InfinitPage } from '../../models/infinit-page';
 import { Shrinkage } from '../../directives/shrinkage';
+import { PostPage } from '../../pages/post/post';
 
 import { appAnimation } from '../../pages/animation';
 
@@ -100,6 +101,11 @@ export class ProfilePage {
     this.navCtrl.push(MorePage, {'animate':false});
   }
 
+  onClickPost(post: Post) {
+    this.navCtrl.push(PostPage, {
+      post: post});
+  }
+
   private disableInfiniteScrollPostIfNoMoreData(infiniteScroll) {
     if(!this.hasMorePost) {
       infiniteScroll.enable(false);
@@ -126,6 +132,7 @@ export class ProfilePage {
   onExtended(event) {
     this.titleState = "out";
   }
+
 
   // shrinkCoverDone(event) {
   //   console.log(event);
