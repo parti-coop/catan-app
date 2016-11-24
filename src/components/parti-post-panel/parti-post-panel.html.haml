@@ -71,6 +71,8 @@
   .post-reaction-info
     %span.post-upvotes-count{ '*ngIf': 'post.upvotes_count > 0' }
       공감 {{ post.upvotes_count }}
+    %span.middot{ '*ngIf': 'post.upvotes_count > 0 && post.comments_count > 0' }
+      &middot;
     %span.post-comments-count{ '*ngIf': 'post.comments_count > 0' }
       댓글 {{ post.comments_count }}
 .post-buttons
@@ -85,7 +87,17 @@
     %ion-icon{ name: 'md-share' }
     공유하기
 .post-comments{ '*ngIf': "hasComment() && !isCollection" }
-  .comment{ '*ngFor': 'let comment of post.comments' }
+  .comment{ '*ngFor': 'let comment of post.comments'}
+    .comment-header
+      .comment-byline
+        .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + comment.user.image_url + ')' }" }
+        .byline-info
+          .user-nickname {{ comment.user.nickname }}
+          .comment-created-at
+            {{ comment.created_at | partiDateTimeFormatObservable | async }}
+    .comment-body{ '[innerHTML]': "comment.body | partiSimpleFormat ", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'" }
+.post-comments-in-collection{ '*ngIf': "hasComment() && isCollection" }
+  .comment{ '*ngFor': 'let comment of post.comments.slice(-2)'}
     .comment-header
       .comment-byline
         .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + comment.user.image_url + ')' }" }
