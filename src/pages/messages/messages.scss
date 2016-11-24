@@ -18,10 +18,12 @@ page-messages {
     }
     &--parti-group {
       color: $brand-primary;
+      width: 35px;
     }
     &--created-at {
       text-align: right;
       color: $gray;
+      width: 75px;
     }
   }
   .message-desc {

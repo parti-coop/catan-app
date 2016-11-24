@@ -23,10 +23,12 @@
       </div>
       <ion-segment [(ngModel)]='selection'>
         <ion-segment-button value='parties'>
-          내 빠띠
+          <div [hidden]='!isMe' class='segment-button-content'>내 빠띠</div>
+          <div [hidden]='isMe' class='segment-button-content'>가입한 빠띠</div>
         </ion-segment-button>
         <ion-segment-button value='posts'>
-          내가 쓴 글
+          <div [hidden]='!isMe' class='segment-button-content'>내가 쓴 글</div>
+          <div [hidden]='isMe' class='segment-button-content'>게시글</div>
         </ion-segment-button>
       </ion-segment>
     </ion-toolbar>

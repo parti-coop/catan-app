@@ -16,9 +16,11 @@
           .user-edit-btn{ '[hidden]': "!isMe" } 프로필 수정
       %ion-segment{ '[(ngModel)]': 'selection' }
         %ion-segment-button{ value: 'parties' }
-          내 빠띠
+          .segment-button-content{ '[hidden]': "!isMe" } 내 빠띠
+          .segment-button-content{ '[hidden]': "isMe" } 가입한 빠띠
         %ion-segment-button{ value: 'posts' }
-          내가 쓴 글
+          .segment-button-content{ '[hidden]': "!isMe" } 내가 쓴 글
+          .segment-button-content{ '[hidden]': "isMe" } 게시글
 %ion-content
   %div.full{ '[hidden]': "selection !== 'parties'" }
     %ion-scroll.full{ scrollY: 'true', '#partiesScroll': true }

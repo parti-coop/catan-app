@@ -41,14 +41,16 @@ export class MyselfData {
         NativeStorage.getItem(this.STORAGE_REFERENCE_HAS_SIGNED_IN),
         NativeStorage.getItem(this.STORAGE_REFERENCE_NICKNAME),
         NativeStorage.getItem(this.STORAGE_REFERENCE_ID),
+        NativeStorage.getItem(this.STORAGE_REFERENCE_IMAGE_URL),
         NativeStorage.getItem(this.STORAGE_REFERENCE_ACCESS_TOKEN),
         NativeStorage.getItem(this.STORAGE_REFERENCE_REFRESH_TOKEN)
       ]).then(values => {
         this._hasSignedIn = values[0];
         this.nickname = values[1];
         this.id = values[2];
-        this.accessToken = values[3];
-        this.refreshToken = values[4];
+        this.imageUrl = values[3];
+        this.accessToken = values[4];
+        this.refreshToken = values[5];
         this.syncedStorage = true;
         if(this._hasSignedIn) {
           console.log("MyselfData : 이미 로그인");
