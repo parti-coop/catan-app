@@ -67,14 +67,13 @@
     명이 투표했습니다.
   .poll-before-voting{ '*ngIf': '!isVoted()' }
     찬반 투표하면 현재 결과를 볼 수 있습니다.
-.post-footer{ '*ngIf': 'post.upvotes_count > 0 || post.comments_count > 0' }
-  .post-reaction-info
-    %span.post-upvotes-count{ '*ngIf': 'post.upvotes_count > 0' }
-      공감 {{ post.upvotes_count }}
-    %span.middot{ '*ngIf': 'post.upvotes_count > 0 && post.comments_count > 0' }
-      &middot;
-    %span.post-comments-count{ '*ngIf': 'post.comments_count > 0' }
-      댓글 {{ post.comments_count }}
+.post-reaction-info-in-collection{ '*ngIf': '(post.upvotes_count > 0 || post.comments_count > 0) && isCollection' }
+  %span.post-upvotes-count{ '*ngIf': 'post.upvotes_count > 0' }
+    공감 {{ post.upvotes_count }}
+  %span.middot{ '*ngIf': 'post.upvotes_count > 0 && post.comments_count > 0' }
+    &middot;
+  %span.post-comments-count{ '*ngIf': 'post.comments_count > 0' }
+    댓글 {{ post.comments_count }}
 .post-buttons
   %span.upvote-button{ '(click)': 'onClickUpvoteButton()', '#upvoteButton': true, '[class.upvotable]': 'post.is_upvotable', '*ngIf': '!isLoading' }
     %ion-icon{ name: 'heart', '[class.upvoted]': '!post.is_upvotable' }
@@ -86,23 +85,32 @@
   %span.parti-share-button{ '(click)': 'onClickShare()' }
     %ion-icon{ name: 'md-share' }
     공유하기
-.post-comments{ '*ngIf': "hasComment() && !isCollection" }
-  .comment{ '*ngFor': 'let comment of post.comments'}
-    .comment-header
-      .comment-byline
-        .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + comment.user.image_url + ')' }" }
-        .byline-info
-          .user-nickname {{ comment.user.nickname }}
-          .comment-created-at
-            {{ comment.created_at | partiDateTimeFormatObservable | async }}
-    .comment-body{ '[innerHTML]': "comment.body | partiSimpleFormat ", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'" }
-.post-comments-in-collection{ '*ngIf': "hasComment() && isCollection" }
-  .comment{ '*ngFor': 'let comment of post.comments.slice(-2)'}
-    .comment-header
-      .comment-byline
-        .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + comment.user.image_url + ')' }" }
-        .byline-info
-          .user-nickname {{ comment.user.nickname }}
-          .comment-created-at
-            {{ comment.created_at | partiDateTimeFormatObservable | async }}
-    .comment-body{ '[innerHTML]': "comment.body | partiSimpleFormat ", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'" }
+.post-footer{ '*ngIf': "!isCollection" }
+  .post-reaction-info{ '*ngIf': '(post.upvotes_count > 0 || post.comments_count > 0) && !isCollection' }
+    %span.post-upvotes-count{ '*ngIf': 'post.upvotes_count > 0' }
+      공감 {{ post.upvotes_count }}
+    %span.middot{ '*ngIf': 'post.upvotes_count > 0 && post.comments_count > 0' }
+      &middot;
+    %span.post-comments-count{ '*ngIf': 'post.comments_count > 0' }
+      댓글 {{ post.comments_count }}
+  .post-comments{ '*ngIf': "hasComment() && !isCollection" }
+    .comment{ '*ngFor': 'let comment of post.comments'}
+      .comment-header
+        .comment-byline
+          .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + comment.user.image_url + ')' }" }
+          .byline-info
+            .user-nickname {{ comment.user.nickname }}
+            .comment-created-at
+              {{ comment.created_at | partiDateTimeFormatObservable | async }}
+      .comment-body{ '[innerHTML]': "comment.body | partiSimpleFormat ", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'" }
+.post-footer-in-collection{ '*ngIf': "isCollection" }
+  .post-comments{ '*ngIf': "hasComment()" }
+    .comment{ '*ngFor': 'let comment of post.comments.slice(-2)'}
+      .comment-header
+        .comment-byline
+          .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + comment.user.image_url + ')' }" }
+          .byline-info
+            .user-nickname {{ comment.user.nickname }}
+            .comment-created-at
+              {{ comment.created_at | partiDateTimeFormatObservable | async }}
+      .comment-body{ '[innerHTML]': "comment.body | partiSimpleFormat ", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'" }

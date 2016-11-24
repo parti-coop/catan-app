@@ -251,73 +251,81 @@ parti-post-panel {
         text-align: left;
       }
     }
-
   }
-  .post-footer {
+
+  .post-reaction-info-in-collection,
+  .post-reaction-info {
     color: $gray-light;
-    .post-reaction-info {
-      font-size: $font-size-small;
-      padding: 0 6px 12px;
-      color: $brand-primary;
-      .middot {
-        padding: 0 2px;
-      }
+    font-size: $font-size-small;
+    padding: 0 6px 12px;
+    color: $brand-primary;
+    .middot {
+      padding: 0 2px;
     }
   }
-  .post-comments-in-collection,
-  .post-comments {
-    padding: 12px 6px;
+
+  .post-footer-in-collection,
+  .post-footer {
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
     border-top: 1px solid $gray-lighter;
-    background-color: $gray-lightest;
+    background-color: $gray-more-lightest;
+    padding: 12px 12px;
     margin-left: -6px;
     margin-right: -6px;
-    .comment {
-      &:first-child {
-        border-top: none;
-        padding-top: 0;
-      }
-      &:last-child {
-        padding-bottom: 0;
-      }
-      border-top: 1px solid $gray-less-lighter;
-      padding: 12px 0;
-      color: $gray-dark;
-      .comment-header {
-        .comment-byline {
-          display: flex;
-          justify-content: flex-start;
-          .user-image {
-            display: inline-block;
-            height: 24px;
-            width: 24px;
-            border-radius: 50%;
-            @include background-thumbnail();
-          }
-          .byline-info {
-            padding-left: 8px;
-            .user-nickname{
+
+    .post-reaction-info {
+      padding: 0 0 12px;
+    }
+
+    .post-comments {
+      .comment {
+        &:first-child {
+          border-top: none;
+          padding-top: 0;
+        }
+        &:last-child {
+          padding-bottom: 0;
+        }
+        border-top: 1px solid $gray-lighter;
+        padding: 12px 0;
+        color: $gray-dark;
+        .comment-header {
+          .comment-byline {
+            display: flex;
+            justify-content: flex-start;
+            .user-image {
               display: inline-block;
-              color: $brand-primary-dark;
+              height: 24px;
+              width: 24px;
+              border-radius: 50%;
+              @include background-thumbnail();
             }
-            .comment-created-at {
-              color: $gray-light;
-              display: inline-block;
-              font-size: $font-size-small;
+            .byline-info {
+              padding-left: 8px;
+              .user-nickname{
+                display: inline-block;
+                color: $brand-primary-dark;
+              }
+              .comment-created-at {
+                color: $gray-light;
+                display: inline-block;
+                font-size: $font-size-small;
+              }
             }
           }
         }
-      }
-      .comment-body {
-        padding-left: 32px;
-        &.agreed:before {
-          content: '\f392  찬성 ';
-          font-family: "Ionicons";
-          color: $brand-success;
-        }
-        &.disagreed:before {
-          content: '\f391  반대 ';
-          font-family: "Ionicons";
-          color: $brand-danger;
+        .comment-body {
+          padding-left: 32px;
+          &.agreed:before {
+            content: '\f392  찬성 ';
+            font-family: "Ionicons";
+            color: $brand-success;
+          }
+          &.disagreed:before {
+            content: '\f391  반대 ';
+            font-family: "Ionicons";
+            color: $brand-danger;
+          }
         }
       }
     }

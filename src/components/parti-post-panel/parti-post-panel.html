@@ -96,18 +96,16 @@
     찬반 투표하면 현재 결과를 볼 수 있습니다.
   </div>
 </div>
-<div *ngIf='post.upvotes_count &gt; 0 || post.comments_count &gt; 0' class='post-footer'>
-  <div class='post-reaction-info'>
-    <span *ngIf='post.upvotes_count &gt; 0' class='post-upvotes-count'>
-      공감 {{ post.upvotes_count }}
-    </span>
-    <span *ngIf='post.upvotes_count &gt; 0 &amp;&amp; post.comments_count &gt; 0' class='middot'>
-      &middot;
-    </span>
-    <span *ngIf='post.comments_count &gt; 0' class='post-comments-count'>
-      댓글 {{ post.comments_count }}
-    </span>
-  </div>
+<div *ngIf='(post.upvotes_count &gt; 0 || post.comments_count &gt; 0) &amp;&amp; isCollection' class='post-reaction-info-in-collection'>
+  <span *ngIf='post.upvotes_count &gt; 0' class='post-upvotes-count'>
+    공감 {{ post.upvotes_count }}
+  </span>
+  <span *ngIf='post.upvotes_count &gt; 0 &amp;&amp; post.comments_count &gt; 0' class='middot'>
+    &middot;
+  </span>
+  <span *ngIf='post.comments_count &gt; 0' class='post-comments-count'>
+    댓글 {{ post.comments_count }}
+  </span>
 </div>
 <div class='post-buttons'>
   <span #upvoteButton (click)='onClickUpvoteButton()' *ngIf='!isLoading' [class.upvotable]='post.is_upvotable' class='upvote-button'>
@@ -124,35 +122,50 @@
     공유하기
   </span>
 </div>
-<div *ngIf='hasComment() &amp;&amp; !isCollection' class='post-comments'>
-  <div *ngFor='let comment of post.comments' class='comment'>
-    <div class='comment-header'>
-      <div class='comment-byline'>
-        <div [ngStyle]="{ 'background-image': 'url(' + comment.user.image_url + ')' }" class='user-image'></div>
-        <div class='byline-info'>
-          <div class='user-nickname'>{{ comment.user.nickname }}</div>
-          <div class='comment-created-at'>
-            {{ comment.created_at | partiDateTimeFormatObservable | async }}
+<div *ngIf='!isCollection' class='post-footer'>
+  <div *ngIf='(post.upvotes_count &gt; 0 || post.comments_count &gt; 0) &amp;&amp; !isCollection' class='post-reaction-info'>
+    <span *ngIf='post.upvotes_count &gt; 0' class='post-upvotes-count'>
+      공감 {{ post.upvotes_count }}
+    </span>
+    <span *ngIf='post.upvotes_count &gt; 0 &amp;&amp; post.comments_count &gt; 0' class='middot'>
+      &middot;
+    </span>
+    <span *ngIf='post.comments_count &gt; 0' class='post-comments-count'>
+      댓글 {{ post.comments_count }}
+    </span>
+  </div>
+  <div *ngIf='hasComment() &amp;&amp; !isCollection' class='post-comments'>
+    <div *ngFor='let comment of post.comments' class='comment'>
+      <div class='comment-header'>
+        <div class='comment-byline'>
+          <div [ngStyle]="{ 'background-image': 'url(' + comment.user.image_url + ')' }" class='user-image'></div>
+          <div class='byline-info'>
+            <div class='user-nickname'>{{ comment.user.nickname }}</div>
+            <div class='comment-created-at'>
+              {{ comment.created_at | partiDateTimeFormatObservable | async }}
+            </div>
           </div>
         </div>
       </div>
+      <div [class.agreed]="comment.choice == 'agree'" [class.disagreed]="comment.choice == 'disagree'" [innerHTML]='comment.body | partiSimpleFormat ' class='comment-body'></div>
     </div>
-    <div [class.agreed]="comment.choice == 'agree'" [class.disagreed]="comment.choice == 'disagree'" [innerHTML]='comment.body | partiSimpleFormat ' class='comment-body'></div>
   </div>
 </div>
-<div *ngIf='hasComment() &amp;&amp; isCollection' class='post-comments-in-collection'>
-  <div *ngFor='let comment of post.comments.slice(-2)' class='comment'>
-    <div class='comment-header'>
-      <div class='comment-byline'>
-        <div [ngStyle]="{ 'background-image': 'url(' + comment.user.image_url + ')' }" class='user-image'></div>
-        <div class='byline-info'>
-          <div class='user-nickname'>{{ comment.user.nickname }}</div>
-          <div class='comment-created-at'>
-            {{ comment.created_at | partiDateTimeFormatObservable | async }}
+<div *ngIf='isCollection' class='post-footer-in-collection'>
+  <div *ngIf='hasComment()' class='post-comments'>
+    <div *ngFor='let comment of post.comments.slice(-2)' class='comment'>
+      <div class='comment-header'>
+        <div class='comment-byline'>
+          <div [ngStyle]="{ 'background-image': 'url(' + comment.user.image_url + ')' }" class='user-image'></div>
+          <div class='byline-info'>
+            <div class='user-nickname'>{{ comment.user.nickname }}</div>
+            <div class='comment-created-at'>
+              {{ comment.created_at | partiDateTimeFormatObservable | async }}
+            </div>
           </div>
         </div>
       </div>
+      <div [class.agreed]="comment.choice == 'agree'" [class.disagreed]="comment.choice == 'disagree'" [innerHTML]='comment.body | partiSimpleFormat ' class='comment-body'></div>
     </div>
-    <div [class.agreed]="comment.choice == 'agree'" [class.disagreed]="comment.choice == 'disagree'" [innerHTML]='comment.body | partiSimpleFormat ' class='comment-body'></div>
   </div>
 </div>
