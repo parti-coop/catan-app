@@ -54,7 +54,7 @@
   </button>
 </div>
 <div *ngIf='!!post.poll' class='post-poll'>
-  <div class='poll-title'>"{{ post.poll.title }}"</div>
+  <div (click)='onClickPostContent()' class='poll-title'>"{{ post.poll.title }}"</div>
   <div class='poll-voting-btns'>
     <div class='voting-btns-wrapper'>
       <button (click)='onClickVotingButton("agree")' [class.voted]='isAgreed()' [disabled]='disableVotingButtons' class='agreed-voting-btn' color='agree' ion-button outline>
@@ -84,7 +84,7 @@
       <div (click)='onClickVotingUser(user)' *ngFor='let user of post.poll.agreed_voting_users' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='voting-user'></div>
     </div>
     <div class='disagreed-voting-users'>
-      <div (click)='onClickVotingUser(user)' *ngFor='let user of post.poll.disagreed_voting_users' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='voting-users'></div>
+      <div (click)='onClickVotingUser(user)' *ngFor='let user of post.poll.disagreed_voting_users' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='voting-user'></div>
     </div>
   </div>
   <div class='poll-recommend-voting'>
@@ -134,6 +134,6 @@
         </div>
       </div>
     </div>
-    <div [innerHTML]='comment.body | partiSimpleFormat ' class='comment-body'></div>
+    <div [class.agreed]="comment.choice == 'agree'" [class.disagreed]="comment.choice == 'disagree'" [innerHTML]='comment.body | partiSimpleFormat ' class='comment-body'></div>
   </div>
 </div>

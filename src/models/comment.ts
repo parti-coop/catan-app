@@ -8,4 +8,5 @@ export interface Comment {
   created_at: string;
   is_mentionable: boolean;
   is_upvotable: boolean;
+  choice: string;
 }

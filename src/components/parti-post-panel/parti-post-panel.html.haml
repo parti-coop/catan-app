@@ -39,7 +39,7 @@
   %button.file-reference-button{ 'ion-button': true, 'outline': true, color: 'gray', '(click)': 'onClickFileReference(post.file_reference)' }
     다운로드
 .post-poll{ '*ngIf': '!!post.poll' }
-  .poll-title "{{ post.poll.title }}"
+  .poll-title{ '(click)': 'onClickPostContent()' } "{{ post.poll.title }}"
   .poll-voting-btns
     .voting-btns-wrapper
       %button.agreed-voting-btn{ 'ion-button': true, 'outline': true, color: 'agree', '[class.voted]': 'isAgreed()', '(click)': 'onClickVotingButton("agree")', '[disabled]': 'disableVotingButtons' }
@@ -60,7 +60,7 @@
     .agreed-voting-users
       .voting-user{ '*ngFor': 'let user of post.poll.agreed_voting_users', '(click)': 'onClickVotingUser(user)', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
     .disagreed-voting-users
-      .voting-users{ '*ngFor': 'let user of post.poll.disagreed_voting_users', '(click)': 'onClickVotingUser(user)', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
+      .voting-user{ '*ngFor': 'let user of post.poll.disagreed_voting_users', '(click)': 'onClickVotingUser(user)', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
   .poll-recommend-voting
     현재
     %span.poll-voted-counts {{ post.poll.agreed_votings_count + post.poll.disagreed_votings_count }}
@@ -93,4 +93,4 @@
           .user-nickname {{ comment.user.nickname }}
           .comment-created-at
             {{ comment.created_at | partiDateTimeFormatObservable | async }}
-    .comment-body{ '[innerHTML]': "comment.body | partiSimpleFormat " }
+    .comment-body{ '[innerHTML]': "comment.body | partiSimpleFormat ", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'" }

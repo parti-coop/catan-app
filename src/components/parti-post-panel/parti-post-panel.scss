@@ -191,7 +191,8 @@ parti-post-panel {
             padding-bottom: 3px;
           }
           &.voted {
-            background-color: color($colors, agree);
+            background-color: $brand-success-dark;
+            border-color: $brand-success-dark;
             color: #fff;
           }
         }
@@ -202,7 +203,8 @@ parti-post-panel {
             padding-top: 6px;
           }
           &.voted {
-            background-color: color($colors, disagree);
+            background-color: $brand-danger-dark;
+            border-color: $brand-danger-dark;
             color: #fff;
           }
         }
@@ -231,6 +233,15 @@ parti-post-panel {
         display: inline-block;
         width: 45%;
         vertical-align: text-top;
+        .voting-user {
+          height: 20px;
+          width: 20px;
+          @include background-thumbnail();
+          display: inline-block;
+          margin-left: 1px;
+          margin-right: 1px;
+          border-radius: 50%;
+        }
       }
       .agreed-voting-users {
         text-align: right;
@@ -238,15 +249,6 @@ parti-post-panel {
       }
       .disagreed-voting-users {
         text-align: left;
-      }
-      .voting-user {
-        height: 20px;
-        width: 20px;
-        @include background-thumbnail();
-        display: inline-block;
-        margin-left: 1px;
-        margin-right: 1px;
-        border-radius: 50%;
       }
     }
 
@@ -306,6 +308,16 @@ parti-post-panel {
       }
       .comment-body {
         padding-left: 32px;
+        &.agreed:before {
+          content: '\f392  찬성 ';
+          font-family: "Ionicons";
+          color: $brand-success;
+        }
+        &.disagreed:before {
+          content: '\f391  반대 ';
+          font-family: "Ionicons";
+          color: $brand-danger;
+        }
       }
     }
   }
