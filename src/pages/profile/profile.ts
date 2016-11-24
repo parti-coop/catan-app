@@ -56,14 +56,14 @@ export class ProfilePage {
   ) {
     this.user = navParams.get('user');
     if (!this.user)
-      this.user = <User>{id: this.myselfData.id, nickname: this.myselfData.nickname, image_url: this.myselfData.imageUrl};
+      this.user = this.myselfData.asModel()
     if (this.user.id == myselfData.id)
       this.isMe = true;
     //this.app.setScrollDisabled(true);
   }
 
   ionViewDidLoad() {
-    this.partiData.joinedByUser(this.user)
+    this.partiData.joined(this.user)
       .subscribe((parties: Parti[]) => {
         this.parties = parties;
       });

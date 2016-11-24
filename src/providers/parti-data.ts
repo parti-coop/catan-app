@@ -18,7 +18,7 @@ export class PartiData {
       .map(res => <Parti[]>(res.json().parties));
   }
 
-  joined(user: User = null): Observable<Parti[]> {
+  joined(user: User): Observable<Parti[]> {
     let requestOptions = new RequestOptions();
     if(!!user) {
       let searchParams = new URLSearchParams();
@@ -26,17 +26,6 @@ export class PartiData {
       requestOptions.search = searchParams;
     }
     return this.http.get('/api/v1/parties/joined', requestOptions)
-      .map(res => <Parti[]>(res.json().parties));
-  }
-
-  joinedByUser(user: User = null): Observable<Parti[]> {
-    let requestOptions = new RequestOptions();
-    if(!!user) {
-      let searchParams = new URLSearchParams();
-      searchParams.set('user_id', String(user.id));
-      requestOptions.search = searchParams;
-    }
-    return this.http.get('/api/v1/parties/joined_by_user', requestOptions)
       .map(res => <Parti[]>(res.json().parties));
   }
 

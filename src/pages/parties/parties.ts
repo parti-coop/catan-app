@@ -12,6 +12,7 @@ import { PartiEnvironment } from '../../config/constant';
 import { PartiData } from '../../providers/parti-data';
 import { MemberData } from '../../providers/member-data';
 import { TagData } from '../../providers/tag-data';
+import { MyselfData } from '../../providers/myself-data';
 import { GroupData } from '../../providers/group-data';
 import { PartiHomePage } from '../../pages/parti-home/parti-home';
 import { GroupPartiesPage } from '../../pages/group-parties/group-parties';
@@ -39,16 +40,20 @@ export class PartiesPage {
     private tagData: TagData,
     private partiData: PartiData,
     private groupData: GroupData,
+    private myselfData: MyselfData,
     private memberData: MemberData
   ) {
     this.listenToMemberEvents();
   }
 
   ionViewDidLoad() {
-    for (let key of ['joined', 'all']) {
+    let observables = {
+      joined: this.partiData.joined(this.myselfData.asModel()),
+      all: this.partiData.all()
+    };
+    for (let key in observables) {
       if(!this.parties[key]) {
-        this.partiData[key]()
-          .subscribe((parties: Parti[]) => {
+          observables[key].subscribe((parties: Parti[]) => {
             this.parties[key] = parties;
           }, (error) => {
             this.parties[key] = this.parties[key] || [];
