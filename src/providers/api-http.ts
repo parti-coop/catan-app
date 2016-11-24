@@ -67,6 +67,8 @@ export class ApiHttp {
     }
     if (!options.headers.get('Content-Type') || !options.headers.get('Content-Type').length) {
       options.headers.append('Content-Type', 'application/json');
+    } else if(options.headers.get('Content-Type') && options.headers.get('Content-Type') == 'multipart/form-data') {
+      options.headers.delete('Content-Type');
     }
     options.method = method;
     return options;

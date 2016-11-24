@@ -40,6 +40,8 @@
   <preference name="TwitterConsumerSecret" value="<%= secrets.twitterConsumerSecret %>" />
   <feature name="StatusBar">
     <param name="ios-package" onload="true" value="CDVStatusBar"/>
+    <param name="ios-package" value="CDVCamera" />
+    <param name="android-package" value="org.apache.cordova.CameraLauncher" />
   </feature>
   <plugin name="cordova-plugin-device" spec="~1.1.3"/>
   <plugin name="cordova-plugin-console" spec="~1.0.4"/>

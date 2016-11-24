@@ -69,6 +69,11 @@
     "cordova-plugin-network-information",
     "cordova-plugin-fcm",
     "cordova-plugin-appavailability",
+    "cordova-plugin-camera",
+    {
+      "id": "com.verso.cordova.clipboard",
+      "locator": "https://github.com/VersoSolutions/CordovaClipboard.git"
+    },
     {
       "id": "ionic-plugin-deeplinks",
       "locator": "ionic-plugin-deeplinks",

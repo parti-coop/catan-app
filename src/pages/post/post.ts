@@ -5,6 +5,8 @@ import { Keyboard } from 'ionic-native';
 import { Subscription } from 'rxjs/rx';
 import { Parti } from '../../models/parti';
 
+import 'rxjs/add/operator/finally';
+
 import { CommentData } from '../../providers/comment-data';
 
 import { Post } from '../../models/post';
@@ -33,7 +35,6 @@ export class PostPage {
     private loadingCtrl: LoadingController
   ){
     this.post = navParams.get('post');
-    console.log(this.post);
     this.commentForm = this.formBuilder.group({
       body: ['', Validators.required]
     });

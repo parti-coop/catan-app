@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>게시글 쓰기</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content #content>
+  <form (ngSubmit)='save()' [formGroup]='postForm'>
+    <ion-item [hidden]='!!this.parties'>
+      가입한 빠띠를 가져오는 중입니다.
+      <ion-spinner></ion-spinner>
+    </ion-item>
+    <ion-item (click)='onClickPartiSelect()' [hidden]='!this.parties'>
+      <span *ngIf='!this.parti'>
+        빠띠를 선택해 주세요.
+      </span>
+      <span *ngIf='!!this.parti'>
+        {{ this.parti.title }}
+      </span>
+    </ion-item>
+    <ion-item>
+      <ion-textarea formControlName='body' placeholder='무슨 이야기를 하고 싶으세요?'></ion-textarea>
+      }
+    </ion-item>
+    <ion-item [hidden]='referenceTypeName() != "LinkSource"'>
+      <ion-input autocapitalize='off' clearInput formControlName='link' placeholder='웹주소를 넣어 주세요.' type='url'></ion-input>
+    </ion-item>
+    <ion-item [hidden]='referenceTypeName() != "Poll"'>
+      <ion-input formControlName='poll' placeholder='찬반투표 제목을 넣어 주세요.' type='text'></ion-input>
+    </ion-item>
+    <ion-item [hidden]='referenceTypeName() != "FileSource"'>
+      <img [src]='imageSrc'>
+    </ion-item>
+  </form>
+</ion-content>
+<ion-footer [keyboardAttach]='content'>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button (click)='onClickCamera()' ion-button>
+        <ion-icon name='ios-camera-outline'></ion-icon>
+      </button>
+      <button (click)='onClickGallery()' ion-button>
+        <ion-icon name='ios-image-outline'></ion-icon>
+      </button>
+      <button (click)='onClickLink()' ion-button>
+        <ion-icon name='ios-link-outline'></ion-icon>
+      </button>
+      <button (click)='onClickPoll()' ion-button>
+        <ion-icon name='ios-key'></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button (click)='save()' [disabled]='invalidToSave()' ion-button type='submit'>게시</button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

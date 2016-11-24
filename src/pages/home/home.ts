@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { App, Events, InfiniteScroll } from 'ionic-angular';
 
@@ -23,6 +23,7 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
+    private ref: ChangeDetectorRef,
     private events: Events,
     private app: App,
     public partiEnvironment: PartiEnvironment,
@@ -33,6 +34,12 @@ export class HomePage {
   ionViewDidLoad() {
     console.log('home view loading');
     this.load();
+  }
+
+  ionViewDidEnter() {
+    console.log('home view enter');
+    this.ref.detectChanges();
+    console.log('detectChanges');
   }
 
   loadMore(infiniteScroll) {
@@ -57,6 +64,7 @@ export class HomePage {
         if(this.posts.length) {
           this.lastPost = this.posts[this.posts.length-1];
         }
+        this.ref.detectChanges();
       });
   }
 

@@ -1,0 +1,11 @@
+%ion-header
+  %ion-navbar
+    %ion-title  빠띠를 골라요.
+
+%ion-content{ 'padding': true }
+  %ion-list
+    %ion-item{ '*ngFor': 'let parti of parties' }
+      %ion-label {{ parti.title }}
+      %ion-checkbox{ 'checked': '{{ (seletedParti && parti.id == seletedParti.id) ? "true" : "false" }}', '(ionChange)': 'onClickParti(parti)' }
+
+

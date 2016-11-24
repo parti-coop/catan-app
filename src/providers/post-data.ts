@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Headers } from "@angular/http";
 import { RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -54,6 +55,33 @@ export class PostData {
 
   get(id: number): Observable<Post> {
     return this.http.get(`/api/v1/posts/${id}`)
+      .map(res => <Post>(res.json().post));
+  }
+
+  create(parti: Parti, body: string,
+    attachment: string, link: string, poll: string
+  ): Observable<Post> {
+    let requestOptions = new RequestOptions();
+
+    let formData: FormData = new FormData();
+    if(!!attachment) {
+      formData.append('post[reference][attachment]', attachment);
+    }
+    if(!!link) {
+      formData.append('post[reference][link]', link);
+    }
+    if(!!poll) {
+      formData.append('post[reference][poll]', poll);
+    }
+    formData.append('post[parti_id]', parti.id);
+    formData.append('post[body]', body);
+    requestOptions.body = formData;
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'multipart/form-data');
+    requestOptions.headers = headers;
+
+    return this.http.post('/api/v1/posts', requestOptions)
       .map(res => <Post>(res.json().post));
   }
 }

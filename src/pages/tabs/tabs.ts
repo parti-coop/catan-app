@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { Keyboard } from 'ionic-native';
-import { Platform, MenuController, NavParams, Tabs, Tab, Events } from 'ionic-angular';
+import { Platform, MenuController, ModalController, NavParams, Tabs, Tab, Events } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
+import { EditorPage } from '../editor/editor';
 import { PartiesPage } from '../parties/parties';
 import { PostPage } from '../post/post';
 import { PartiHomePage } from '../parti-home/parti-home';
@@ -28,6 +29,7 @@ export class TabsPage {
   constructor(
     platform: Platform,
     private menuCtrl: MenuController,
+    private modalCtrl: ModalController,
     private navParams: NavParams,
     private events: Events,
     private postData: PostData,
@@ -79,5 +81,10 @@ export class TabsPage {
         this.tabsRef.select(this.deepLinkTabRef);
       });
     }
+  }
+
+  onClickEditor() {
+    let editorModal = this.modalCtrl.create(EditorPage);
+     editorModal.present();
   }
 }

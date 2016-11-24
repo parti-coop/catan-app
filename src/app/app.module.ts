@@ -35,6 +35,8 @@ import { IntroPage } from '../pages/intro/intro';
 import { DevPage } from '../pages/dev/dev';
 import { MembersPage } from '../pages/members/members';
 import { ProfilePage } from '../pages/profile/profile';
+import { EditorPage } from '../pages/editor/editor';
+import { PartiSelectPage } from '../pages/parti-select/parti-select';
 
 import { PartiEnvironment } from '../config/constant';
 import { PartiData } from '../providers/parti-data';
@@ -80,6 +82,8 @@ moment.locale('ko');
     DevPage,
     MembersPage,
     ProfilePage,
+    EditorPage,
+    PartiSelectPage,
     PartiPostBylineComponent,
     PartiPostPanelComponent,
     PartiList,
@@ -114,7 +118,9 @@ moment.locale('ko');
     IntroPage,
     DevPage,
     MembersPage,
-    ProfilePage
+    ProfilePage,
+    EditorPage,
+    PartiSelectPage
   ],
   providers: [
     PartiEnvironment,

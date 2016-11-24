@@ -66,6 +66,7 @@ export class Shrinkage implements AfterViewInit {
       this.isShrinkedStared = true;
       setTimeout(() => {
         this.renderer.setElementStyle(this.target, 'height', '0');
+        this.renderer.setElementStyle(this.target, 'overflow', 'hidden');
       }, 10);
     }
   }
@@ -90,6 +91,7 @@ export class Shrinkage implements AfterViewInit {
 
     this.reset();
     this.renderer.setElementStyle(this.target, 'height', 'initial');
+    this.renderer.setElementStyle(this.target, 'overflow', 'initial');
     setTimeout(() => {
       this.content.resize();
       this.onExtended.emit();
