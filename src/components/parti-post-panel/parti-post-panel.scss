@@ -5,18 +5,21 @@ parti-post-panel {
   .post-parti {
     border-bottom: 1px solid #d2d2d2;
     padding: 0 6px 6px;
+    display: flex;
+    flex-flow: row nowrap;
 
     .parti-logo {
-      display: inline-block;
       height: 28px;
       width: 28px;
       border-radius: 2px;
+      margin-right: 12px;
       @include background-thumbnail();
     }
     .parti-info {
-      display: inline-block;
-      width: 80%;
+      flex: 1;
+      align-self: center;
       .parti-title {
+        width: 100%;
         display: inline-block;
         color: $brand-primary;
       }
