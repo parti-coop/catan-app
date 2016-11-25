@@ -16,17 +16,10 @@ parti-post-panel {
       margin-right: 12px;
       @include background-thumbnail();
     }
-    .parti-info {
+    .parti-title {
       flex: 1;
       align-self: center;
-      .parti-title {
-        width: 100%;
-        display: inline-block;
-        color: $brand-primary;
-      }
-      .parti-group {
-        color: $brand-primary;
-      }
+      color: $brand-primary;
     }
   }
   .post-head {

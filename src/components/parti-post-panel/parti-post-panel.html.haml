@@ -1,8 +1,8 @@
 .post-parti{ '*ngIf': 'isCollection' }
   .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + post.parti.logo_url + ')' }" }
-  .parti-info
-    .parti-title {{ post.parti.title }}
-    .parti-group{ '*ngIf': 'post.parti.group' }
+  .parti-title
+    {{ post.parti.title }}
+    %span{ '*ngIf': 'post.parti.group' }
       <
       {{ post.parti.group.name }}
 .post-head

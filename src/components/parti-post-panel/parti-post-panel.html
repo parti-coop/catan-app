@@ -1,11 +1,11 @@
 <div *ngIf='isCollection' class='post-parti'>
   <div [ngStyle]="{ 'background-image': 'url(' + post.parti.logo_url + ')' }" class='parti-logo'></div>
-  <div class='parti-info'>
-    <div class='parti-title'>{{ post.parti.title }}</div>
-    <div *ngIf='post.parti.group' class='parti-group'>
+  <div class='parti-title'>
+    {{ post.parti.title }}
+    <span *ngIf='post.parti.group'>
       <
       {{ post.parti.group.name }}
-    </div>
+    </span>
   </div>
 </div>
 <div class='post-head'>
