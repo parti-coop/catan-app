@@ -65,8 +65,8 @@ export class Shrinkage implements AfterViewInit {
     if (event.target.scrollTop > 0) {
       this.isShrinkedStared = true;
       setTimeout(() => {
-        this.renderer.setElementStyle(this.target, 'height', '0');
         this.renderer.setElementStyle(this.target, 'overflow', 'hidden');
+        this.slide('out');
       }, 10);
     }
   }
@@ -90,12 +90,22 @@ export class Shrinkage implements AfterViewInit {
     }
 
     this.reset();
-    this.renderer.setElementStyle(this.target, 'height', 'initial');
-    this.renderer.setElementStyle(this.target, 'overflow', 'initial');
+    console.log('test1');
+    this.slide('in');
     setTimeout(() => {
       this.content.resize();
       this.onExtended.emit();
       this.render(null);
     }, 10);
+  }
+
+  slide(direction: string) {
+    if(direction == 'out') {
+      this.renderer.setElementClass(this.target, 'slide-in', false);
+      this.renderer.setElementClass(this.target, 'slide-out', true);
+    } else {
+      this.renderer.setElementClass(this.target, 'slide-out', false);
+      this.renderer.setElementClass(this.target, 'slide-in', true);
+    }
   }
 }
