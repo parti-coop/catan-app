@@ -103,8 +103,8 @@
             .comment-created-at
               {{ comment.created_at | partiDateTimeFormatObservable | async }}
       .comment-body{ '[innerHTML]': "comment.body | partiSimpleFormat ", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'" }
-.post-footer-in-collection{ '*ngIf': "isCollection" }
-  .post-comments{ '*ngIf': "hasComment()" }
+.post-footer-in-collection{ '*ngIf': "isCollection && hasComment()" }
+  .post-comments
     .comment{ '*ngFor': 'let comment of post.comments.slice(-2)'}
       .comment-header
         .comment-byline
