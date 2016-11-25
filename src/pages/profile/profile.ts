@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, ViewController, InfiniteScroll, Content, App, Scroll } from 'ionic-angular';
+import { NavController, NavParams, ViewController, InfiniteScroll, Content, App, Scroll, Platform } from 'ionic-angular';
+import { InAppBrowser } from 'ionic-native';
 
 import 'rxjs/add/operator/finally';
 
@@ -51,6 +52,7 @@ export class ProfilePage {
     private viewCtrl: ViewController,
     private navParams: NavParams,
     private app: App,
+    private platform: Platform,
     public myselfData: MyselfData,
     private partiData: PartiData,
     private postData: PostData
@@ -131,6 +133,12 @@ export class ProfilePage {
 
   onExtended(event) {
     this.titleState = "out";
+  }
+
+  onClickProfileEditBtn() {
+    this.platform.ready().then(() => {
+      new InAppBrowser('http://parti.xyz/users/edit', "_blank", "location=true");
+    });
   }
 
 

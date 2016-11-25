@@ -18,7 +18,7 @@
         </div>
         <div class='cover-bottom'>
           <div class='user-nickname'>{{user.nickname}}</div>
-          <div [hidden]='!isMe' class='user-edit-btn'>프로필 수정</div>
+          <div (click)='onClickProfileEditBtn()' [hidden]='!isMe' class='user-edit-btn'>프로필 수정</div>
         </div>
       </div>
       <ion-segment [(ngModel)]='selection'>

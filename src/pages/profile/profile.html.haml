@@ -13,7 +13,7 @@
           .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
         .cover-bottom
           .user-nickname {{user.nickname}}
-          .user-edit-btn{ '[hidden]': "!isMe" } 프로필 수정
+          .user-edit-btn{ '[hidden]': "!isMe", '(click)': 'onClickProfileEditBtn()' } 프로필 수정
       %ion-segment{ '[(ngModel)]': 'selection' }
         %ion-segment-button{ value: 'parties' }
           .segment-button-content{ '[hidden]': "!isMe" } 내 빠띠
