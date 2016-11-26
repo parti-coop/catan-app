@@ -1,3 +1,135 @@
 page-editor {
+  .content-md{
+    background-color: $gray-more-lightest;
+  }
+  form {
+    padding: 0 12px;
+  }
+  .user-info {
+    display: flex;
+    padding: 8px 0 3px;
+    .user-image {
+      background-image: url(https://catan-file.s3.amazonaws.com/uploads/user/0/sm_bbaf990a97.jpg);
+      height: 36px;
+      width: 36px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .user-nickname {
+      flex: 1;
+      color: $brand-primary-dark;
+      margin-left: 12px;
+      padding-top: 6px;
+    }
+  }
+  .select-parti {
+    ion-label{
+      color: $gray-light;
+      font-size: $font-size-base;
+      padding: 7px 12px 4px;
+      border: 1px solid $brand-primary;
+      margin: 0;
+      background-color: #fff;
+    }
+    .item-block .item-inner {
+      border: none;
+      padding: 0;
+      background-color: $gray-more-lightest;
+    }
+    .item-md{
+      padding: 0;
+    }
+    &--before-select,
+    &--select,
+    &--after-select {
+      display: flex;
+      &__text {
+        flex: 1;
+      }
+      &__icon {
+        text-align: right;
+        color: $brand-primary;
+        height: 12px;
+      }
+      &__spinner {
+        height: 12px;
+      }
+    }
+    &--after-select {
+      color: $brand-primary;
+    }
+  }
+  .post {
+    color: $gray-light;
+    font-size: $font-size-large;
+    margin-top: 5px;
+    .item.item-textarea {
+      padding: 0;
+      background-color: $gray-more-lightest;
+    }
+    textarea {
+      margin: 0;
+    }
+    .item-block .item-inner {
+      border: none;
+    }
+    .item-md.item-input.input-has-focus .item-inner {
+      padding: 0;
+      border: none;
+      box-shadow: none;
+    }
+    .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
+      box-shadow: none;
+    }
+  }
+  .item-md {
+    padding: 0;
+    &.item-block .item-inner {
+      border: none;
+      padding: 0;
+    }
+    .link-reference.input-md,
+    .poll.input-md {
+      border: 1px solid $gray-less-lighter;
+      font-size: 12px;
+      padding: 12px;
+      color: $gray-light;
+      .text-input-md {
+        margin: 0;
+      }
+    }
+    .input-md[clearInput] .text-input {
+      padding: 0;
+      padding-bottom: 31px;
+    }
+  }
 
+  .toolbar-md{
+    padding: 12px;
+  }
+  .post-btns {
+    .bar-button-md {
+      font-size: 27px;
+      color: $gray-light;
+    }
+  }
+  .submit-btn {
+    a[disabled], button[disabled], [ion-button][disabled] {
+      background-color: $gray-more-lightest;
+      color: $gray;
+      border: 1px solid $gray-light;
+    }
+    .bar-button-md {
+      border: none;
+      padding: 0 12px;
+      margin: 0;
+      background-color: $brand-primary;
+      color: #fff;
+    }
+  }
+  .ion-md-poll:before{
+    content: url('../assets/images/icon_poll.png');
+  }
 }

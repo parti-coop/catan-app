@@ -49,7 +49,7 @@ export class EditorPage {
     private alertCtrl: AlertController,
     private postData: PostData,
     private partiData: PartiData,
-    private myselfData: MyselfData
+    public myselfData: MyselfData
   ) {
     this.postForm = this.formBuilder.group({
       body: ['', Validators.required],

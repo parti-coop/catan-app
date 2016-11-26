@@ -1,31 +1,54 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>게시글 쓰기</ion-title>
-  </ion-navbar>
-</ion-header>
 <ion-content #content>
   <form (ngSubmit)='save()' [formGroup]='postForm'>
-    <ion-item [hidden]='!!this.parties'>
-      가입한 빠띠를 가져오는 중입니다.
-      <ion-spinner></ion-spinner>
-    </ion-item>
-    <ion-item (click)='onClickPartiSelect()' [hidden]='!this.parties'>
-      <span *ngIf='!this.parti'>
-        빠띠를 선택해 주세요.
-      </span>
-      <span *ngIf='!!this.parti'>
-        {{ this.parti.title }}
-      </span>
-    </ion-item>
-    <ion-item>
-      <ion-textarea formControlName='body' placeholder='무슨 이야기를 하고 싶으세요?'></ion-textarea>
-      }
-    </ion-item>
+    <div class='user-info'>
+      <div [ngStyle]="{ 'background-image': 'url(' + myselfData.imageUrl + ')' }" class='user-image'></div>
+      <div class='user-nickname'>{{ myselfData.nickname }}</div>
+    </div>
+    <div class='select-parti'>
+      <ion-item [hidden]='!!this.parties'>
+        <div class='select-parti--before-select'>
+          <div class='select-parti--before-select__text'>
+            가입한 빠띠를 가져오는 중입니다
+          </div>
+          <div class='select-parti--before-select__spinner'>
+            <ion-spinner></ion-spinner>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item (click)='onClickPartiSelect()' [hidden]='!this.parties'>
+        <span *ngIf='!this.parti'>
+          <div class='select-parti--select'>
+            <div class='select-parti--select__text'>
+              이야기 나눌 빠띠를 골라 주세요
+            </div>
+            <div class='select-parti--select__icon'>
+              <ion-icon name='arrow-dropdown'></ion-icon>
+            </div>
+          </div>
+        </span>
+        <span *ngIf='!!this.parti'>
+          <div class='select-parti--after-select'>
+            <div class='select-parti--after-select__text'>
+              {{ this.parti.title }}
+            </div>
+            <div class='select-parti--after-select__icon'>
+              <ion-icon name='arrow-dropdown'></ion-icon>
+            </div>
+          </div>
+        </span>
+      </ion-item>
+    </div>
+    <div class='post'>
+      <ion-item>
+        <ion-textarea formControlName='body' placeholder='무슨 이야기를 나누실래요?'></ion-textarea>
+        }
+      </ion-item>
+    </div>
     <ion-item [hidden]='referenceTypeName() != "LinkSource"'>
-      <ion-input autocapitalize='off' clearInput formControlName='link' placeholder='웹주소를 넣어 주세요.' type='url'></ion-input>
+      <ion-input autocapitalize='off' class='link-reference' clearInput formControlName='link' placeholder='URL을 입력하거나 붙여넣으세요' type='url'></ion-input>
     </ion-item>
     <ion-item [hidden]='referenceTypeName() != "Poll"'>
-      <ion-input formControlName='poll' placeholder='찬반투표 제목을 넣어 주세요.' type='text'></ion-input>
+      <ion-input class='poll' formControlName='poll' placeholder='찬반투표 제목을 넣어 주세요' type='text'></ion-input>
     </ion-item>
     <ion-item [hidden]='referenceTypeName() != "FileSource"'>
       <img [src]='imageSrc'>
@@ -35,21 +58,25 @@
 <ion-footer [keyboardAttach]='content'>
   <ion-toolbar>
     <ion-buttons left>
-      <button (click)='onClickCamera()' ion-button>
-        <ion-icon name='ios-camera-outline'></ion-icon>
-      </button>
-      <button (click)='onClickGallery()' ion-button>
-        <ion-icon name='ios-image-outline'></ion-icon>
-      </button>
-      <button (click)='onClickLink()' ion-button>
-        <ion-icon name='ios-link-outline'></ion-icon>
-      </button>
-      <button (click)='onClickPoll()' ion-button>
-        <ion-icon name='ios-key'></ion-icon>
-      </button>
+      <div class='post-btns'>
+        <button (click)='onClickCamera()' ion-button>
+          <ion-icon name='ios-camera-outline'></ion-icon>
+        </button>
+        <button (click)='onClickGallery()' ion-button>
+          <ion-icon name='ios-image-outline'></ion-icon>
+        </button>
+        <button (click)='onClickLink()' ion-button>
+          <ion-icon name='ios-link-outline'></ion-icon>
+        </button>
+        <button (click)='onClickPoll()' ion-button>
+          <ion-icon name='poll'></ion-icon>
+        </button>
+      </div>
     </ion-buttons>
     <ion-buttons right>
-      <button (click)='save()' [disabled]='invalidToSave()' ion-button type='submit'>게시</button>
+      <div class='submit-btn'>
+        <button (click)='save()' [disabled]='invalidToSave()' ion-button type='submit'>게시</button>
+      </div>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

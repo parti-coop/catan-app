@@ -1,37 +1,51 @@
-%ion-header
-  %ion-navbar
-    %ion-title 게시글 쓰기
-
 %ion-content{ '#content': true }
   %form{ '[formGroup]': 'postForm', '(ngSubmit)': 'save()' }
-    %ion-item{ '[hidden]': '!!this.parties' }
-      가입한 빠띠를 가져오는 중입니다.
-      %ion-spinner
-    %ion-item{ '[hidden]': '!this.parties', '(click)': 'onClickPartiSelect()' }
-      %span{ '*ngIf': '!this.parti'}
-        빠띠를 선택해 주세요.
-      %span{ '*ngIf': '!!this.parti'}
-        {{ this.parti.title }}
-    %ion-item
-      %ion-textarea{ 'formControlName': 'body', placeholder: "무슨 이야기를 하고 싶으세요?" }
-      }
+    .user-info
+      .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + myselfData.imageUrl + ')' }" }
+      .user-nickname {{ myselfData.nickname }}
+    .select-parti
+      %ion-item{ '[hidden]': '!!this.parties' }
+        .select-parti--before-select
+          .select-parti--before-select__text
+            가입한 빠띠를 가져오는 중입니다
+          .select-parti--before-select__spinner
+            %ion-spinner
+      %ion-item{ '[hidden]': '!this.parties', '(click)': 'onClickPartiSelect()' }
+        %span{ '*ngIf': '!this.parti'}
+          .select-parti--select
+            .select-parti--select__text
+              이야기 나눌 빠띠를 골라 주세요
+            .select-parti--select__icon
+              %ion-icon{ name: 'arrow-dropdown' }
+        %span{ '*ngIf': '!!this.parti'}
+          .select-parti--after-select
+            .select-parti--after-select__text
+              {{ this.parti.title }}
+            .select-parti--after-select__icon
+              %ion-icon{ name: 'arrow-dropdown' }
+    .post
+      %ion-item
+        %ion-textarea{ 'formControlName': 'body', placeholder: "무슨 이야기를 나누실래요?" }
+        }
     %ion-item{ '[hidden]': 'referenceTypeName() != "LinkSource"' }
-      %ion-input{ type: 'url', 'formControlName': 'link', placeholder: '웹주소를 넣어 주세요.', autocapitalize: 'off', 'clearInput': true}
+      %ion-input{ type: 'url', 'formControlName': 'link', placeholder: 'URL을 입력하거나 붙여넣으세요', autocapitalize: 'off', 'clearInput': true, 'class': 'link-reference' }
     %ion-item{ '[hidden]': 'referenceTypeName() != "Poll"' }
-      %ion-input{ type: 'text', 'formControlName': 'poll', placeholder: '찬반투표 제목을 넣어 주세요.' }
+      %ion-input{ type: 'text', 'formControlName': 'poll', placeholder: '찬반투표 제목을 넣어 주세요', 'class': 'poll' }
     %ion-item{ '[hidden]': 'referenceTypeName() != "FileSource"' }
       %img{'[src]': "imageSrc" }
 %ion-footer{ '[keyboardAttach]': 'content' }
   %ion-toolbar
     %ion-buttons{ 'left': true }
-      %button{ 'ion-button': true, '(click)': 'onClickCamera()' }
-        %ion-icon{ 'name': 'ios-camera-outline' }
-      %button{ 'ion-button': true, '(click)': 'onClickGallery()' }
-        %ion-icon{ 'name': 'ios-image-outline' }
-      %button{ 'ion-button': true, '(click)': 'onClickLink()' }
-        %ion-icon{ 'name': 'ios-link-outline' }
-      %button{ 'ion-button': true, '(click)': 'onClickPoll()' }
-        %ion-icon{ 'name': 'ios-key'}
+      .post-btns
+        %button{ 'ion-button': true, '(click)': 'onClickCamera()' }
+          %ion-icon{ 'name': 'ios-camera-outline' }
+        %button{ 'ion-button': true, '(click)': 'onClickGallery()' }
+          %ion-icon{ 'name': 'ios-image-outline' }
+        %button{ 'ion-button': true, '(click)': 'onClickLink()' }
+          %ion-icon{ 'name': 'ios-link-outline' }
+        %button{ 'ion-button': true, '(click)': 'onClickPoll()' }
+          %ion-icon{ 'name': 'poll'}
     %ion-buttons{ 'right': true }
-      %button{ 'ion-button': true, type: 'submit', '[disabled]': 'invalidToSave()', '(click)': 'save()' } 게시
+      .submit-btn
+        %button{ 'ion-button': true, type: 'submit', '[disabled]': 'invalidToSave()', '(click)': 'save()' } 게시
 
