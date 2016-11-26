@@ -10,6 +10,7 @@ export interface Post {
   id: number;
   parsed_title: string;
   parsed_body: string;
+  truncated_parsed_body: string;
   specific_desc_striped_tags: string;
   parti: Parti;
   user: User;
