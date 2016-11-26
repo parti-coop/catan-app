@@ -253,27 +253,28 @@ parti-post-panel {
     }
 
     .poll-votings {
+      display: flex;
       .agreed-voting-users,
       .disagreed-voting-users {
-        display: inline-block;
-        width: 45%;
+        flex: 1;
         vertical-align: text-top;
         .voting-user {
           height: 20px;
           width: 20px;
           @include background-thumbnail();
           display: inline-block;
-          margin-left: 1px;
+          margin-left: -4px;
           margin-right: 1px;
           border-radius: 50%;
         }
       }
       .agreed-voting-users {
         text-align: right;
-        padding-right: 8px;
+        margin-right: 8px;
       }
       .disagreed-voting-users {
         text-align: left;
+        margin-left: 8px;
       }
     }
   }

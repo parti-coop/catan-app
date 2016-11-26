@@ -59,9 +59,9 @@
       댓글로 의견을 나눠 보세요
   .poll-votings{ '*ngIf': 'isVoted() && !isCollection' }
     .agreed-voting-users
-      .voting-user{ '*ngFor': 'let user of post.poll.agreed_voting_users', '(click)': 'onClickVotingUser(user)', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
+      .voting-user{ '*ngFor': 'let user of post.poll.agreed_voting_users.slice(0,6)', '(click)': 'onClickVotingUser(user)', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
     .disagreed-voting-users
-      .voting-user{ '*ngFor': 'let user of post.poll.disagreed_voting_users', '(click)': 'onClickVotingUser(user)', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
+      .voting-user{ '*ngFor': 'let user of post.poll.disagreed_voting_users.slice(0,6)', '(click)': 'onClickVotingUser(user)', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
   .poll-recommend-voting
     현재
     %span.poll-voted-counts {{ post.poll.agreed_votings_count + post.poll.disagreed_votings_count }}
