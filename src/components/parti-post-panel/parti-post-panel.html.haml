@@ -34,8 +34,8 @@
   %img{src: "{{ post.file_reference.attachment_url }}"}
 
 .post-file-reference{ '*ngIf': '!!post.file_reference && !isImage()' }
-  %span.file-reference-name {{ post.file_reference.name }}
-  %span.file-reference-file-size {{ post.file_reference.file_size }} byte
+  .file-reference-name {{ post.file_reference.name }}
+  .file-reference-file-size {{ post.file_reference.file_size }} byte
   %button.file-reference-button{ 'ion-button': true, 'outline': true, color: 'gray', '(click)': 'onClickFileReference(post.file_reference)' }
     다운로드
 .post-poll{ '*ngIf': '!!post.poll' }

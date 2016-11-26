@@ -2,8 +2,8 @@
   %ion-navbar
     %ion-title
       .parti-info
-        .parti-title {{ post.parti.title }}
-        .parti-group{ '*ngIf': 'post.parti.group' }
+        %span.parti-title {{ post.parti.title }}
+        %span.parti-group{ '*ngIf': 'post.parti.group' }
           <
           {{ post.parti.group.name }}
       .parti-home-link{'(click)': 'onClickParti(post.parti)'}

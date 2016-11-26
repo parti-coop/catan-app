@@ -2,11 +2,11 @@
   <ion-navbar>
     <ion-title>
       <div class='parti-info'>
-        <div class='parti-title'>{{ post.parti.title }}</div>
-        <div *ngIf='post.parti.group' class='parti-group'>
+        <span class='parti-title'>{{ post.parti.title }}</span>
+        <span *ngIf='post.parti.group' class='parti-group'>
           <
           {{ post.parti.group.name }}
-        </div>
+        </span>
       </div>
       <div (click)='onClickParti(post.parti)' class='parti-home-link'>
         빠띠 보기

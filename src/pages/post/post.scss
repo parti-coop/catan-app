@@ -7,27 +7,30 @@ page-post {
     }
     ion-title {
       text-align: center;
-      .parti-info {
-        font-size: $font-size-large;
-        color: $gray-dark;
-        display: inline-block;
-        font-weight: bold;
-        max-width: 72%;
-        overflow: hidden;
-        vertical-align: text-bottom;
+      .toolbar-title {
+        display: flex;
+        .parti-info {
+          flex: 1;
+          font-size: $font-size-large;
+          color: $gray-dark;
+          font-weight: bold;
+          overflow: hidden;
+          vertical-align: text-bottom;
+          white-space: nowrap;
+          text-overflow: ellipsis;
 
-        .parti-title {
-          display: inline-block;
+          .parti-title {
+          }
+          .parti-group {
+          }
         }
-        .parti-group {
-          display: inline-block;
+        .parti-home-link {
+          font-size: $font-size-base;
+          color: $gray-light;
+          align-self: flex-end;
+          width: 46px;
+          margin-top: 6px;
         }
-      }
-      .parti-home-link {
-        font-size: $font-size-base;
-        color: $gray-light;
-        float: right;
-        margin-top: 6px;
       }
     }
   }

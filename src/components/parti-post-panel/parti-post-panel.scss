@@ -20,6 +20,9 @@ parti-post-panel {
       flex: 1;
       align-self: center;
       color: $brand-primary;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
   .post-head {
@@ -97,11 +100,20 @@ parti-post-panel {
       padding: 12px;
       .link-reference-title {
         font-weight: bold;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
       .link-reference-body {
         padding-top: 6px;
         font-size: $font-size-small;
         color: $gray;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        word-wrap: break-word;
       }
       .link-reference-footer {
         padding-top: 6px;
@@ -141,10 +153,18 @@ parti-post-panel {
     margin: 0 6px 12px;
     padding: 24px;
     text-align: center;
+    .file-reference-name {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
     .file-reference-file-size {
       font-size: $font-size-small;
       color: $gray-light;
       padding-left: 6px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
     .file-reference-button {
       display: block;

@@ -47,8 +47,8 @@
   <img src='{{ post.file_reference.attachment_url }}'>
 </div>
 <div *ngIf='!!post.file_reference &amp;&amp; !isImage()' class='post-file-reference'>
-  <span class='file-reference-name'>{{ post.file_reference.name }}</span>
-  <span class='file-reference-file-size'>{{ post.file_reference.file_size }} byte</span>
+  <div class='file-reference-name'>{{ post.file_reference.name }}</div>
+  <div class='file-reference-file-size'>{{ post.file_reference.file_size }} byte</div>
   <button (click)='onClickFileReference(post.file_reference)' class='file-reference-button' color='gray' ion-button outline>
     다운로드
   </button>
