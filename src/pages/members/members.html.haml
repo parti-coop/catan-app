@@ -2,14 +2,13 @@
   %ion-toolbar
     %ion-buttons{ 'start': true}
       %button{ 'ion-button': true, '(click)': 'dismiss()' }
-        X
+        %ion-icon{ name: 'close' }
     %ion-title
       .title-member 멤버 {{ parti.members_count }}
-      .title-parti {{ partiTitle() }}
 %ion-content{ 'padding': true }
   %ion-list
     %ion-item{ '*ngFor': 'let member of members' }
       .member
-        .member-image{ '[ngStyle]': "{ 'background-image': 'url(' + member.user.image_url + ')' }" }
-        .member-name {{ member.user.nickname }}
+        .member-image{ '[ngStyle]': "{ 'background-image': 'url(' + member.user.image_url + ')' }", '(click)': 'onClickUser(member)' }
+        .member-name{ '(click)': 'onClickUser(member)' } {{ member.user.nickname }}
         .member-maker{ '*ngIf': "member.is_maker" } 빠띠메이커
