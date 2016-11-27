@@ -83,8 +83,6 @@ export class TabsPage {
       .startWith(0)
       .subscribe(() => {
         let lastMessageId = this.myselfData.getLastMessageId();
-        console.log('lastMessageId');
-        console.log(lastMessageId);
         if(!lastMessageId) {
           this.messageData.lastMessageId()
             .subscribe((id) => {
