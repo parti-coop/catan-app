@@ -17,6 +17,11 @@ export class MessageData {
     return this.http.get('/api/v1/messages')
       .map(req => <Message[]>(req.json().messages));
   }
+
+  touchReadAt(message: Message): Observable<void> {
+    return this.http.patch(`/api/v1/messages/${message.id}/touch_read_at`)
+      .map(req => {});
+  }
 }
 
 

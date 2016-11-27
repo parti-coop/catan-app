@@ -8,6 +8,9 @@ page-messages {
         margin: 0;
       }
     }
+    &.read {
+      background-color: $gray-lighter;
+    }
   }
   .message-header {
     display: flex;

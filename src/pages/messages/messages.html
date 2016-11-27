@@ -7,7 +7,7 @@
 </ion-header>
 <ion-content class='ion-parti'>
   <ion-list>
-    <ion-item (click)='onClickMessage(message)' *ngFor='let message of messages' text-wrap>
+    <ion-item (click)='onClickMessage(message)' *ngFor='let message of messages' [class.read]='!!message.read_at' text-wrap>
       <div class='message-header'>
         <div *ngIf='message.parti.group' class='message-header--parti-group'>
           {{ message.parti.group.name }}

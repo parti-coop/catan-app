@@ -105,20 +105,30 @@ export class ApiHttp {
    }
 
    handleError(error, usedSessionStamp) {
-      if(usedSessionStamp != this.sessionStamp) {
-        console.log("ApiHttp#handleError : old session");
-        return Observable.empty();
+      if (error && error.status  == 404) {
+        let alert = this.alertCtrl.create({
+          title: '안내',
+          subTitle: '지워지거나 없는 정보입니다.',
+          buttons: ['확인']
+        });
+        alert.present();
+        return Observable.throw(error);
+      } else {
+        if(usedSessionStamp != this.sessionStamp) {
+          console.log("ApiHttp#handleError : old session");
+          return Observable.empty();
+        }
+
+        this.sessionStamp = new Date();
+        console.log("ApiHttps#handleError : error - " + JSON.stringify(error));
+
+        let alert = this.alertCtrl.create({
+          title: '오류',
+          subTitle: '죄송합니다. 뭔가 잘못되었습니다.',
+          buttons: ['확인']
+        });
+        alert.present();
+        return Observable.throw(error);
       }
-
-      this.sessionStamp = new Date();
-      console.log("ApiHttps#handleError : error - " + JSON.stringify(error));
-
-      let alert = this.alertCtrl.create({
-        title: '오류',
-        subTitle: '죄송합니다. 뭔가 잘못되었습니다.',
-        buttons: ['확인']
-      });
-      alert.present();
-      return Observable.throw(error);
    }
 }

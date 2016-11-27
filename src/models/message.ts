@@ -21,4 +21,5 @@ export interface Message {
   post: Post;
   parti: Parti;
   desc: string;
+  read_at: string;
 }

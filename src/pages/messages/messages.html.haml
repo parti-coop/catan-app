@@ -4,7 +4,7 @@
       알림
 %ion-content.ion-parti
   %ion-list
-    %ion-item{ '*ngFor': 'let message of messages', 'text-wrap': true, '(click)': 'onClickMessage(message)' }
+    %ion-item{ '*ngFor': 'let message of messages', 'text-wrap': true, '[class.read]': '!!message.read_at', '(click)': 'onClickMessage(message)' }
       .message-header
         .message-header--parti-group{ '*ngIf': 'message.parti.group' }
           {{ message.parti.group.name }}

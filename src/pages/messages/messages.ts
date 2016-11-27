@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+import moment from 'moment';
+
 import { PartiEnvironment } from '../../config/constant';
 import { Message } from '../../models/message';
 import { MessageData } from '../../providers/message-data';
@@ -28,6 +30,10 @@ export class MessagesPage {
   }
 
   onClickMessage(message: Message) {
+    this.messageData.touchReadAt(message)
+      .subscribe(() => {
+        message.read_at = moment().toISOString();
+      });
     if(message.messagable_type === 'Upvote' || message.messagable_type === 'Comment'){
       this.navCtrl.push(PostPage, {
         post: message.post
