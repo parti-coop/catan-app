@@ -59,7 +59,7 @@ export class EditorPage {
   }
 
   ionViewDidLoad() {
-    this.partiData.joined(this.  myselfData.asModel()).subscribe((parties: Parti[]) => {
+    this.partiData.joined(this.myselfData.asModel()).subscribe((parties: Parti[]) => {
       this.parties = parties;
     });
   }

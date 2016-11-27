@@ -1,8 +1,8 @@
 <ion-tabs #tabs>
-  <ion-tab [root]='homeRoot' [tabBadge]='newPostsCount' tabIcon='list-box' tabTitle='타임라인'></ion-tab>
+  <ion-tab [root]='homeRoot' [tabBadge]='newPostsCountLabel' tabIcon='list-box' tabTitle='타임라인'></ion-tab>
   <ion-tab [root]='partiesRoot' tabIcon='parti' tabTitle='빠띠'></ion-tab>
   <ion-tab (ionSelect)='onClickEditor()' tabIcon='create'></ion-tab>
-  <ion-tab [root]='messagesRoot' tabIcon='notifications' tabTitle='알림'></ion-tab>
+  <ion-tab [root]='messagesRoot' [tabBadge]='newMessagesCountLabel' tabIcon='notifications' tabTitle='알림'></ion-tab>
   <ion-tab [root]='profileRoot' tabIcon='person' tabTitle='계정'></ion-tab>
   <ion-tab #deepLinkTab [show]='false'></ion-tab>
 </ion-tabs>

@@ -4,6 +4,7 @@ import { Platform } from 'ionic-angular';
 import { NativeStorage } from 'ionic-native';
 
 import { Observable } from 'rxjs/Observable';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/catch';
@@ -23,11 +24,15 @@ export class MyselfData {
   STORAGE_REFERENCE_ACCESS_TOKEN = 'MyselfData_accessToken';
   STORAGE_REFERENCE_REFRESH_TOKEN = 'MyselfData_refreshToken';
 
+  STORAGE_REFERENCE_LAST_MESSAGE_ID = 'MyselfData_lastMessageId';
+
   public accessToken: string;
   public refreshToken: string;
   public nickname: string;
   public id: number;
   public imageUrl: string;
+
+  public lastMessageId: number;
   private syncedStorage: boolean = false;
   private _hasSignedIn: boolean = false;
 
@@ -43,7 +48,8 @@ export class MyselfData {
         NativeStorage.getItem(this.STORAGE_REFERENCE_ID),
         NativeStorage.getItem(this.STORAGE_REFERENCE_IMAGE_URL),
         NativeStorage.getItem(this.STORAGE_REFERENCE_ACCESS_TOKEN),
-        NativeStorage.getItem(this.STORAGE_REFERENCE_REFRESH_TOKEN)
+        NativeStorage.getItem(this.STORAGE_REFERENCE_REFRESH_TOKEN),
+        NativeStorage.getItem(this.STORAGE_REFERENCE_LAST_MESSAGE_ID)
       ]).then(values => {
         this._hasSignedIn = values[0];
         this.nickname = values[1];
@@ -51,13 +57,16 @@ export class MyselfData {
         this.imageUrl = values[3];
         this.accessToken = values[4];
         this.refreshToken = values[5];
+        this.lastMessageId = values[6];
         this.syncedStorage = true;
-        if(this._hasSignedIn) {
+        if(this._hasSignedIn && this.accessToken && this.id && this.refreshToken) {
           console.log("MyselfData : 이미 로그인");
         } else {
+          this.clearMyselfData();
           console.log("MyselfData : 로그아웃");
         }
       }).catch(error => {
+        this.clearMyselfData();
         console.log("MyselfData : 로그인 정보 없음");
         console.log(JSON.stringify(error));
         this._hasSignedIn = false;
@@ -144,7 +153,9 @@ export class MyselfData {
     return Observable.from(Promise.all([
       NativeStorage.setItem(this.STORAGE_REFERENCE_ID, myself.id),
       NativeStorage.setItem(this.STORAGE_REFERENCE_NICKNAME, myself.nickname),
-      NativeStorage.setItem(this.STORAGE_REFERENCE_IMAGE_URL, myself.image_url)])
+      NativeStorage.setItem(this.STORAGE_REFERENCE_IMAGE_URL, myself.image_url),
+      NativeStorage.setItem(this.STORAGE_REFERENCE_LAST_MESSAGE_ID, 0
+        )])
       .then(values => {
         this.id = myself.id;
         this.nickname = myself.nickname;
@@ -161,7 +172,8 @@ export class MyselfData {
         NativeStorage.remove(this.STORAGE_REFERENCE_NICKNAME),
         NativeStorage.remove(this.STORAGE_REFERENCE_ID),
         NativeStorage.remove(this.STORAGE_REFERENCE_ACCESS_TOKEN),
-        NativeStorage.remove(this.STORAGE_REFERENCE_REFRESH_TOKEN)
+        NativeStorage.remove(this.STORAGE_REFERENCE_REFRESH_TOKEN),
+        NativeStorage.remove(this.STORAGE_REFERENCE_LAST_MESSAGE_ID)
       ]).then(values => {
         this.accessToken = null;
         this.refreshToken = null;
@@ -169,6 +181,7 @@ export class MyselfData {
         this.id = -1;
         this.imageUrl = null;
         this._hasSignedIn = false;
+        this.lastMessageId = 0;
         return this._hasSignedIn;
       })).finally(() => {
         this.syncedStorage = true;
@@ -248,6 +261,19 @@ export class MyselfData {
     return <Myself>{id: this.id, nickname: this.nickname, image_url: this.imageUrl};
   }
 
+  getLastMessageId(): number {
+    return this.lastMessageId;
+  }
+
+  setLastMessageId(messageId: number) {
+    return Observable.from(NativeStorage.setItem(this.STORAGE_REFERENCE_LAST_MESSAGE_ID, messageId)
+      .then(value => {
+        console.log('STORAGE_REFERENCE_LAST_MESSAGE_ID');
+        console.log(value);
+        this.lastMessageId = value;
+        return value;
+      }));
+  }
 }
 
 export class NeedToSignUpError extends Error {

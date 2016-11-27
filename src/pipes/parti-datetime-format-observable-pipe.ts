@@ -33,7 +33,7 @@ export class PartiDateTimeFormatObservablePipe {
       }).map(()=> {
         if(this.isYoung(date)) {
           this.isFullFormat = false;
-          if (this.isFuture) {
+          if (this.isFuture(date)) {
             return '지금';
           } else {
             return date.from(moment());

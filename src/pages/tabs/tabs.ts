@@ -2,6 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { Keyboard } from 'ionic-native';
 import { Platform, MenuController, ModalController, NavParams, Tabs, Tab, Events } from 'ionic-angular';
 
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
+
 import { HomePage } from '../home/home';
 import { EditorPage } from '../editor/editor';
 import { PartiesPage } from '../parties/parties';
@@ -9,7 +12,10 @@ import { PostPage } from '../post/post';
 import { PartiHomePage } from '../parti-home/parti-home';
 import { MessagesPage } from '../messages/messages';
 import { ProfilePage } from '../profile/profile';
+
 import { PostData } from '../../providers/post-data';
+import { MessageData } from '../../providers/message-data';
+import { MyselfData } from '../../providers/myself-data';
 import { PartiData } from '../../providers/parti-data';
 import { Parti } from '../../models/parti';
 import { Post } from '../../models/post';
@@ -26,15 +32,19 @@ export class TabsPage {
   messagesRoot: any = MessagesPage;
   profileRoot: any = ProfilePage;
 
-  newPostsCount: string;
+  newPostsCountLabel: string;
+  newMessagesCountLabel: string;
+  newMessagesCountSubscription: Subscription;
 
   constructor(
-    platform: Platform,
+    private platform: Platform,
     private menuCtrl: MenuController,
     private modalCtrl: ModalController,
     private navParams: NavParams,
     private events: Events,
+    private myselfData: MyselfData,
     private postData: PostData,
+    private messageData: MessageData,
     private partiData: PartiData
   ) {
     platform.ready().then(() => {
@@ -46,8 +56,16 @@ export class TabsPage {
           document.body.classList.remove('keyboard-is-open');
       });
     });
+
     this.listenToDeepLiknEvents();
     this.listenToNewPostsCountEvents();
+    this.listenToLastMessageIdEvents();
+  }
+
+  ionViewDidLoad() {
+    this.platform.ready().then(() => {
+      this.newMessagesCountSubscription = this.pollingNewMessagesCount();
+    });
   }
 
   ionViewWillUnload() {
@@ -56,6 +74,37 @@ export class TabsPage {
       let tab = this.tabsRef.getByIndex(i);
       tab && tab.popAll();
     }
+    this.newMessagesCountSubscription.unsubscribe();
+  }
+
+  pollingNewMessagesCount() {
+    return Observable
+      .interval(60 * 2000)
+      .startWith(0)
+      .subscribe(() => {
+        let lastMessageId = this.myselfData.getLastMessageId();
+        console.log('lastMessageId');
+        console.log(lastMessageId);
+        if(!lastMessageId) {
+          this.messageData.lastMessageId()
+            .subscribe((id) => {
+              this.myselfData.setLastMessageId(id);
+            });
+          return;
+        }
+        this.messageData.newCount(lastMessageId)
+          .subscribe((count) => {
+            if(count && count > 0) {
+              if(count > 999) {
+                this.newMessagesCountLabel = '999+';
+              } else {
+                this.newMessagesCountLabel = String(count);
+              }
+            } else {
+              this.newMessagesCountLabel = null;
+            }
+          });
+      });
   }
 
   listenToDeepLiknEvents() {
@@ -84,7 +133,17 @@ export class TabsPage {
 
   listenToNewPostsCountEvents() {
     this.events.subscribe('tabs:new-posts-count', (data) => {
-      this.newPostsCount = data[0];
+      this.newPostsCountLabel = data[0];
+    });
+  }
+
+  listenToLastMessageIdEvents() {
+    this.events.subscribe('tabs:last-message-id', (data) => {
+      console.log('tabs:last-message-id')
+      console.log(data[0])
+      this.myselfData.setLastMessageId(data[0]).subscribe((value) => {
+        this.newMessagesCountLabel = null;
+      });
     });
   }
 

@@ -2,15 +2,20 @@
   %ion-navbar
     %ion-title
       알림
-%ion-content.ion-parti
+%ion-content
+  %ion-refresher{ '(ionRefresh)': 'onRefresh($event)' }
+    %ion-refresher-content
   %ion-list
     %ion-item{ '*ngFor': 'let message of messages', 'text-wrap': true, '[class.read]': '!!message.read_at', '(click)': 'onClickMessage(message)' }
       .message-header
         .message-header--parti-group{ '*ngIf': 'message.parti.group' }
           {{ message.parti.group.name }}
           >
-        .message-header--parti-title {{ message.parti.title }}빠띠
+        .message-header--parti-title
+          {{ message.parti.title }}빠띠
         .message-header--created-at
           {{ message.created_at | partiDateTimeFormatObservable | async }}
       .message-desc{ '[innerHTML]': "message.desc" }
-
+    %template{ '[ngIf]': 'hasPreviousMessages'}
+      %ion-infinite-scroll{ '(ionInfinite)': 'loadMore($event)', '#infiniteScroll': true }
+        %ion-infinite-scroll-content

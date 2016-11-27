@@ -110,6 +110,7 @@ export class HomePage {
   pollingNewPostCount(): Subscription {
     return Observable
       .interval(60 * 2000)
+      .startWith(0)
       .subscribe(() => {
         let lastTouchedAt = _.head(this.posts) && _.head(this.posts).last_touched_at;
         if(!lastTouchedAt) {

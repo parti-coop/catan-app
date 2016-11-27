@@ -1,7 +1,7 @@
 %ion-tabs{ '#tabs': true }
-  %ion-tab{ '[root]': 'homeRoot', tabTitle: '타임라인', tabIcon: 'list-box', '[tabBadge]': 'newPostsCount' }
+  %ion-tab{ '[root]': 'homeRoot', tabTitle: '타임라인', tabIcon: 'list-box', '[tabBadge]': 'newPostsCountLabel' }
   %ion-tab{ '[root]': 'partiesRoot', tabTitle: '빠띠', tabIcon: 'parti' }
   %ion-tab{ tabIcon: 'create', '(ionSelect)': 'onClickEditor()' }
-  %ion-tab{ '[root]': 'messagesRoot', tabTitle: '알림', tabIcon: 'notifications' }
+  %ion-tab{ '[root]': 'messagesRoot', tabTitle: '알림', tabIcon: 'notifications', '[tabBadge]': 'newMessagesCountLabel' }
   %ion-tab{ '[root]': 'profileRoot', tabTitle: '계정', tabIcon: 'person' }
   %ion-tab{ '[show]': 'false', '#deepLinkTab': true }
