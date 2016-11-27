@@ -26,6 +26,8 @@ export class TabsPage {
   messagesRoot: any = MessagesPage;
   profileRoot: any = ProfilePage;
 
+  newPostsCount: string;
+
   constructor(
     platform: Platform,
     private menuCtrl: MenuController,
@@ -45,6 +47,15 @@ export class TabsPage {
       });
     });
     this.listenToDeepLiknEvents();
+    this.listenToNewPostsCountEvents();
+  }
+
+  ionViewWillUnload() {
+    console.log('tabs ionViewWillUnload');
+    for(var i = 0; i < this.tabsRef.length(); i++) {
+      let tab = this.tabsRef.getByIndex(i);
+      tab && tab.popAll();
+    }
   }
 
   listenToDeepLiknEvents() {
@@ -71,6 +82,12 @@ export class TabsPage {
     });
   }
 
+  listenToNewPostsCountEvents() {
+    this.events.subscribe('tabs:new-posts-count', (data) => {
+      this.newPostsCount = data[0];
+    });
+  }
+
   goToDeepLink(page, params) {
     if(!this.deepLinkTabRef.root) {
       this.deepLinkTabRef.root = page;
@@ -85,6 +102,6 @@ export class TabsPage {
 
   onClickEditor() {
     let editorModal = this.modalCtrl.create(EditorPage);
-     editorModal.present();
+    editorModal.present();
   }
 }

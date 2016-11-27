@@ -4,12 +4,19 @@
     %ion-buttons{ 'end': true }
       %button{ 'icon-only': true, 'ion-button': true, '(click)': 'onClickBug()' }
         %ion-icon{ name: 'ios-bug' }
-%ion-content.ion-parti
+%ion-content
+  .new-posts-indicator{'ion-fixed': true, '(click)': 'onClickNewPostIndicator()', '[@indicatorTrigger]': 'newPostsCountStat' }
+    %ion-chip{ 'color': 'primary', }
+      %ion-label 새로운 소식 {{ newPostsCountLabel }}개
+  %ion-refresher{ '(ionRefresh)': 'onRefresh($event)' }
+    %ion-refresher-content
+  .force-reloading-posts-spinner{ '[class.loading]': 'isForceRefreshingStat' }
+    %ion-spinner
   .spinner-center-wrapper{ '*ngIf': '!posts' }
     %ion-spinner
-  %template{ '[ngIf]': '!!posts'}
-    %parti-post-panel.post{ '[post]': 'post', '*ngFor': 'let post of posts', '[isCollection]': 'true' }
-    %template{ '[ngIf]': 'hasMorePost'}
+  %div{ '*ngIf': '!!posts' }
+    %parti-post-panel.post{ '[post]': 'post', '*ngFor': 'let post of posts', '[isCollection]': 'true', '[@postTrigger]': "'visible'" }
+    %template{ '[ngIf]': 'hasPreviousPosts'}
       %ion-infinite-scroll{ '(ionInfinite)': 'loadMore($event)', '#infiniteScroll': true }
-        %ion-infinite-scroll-content{ loadingSpinner: "bubbles" }
+        %ion-infinite-scroll-content
 

@@ -166,12 +166,7 @@ export class EditorPage {
         this.resetForm(ReferenceType.FileSource);
         this.imageSrc = 'data:image/jpeg;base64,' + imageData;
       }, (err) => {
-        let alert = this.alertCtrl.create({
-          title: '오류',
-          subTitle: '엇! 뭔가 잘못되었습니다.',
-          buttons: ['확인']
-        });
-        alert.present();
+        console.log(err);
       });
     });
   }

@@ -8,16 +8,27 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content class='ion-parti'>
+<ion-content>
+  <div (click)='onClickNewPostIndicator()' [@indicatorTrigger]='newPostsCountStat' class='new-posts-indicator' ion-fixed>
+    <ion-chip color='primary'>
+      <ion-label>새로운 소식 {{ newPostsCountLabel }}개</ion-label>
+    </ion-chip>
+  </div>
+  <ion-refresher (ionRefresh)='onRefresh($event)'>
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div [class.loading]='isForceRefreshingStat' class='force-reloading-posts-spinner'>
+    <ion-spinner></ion-spinner>
+  </div>
   <div *ngIf='!posts' class='spinner-center-wrapper'>
     <ion-spinner></ion-spinner>
   </div>
-  <template [ngIf]='!!posts'>
-    <parti-post-panel *ngFor='let post of posts' [isCollection]='true' [post]='post' class='post'></parti-post-panel>
-    <template [ngIf]='hasMorePost'>
+  <div *ngIf='!!posts'>
+    <parti-post-panel *ngFor='let post of posts' [@postTrigger]="'visible'" [isCollection]='true' [post]='post' class='post'></parti-post-panel>
+    <template [ngIf]='hasPreviousPosts'>
       <ion-infinite-scroll #infiniteScroll (ionInfinite)='loadMore($event)'>
-        <ion-infinite-scroll-content loadingSpinner='bubbles'></ion-infinite-scroll-content>
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
       </ion-infinite-scroll>
     </template>
-  </template>
+  </div>
 </ion-content>

@@ -58,6 +58,16 @@ export class PostData {
       .map(res => <Post>(res.json().post));
   }
 
+  newPostsCount(lastTouchedAt: string): Observable<number> {
+    let requestOptions = new RequestOptions();
+    let searchParams = new URLSearchParams();
+    searchParams.set('last_touched_at', lastTouchedAt);
+    requestOptions.search = searchParams;
+
+    return this.http.get(`/api/v1/posts/new_count`, requestOptions)
+      .map(res => <number>(res.json().posts_count));
+  }
+
   create(parti: Parti, body: string,
     attachment: string, link: string, poll: string
   ): Observable<Post> {

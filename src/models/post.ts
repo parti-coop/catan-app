@@ -15,6 +15,7 @@ export interface Post {
   parti: Parti;
   user: User;
   created_at: string;
+  last_touched_at: string;
   is_upvotable: boolean;
   upvotes_count: number;
   comments_count: number;

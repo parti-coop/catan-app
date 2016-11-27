@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController, Events, Platform } from 'ionic-angular';
-import { InAppBrowser } from 'ionic-native';
 
 import 'rxjs/add/operator/finally';
 

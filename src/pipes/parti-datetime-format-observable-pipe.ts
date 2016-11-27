@@ -1,10 +1,12 @@
 import { Injectable, Pipe } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import moment from 'moment';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/takeWhile';
+
+import moment from 'moment';
 
 @Pipe({
   name: 'partiDateTimeFormatObservable'
@@ -31,7 +33,11 @@ export class PartiDateTimeFormatObservablePipe {
       }).map(()=> {
         if(this.isYoung(date)) {
           this.isFullFormat = false;
-          return date.from(moment());
+          if (this.isFuture) {
+            return '지금';
+          } else {
+            return date.from(moment());
+          }
         } else {
           this.isFullFormat = true;
           return date.format('YYYY. M. D');
@@ -50,6 +56,10 @@ export class PartiDateTimeFormatObservablePipe {
     } else {
       return 3600;
     }
+  }
+
+  private isFuture(date: moment.Moment) {
+    return moment().diff(date, 'minute') <= 0;
   }
 
   private isYoung(date: moment.Moment) {

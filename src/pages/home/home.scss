@@ -1,8 +1,30 @@
 page-home {
+  .new-posts-indicator {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 12px;
+    ion-chip {
+      display: flex;
+      align-items: center;
+    }
+  }
+  .force-reloading-posts-spinner {
+    height: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: height 0.25s ease-in;
+    &.loading {
+      height: 60px;
+    }
+  }
   parti-post-panel {
     background-color: #fff;
     border-top: 12px solid $gray-lighter;
     &:first-child {
+      border-top: none;
       margin: 0;
     }
   }
