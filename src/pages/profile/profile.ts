@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { NavController, NavParams, ViewController, InfiniteScroll, Content, App, Scroll, Platform } from 'ionic-angular';
 import { InAppBrowser } from 'ionic-native';
 
@@ -29,11 +29,13 @@ export class ProfilePage {
   infiniteScroll: InfiniteScroll;
   @ViewChild(Shrinkage)
   shrinkage: Shrinkage;
-  @ViewChild('#cover')
+  @ViewChild('cover')
   cover: ElementRef;
-  @ViewChild('#partiesScroll')
+  @ViewChild('coverItem')
+  coverItems: any[];
+  @ViewChild('partiesScroll')
   partiesScroll: Scroll;
-  @ViewChild('#postsScroll')
+  @ViewChild('postsScroll')
   postsScroll: Scroll;
 
   selection: string = 'parties';
@@ -114,15 +116,6 @@ export class ProfilePage {
     }
   }
 
-  // ngAfterViewInit() {
-  //   this.content.addScrollListener((event) =>  {
-  //     if(event.target.scrollTop > 0) {
-  //       this.coverState = "after";
-  //       this.titleState = "in";
-  //     }
-  //   });
-  // }
-
   onClickExtendCover() {
     this.shrinkage.extends();
   }
@@ -140,16 +133,4 @@ export class ProfilePage {
       new InAppBrowser('http://parti.xyz/users/edit', "_blank", "location=true");
     });
   }
-
-
-  // shrinkCoverDone(event) {
-  //   console.log(event);
-  //   this.content.resize();
-  // }
-
-  // onSwipeUpContentAction(swipeVertical: SwipeVertical) {
-  //   this.app.setScrollDisabled(false);
-  //   this.coverState = "after";
-  //   this.titleState = "in";
-  // }
 }

@@ -1,4 +1,4 @@
-%ion-header{ 'no-shadow': true, '[shrinkage]': 'content', '[target]': 'cover', '[scrolls]': '[partiesScroll, postsScroll]', '(onShrinked)': 'onShrinked($event)', '(onExtended)': 'onExtended($event)' }
+%ion-header{ 'no-shadow': true, '[shrinkage]': 'content', '[target]': 'cover', '[targetItems]': 'coverItems', '[scrolls]': '[partiesScroll, postsScroll]', '(onShrinked)': 'onShrinked($event)', '(onExtended)': 'onExtended($event)' }
   %ion-navbar{ 'no-border': true }
     %ion-title{ '(click)': 'onClickExtendCover()' }
       .title{'[@fadeInOut]': 'titleState'}
@@ -8,12 +8,12 @@
         %ion-icon{ name: 'settings', '(click)': 'onClickSettings()' }
   .profile-toolbar
     %ion-toolbar{ 'no-border': true }
-      .cover{ '#cover': true, '[hidden]': "titleState === 'in'" }
+      .cover{ '#cover': true }
         .cover-top
-          .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
+          .user-image.xx{ '#coverItem': true, '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
         .cover-bottom
-          .user-nickname {{user.nickname}}
-          .user-edit-btn{ '[hidden]': "!isMe", '(click)': 'onClickProfileEditBtn()' } 프로필 수정
+          .user-nickname{  '#coverItem': true } {{user.nickname}}
+          .user-edit-btn.cover-item{  '#coverItem': true, '[hidden]': "!isMe", '(click)': 'onClickProfileEditBtn()' } 프로필 수정
       %ion-segment{ '[(ngModel)]': 'selection' }
         %ion-segment-button{ value: 'parties' }
           .segment-button-content{ '[hidden]': "!isMe" } 내 빠띠

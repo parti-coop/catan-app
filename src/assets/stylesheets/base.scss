@@ -86,44 +86,6 @@ body.keyboard-is-open
   display: none;
 }
 
-@-webkit-keyframes slideOutSmooth {
-  0% {
-    -webkit-transform: translate3d(0, 0, 0);
-  }
-  100% {
-    -webkit-transform: translate3d(0, -100%, 0);
-    height: 0;
-  }
-}
-
-@-webkit-keyframes slideInSmooth {
-  0% {
-    -webkit-transform: translate3d(0, -100%, 0);
-  }
-  100% {
-    -webkit-transform: translate3d(0, 0, 0);
-    height: initial;
-  }
-}
-
-.slide-in {
-   -webkit-animation: slideInSmooth ease-in 1;
-  animation: slideInSmooth ease-in 1;
-  -webkit-animation-fill-mode: forwarded;
-  animation-fill-mode: forwarded;
-  -webkit-animation-duration: 750ms;
-  animation-duration: 750ms;
-}
-
-.slide-out {
-   -webkit-animation: slideOutSmooth ease-in 1;
-  animation: slideOutSmooth ease-in 1;
-  -webkit-animation-fill-mode: forwarded;
-  animation-fill-mode: forwarded;
-  -webkit-animation-duration: 750ms;
-  animation-duration: 750ms;
-}
-
 // 공유하기 팝업
 ion-action-sheet {
   .action-sheet-container {

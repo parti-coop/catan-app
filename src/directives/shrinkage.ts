@@ -17,6 +17,7 @@ export class Shrinkage implements AfterViewInit {
   // Might end up separate shrinkageHeader, shrinkageFooter
   @Input('shrinkage') content: Content;
   @Input() target: any;
+  @Input('targetItems') targetItems: any[];
   @Input() scrolls: Scroll[];
   @Output() onShrinked = new EventEmitter();
   @Output() onExtended = new EventEmitter();
@@ -28,6 +29,8 @@ export class Shrinkage implements AfterViewInit {
 
   ngAfterViewInit() {
     this.originHeaderTop = this.target.clientHeight;
+    this.initStyle();
+    this.slide('in');
     this.reset();
 
     // Kick of rendering
@@ -40,6 +43,14 @@ export class Shrinkage implements AfterViewInit {
       scroll.addScrollEventListener((event) => {
         this.onPageScroll(event);
       });
+    });
+  }
+
+  initStyle() {
+    this.renderer.setElementStyle(this.target, 'overflow', 'hidden');
+    this.renderer.setElementStyle(this.target, 'transition', 'all 200ms');
+    _(this.targetItems).forEach((child) => {
+      this.renderer.setElementStyle(child, 'transition', 'all 200ms');
     });
   }
 
@@ -65,7 +76,6 @@ export class Shrinkage implements AfterViewInit {
     if (event.target.scrollTop > 0) {
       this.isShrinkedStared = true;
       setTimeout(() => {
-        this.renderer.setElementStyle(this.target, 'overflow', 'hidden');
         this.slide('out');
       }, 10);
     }
@@ -90,7 +100,6 @@ export class Shrinkage implements AfterViewInit {
     }
 
     this.reset();
-    console.log('test1');
     this.slide('in');
     setTimeout(() => {
       this.content.resize();
@@ -101,11 +110,15 @@ export class Shrinkage implements AfterViewInit {
 
   slide(direction: string) {
     if(direction == 'out') {
-      this.renderer.setElementClass(this.target, 'slide-in', false);
-      this.renderer.setElementClass(this.target, 'slide-out', true);
+      this.renderer.setElementStyle(this.target, 'height', '0');
+      _(this.targetItems).forEach((child) => {
+        this.renderer.setElementStyle(child, 'opacity', '0.5');
+      });
     } else {
-      this.renderer.setElementClass(this.target, 'slide-out', false);
-      this.renderer.setElementClass(this.target, 'slide-in', true);
+      this.renderer.setElementStyle(this.target, 'height', `${this.originHeaderTop}px`);
+      _(this.targetItems).forEach((child) => {
+        this.renderer.setElementStyle(child, 'opacity', '1');
+      });
     }
   }
 }

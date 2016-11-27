@@ -1,4 +1,4 @@
-<ion-header (onExtended)='onExtended($event)' (onShrinked)='onShrinked($event)' [scrolls]='[partiesScroll, postsScroll]' [shrinkage]='content' [target]='cover' no-shadow>
+<ion-header (onExtended)='onExtended($event)' (onShrinked)='onShrinked($event)' [scrolls]='[partiesScroll, postsScroll]' [shrinkage]='content' [targetItems]='coverItems' [target]='cover' no-shadow>
   <ion-navbar no-border>
     <ion-title (click)='onClickExtendCover()'>
       <div [@fadeInOut]='titleState' class='title'>
@@ -12,13 +12,13 @@
   </ion-navbar>
   <div class='profile-toolbar'>
     <ion-toolbar no-border>
-      <div #cover [hidden]="titleState === 'in'" class='cover'>
+      <div #cover class='cover'>
         <div class='cover-top'>
-          <div [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='user-image'></div>
+          <div #coverItem [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='user-image xx'></div>
         </div>
         <div class='cover-bottom'>
-          <div class='user-nickname'>{{user.nickname}}</div>
-          <div (click)='onClickProfileEditBtn()' [hidden]='!isMe' class='user-edit-btn'>프로필 수정</div>
+          <div #coverItem class='user-nickname'>{{user.nickname}}</div>
+          <div #coverItem (click)='onClickProfileEditBtn()' [hidden]='!isMe' class='user-edit-btn cover-item'>프로필 수정</div>
         </div>
       </div>
       <ion-segment [(ngModel)]='selection'>
