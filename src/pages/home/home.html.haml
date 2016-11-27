@@ -5,8 +5,8 @@
       %button{ 'icon-only': true, 'ion-button': true, '(click)': 'onClickBug()' }
         %ion-icon{ name: 'ios-bug' }
 %ion-content
-  .new-posts-indicator{'ion-fixed': true, '(click)': 'onClickNewPostIndicator()', '[@indicatorTrigger]': 'newPostsCountStat' }
-    %ion-chip{ 'color': 'primary', }
+  .new-posts-indicator{'ion-fixed': true, '[@indicatorTrigger]': 'newPostsCountStat' }
+    %ion-chip{ 'color': 'primary', '(click)': 'onClickNewPostIndicator()' }
       %ion-label 새로운 소식 {{ newPostsCountLabel }}개
   %ion-refresher{ '(ionRefresh)': 'onRefresh($event)' }
     %ion-refresher-content

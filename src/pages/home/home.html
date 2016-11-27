@@ -9,8 +9,8 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <div (click)='onClickNewPostIndicator()' [@indicatorTrigger]='newPostsCountStat' class='new-posts-indicator' ion-fixed>
-    <ion-chip color='primary'>
+  <div [@indicatorTrigger]='newPostsCountStat' class='new-posts-indicator' ion-fixed>
+    <ion-chip (click)='onClickNewPostIndicator()' color='primary'>
       <ion-label>새로운 소식 {{ newPostsCountLabel }}개</ion-label>
     </ion-chip>
   </div>

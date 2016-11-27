@@ -42,11 +42,13 @@ import { DevPage } from '../../pages/dev/dev';
     trigger('indicatorTrigger', [
       state('visible', style({
         transform: 'translateY(0)',
-        opacity: 1
+        opacity: 1,
+        height: '*'
       })),
       state('invisible, void', style({
         transform: 'translateY(-100%)',
-        opacity: 0
+        opacity: 0,
+        height: 0
       })),
       transition('* <=> visible', [
         animate(200)
