@@ -9,6 +9,7 @@
       <div *ngIf="from == 'parti-home'" class='title-member'>멤버 {{ parti.members_count }}명</div>
       <div *ngIf="from == 'post-poll' &amp;&amp; choice == 'agree'" class='title-member'>찬성 멤버 {{ post.poll.agreed_votings_count }}명</div>
       <div *ngIf="from == 'post-poll' &amp;&amp; choice == 'disagree'" class='title-member'>반대 멤버 {{ post.poll.disagreed_votings_count }}명</div>
+      <div *ngIf="from == 'post-comments'" class='title-member'>댓글 단 멤버 {{ post.comment_users.length }}명</div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -22,7 +23,7 @@
       </div>
     </ion-item>
   </ion-list>
-  <ion-list *ngIf="from == 'post-poll'">
+  <ion-list *ngIf="from == 'post-poll' || 'post-comments'">
     <ion-item *ngFor='let user of users'>
       <div (click)='onClickUser(user)' class='member'>
         <div [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='member-image'></div>

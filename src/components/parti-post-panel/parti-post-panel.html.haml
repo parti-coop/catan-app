@@ -96,8 +96,8 @@
       댓글 {{ post.comments_count }}
     .commenters{ '*ngIf': "hasComment()" }
       .comment-user{ '*ngFor': 'let user of post.comment_users.slice(0,8)'}
-        .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
-      .more{ '*ngIf': "post.comment_users.length > 8" }
+        .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }", '(click)': 'onClickUser(user)' }
+      .more-users{ '*ngIf': "post.comment_users.length > 8", '(click)': "onClickMoreUsers()" }
         + {{ post.comment_users.length - 8 }}
   .post-comments{ '*ngIf': "hasComment()" }
     .comment{ '*ngFor': 'let comment of post.comments'}

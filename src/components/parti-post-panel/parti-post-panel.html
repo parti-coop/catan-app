@@ -136,9 +136,9 @@
     </span>
     <div *ngIf='hasComment()' class='commenters'>
       <div *ngFor='let user of post.comment_users.slice(0,8)' class='comment-user'>
-        <div [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='user-image'></div>
+        <div (click)='onClickUser(user)' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='user-image'></div>
       </div>
-      <div *ngIf='post.comment_users.length &gt; 8' class='more'>
+      <div (click)='onClickMoreUsers()' *ngIf='post.comment_users.length &gt; 8' class='more-users'>
         + {{ post.comment_users.length - 8 }}
       </div>
     </div>

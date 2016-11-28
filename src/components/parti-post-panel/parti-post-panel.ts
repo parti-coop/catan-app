@@ -14,6 +14,7 @@ import { Parti } from '../../models/parti';
 import { Post } from '../../models/post';
 import { PostPage } from '../../pages/post/post';
 import { PartiHomePage } from '../../pages/parti-home/parti-home';
+import { ProfilePage } from '../../pages/profile/profile';
 import { MembersPage } from '../../pages/members/members';
 import { UpvoteData } from '../../providers/upvote-data';
 
@@ -183,6 +184,15 @@ export class PartiPostPanelComponent {
 
   onClickVotingUsers(choice: string) {
     let profileModal = this.modalCtrl.create(MembersPage, { post: this.post, choice: choice, from: 'post-poll' });
+    profileModal.present();
+  }
+
+  onClickUser(user: User) {
+    this.navCtrl.push(ProfilePage, { user: user });
+  }
+
+  onClickMoreUsers() {
+    let profileModal = this.modalCtrl.create(MembersPage, { post: this.post, from: 'post-comments' });
     profileModal.present();
   }
 
