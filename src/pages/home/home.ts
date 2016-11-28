@@ -1,6 +1,6 @@
 import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { App, Events, InfiniteScroll, Refresher, Content } from 'ionic-angular';
+import { App, Events, InfiniteScroll, Refresher, ViewController, Content } from 'ionic-angular';
 import { trigger, state, style, transition, animate } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
@@ -70,6 +70,8 @@ import { DevPage } from '../../pages/dev/dev';
   ]
 })
 export class HomePage {
+  HOME_TAB_INDEX = 0;
+
   @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
   @ViewChild(Content) content: Content;
   @ViewChild(Refresher) refresher: Refresher;
@@ -87,6 +89,7 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
+    public viewCtrl: ViewController,
     private ref: ChangeDetectorRef,
     private events: Events,
     private app: App,
@@ -111,7 +114,7 @@ export class HomePage {
 
   pollingNewPostCount(): Subscription {
     return Observable
-      .interval(60 * 2000)
+      .interval(3 * 60 * 1000)
       .startWith(0)
       .subscribe(() => {
         let lastTouchedAt = _.head(this.posts) && _.head(this.posts).last_touched_at;
@@ -228,7 +231,11 @@ export class HomePage {
     let hasNewPosts = (!!count && count > 0);
     if(hasNewPosts) {
       this.newPostsCountLabel = count > 999 ? '999+' : String(count);
-      if(!this.shownNewPostsCount && this.content.getScrollTop() > 100) {
+      let selectedHomeTab = this.navCtrl.parent.getSelected().index == this.HOME_TAB_INDEX;
+      if(selectedHomeTab
+        && this.navCtrl.isActive(this.viewCtrl)
+        && !this.shownNewPostsCount)
+      {
         if(!!this.newPostsCountStatResettter) {
           clearTimeout(this.newPostsCountStatResettter);
         }
@@ -236,7 +243,6 @@ export class HomePage {
           this.newPostsCountStat = 'invisible';
         }, 5000);
         this.newPostsCountStat = 'visible';
-
         this.shownNewPostsCount = true;
       }
     } else {
