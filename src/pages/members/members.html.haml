@@ -4,11 +4,18 @@
       %button{ 'ion-button': true, '(click)': 'dismiss()' }
         %ion-icon{ name: 'close' }
     %ion-title
-      .title-member 멤버 {{ parti.members_count }}
+      .title-member{ '*ngIf': "from == 'parti-home'" } 멤버 {{ parti.members_count }}명
+      .title-member{ '*ngIf': "from == 'post-poll' && choice == 'agree'" } 찬성 멤버 {{ post.poll.agreed_votings_count }}명
+      .title-member{ '*ngIf': "from == 'post-poll' && choice == 'disagree'" } 반대 멤버 {{ post.poll.disagreed_votings_count }}명
 %ion-content{ 'padding': true }
-  %ion-list
+  %ion-list{ '*ngIf': "from == 'parti-home'" }
     %ion-item{ '*ngFor': 'let member of members' }
       .member
-        .member-image{ '[ngStyle]': "{ 'background-image': 'url(' + member.user.image_url + ')' }", '(click)': 'onClickUser(member)' }
+        .member-image{ '[ngStyle]': "{ 'background-image': 'url(' + member.user.image_url + ')' }", '(click)': 'onClickUser(member.user)' }
         .member-name{ '(click)': 'onClickUser(member)' } {{ member.user.nickname }}
         .member-maker{ '*ngIf': "member.is_maker" } 빠띠메이커
+  %ion-list{ '*ngIf': "from == 'post-poll'" }
+    %ion-item{ '*ngFor': 'let user of users' }
+      .member{ '(click)': 'onClickUser(user)' }
+        .member-image{ '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
+        .member-name {{ user.nickname }}

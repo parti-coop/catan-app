@@ -1,6 +1,6 @@
 import { Platform } from 'ionic-angular';
 import { Component, Input } from '@angular/core';
-import { NavController, AlertController, ToastController, ActionSheetController } from 'ionic-angular';
+import { NavController, AlertController, ToastController, ActionSheetController, ModalController } from 'ionic-angular';
 import { InAppBrowser, Transfer, FileOpener, SocialSharing, Facebook, Device, AppAvailability } from 'ionic-native';
 
 import _ from 'lodash';
@@ -14,6 +14,7 @@ import { Parti } from '../../models/parti';
 import { Post } from '../../models/post';
 import { PostPage } from '../../pages/post/post';
 import { PartiHomePage } from '../../pages/parti-home/parti-home';
+import { MembersPage } from '../../pages/members/members';
 import { UpvoteData } from '../../providers/upvote-data';
 
 import { VotingData } from '../../providers/voting-data';
@@ -43,6 +44,7 @@ export class PartiPostPanelComponent {
     private platform: Platform,
     private toastCtrl: ToastController,
     private actionSheetCtrl: ActionSheetController,
+    private modalCtrl: ModalController,
     private votingData: VotingData,
     private upvoteData: UpvoteData,
     private myselfData: MyselfData
@@ -179,8 +181,9 @@ export class PartiPostPanelComponent {
       });
   }
 
-  onClickVotingUser(user: User) {
-    console.log(`user ${user.nickname}`);
+  onClickVotingUsers(choice: string) {
+    let profileModal = this.modalCtrl.create(MembersPage, { post: this.post, choice: choice, from: 'post-poll' });
+    profileModal.present();
   }
 
   onClickUpvoteButton() {

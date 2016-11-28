@@ -81,11 +81,11 @@
     </div>
   </div>
   <div *ngIf='isVoted() &amp;&amp; !isCollection' class='poll-votings'>
-    <div class='agreed-voting-users'>
-      <div (click)='onClickVotingUser(user)' *ngFor='let user of post.poll.agreed_voting_users.slice(0,6)' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='voting-user'></div>
+    <div (click)="onClickVotingUsers('agree')" class='agreed-voting-users'>
+      <div *ngFor='let user of post.poll.agreed_voting_users.slice(0,6)' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='voting-user'></div>
     </div>
-    <div class='disagreed-voting-users'>
-      <div (click)='onClickVotingUser(user)' *ngFor='let user of post.poll.disagreed_voting_users.slice(0,6)' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='voting-user'></div>
+    <div (click)="onClickVotingUsers('disagree')" class='disagreed-voting-users'>
+      <div *ngFor='let user of post.poll.disagreed_voting_users.slice(0,6)' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='voting-user'></div>
     </div>
   </div>
   <div class='poll-recommend-voting'>

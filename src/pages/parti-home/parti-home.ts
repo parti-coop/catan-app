@@ -271,7 +271,7 @@ export class PartiHomePage {
   }
 
   onClickMember() {
-    let profileModal = this.modalCtrl.create(MembersPage, { parti: this.parti });
+    let profileModal = this.modalCtrl.create(MembersPage, { parti: this.parti, from: 'parti-home' });
     profileModal.present();
   }
 }

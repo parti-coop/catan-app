@@ -6,17 +6,27 @@
       </button>
     </ion-buttons>
     <ion-title>
-      <div class='title-member'>멤버 {{ parti.members_count }}</div>
+      <div *ngIf="from == 'parti-home'" class='title-member'>멤버 {{ parti.members_count }}명</div>
+      <div *ngIf="from == 'post-poll' &amp;&amp; choice == 'agree'" class='title-member'>찬성 멤버 {{ post.poll.agreed_votings_count }}명</div>
+      <div *ngIf="from == 'post-poll' &amp;&amp; choice == 'disagree'" class='title-member'>반대 멤버 {{ post.poll.disagreed_votings_count }}명</div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-  <ion-list>
+  <ion-list *ngIf="from == 'parti-home'">
     <ion-item *ngFor='let member of members'>
       <div class='member'>
-        <div (click)='onClickUser(member)' [ngStyle]="{ 'background-image': 'url(' + member.user.image_url + ')' }" class='member-image'></div>
+        <div (click)='onClickUser(member.user)' [ngStyle]="{ 'background-image': 'url(' + member.user.image_url + ')' }" class='member-image'></div>
         <div (click)='onClickUser(member)' class='member-name'>{{ member.user.nickname }}</div>
         <div *ngIf='member.is_maker' class='member-maker'>빠띠메이커</div>
+      </div>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="from == 'post-poll'">
+    <ion-item *ngFor='let user of users'>
+      <div (click)='onClickUser(user)' class='member'>
+        <div [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='member-image'></div>
+        <div class='member-name'>{{ user.nickname }}</div>
       </div>
     </ion-item>
   </ion-list>
