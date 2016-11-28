@@ -87,14 +87,19 @@
     %ion-icon{ name: 'md-share' }
     공유하기
 .post-footer{ '*ngIf': "!isCollection" }
-  .post-reaction-info{ '*ngIf': '(post.upvotes_count > 0 || post.comments_count > 0) && !isCollection' }
+  .post-reaction-info{ '*ngIf': '(post.upvotes_count > 0 || post.comments_count > 0)' }
     %span.post-upvotes-count{ '*ngIf': 'post.upvotes_count > 0' }
       공감 {{ post.upvotes_count }}
     %span.middot{ '*ngIf': 'post.upvotes_count > 0 && post.comments_count > 0' }
       &middot;
     %span.post-comments-count{ '*ngIf': 'post.comments_count > 0' }
       댓글 {{ post.comments_count }}
-  .post-comments{ '*ngIf': "hasComment() && !isCollection" }
+    .commenters{ '*ngIf': "hasComment()" }
+      .comment-user{ '*ngFor': 'let user of post.comment_users.slice(0,8)'}
+        .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
+      .more{ '*ngIf': "post.comment_users.length > 8" }
+        + {{ post.comment_users.length - 8 }}
+  .post-comments{ '*ngIf': "hasComment()" }
     .comment{ '*ngFor': 'let comment of post.comments'}
       .comment-header
         .comment-byline

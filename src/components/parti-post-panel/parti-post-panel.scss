@@ -299,7 +299,30 @@ parti-post-panel {
     margin-right: -6px;
 
     .post-reaction-info {
-      padding: 0 0 12px;
+      border-bottom: 1px solid #eaeaeb;
+      margin: 0 -12px 12px;
+      padding: 0 12px 12px;
+      .commenters {
+        padding-top: 12px;
+        .comment-user {
+          display: inline-block;
+          margin-right: 6px;
+          .user-image {
+            display: inline-block;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            @include background-thumbnail();
+          }
+        }
+        .more {
+          float: right;
+          color: #777777;
+          border: 1px solid #dedede;
+          border-radius: 30px;
+          padding: 4px 10px;
+        }
+      }
     }
 
     .post-comments {

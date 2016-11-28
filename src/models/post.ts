@@ -19,6 +19,7 @@ export interface Post {
   is_upvotable: boolean;
   upvotes_count: number;
   comments_count: number;
+  comment_users: User[];
   comments: Comment[];
   link_reference: LinkSource;
   file_reference: FileSource;
