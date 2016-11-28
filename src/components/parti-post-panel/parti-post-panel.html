@@ -156,7 +156,12 @@
           </div>
         </div>
       </div>
-      <div [class.agreed]="comment.choice == 'agree'" [class.disagreed]="comment.choice == 'disagree'" [innerHTML]='comment.body | partiSimpleFormat ' class='comment-body'></div>
+      <template [ngIf]='!comment.is_blinded'>
+        <div [class.agreed]="comment.choice == 'agree'" [class.disagreed]="comment.choice == 'disagree'" [innerHTML]='comment.body | partiSimpleFormat ' class='comment-body'></div>
+      </template>
+      <template [ngIf]='comment.is_blinded'>
+        <div class='comment-body comment-body-blinded'>건강하고 유쾌한 빠띠 활동을 위해 숨겨진 댓글입니다.</div>
+      </template>
     </div>
   </div>
 </div>
@@ -174,7 +179,12 @@
           </div>
         </div>
       </div>
-      <div [class.agreed]="comment.choice == 'agree'" [class.disagreed]="comment.choice == 'disagree'" [innerHTML]='comment.body | partiSimpleFormat ' class='comment-body'></div>
+      <template [ngIf]='!comment.is_blinded'>
+        <div [class.agreed]="comment.choice == 'agree'" [class.disagreed]="comment.choice == 'disagree'" [innerHTML]='comment.body | partiSimpleFormat ' class='comment-body'></div>
+      </template>
+      <template [ngIf]='comment.is_blinded'>
+        <div class='comment-body comment-body-blinded'>건강하고 유쾌한 빠띠 활동을 위해 숨겨진 댓글입니다.</div>
+      </template>
     </div>
   </div>
 </div>

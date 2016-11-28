@@ -142,7 +142,7 @@ export class HomePage {
           this.posts = [];
           this.hasPreviousPosts = newPosts.has_more_item;
         }
-        if(newPosts.items) {
+        if(!_.isEmpty(newPosts.items)) {
           let newLastPost = _.last(newPosts.items);
           let currentFirstPost = _.head(this.posts);
 

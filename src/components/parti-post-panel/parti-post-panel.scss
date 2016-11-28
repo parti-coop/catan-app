@@ -383,6 +383,9 @@ parti-post-panel {
             font-family: "Ionicons";
             color: $brand-danger;
           }
+          &.comment-body-blinded {
+            color: $gray-light;
+          }
         }
       }
     }
