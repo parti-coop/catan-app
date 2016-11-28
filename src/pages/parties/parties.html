@@ -18,7 +18,7 @@
 <ion-content>
   <div [hidden]="selection !== 'joined'" class='full'>
     <ion-scroll class='full' scrollY='true'>
-      <div class='select-group-panel'>
+      <div [hidden]='!has_group' class='select-group-panel'>
         <p>내 그룹</p>
         <ion-scroll scrollX='true'>
           <div class='groups'>

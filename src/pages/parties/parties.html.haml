@@ -11,7 +11,7 @@
 %ion-content
   %div.full{ '[hidden]': "selection !== 'joined'" }
     %ion-scroll.full{ scrollY: 'true' }
-      .select-group-panel
+      .select-group-panel{ '[hidden]': "!has_group" }
         %p 내 그룹
         %ion-scroll{ scrollX: 'true' }
           .groups

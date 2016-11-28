@@ -28,6 +28,7 @@ export class PartiesPage {
   parties: { [id: string] : Parti[]; } = {};
   selection: string = 'joined';
   groups: Group[];
+  has_group: boolean = false;
   tags: Tag[];
 
   constructor(
@@ -63,6 +64,10 @@ export class PartiesPage {
     }
     this.groupData.joined().subscribe((groups: Group[]) => {
       this.groups = groups;
+      for(let group of groups) {
+        this.has_group = true;
+        break;
+      }
     });
     this.tagData.mostUsedOnParties(100).subscribe((tagNames: string[]) => {
       this.tags = _.map(tagNames, (tagName) => <Tag>({ name: tagName}));
