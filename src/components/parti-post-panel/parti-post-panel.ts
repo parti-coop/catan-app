@@ -10,8 +10,10 @@ import 'rxjs/add/operator/finally';
 import { LinkSource } from '../../models/link-source';
 import { FileSource } from '../../models/file-source';
 import { User } from '../../models/user';
+import { Parti } from '../../models/parti';
 import { Post } from '../../models/post';
 import { PostPage } from '../../pages/post/post';
+import { PartiHomePage } from '../../pages/parti-home/parti-home';
 import { UpvoteData } from '../../providers/upvote-data';
 
 import { VotingData } from '../../providers/voting-data';
@@ -68,6 +70,10 @@ export class PartiPostPanelComponent {
 
   hasComment() {
     return this.post.comments_count > 0;
+  }
+
+  onClickParti(parti: Parti) {
+    this.navCtrl.push(PartiHomePage, { parti: parti });
   }
 
   onClickPostContent() {
