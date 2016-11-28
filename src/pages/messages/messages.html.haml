@@ -6,7 +6,7 @@
   %ion-refresher{ '(ionRefresh)': 'onRefresh($event)' }
     %ion-refresher-content
   %ion-list
-    %ion-item{ '*ngFor': 'let message of messages', 'text-wrap': true, '[class.read]': '!!message.read_at', '(click)': 'onClickMessage(message)' }
+    %ion-item{ '*ngFor': 'let message of messages', 'text-wrap': true, '[class.read]': '!!message.read_at', '(click)': 'onClickMessage(message)', '[@messageTrigger]': '"visible"' }
       .message-header
         .message-header--parti-group{ '*ngIf': 'message.parti.group' }
           {{ message.parti.group.name }}

@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewChildren, QueryList, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, ViewController, InfiniteScroll, Content, App, Scroll, Platform } from 'ionic-angular';
 import { InAppBrowser } from 'ionic-native';
 

@@ -10,7 +10,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list>
-    <ion-item (click)='onClickMessage(message)' *ngFor='let message of messages' [class.read]='!!message.read_at' text-wrap>
+    <ion-item (click)='onClickMessage(message)' *ngFor='let message of messages' [@messageTrigger]='"visible"' [class.read]='!!message.read_at' text-wrap>
       <div class='message-header'>
         <div *ngIf='message.parti.group' class='message-header--parti-group'>
           {{ message.parti.group.name }}

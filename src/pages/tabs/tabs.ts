@@ -79,7 +79,7 @@ export class TabsPage {
 
   pollingNewMessagesCount() {
     return Observable
-      .interval(60 * 2000)
+      .interval(2 * 60 * 1000)
       .startWith(0)
       .subscribe(() => {
         let lastMessageId = this.myselfData.getLastMessageId();
@@ -98,6 +98,7 @@ export class TabsPage {
               } else {
                 this.newMessagesCountLabel = String(count);
               }
+              this.events.publish('messages:refresh', lastMessageId);
             } else {
               this.newMessagesCountLabel = null;
             }
