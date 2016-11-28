@@ -350,13 +350,16 @@ parti-post-panel {
             }
             .byline-info {
               padding-left: 8px;
+              display: flex;
+              flex-flow: row nowrap;
               .user-nickname{
-                display: inline-block;
+                flex: 1;
+                padding-right: 6px;
                 color: $brand-primary-dark;
               }
               .comment-created-at {
+                width: 90px;
                 color: $gray-light;
-                display: inline-block;
                 font-size: $font-size-small;
               }
             }
