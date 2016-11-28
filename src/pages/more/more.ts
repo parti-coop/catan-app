@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { App, NavController, AlertController, LoadingController } from 'ionic-angular';
+import { App, NavController, AlertController, ViewController, LoadingController } from 'ionic-angular';
 
 import 'rxjs/add/operator/finally';
 
@@ -18,6 +18,7 @@ export class MorePage {
 
   constructor(
     public navCtrl: NavController,
+    public viewCtrl: ViewController,
     public partiEnvironment: PartiEnvironment,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
@@ -34,6 +35,26 @@ export class MorePage {
   }
 
   onClickSignOutButton() {
+    let alert = this.alertCtrl.create({
+      title: '확인',
+      message: '정말 로그아웃하시겠습니까?',
+      buttons: [
+        {
+          text: '취소',
+          role: 'cancel',
+        },
+        {
+          text: '로그아웃',
+          handler: () => {
+            this.signOut();
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  signOut() {
     let loading = this.loadingCtrl.create();
     loading.present();
 
