@@ -14,7 +14,7 @@
   .link-reference-image-wrapper
     .link-reference-image{ '[ngStyle]': "{ 'background-image': 'url(' + post.link_reference.image_url + ')' }" }
   .link-reference-detail-wrapper
-    .link-reference-title {{ post.link_reference.title }}
+    .link-reference-title {{ post.link_reference.title || post.link_reference.url }}
     .link-reference-body {{ post.link_reference.body }}
     .link-reference-footer
       .link-reference-site-name {{ post.link_reference.site_name | uppercase }}

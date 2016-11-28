@@ -19,7 +19,7 @@
     <div [ngStyle]="{ 'background-image': 'url(' + post.link_reference.image_url + ')' }" class='link-reference-image'></div>
   </div>
   <div class='link-reference-detail-wrapper'>
-    <div class='link-reference-title'>{{ post.link_reference.title }}</div>
+    <div class='link-reference-title'>{{ post.link_reference.title || post.link_reference.url }}</div>
     <div class='link-reference-body'>{{ post.link_reference.body }}</div>
     <div class='link-reference-footer'>
       <div class='link-reference-site-name'>{{ post.link_reference.site_name | uppercase }}</div>
