@@ -11,7 +11,7 @@
         <div class='parti-body'>
           <div class='parti-title'>
             <div class='parti-title--title'>{{ parti.title }}</div>
-            <div *ngIf='parti.is_made_by' class='parti-title--maker'>빠띠 메이커</div>
+            <div *ngIf='parti.is_made_by_target_user' class='parti-title--maker'>빠띠 메이커</div>
           </div>
           <div class='parti-info'>
             <div *ngIf='parti.latest_posts_count !== 0' class='parti-info--new-post'>

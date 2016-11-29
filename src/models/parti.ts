@@ -15,5 +15,6 @@ export interface Parti {
   posts_count: number;
   is_member: boolean;
   is_made_by: boolean;
+  is_made_by_target_user: boolean;
   share: Share;
 }

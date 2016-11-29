@@ -9,7 +9,7 @@
         .parti-body
           .parti-title
             .parti-title--title {{ parti.title }}
-            .parti-title--maker{ '*ngIf': "parti.is_made_by" } 빠띠 메이커
+            .parti-title--maker{ '*ngIf': "parti.is_made_by_target_user" } 빠띠 메이커
           .parti-info
             .parti-info--new-post{ '*ngIf': "parti.latest_posts_count !== 0"}
               .parti-info--new-post__icon N
