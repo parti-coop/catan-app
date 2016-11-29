@@ -8,13 +8,16 @@ page-sign-up {
       justify-content: center;
       flex-direction: column;
       .sign-up-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-size: $font-size-h3;
         font-weight: bold;
         text-align: center;
-        flex-basis: 30%;
+        flex: 1;
       }
       .sign-up-form {
-        flex-basis: 30%;
+        flex: 1;
         ion-item {
           padding-left: 0;
           margin: 0 22px;
@@ -28,17 +31,6 @@ page-sign-up {
           margin: 7px 22px 0;
           font-size: $font-size-small;
         }
-        .sign-up-next-help-block {
-          margin: 0 22px;
-          position: absolute;
-          bottom: 66px;
-          font-size: $font-size-small;
-          a {
-            color: #ffc152;
-            font-weight: bold;
-            text-decoration: none;
-          }
-        }
         .item-input {
           background-color: transparent;
           input {
@@ -48,18 +40,33 @@ page-sign-up {
           }
           @include chagne-palceholder-color($brand-primary-light);
         }
-        .sign-up-next-button {
-          button {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            margin: 0;
-            color: $brand-primary-dark;
-            background-color: $background-color;
-            opacity: 1;
-            font-weight: bold;
-            height: 42px;
-          }
+      }
+      .sign-up-next-help-block {
+        display: flex;
+        align-items: flex-end;
+        flex: 1;
+        margin: 0 22px;
+        font-size: $font-size-small;
+        a {
+          color: #ffc152;
+          font-weight: bold;
+          text-decoration: none;
+        }
+        .flex-conatiner {
+          margin-bottom: 70px;
+        }
+      }
+      .sign-up-next-button {
+        button {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          margin: 0;
+          color: $brand-primary-dark;
+          background-color: $background-color;
+          opacity: 1;
+          font-weight: bold;
+          height: 42px;
         }
       }
     }

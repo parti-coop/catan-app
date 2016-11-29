@@ -16,21 +16,22 @@
       <p>* 이미 다른 회원이 사용 중인 아이디입니다.</p>
     </ion-item>
     <ion-item *ngIf='needEmail'>
-      <ion-label>이메일</ion-label>
-      <ion-input formControlName='email' type='email'></ion-input>
+      <ion-input formControlName='email' placeholder='이메일' type='email'></ion-input>
     </ion-item>
     <ion-item *ngIf='emailField.hasError("invalidEmail") &amp;&amp; emailField.touched' no-lines>
       <p>* 올바른 이메일 형식이 아니예요.</p>
     </ion-item>
-    <div class='sign-up-next-help-block'>
-      “계속하기”를 클릭하면
+  </form>
+  <div class='sign-up-next-help-block'>
+    <div class='flex-conatiner'>
+      "계속하기"를 클릭하면
       <span><a href='http://parti.xyz/terms'>이용약관</a>과
       </span><span><a href='http://parti.xyz/privacy'>
         개인정보처리정책
       </a>
       의 내용을 이해하고 동의하게 됩니다.</span></div>
-    <div class='sign-up-next-button'>
-      <button [disabled]='!signUpForm.valid' block ion-button type='submit'>계속하기</button>
-    </div>
-  </form>
+  </div>
+  <div class='sign-up-next-button'>
+    <button (click)='signUp()' [disabled]='!signUpForm.valid' block ion-button>계속하기</button>
+  </div>
 </ion-content>
