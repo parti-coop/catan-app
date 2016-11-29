@@ -1,5 +1,5 @@
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { Component, Input } from '@angular/core';
 import { NavController, AlertController, ToastController, ActionSheetController, ModalController } from 'ionic-angular';
 import { InAppBrowser, Transfer, FileOpener, SocialSharing, Facebook, Device, AppAvailability } from 'ionic-native';
 
@@ -34,6 +34,8 @@ export class PartiPostPanelComponent {
 
   @Input()
   isCollection: boolean;
+
+  @Output() onAddComment = new EventEmitter();
 
   isLoading: boolean = false;
 
@@ -86,10 +88,14 @@ export class PartiPostPanelComponent {
   }
 
   onClickCommentButton() {
-    this.navCtrl.push(PostPage, {
-      post: this.post,
-      needFocusCommentInut: true
-    });
+    if(this.isCollection == true) {
+      this.navCtrl.push(PostPage, {
+        post: this.post,
+        needFocusCommentInut: true
+      });
+    } else {
+      this.onAddComment.emit();
+    }
   }
 
   onClickLinkReference(linkSource: LinkSource) {

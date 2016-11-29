@@ -114,7 +114,7 @@
     {{ post.is_upvotable ? '공감해요' : '공감해요 취소' }}
     <ion-spinner *ngIf='isLoading'></ion-spinner>
   </span>
-  <span (click)='onClickCommentButton()' *ngIf='isCollection' class='comment-button'>
+  <span (click)='onClickCommentButton()' class='comment-button'>
     <ion-icon name='chatbubbles'></ion-icon>
     댓글달기
   </span>

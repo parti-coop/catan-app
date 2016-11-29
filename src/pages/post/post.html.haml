@@ -10,7 +10,7 @@
         빠띠 보기
 
 %ion-content{ '#content': true }
-  %parti-post-panel{ '[post]': 'post', '[isCollection]': 'false' }
+  %parti-post-panel{ '[post]': 'post', '[isCollection]': 'false', '(onAddComment)': 'setFocusCommentForm($event)' }
 
 %ion-footer{ '[keyboardAttach]': 'content' }
   %ion-toolbar

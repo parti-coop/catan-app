@@ -52,6 +52,10 @@ export class PostPage {
     }
   }
 
+  setFocusCommentForm(event = null) {
+    this.inputCommentBody.setFocus();
+  }
+
   ngOnDestroy() {
     if (this.onShowSubscription) {
       this.onShowSubscription.unsubscribe();
@@ -65,7 +69,7 @@ export class PostPage {
     this.commentForm.controls['body'].setValue(null);
     if(this.navParams.get('needFocusCommentInut')) {
       setTimeout(() => {
-        this.inputCommentBody.setFocus();
+        this.setFocusCommentForm();
       }, 50);
     }
   }

@@ -80,7 +80,7 @@
     %ion-icon{ name: 'heart', '[class.upvoted]': '!post.is_upvotable' }
     {{ post.is_upvotable ? '공감해요' : '공감해요 취소' }}
     %ion-spinner{ '*ngIf': 'isLoading' }
-  %span.comment-button{ '*ngIf': 'isCollection', '(click)': 'onClickCommentButton()' }
+  %span.comment-button{ '(click)': 'onClickCommentButton()' }
     %ion-icon{ name: 'chatbubbles' }
     댓글달기
   %span.parti-share-button{ '(click)': 'onClickShare()' }
