@@ -12,9 +12,8 @@ page-parti-home {
 
   .cover {
     padding: 130px 0 0;
-    background-repeat: round;
-    background-size: contain;
     margin-bottom: 12px;
+    @include background-thumbnail();
     .parti-panel {
       padding: 18px;
       display: flex;
