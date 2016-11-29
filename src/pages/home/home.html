@@ -24,7 +24,7 @@
     <ion-spinner></ion-spinner>
   </div>
   <div *ngIf='!!posts'>
-    <parti-post-panel *ngFor='let post of posts' [@postTrigger]="'visible'" [isCollection]='true' [post]='post' class='post'></parti-post-panel>
+    <parti-post-panel *ngFor='let post of posts' [@postTrigger]="'visible'" [isCollection]='true' [isPartiHome]='false' [post]='post' class='post'></parti-post-panel>
     <template [ngIf]='hasPreviousPosts'>
       <ion-infinite-scroll #infiniteScroll (ionInfinite)='loadMore($event)'>
         <ion-infinite-scroll-content></ion-infinite-scroll-content>

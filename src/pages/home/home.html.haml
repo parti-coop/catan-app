@@ -15,7 +15,7 @@
   .spinner-center-wrapper{ '*ngIf': '!posts' }
     %ion-spinner
   %div{ '*ngIf': '!!posts' }
-    %parti-post-panel.post{ '[post]': 'post', '*ngFor': 'let post of posts', '[isCollection]': 'true', '[@postTrigger]': "'visible'" }
+    %parti-post-panel.post{ '[post]': 'post', '*ngFor': 'let post of posts', '[isCollection]': 'true', '[isPartiHome]': 'false', '[@postTrigger]': "'visible'" }
     %template{ '[ngIf]': 'hasPreviousPosts'}
       %ion-infinite-scroll{ '(ionInfinite)': 'loadMore($event)', '#infiniteScroll': true }
         %ion-infinite-scroll-content

@@ -10,7 +10,8 @@
         빠띠 보기
 
 %ion-content{ '#content': true }
-  %parti-post-panel{ '[post]': 'post', '[isCollection]': 'false', '(onAddComment)': 'setFocusCommentForm($event)', '[ngStyle]': "{ 'box-shadow': 'none' }" }
+  %parti-post-panel{ '[post]': 'post', '[isCollection]': 'false', '[isPartiHome]': 'false', '(onAddComment)': 'setFocusCommentForm($event)', '[ngStyle]': "{ 'box-shadow': 'none' }" }
+
 %ion-footer{ '[keyboardAttach]': 'content' }
   %ion-toolbar
     %form{ '[formGroup]': 'commentForm', '(ngSubmit)': 'save()' }

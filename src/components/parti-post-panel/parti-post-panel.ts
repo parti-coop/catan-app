@@ -35,6 +35,9 @@ export class PartiPostPanelComponent {
   @Input()
   isCollection: boolean;
 
+  @Input()
+  isPartiHome: boolean;
+
   @Output() onAddComment = new EventEmitter();
 
   isLoading: boolean = false;

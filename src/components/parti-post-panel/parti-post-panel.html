@@ -1,4 +1,4 @@
-<div *ngIf='isCollection' class='post-parti'>
+<div *ngIf='isCollection &amp;&amp; !isPartiHome' class='post-parti'>
   <div [ngStyle]="{ 'background-image': 'url(' + post.parti.logo_url + ')' }" class='parti-logo'></div>
   <div (click)='onClickParti(post.parti)' class='parti-title'>
     {{ post.parti.title }}

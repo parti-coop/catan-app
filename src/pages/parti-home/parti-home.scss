@@ -1,19 +1,20 @@
 page-parti-home {
   parti-post-panel {
     margin-top: 12px;
+    box-shadow: 0px 2px 1px rgba(0,0,0,0.12);
     &:first-of-type {
       margin-top: 0;
     }
   }
   .scroll-content {
-    background-color: $gray-lightest;
+    background-color: $gray-lighter;
   }
 
   .cover {
     padding: 130px 0 0;
     background-repeat: round;
     background-size: contain;
-    margin-bottom: 36px;
+    margin-bottom: 12px;
     .parti-panel {
       padding: 18px;
       display: flex;

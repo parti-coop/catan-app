@@ -1,4 +1,4 @@
-.post-parti{ '*ngIf': 'isCollection' }
+.post-parti{ '*ngIf': 'isCollection && !isPartiHome' }
   .parti-logo{ '[ngStyle]': "{ 'background-image': 'url(' + post.parti.logo_url + ')' }" }
   .parti-title{'(click)': 'onClickParti(post.parti)'}
     {{ post.parti.title }}
