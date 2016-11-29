@@ -37,7 +37,7 @@
       .opening-body
         .spinner-center-wrapper{ '*ngIf': '!parties' }
           %ion-spinner
-        %parti-list{ '[parties]': 'parties' }
+        %parti-list{ '[parties]': 'parties', '[isOpening]': 'true' }
 
 %ion-footer.opening-footer-container
   %button{ 'ion-button': true, block: true, '(click)': 'onClickNext()' }

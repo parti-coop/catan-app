@@ -49,7 +49,7 @@
         <div *ngIf='!parties' class='spinner-center-wrapper'>
           <ion-spinner></ion-spinner>
         </div>
-        <parti-list [parties]='parties'></parti-list>
+        <parti-list [isOpening]='true' [parties]='parties'></parti-list>
       </div>
     </ion-slide>
   </ion-slides>

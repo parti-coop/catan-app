@@ -13,7 +13,12 @@ export class PartiList {
 
   @Input()
   parties: Parti[];
+
+  @Input()
+  isOpening: boolean;
+
   text: string;
+
 
   constructor(
     public navCtrl: NavController,
@@ -31,11 +36,13 @@ export class PartiList {
       .subscribe(() => {
         parti.is_member = true;
         this.events.publish('parti:join', parti);
-        let toast = this.toastCtrl.create({
-          message: '가입되었습니다.',
-          duration: 3000
-        });
-        toast.present();
+        if(!this.isOpening) {
+          let toast = this.toastCtrl.create({
+            message: '가입되었습니다.',
+            duration: 3000
+          });
+          toast.present();
+        }
       });
   }
 
@@ -44,11 +51,13 @@ export class PartiList {
       .subscribe(() => {
         parti.is_member = false;
         this.events.publish('parti:cancel', parti);
-        let toast = this.toastCtrl.create({
-          message: '탈퇴되었습니다.',
-          duration: 3000
-        });
-        toast.present();
+        if(!this.isOpening) {
+          let toast = this.toastCtrl.create({
+            message: '탈퇴되었습니다.',
+            duration: 3000
+          });
+          toast.present();
+        }
       });
   }
 }
