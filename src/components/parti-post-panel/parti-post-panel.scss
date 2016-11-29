@@ -69,9 +69,10 @@ parti-post-panel {
     ion-icon {
       font-size: 22px;
     }
+    .parti-share-button,
     .upvote-button,
     .comment-button {
-      width: 33%;
+      flex: 1;
     }
     .upvote-button {
       .upvoted {
@@ -80,9 +81,6 @@ parti-post-panel {
       .upvotable {
         color: $gray;
       }
-    }
-    .parti-share-button {
-      width: 33%;
     }
   }
   .post-video-reference,

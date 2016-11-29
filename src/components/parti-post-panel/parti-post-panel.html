@@ -109,10 +109,12 @@
   </span>
 </div>
 <div class='post-buttons'>
-  <span #upvoteButton (click)='onClickUpvoteButton()' *ngIf='!isLoading' [class.upvotable]='post.is_upvotable' class='upvote-button'>
-    <ion-icon [class.upvoted]='!post.is_upvotable' name='heart'></ion-icon>
-    {{ post.is_upvotable ? '공감해요' : '공감해요 취소' }}
+  <span [class.upvotable]='post.is_upvotable' class='upvote-button'>
     <ion-spinner *ngIf='isLoading'></ion-spinner>
+    <div (click)='onClickUpvoteButton()' *ngIf='!isLoading'>
+      <ion-icon [class.upvoted]='!post.is_upvotable' name='heart'></ion-icon>
+      {{ post.is_upvotable ? '공감해요' : '공감해요 취소' }}
+    </div>
   </span>
   <span (click)='onClickCommentButton()' class='comment-button'>
     <ion-icon name='chatbubbles'></ion-icon>
