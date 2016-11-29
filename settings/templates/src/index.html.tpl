@@ -26,6 +26,17 @@
 
   <link href="build/main.css" rel="stylesheet">
   <script src="assets/js/web-animations.min.js"></script>
+  <script>
+    document.onclick = function (e) {
+      e = e ||  window.event;
+      var element = e.target || e.srcElement;
+
+      if (element.tagName == 'A') {
+        window.open(element.href, "_blank", "location=yes");
+        return false;
+      }
+    }
+  </script>
 </head>
 <body>
 

@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, NavController, Events, AlertController } from 'ionic-angular';
-import { NativeStorage, StatusBar, Network, Deeplinks } from 'ionic-native';
+import { NativeStorage, StatusBar, Network, Deeplinks, InAppBrowser } from 'ionic-native';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { IntroPage } from '../pages/intro/intro';
@@ -10,6 +10,8 @@ import { DisconnectedPage } from '../pages/disconnected/disconnected';
 import { MyselfData } from '../providers/myself-data';
 import { PushService } from '../providers/push-service';
 import { PartiEnvironment } from '../config/constant';
+
+declare var window: any;
 
 @Component({
   templateUrl: 'app.html'
@@ -29,6 +31,8 @@ export class PartiApp {
     private pushService: PushService
   ) {
     platform.ready().then(() => {
+      window.open = (url, target?, opts?) => new InAppBrowser(url, target, opts);
+
       StatusBar.styleDefault();
 
       this.initRootPage();
@@ -66,8 +70,6 @@ export class PartiApp {
         '/p/:partiSlug': { page: 'indiePartiHome' },
         '/g/:groupSlug/:partiSlug': { page: 'groupPartiHome' }
       }).subscribe(match => {
-        console.log("match : ", match);
-
         setTimeout(() => {
           if('indiePartiHome' == match.$route.page || 'groupPartiHome' == match.$route.page) {
             console.log("Deeplinks : " + JSON.stringify(match.$args));
