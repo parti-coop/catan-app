@@ -103,16 +103,16 @@
     .comment{ '*ngFor': 'let comment of post.comments'}
       .comment-header
         .comment-byline
-          .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + comment.user.image_url + ')' }" }
+          .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + comment.user.image_url + ')' }", '(click)': 'onClickUser(comment.user)' }
           .byline-info
-            .user-nickname {{ comment.user.nickname }}
+            .user-nickname{ '(click)': 'onClickUser(comment.user)' } {{ comment.user.nickname }}
             .comment-created-at
               {{ comment.created_at | partiDateTimeFormatObservable | async }}
       %template{ '[ngIf]': '!comment.is_blinded' }
         .comment-body{ '[innerHTML]': "comment.body | partiSimpleFormat ", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'" }
       %template{ '[ngIf]': 'comment.is_blinded' }
         .comment-body.comment-body-blinded 건강하고 유쾌한 빠띠 활동을 위해 숨겨진 댓글입니다.
-.post-footer-in-collection{ '*ngIf': "isCollection && hasComment()", '(click)': 'onClickPostContent()' }
+.post-footer-in-collection{ '*ngIf': "isCollection && hasComment()"}
   .post-comments
     .comment{ '*ngFor': 'let comment of post.comments.slice(-2)'}
       .comment-header
@@ -123,6 +123,6 @@
             .comment-created-at
               {{ comment.created_at | partiDateTimeFormatObservable | async }}
       %template{ '[ngIf]': '!comment.is_blinded' }
-        .comment-body{ '[innerHTML]': "comment.body | partiSimpleFormat ", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'" }
+        .comment-body{ '[innerHTML]': "comment.body | partiSimpleFormat ", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'", '(click)': 'onClickPostContent()' }
       %template{ '[ngIf]': 'comment.is_blinded' }
         .comment-body.comment-body-blinded 건강하고 유쾌한 빠띠 활동을 위해 숨겨진 댓글입니다.
