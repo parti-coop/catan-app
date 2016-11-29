@@ -165,7 +165,7 @@
     </div>
   </div>
 </div>
-<div *ngIf='isCollection &amp;&amp; hasComment()' class='post-footer-in-collection'>
+<div (click)='onClickPostContent()' *ngIf='isCollection &amp;&amp; hasComment()' class='post-footer-in-collection'>
   <div class='post-comments'>
     <div *ngFor='let comment of post.comments.slice(-2)' class='comment'>
       <div class='comment-header'>

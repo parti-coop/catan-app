@@ -112,7 +112,7 @@
         .comment-body{ '[innerHTML]': "comment.body | partiSimpleFormat ", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'" }
       %template{ '[ngIf]': 'comment.is_blinded' }
         .comment-body.comment-body-blinded 건강하고 유쾌한 빠띠 활동을 위해 숨겨진 댓글입니다.
-.post-footer-in-collection{ '*ngIf': "isCollection && hasComment()" }
+.post-footer-in-collection{ '*ngIf': "isCollection && hasComment()", '(click)': 'onClickPostContent()' }
   .post-comments
     .comment{ '*ngFor': 'let comment of post.comments.slice(-2)'}
       .comment-header
