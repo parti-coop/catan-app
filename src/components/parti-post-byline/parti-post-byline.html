@@ -1,5 +1,5 @@
 <div *ngIf='post' class='byline'>
-  <div [ngStyle]="{ 'background-image': 'url(' + post.user.image_url + ')' }" class='user-image'></div>
+  <div (click)='onClickUser()' [ngStyle]="{ 'background-image': 'url(' + post.user.image_url + ')' }" class='user-image'></div>
   <div class='byline-info'>
     <div (click)='onClickUser()' class='user-nickname'>{{ post.user.nickname }}</div>
     <div class='post-created-at'>

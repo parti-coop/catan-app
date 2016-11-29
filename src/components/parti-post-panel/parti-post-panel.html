@@ -11,9 +11,9 @@
 <div class='post-head'>
   <parti-post-byline [post]='post'></parti-post-byline>
 </div>
-<div (click)='onClickPostContent()' [innerHTML]='post.parsed_title | partiSimpleFormat' class='post-title'></div>
-<div (click)='onClickPostContent()' *ngIf='!isCollection' [innerHTML]='post.parsed_body | partiSimpleFormat' class='post-body'></div>
-<div (click)='onClickPostContent()' *ngIf='isCollection' [innerHTML]='post.truncated_parsed_body | partiSimpleFormat' class='post-body'></div>
+<div (click)='onClickPostContent()' *ngIf='post.parsed_title' [innerHTML]='post.parsed_title | partiSimpleFormat' class='post-title'></div>
+<div (click)='onClickPostContent()' *ngIf='!isCollection &amp;&amp; post.parsed_body' [innerHTML]='post.parsed_body | partiSimpleFormat' class='post-body'></div>
+<div (click)='onClickPostContent()' *ngIf='isCollection &amp;&amp; post.parsed_body' [innerHTML]='post.truncated_parsed_body | partiSimpleFormat' class='post-body'></div>
 <div (click)='onClickLinkReference(post.link_reference)' *ngIf='!!post.link_reference &amp;&amp; !post.link_reference.is_video' class='post-link-reference'>
   <div class='link-reference-image-wrapper'>
     <div [ngStyle]="{ 'background-image': 'url(' + post.link_reference.image_url + ')' }" class='link-reference-image'></div>
@@ -170,9 +170,9 @@
     <div *ngFor='let comment of post.comments.slice(-2)' class='comment'>
       <div class='comment-header'>
         <div class='comment-byline'>
-          <div [ngStyle]="{ 'background-image': 'url(' + comment.user.image_url + ')' }" class='user-image'></div>
+          <div (click)='onClickUser(comment.user)' [ngStyle]="{ 'background-image': 'url(' + comment.user.image_url + ')' }" class='user-image'></div>
           <div class='byline-info'>
-            <div class='user-nickname'>{{ comment.user.nickname }}</div>
+            <div (click)='onClickUser(comment.user)' class='user-nickname'>{{ comment.user.nickname }}</div>
             <div class='comment-created-at'>
               {{ comment.created_at | partiDateTimeFormatObservable | async }}
             </div>

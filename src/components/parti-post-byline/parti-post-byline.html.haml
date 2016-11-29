@@ -1,5 +1,5 @@
 .byline{ '*ngIf': 'post' }
-  .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + post.user.image_url + ')' }" }
+  .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + post.user.image_url + ')' }", '(click)': 'onClickUser()' }
   .byline-info
     .user-nickname{ '(click)': 'onClickUser()' } {{ post.user.nickname }}
     .post-created-at
