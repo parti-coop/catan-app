@@ -86,7 +86,7 @@
   %span.parti-share-button{ '(click)': 'onClickShare()' }
     %ion-icon{ name: 'md-share' }
     공유하기
-.post-footer{ '*ngIf': "!isCollection" }
+.post-footer{ '*ngIf': "!isCollection && ( hasComment() || post.upvotes_count > 0 )" }
   .post-reaction-info{ '*ngIf': '(post.upvotes_count > 0 || post.comments_count > 0)' }
     %span.post-upvotes-count{ '*ngIf': 'post.upvotes_count > 0' }
       공감 {{ post.upvotes_count }}

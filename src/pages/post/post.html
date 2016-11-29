@@ -15,7 +15,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content #content>
-  <parti-post-panel (onAddComment)='setFocusCommentForm($event)' [isCollection]='false' [post]='post'></parti-post-panel>
+  <parti-post-panel (onAddComment)='setFocusCommentForm($event)' [isCollection]='false' [ngStyle]="{ 'box-shadow': 'none' }" [post]='post'></parti-post-panel>
 </ion-content>
 <ion-footer [keyboardAttach]='content'>
   <ion-toolbar>

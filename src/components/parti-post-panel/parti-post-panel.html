@@ -123,7 +123,7 @@
     공유하기
   </span>
 </div>
-<div *ngIf='!isCollection' class='post-footer'>
+<div *ngIf='!isCollection &amp;&amp; ( hasComment() || post.upvotes_count &gt; 0 )' class='post-footer'>
   <div *ngIf='(post.upvotes_count &gt; 0 || post.comments_count &gt; 0)' class='post-reaction-info'>
     <span *ngIf='post.upvotes_count &gt; 0' class='post-upvotes-count'>
       공감 {{ post.upvotes_count }}
