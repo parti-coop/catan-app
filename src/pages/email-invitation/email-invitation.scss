@@ -1,3 +1,53 @@
 page-email-invitation {
-
+  .toolbar-content {
+    display: flex;
+    .invite-btn {
+      width: 25px;
+      margin-right: 12px;
+      button {
+        background-color: $gray-more-lightest;
+        color: $gray-darker;
+        box-shadow: none;
+        .button-effect {
+          background-color: $gray-more-lightest;
+        }
+      }
+    }
+  }
+  [padding], [padding] .scroll-content {
+    padding: 54px 32px;
+  }
+  .item-md {
+    padding-left: 0;
+    &.item-block .item-inner {
+      padding-right: 0;
+    }
+    .text-input {
+      margin: 24px 0 18px;
+    }
+  }
+  .add-email-btn {
+    .item-md.item-block .item-inner {
+      text-align: center;
+      border: none;
+    }
+    .item-button {
+      background-color: $gray-more-lightest;
+      color: $gray;
+      border: 1px solid $gray-less-lighter;
+      box-shadow: none;
+      padding: 14px 22px;
+      font-size: $font-size-small;
+    }
+    ion-label {
+      margin: 24px;
+    }
+  }
+  .remove-email-btn {
+    button {
+      background-color: #fff;
+      color: $gray-less-lighter;
+      font-size: $font-size-large;
+    }
+  }
 }

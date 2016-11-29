@@ -1,34 +1,42 @@
 <ion-header>
   <ion-navbar>
     <ion-title>아이디 초대</ion-title>
+    <div class='invite-btn'>
+      <button [disabled]='!invitationForm.valid' block ion-button type='submit'>초대</button>
+    </div>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <div class='help-text'>
-    <p>초대하려는 아이디를 넣어주세요.</p>
-  </div>
   <form (ngSubmit)='invite()' [formGroup]='invitationForm'>
     <div formArrayName='nicknames'>
       <div *ngFor='let nickname of nicknameArray.controls; let i=index'>
         <ion-item>
-          <span item-left>{{ nickname.status }}</span>
-          <ion-input [formControlName]='i' placeholder='예) red@test.com' type='text'></ion-input>
-          <button (click)='removeNicknameControl(i)' clear item-right>
-            <ion-icon name='close'></ion-icon>
-          </button>
+          <ion-input [formControlName]='i' placeholder='빠띠 아이디를 넣어주세요' type='text'></ion-input>
+          <div class='remove-email-btn' clear item-right>
+            <button (click)='removeNicknameControl(i)'>
+              <ion-icon name='close'></ion-icon>
+            </button>
+          </div>
         </ion-item>
+        <div class='nickname-status'>
+          <ion-item [hidden]='nickname.status != "VALID"'>
+            <p>유효한 아이디입니다</p>
+          </ion-item>
+          <ion-item [hidden]='nickname.status != "INVALID"'>
+            <p>잘못된 아이디입니다</p>
+          </ion-item>
+        </div>
         <ion-item *ngIf='nickname.hasError("notFound") &amp;&amp; nickname.touched' no-lines>
           <p>
             * 찾을 수 없는 아이디네요.
           </p>
         </ion-item>
       </div>
-      <ion-item>
-        <button (click)='addNicknameControl($event)' ion-button>추가</button>
-      </ion-item>
-    </div>
-    <div>
-      <button [disabled]='!invitationForm.valid' block ion-button type='submit'>보내기</button>
+      <div class='add-email-btn'>
+        <ion-item>
+          <button (click)='addNicknameControl($event)' ion-button>추가</button>
+        </ion-item>
+      </div>
     </div>
   </form>
 </ion-content>

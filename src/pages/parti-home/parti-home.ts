@@ -140,15 +140,14 @@ export class PartiHomePage {
     }
 
     let actionSheet = this.actionSheetCtrl.create({
-      title: `${this.parti.title}에 초대합니다`,
       buttons: [
         {
-          text: '이메일로 초대',
+          text: '이메일 초대',
           handler: () => {
             this.navCtrl.push(EmailInvitationPage, { parti: this.parti });
           }
         },{
-          text: '빠띠회원을 초대',
+          text: '빠띠멤버 초대',
           handler: () => {
             this.navCtrl.push(NicknameInvitationPage, { parti: this.parti });
           }

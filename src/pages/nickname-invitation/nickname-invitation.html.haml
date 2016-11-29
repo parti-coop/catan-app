@@ -1,21 +1,25 @@
 %ion-header
   %ion-navbar
     %ion-title 아이디 초대
+    .invite-btn
+      %button{ 'ion-button': true, block: true, type: 'submit', '[disabled]': '!invitationForm.valid' } 초대
 %ion-content{ 'padding': true }
-  .help-text
-    %p 초대하려는 아이디를 넣어주세요.
   %form{ '[formGroup]': 'invitationForm', '(ngSubmit)': 'invite()' }
     %div{ 'formArrayName': 'nicknames' }
       %div{ '*ngFor': 'let nickname of nicknameArray.controls; let i=index' }
         %ion-item
-          %span{ 'item-left': true } {{ nickname.status }}
-          %ion-input{ '[formControlName]': 'i', type: 'text', placeholder: '예) red@test.com' }
-          %button{ '(click)': 'removeNicknameControl(i)', clear: true,  'item-right': true }
-            %ion-icon{ name: 'close' }
+          %ion-input{ '[formControlName]': 'i', type: 'text', placeholder: '빠띠 아이디를 넣어주세요' }
+          .remove-email-btn{ clear: true,  'item-right': true }
+            %button{ '(click)': 'removeNicknameControl(i)' }
+              %ion-icon{ name: 'close' }
+        .nickname-status
+          %ion-item{ '[hidden]': 'nickname.status != "VALID"' }
+            %p 유효한 아이디입니다
+          %ion-item{ '[hidden]': 'nickname.status != "INVALID"' }
+            %p 잘못된 아이디입니다
         %ion-item{ 'no-lines': true, '*ngIf': 'nickname.hasError("notFound") && nickname.touched' }
           %p
             * 찾을 수 없는 아이디네요.
-      %ion-item
-        %button{ 'ion-button': true, '(click)': 'addNicknameControl($event)' } 추가
-    %div
-      %button{ 'ion-button': true, block: true, type: 'submit', '[disabled]': '!invitationForm.valid' } 보내기
+      .add-email-btn
+        %ion-item
+          %button{ 'ion-button': true, '(click)': 'addNicknameControl($event)' } 추가
