@@ -8,6 +8,8 @@ import { MyselfData, DuplicateNicknameError } from '../../providers/myself-data'
 import { EmailValidator } from '../../validators/email';
 import { OpeningPage } from '../../pages/opening/opening';
 import { PushService } from '../../providers/push-service';
+import { Platform } from 'ionic-angular';
+import { InAppBrowser } from 'ionic-native';
 
 @Component({
   selector: 'page-sign-up',
@@ -30,6 +32,7 @@ export class SignUpPage {
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private pushService: PushService,
+    private platform: Platform,
     private app: App,
     private myselfData: MyselfData,
     private userData: UserData
@@ -87,5 +90,11 @@ export class SignUpPage {
           alert.present();
         });
       });
+  }
+
+  onClickToWebBtn(url: string) {
+    this.platform.ready().then(() => {
+      new InAppBrowser(url, "_blank", "location=true");
+    });
   }
 }
