@@ -12,6 +12,7 @@ import { Post } from '../../models/post';
 import { PostData } from '../../providers/post-data';
 import { PartiData } from '../../providers/parti-data';
 import { MyselfData } from '../../providers/myself-data';
+import { HomePage } from '../../pages/home/home';
 import { PartiSelectPage } from '../../pages/parti-select/parti-select';
 
 export enum ReferenceType {
@@ -123,7 +124,7 @@ export class EditorPage {
       .finally(() => {
         loading.dismiss();
       }).subscribe((post: Post) => {
-        this.events.publish('home:reload');
+        this.events.publish('home:force-refresh-and-show');
         this.viewController.dismiss();
       });
   }
@@ -142,12 +143,7 @@ export class EditorPage {
         this.resetForm(ReferenceType.FileSource);
         this.imageSrc = 'data:image/jpeg;base64,' + imageData;
       }, (err) => {
-        let alert = this.alertCtrl.create({
-          title: '오류',
-          subTitle: '엇! 뭔가 잘못되었습니다.',
-          buttons: ['확인']
-        });
-        alert.present();
+        console.log(err);
       });
     });
   }

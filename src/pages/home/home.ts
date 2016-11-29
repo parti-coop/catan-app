@@ -70,7 +70,7 @@ import { DevPage } from '../../pages/dev/dev';
   ]
 })
 export class HomePage {
-  HOME_TAB_INDEX = 0;
+  static HOME_TAB_INDEX = 0;
 
   @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
   @ViewChild(Content) content: Content;
@@ -101,6 +101,14 @@ export class HomePage {
   ionViewDidLoad() {
     this.loadNewest();
     this.newPostsCountSubscription = this.pollingNewPostCount();
+    this.listenToFroceRefreshAndShowEvents();
+  }
+
+  listenToFroceRefreshAndShowEvents() {
+    this.events.subscribe('home:force-refresh-and-show', (data) => {
+      this.loadNewest();
+      this.navCtrl.parent.select(HomePage.HOME_TAB_INDEX);
+    });
   }
 
   ionViewDidEnter() {
@@ -231,7 +239,7 @@ export class HomePage {
     let hasNewPosts = (!!count && count > 0);
     if(hasNewPosts) {
       this.newPostsCountLabel = count > 999 ? '999+' : String(count);
-      let selectedHomeTab = this.navCtrl.parent.getSelected().index == this.HOME_TAB_INDEX;
+      let selectedHomeTab = this.navCtrl.parent.getSelected().index == HomePage.HOME_TAB_INDEX;
       if(selectedHomeTab
         && this.navCtrl.isActive(this.viewCtrl)
         && !this.shownNewPostsCount)
