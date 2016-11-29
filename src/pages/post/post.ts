@@ -87,6 +87,7 @@ export class PostPage {
           this.post.comments = [];
         }
         this.post.comments.push(comment);
+        this.post.comment_users.push(comment.user);
         this.post.comments_count += 1;
         this.commentForm.controls['body'].setValue(null);
         this.content.resize();
