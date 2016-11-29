@@ -11,9 +11,9 @@
 <div class='post-head'>
   <parti-post-byline [post]='post'></parti-post-byline>
 </div>
-<div (click)='onClickPostContent()' *ngIf='post.parsed_title' [innerHTML]='post.parsed_title | partiSimpleFormat' class='post-title'></div>
-<div (click)='onClickPostContent()' *ngIf='!isCollection &amp;&amp; post.parsed_body' [innerHTML]='post.parsed_body | partiSimpleFormat' class='post-body'></div>
-<div (click)='onClickPostContent()' *ngIf='isCollection &amp;&amp; post.parsed_body' [innerHTML]='post.truncated_parsed_body | partiSimpleFormat' class='post-body'></div>
+<div (click)='onClickPostContent()' *ngIf='post.parsed_title != null' [innerHTML]='post.parsed_title | partiSimpleFormat' class='post-title'></div>
+<div (click)='onClickPostContent()' *ngIf='!isCollection &amp;&amp; post.parsed_body != null' [innerHTML]='post.parsed_body | partiSimpleFormat' class='post-body'></div>
+<div (click)='onClickPostContent()' *ngIf='isCollection &amp;&amp; post.parsed_body != null' [innerHTML]='post.truncated_parsed_body | partiSimpleFormat' class='post-body'></div>
 <div (click)='onClickLinkReference(post.link_reference)' *ngIf='!!post.link_reference &amp;&amp; !post.link_reference.is_video' class='post-link-reference'>
   <div class='link-reference-image-wrapper'>
     <div [ngStyle]="{ 'background-image': 'url(' + post.link_reference.image_url + ')' }" class='link-reference-image'></div>
