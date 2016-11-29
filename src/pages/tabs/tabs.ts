@@ -138,8 +138,6 @@ export class TabsPage {
 
   listenToLastMessageIdEvents() {
     this.events.subscribe('tabs:last-message-id', (data) => {
-      console.log('tabs:last-message-id')
-      console.log(data[0])
       this.myselfData.setLastMessageId(data[0]).subscribe((value) => {
         this.newMessagesCountLabel = null;
       });

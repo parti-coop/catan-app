@@ -32,7 +32,6 @@ export class PushService {
 
     FCMPlugin.getToken(
       (token) => {
-        console.log('token: ' + token);
         this.registrationId = token;
         this.subscribe();
       },

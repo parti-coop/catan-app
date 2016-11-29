@@ -18,7 +18,6 @@ export class InvitationData {
       emails: emails,
       parti_id: parti.id
     });
-    console.log(requestOptions.body);
     return this.http.post(`/api/v1/invitations/by_emails`, requestOptions)
       .map(res => {});
   }
@@ -29,7 +28,6 @@ export class InvitationData {
       nicknames: nicknames,
       parti_id: parti.id
     });
-    console.log(requestOptions.body);
     return this.http.post(`/api/v1/invitations/by_nicknames`, requestOptions)
       .map(res => {});
   }

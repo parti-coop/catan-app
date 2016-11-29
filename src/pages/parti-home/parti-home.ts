@@ -248,7 +248,6 @@ export class PartiHomePage {
                   (error) => failHandler);
               },
               () => {
-                console.log("XXX");
                 let alert = this.alertCtrl.create({
                   title: '확인',
                   subTitle: `카카오톡 앱이 없습니다.`,

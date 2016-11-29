@@ -33,8 +33,6 @@ export class NicknameInvitationPage {
     this.invitationForm = this.formBuilder.group({
       nicknames: this.nicknameArray
     });
-
-    console.log(this.invitationForm);
   }
 
   initNicknameArray() {
@@ -62,7 +60,6 @@ export class NicknameInvitationPage {
     let loading = this.loadingCtrl.create();
     loading.present();
 
-    console.log(JSON.stringify(this.nicknameArray.value))
     this.invitationData.inviteNicknames(this.parti, this.nicknameArray.value)
       .finally(() => {
         loading.dismiss();
