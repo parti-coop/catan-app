@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, NavController, Events, AlertController } from 'ionic-angular';
-import { NativeStorage, StatusBar, Network, Deeplinks, InAppBrowser } from 'ionic-native';
+import { NativeStorage, StatusBar, Network, Deeplinks, InAppBrowser, Splashscreen } from 'ionic-native';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { IntroPage } from '../pages/intro/intro';
@@ -34,6 +34,7 @@ export class PartiApp {
       window.open = (url, target?, opts?) => new InAppBrowser(url, target, opts);
 
       StatusBar.styleDefault();
+      Splashscreen.hide();
 
       this.initRootPage();
       this.pushService.init();

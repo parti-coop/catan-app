@@ -104,7 +104,7 @@ export class ApiHttp {
     });
    }
 
-  handleError(error, usedSessionStamp) {
+  handleError(error, usedSessionStamp): Observable<any> {
     if (error && error.status  == 404) {
       let alert = this.alertCtrl.create({
         title: '안내',

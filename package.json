@@ -5,12 +5,6 @@
   "private": true,
   "scripts": {
     "ionic:build": "ionic-app-scripts build",
-    "build": "gulp build-haml",
-    "serve:before": "watch",
-    "emulate:before": "build",
-    "deploy:before": "build",
-    "build:before": "build",
-    "run:before": "build",
     "watch:ionic": "ionic-app-scripts watch",
     "watch:haml": "gulp watch-haml",
     "watch:settings": "gulp watch-settings",
@@ -86,7 +80,7 @@
   ],
   "cordovaPlatforms": [
     "ios",
-    "android"
+    "android@6.1.0"
   ],
   "description": "catan-app: An Ionic project"
 }

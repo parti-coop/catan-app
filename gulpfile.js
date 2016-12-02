@@ -95,3 +95,6 @@ gulp.task('reset', ['settings'], function() {
     console.log(stderr);
   });
 });
+
+gulp.task('run:before', ['build-haml']);
+gulp.task('run:before', ['build-haml']);
