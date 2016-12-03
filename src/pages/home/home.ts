@@ -9,7 +9,6 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/switchMapTo';
 
-import moment from 'moment';
 import _ from 'lodash';
 
 import { PartiEnvironment } from '../../config/constant';
@@ -99,14 +98,14 @@ export class HomePage {
   ) {}
 
   ionViewDidLoad() {
-    this.loadNewest();
+    this.loadLatest();
     this.newPostsCountSubscription = this.pollingNewPostCount();
     this.listenToFroceRefreshAndShowEvents();
   }
 
   listenToFroceRefreshAndShowEvents() {
     this.events.subscribe('home:force-refresh-and-show', (data) => {
-      this.loadNewest();
+      this.loadLatest();
       this.navCtrl.parent.select(HomePage.HOME_TAB_INDEX);
     });
   }
@@ -138,48 +137,26 @@ export class HomePage {
       });
   }
 
-  loadNewest(onCompleted: () => void = null) {
+  loadLatest(onCompleted: () => void = null) {
     this.isRefreshingStat = true;
-    this.postData.dashboard()
+    this.postData.dashboardLatest(_.head(this.posts))
       .finally(() => {
         onCompleted && onCompleted();
         this.isRefreshingStat = false;
-      }).subscribe(newPosts => {
+      }).subscribe(latestPosts => {
         this.resetNewPostsCount();
         if(this.posts == null) {
           this.posts = [];
-          this.hasPreviousPosts = newPosts.has_more_item;
+          this.hasPreviousPosts = latestPosts.has_more_item;
         }
-        if(!_.isEmpty(newPosts.items)) {
-          let newLastPost = _.last(newPosts.items);
-          let currentFirstPost = _.head(this.posts);
-
-          let overlap = !!newLastPost && !!currentFirstPost
-            && moment(currentFirstPost.last_touched_at) > moment(newLastPost.last_touched_at)
-          if(overlap) {
-            console.log('prepend');
-            _(newPosts.items).reverse().each((newPost) => {
-              let originPost = _(this.posts).find((post) => {
-                return newPost.id == post.id;
-              });
-
-              if(!!originPost) {
-                if(moment(newPost.last_touched_at) > moment(originPost.last_touched_at)) {
-                  _.remove(this.posts, (post) => {
-                    return originPost.id == post.id;
-                  });
-                  this.posts.unshift(newPost);
-                } else {
-                  // do nothing
-                }
-              } else {
-                this.posts.unshift(newPost);
-              }
-            })
+        if(!_.isEmpty(latestPosts.items)) {
+          if(latestPosts.has_gap) {
+            this.posts = latestPosts.items;
+            this.hasPreviousPosts = latestPosts.has_more_item;
           } else {
-            console.log('reload all');
-            this.posts = newPosts.items;
-            this.hasPreviousPosts = newPosts.has_more_item;
+            _(latestPosts.items).reverse().each((latestPost) => {
+              this.posts.unshift(latestPost);
+            });
           }
         }
         this.afterUpdatedPosts();
@@ -188,7 +165,7 @@ export class HomePage {
 
   loadMore(infiniteScroll) {
     console.log("infinite");
-    this.postData.dashboard(_.last(this.posts))
+    this.postData.dashboardAfter(_.last(this.posts))
       .finally(() => {
         infiniteScroll.complete();
         if(!this.hasPreviousPosts) {
@@ -209,7 +186,7 @@ export class HomePage {
   }
 
   onRefresh(refresher) {
-    this.loadNewest(() => {
+    this.loadLatest(() => {
       setTimeout(() => {
         refresher.complete();
       }, 500);
@@ -222,7 +199,7 @@ export class HomePage {
 
   onClickNewPostIndicator() {
     this.isForceRefreshingStat = true;
-    this.loadNewest(() => {
+    this.loadLatest(() => {
       setTimeout(() => {
         this.isForceRefreshingStat = false;
       }, 500);

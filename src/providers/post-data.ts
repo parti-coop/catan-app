@@ -16,14 +16,25 @@ export class PostData {
     private http: ApiHttp
   ) {}
 
-  dashboard(lastPost: Post = null): Observable<InfinitPage<Post>> {
+  dashboardAfter(lastPost: Post = null): Observable<InfinitPage<Post>> {
     let requestOptions = new RequestOptions();
     let searchParams = new URLSearchParams();
     if(!!lastPost) {
       searchParams.set('last_id', String(lastPost.id));
       requestOptions.search = searchParams;
     }
-    return this.http.get('/api/v1/posts/dashboard', requestOptions)
+    return this.http.get('/api/v1/posts/dashboard_after', requestOptions)
+      .map(res => <InfinitPage<Post>>(res.json()));
+  }
+
+  dashboardLatest(firstPost: Post = null): Observable<InfinitPage<Post>> {
+    let requestOptions = new RequestOptions();
+    let searchParams = new URLSearchParams();
+    if(!!firstPost) {
+      searchParams.set('first_id', String(firstPost.id));
+      requestOptions.search = searchParams;
+    }
+    return this.http.get('/api/v1/posts/dashboard_latest', requestOptions)
       .map(res => <InfinitPage<Post>>(res.json()));
   }
 
