@@ -4,34 +4,33 @@
       .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + myselfData.imageUrl + ')' }" }
       .user-nickname {{ myselfData.nickname }}
     .select-parti
-      %ion-item{ '[hidden]': '!!this.parties' }
+      %ion-item{ '[hidden]': '!!parties' }
         .select-parti--before-select
           .select-parti--before-select__text
             가입한 빠띠를 가져오는 중입니다
           .select-parti--before-select__spinner
             %ion-spinner
-      %ion-item{ '[hidden]': '!this.parties', '(click)': 'onClickPartiSelect()' }
-        %span{ '*ngIf': '!this.parti'}
+      %ion-item{ '[hidden]': '!parties', '(click)': 'onClickPartiSelect()' }
+        %span{ '*ngIf': '!parti'}
           .select-parti--select
             .select-parti--select__text
               이야기 나눌 빠띠를 골라 주세요
             .select-parti--select__icon
               %ion-icon{ name: 'arrow-dropdown' }
-        %span{ '*ngIf': '!!this.parti'}
+        %span{ '*ngIf': '!!parti'}
           .select-parti--after-select
             .select-parti--after-select__text
-              {{ this.parti.title }}
+              {{ parti.title }}
             .select-parti--after-select__icon
               %ion-icon{ name: 'arrow-dropdown' }
     .post
       %ion-item
         %ion-textarea{ 'formControlName': 'body', placeholder: "무슨 이야기를 나누실래요?" }
-        }
     %ion-item{ '[hidden]': 'referenceTypeName() != "LinkSource"' }
       %ion-input{ type: 'url', 'formControlName': 'link', placeholder: 'URL을 입력하거나 붙여넣으세요', autocapitalize: 'off', 'clearInput': true, 'class': 'link-reference' }
     %ion-item{ '[hidden]': 'referenceTypeName() != "Poll"' }
       %ion-input{ type: 'text', 'formControlName': 'poll', placeholder: '찬반투표 제목을 넣어 주세요', 'class': 'poll' }
-    %ion-item{ '[hidden]': 'referenceTypeName() != "FileSource"' }
+    %ion-item{ '*ngIf': 'referenceTypeName() == "FileSource"' }
       %img{'[src]': "imageSrc" }
 %ion-footer{ '[keyboardAttach]': 'content' }
   %ion-toolbar

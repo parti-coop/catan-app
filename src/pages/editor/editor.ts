@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { LoadingController, NavController,
   Events, ViewController, Platform, TextArea,
@@ -42,6 +42,7 @@ export class EditorPage {
   constructor(
     public navCtrl: NavController,
     private modalCtrl: ModalController,
+    private ref: ChangeDetectorRef,
     private events: Events,
     private viewController: ViewController,
     private platform: Platform,
@@ -107,6 +108,7 @@ export class EditorPage {
     partiModal.onDidDismiss(data => {
       if(!!data && !!data.parti) {
         this.parti = data.parti;
+        this.ref.detectChanges();
       }
     });
     partiModal.present();
