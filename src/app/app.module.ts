@@ -15,6 +15,7 @@ import { JoinedPartiList } from '../components/joined-parti-list/joined-parti-li
 
 import { KeyboardAttachDirective } from '../directives/keyboard-attach';
 import { Shrinkage } from '../directives/shrinkage';
+import { SmartBody } from '../directives/smart-body';
 
 import { MorePage } from '../pages/more/more';
 import { HomePage } from '../pages/home/home';
@@ -90,6 +91,7 @@ moment.locale('ko');
     JoinedPartiList,
     PartiSimpleFormatPipe,
     KeyboardAttachDirective,
+    SmartBody,
     Shrinkage,
     PartiDateTimeFormatObservablePipe
   ],

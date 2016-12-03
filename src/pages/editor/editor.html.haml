@@ -26,12 +26,12 @@
     .post
       %ion-item
         %ion-textarea{ 'formControlName': 'body', placeholder: "무슨 이야기를 나누실래요?" }
-    %ion-item{ '[hidden]': 'referenceTypeName() != "LinkSource"' }
-      %ion-input{ type: 'url', 'formControlName': 'link', placeholder: 'URL을 입력하거나 붙여넣으세요', autocapitalize: 'off', 'clearInput': true, 'class': 'link-reference' }
-    %ion-item{ '[hidden]': 'referenceTypeName() != "Poll"' }
-      %ion-input{ type: 'text', 'formControlName': 'poll', placeholder: '찬반투표 제목을 넣어 주세요', 'class': 'poll' }
-    %ion-item{ '*ngIf': 'referenceTypeName() == "FileSource"' }
-      %img{'[src]': "imageSrc" }
+      %ion-item{ '[hidden]': 'referenceTypeName() != "LinkSource"' }
+        %ion-input{ type: 'url', 'formControlName': 'link', placeholder: 'URL을 입력하거나 붙여넣으세요', autocapitalize: 'off', 'clearInput': true, 'class': 'link-reference' }
+      %ion-item{ '[hidden]': 'referenceTypeName() != "Poll"' }
+        %ion-input{ type: 'text', 'formControlName': 'poll', placeholder: '찬반투표 제목을 넣어 주세요', 'class': 'poll' }
+      %ion-item{ '*ngIf': 'referenceTypeName() == "FileSource"' }
+        %img{'[src]': "imageSrc" }
 %ion-footer{ '[keyboardAttach]': 'content' }
   %ion-toolbar
     %ion-buttons{ 'left': true }
@@ -46,5 +46,5 @@
           %ion-icon{ 'name': 'poll'}
     %ion-buttons{ 'right': true }
       .submit-btn
-        %button{ 'ion-button': true, type: 'submit', '[disabled]': 'invalidToSave()', '(click)': 'save()' } 게시
+        %button{ 'ion-button': true, type: 'submit', '[disabled]': '!parti || !postForm.valid', '(click)': 'save()' } 게시
 

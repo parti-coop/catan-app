@@ -31,8 +31,7 @@
       e = e ||  window.event;
       var element = e.target || e.srcElement;
 
-      if (element.tagName == 'A') {
-        window.open(element.href, "_blank", "location=yes");
+      if (element.tagName == 'A' && !!element.href) {
         return false;
       }
     }

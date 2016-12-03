@@ -42,16 +42,16 @@
       <ion-item>
         <ion-textarea formControlName='body' placeholder='무슨 이야기를 나누실래요?'></ion-textarea>
       </ion-item>
+      <ion-item [hidden]='referenceTypeName() != "LinkSource"'>
+        <ion-input autocapitalize='off' class='link-reference' clearInput formControlName='link' placeholder='URL을 입력하거나 붙여넣으세요' type='url'></ion-input>
+      </ion-item>
+      <ion-item [hidden]='referenceTypeName() != "Poll"'>
+        <ion-input class='poll' formControlName='poll' placeholder='찬반투표 제목을 넣어 주세요' type='text'></ion-input>
+      </ion-item>
+      <ion-item *ngIf='referenceTypeName() == "FileSource"'>
+        <img [src]='imageSrc'>
+      </ion-item>
     </div>
-    <ion-item [hidden]='referenceTypeName() != "LinkSource"'>
-      <ion-input autocapitalize='off' class='link-reference' clearInput formControlName='link' placeholder='URL을 입력하거나 붙여넣으세요' type='url'></ion-input>
-    </ion-item>
-    <ion-item [hidden]='referenceTypeName() != "Poll"'>
-      <ion-input class='poll' formControlName='poll' placeholder='찬반투표 제목을 넣어 주세요' type='text'></ion-input>
-    </ion-item>
-    <ion-item *ngIf='referenceTypeName() == "FileSource"'>
-      <img [src]='imageSrc'>
-    </ion-item>
   </form>
 </ion-content>
 <ion-footer [keyboardAttach]='content'>
@@ -74,7 +74,7 @@
     </ion-buttons>
     <ion-buttons right>
       <div class='submit-btn'>
-        <button (click)='save()' [disabled]='invalidToSave()' ion-button type='submit'>게시</button>
+        <button (click)='save()' [disabled]='!parti || !postForm.valid' ion-button type='submit'>게시</button>
       </div>
     </ion-buttons>
   </ion-toolbar>

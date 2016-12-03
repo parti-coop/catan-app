@@ -9,8 +9,11 @@ export class PartiSimpleFormatPipe {
   constructor(private sanitizer: DomSanitizer) {
   }
 
-  public transform(value: string) {
-    return ( value ? this.bypassSanitizer(this.br(value)) : value );
+  public transform(value: string, type: string) {
+    if(!!value && type == 'comment') {
+      value = this.br(value)
+    }
+    return ( value ? this.bypassSanitizer(value) : value );
   }
 
   br(value: string): string {

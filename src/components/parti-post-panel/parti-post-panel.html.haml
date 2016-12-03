@@ -7,9 +7,9 @@
       {{ post.parti.group.name }}
 .post-head
   %parti-post-byline{ '[post]': 'post' }
-.post-title{ '*ngIf': 'post.parsed_title != null', '[innerHTML]': "post.parsed_title | partiSimpleFormat", '(click)': 'onClickPostContent()' }
-.post-body{ '*ngIf': '!isCollection && post.parsed_body != null', '[innerHTML]': "post.parsed_body | partiSimpleFormat", '(click)': 'onClickPostContent()' }
-.post-body{ '*ngIf': 'isCollection && post.parsed_body != null', '[innerHTML]': "post.truncated_parsed_body | partiSimpleFormat", '(click)': 'onClickPostContent()' }
+.post-title{ '*ngIf': 'post.parsed_title != null', '[innerHTML]': "post.parsed_title | partiSimpleFormat:post", smartBody: true }
+.post-body{ '*ngIf': '!isCollection && post.parsed_body != null', '[innerHTML]': "post.parsed_body | partiSimpleFormat:post", smartBody: true }
+.post-body{ '*ngIf': 'isCollection && post.parsed_body != null', '[innerHTML]': "post.truncated_parsed_body | partiSimpleFormat:post", smartBody: true }
 .post-link-reference{ '(click)': 'onClickLinkReference(post.link_reference)', '*ngIf': '!!post.link_reference && !post.link_reference.is_video' }
   .link-reference-image-wrapper
     .link-reference-image{ '[ngStyle]': "{ 'background-image': 'url(' + post.link_reference.image_url + ')' }" }
@@ -23,7 +23,7 @@
         %ion-icon{ name: 'exit' }
 .post-video-reference{ '*ngIf': '!!post.link_reference && !!post.link_reference.is_video' }
   .link-reference-video-wrapper
-    .link-reference-video{  '[innerHTML]': "post.link_reference.video_embeded_code | partiSimpleFormat " }
+    .link-reference-video{  '[innerHTML]': "post.link_reference.video_embeded_code | partiSimpleFormat:post" }
   .link-reference-detail-wrapper
     .link-reference-footer
       .link-reference-site-name {{ post.link_reference.site_name | uppercase }}
@@ -40,7 +40,7 @@
   %button.file-reference-button{ 'ion-button': true, 'outline': true, color: 'gray', '(click)': 'onClickFileReference(post.file_reference)' }
     다운로드
 .post-poll{ '*ngIf': '!!post.poll' }
-  .poll-title{ '(click)': 'onClickPostContent()' } "{{ post.poll.title }}"
+  .poll-title "{{ post.poll.title }}"
   .poll-voting-btns
     .voting-btns-wrapper
       %button.agreed-voting-btn{ 'ion-button': true, 'outline': true, color: 'agree', '[class.voted]': 'isAgreed()', '(click)': 'onClickVotingButton("agree")', '[disabled]': 'disableVotingButtons' }
@@ -110,7 +110,7 @@
             .comment-created-at
               {{ comment.created_at | partiDateTimeFormatObservable | async }}
       %template{ '[ngIf]': '!comment.is_blinded' }
-        .comment-body{ '[innerHTML]': "comment.body | partiSimpleFormat ", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'" }
+        .comment-body{ smartBody: true, '[innerHTML]': "comment.body | partiSimpleFormat:comment", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'" }
       %template{ '[ngIf]': 'comment.is_blinded' }
         .comment-body.comment-body-blinded 건강하고 유쾌한 빠띠 활동을 위해 숨겨진 댓글입니다.
 .post-footer-in-collection{ '*ngIf': "isCollection && hasComment()"}
@@ -124,6 +124,6 @@
             .comment-created-at
               {{ comment.created_at | partiDateTimeFormatObservable | async }}
       %template{ '[ngIf]': '!comment.is_blinded' }
-        .comment-body{ '[innerHTML]': "comment.body | partiSimpleFormat ", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'", '(click)': 'onClickPostContent()' }
+        .comment-body{ smartBody: true, '[innerHTML]': "comment.body | partiSimpleFormat:comment", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'", '(click)': 'onClickPostContent()' }
       %template{ '[ngIf]': 'comment.is_blinded' }
         .comment-body.comment-body-blinded 건강하고 유쾌한 빠띠 활동을 위해 숨겨진 댓글입니다.

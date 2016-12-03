@@ -22,4 +22,15 @@ export class UserData {
     return this.http.get('/api/v1/users/by_nickname', requestOptions)
       .map(res => <User>(res.json().user));
   }
+
+  bySlug(slug: string): Observable<User> {
+    let searchParams = new URLSearchParams();
+    searchParams.set('slug', slug);
+
+    let requestOptions = new RequestOptions();
+    requestOptions.search = searchParams;
+
+    return this.http.get('/api/v1/users/by_slug', requestOptions)
+      .map(res => <User>(res.json().user));
+  }
 }

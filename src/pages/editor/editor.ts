@@ -12,7 +12,6 @@ import { Post } from '../../models/post';
 import { PostData } from '../../providers/post-data';
 import { PartiData } from '../../providers/parti-data';
 import { MyselfData } from '../../providers/myself-data';
-import { HomePage } from '../../pages/home/home';
 import { PartiSelectPage } from '../../pages/parti-select/parti-select';
 
 export enum ReferenceType {
@@ -97,10 +96,6 @@ export class EditorPage {
     this.platform.registerBackButtonAction(() => {
       this.viewController.dismiss();
     });
-  }
-
-  invalidToSave() {
-    return !this.parti || !this.postForm.valid;
   }
 
   onClickPartiSelect() {

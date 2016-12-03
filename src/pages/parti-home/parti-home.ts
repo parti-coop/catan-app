@@ -209,7 +209,7 @@ export class PartiHomePage {
               .catch(() => {
                 let text = share.twitter_text;
                 let tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(share.url)}`
-                let browser = new InAppBrowser(tweetUrl, "_blank");
+                new InAppBrowser(tweetUrl, "_blank");
               });
           }
         },{

@@ -103,7 +103,7 @@ export class PartiPostPanelComponent {
 
   onClickLinkReference(linkSource: LinkSource) {
     this.platform.ready().then(() => {
-      let browser = new InAppBrowser(linkSource.url, "_blank", "location=true");
+      new InAppBrowser(linkSource.url, "_blank", "location=true");
     });
   }
 
@@ -274,7 +274,7 @@ export class PartiPostPanelComponent {
               .catch(() => {
                 let text = share.twitter_text;
                 let tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(share.url)}`
-                let browser = new InAppBrowser(tweetUrl, "_blank");
+                new InAppBrowser(tweetUrl, "_blank");
               });
           }
         },{
