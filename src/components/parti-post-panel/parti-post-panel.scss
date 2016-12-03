@@ -20,9 +20,7 @@ parti-post-panel {
       flex: 1;
       align-self: center;
       color: $brand-primary;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      @include single-text-ellipsis();
     }
   }
   .post-head {
@@ -102,20 +100,13 @@ parti-post-panel {
       padding: 12px;
       .link-reference-title {
         font-weight: bold;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+        @include single-text-ellipsis();
       }
       .link-reference-body {
         padding-top: 6px;
         font-size: $font-size-small;
         color: $gray;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        word-wrap: break-word;
+        @include multi-text-ellipsis(2);
       }
       .link-reference-footer {
         padding-top: 6px;
@@ -156,17 +147,13 @@ parti-post-panel {
     padding: 24px;
     text-align: center;
     .file-reference-name {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
+      @include single-text-ellipsis();
     }
     .file-reference-file-size {
       font-size: $font-size-small;
       color: $gray-light;
       padding-left: 6px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
+      @include single-text-ellipsis();
     }
     .file-reference-button {
       display: block;
@@ -365,12 +352,7 @@ parti-post-panel {
         }
         .comment-body {
           padding-left: 32px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          word-wrap: break-word;
+          @include multi-text-ellipsis(2);
           &.agreed:before {
             content: '\f392  찬성 ';
             font-family: "Ionicons";

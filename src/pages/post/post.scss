@@ -14,10 +14,8 @@ page-post {
           font-size: $font-size-large;
           color: $gray-dark;
           font-weight: bold;
-          overflow: hidden;
           vertical-align: text-bottom;
-          white-space: nowrap;
-          text-overflow: ellipsis;
+          @include single-text-ellipsis();
 
           .parti-title {
           }

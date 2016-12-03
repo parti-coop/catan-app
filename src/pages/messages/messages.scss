@@ -31,5 +31,6 @@ page-messages {
   }
   .message-desc {
     padding-top: 5px;
+    @include multi-text-ellipsis(3);
   }
 }
