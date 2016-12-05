@@ -3,6 +3,7 @@ import { User } from '../models/user';
 export interface Comment {
   id: number;
   body: string;
+  truncated_body: string;
   upvotes_count: number;
   user: User;
   created_at: string;

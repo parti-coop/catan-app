@@ -6,7 +6,8 @@
         %span.parti-group{ '*ngIf': 'post.parti.group' }
           <
           {{ post.parti.group.name }}
-      .parti-home-link{'(click)': 'onClickParti(post.parti)'}
+    %ion-buttons{ 'end': true }
+      %button{ 'ion-button': true, clear: true, '(click)': 'onClickParti(post.parti)' }
         빠띠 보기
 
 %ion-content{ '#content': true }

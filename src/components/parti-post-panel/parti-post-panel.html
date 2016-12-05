@@ -13,7 +13,7 @@
 </div>
 <div *ngIf='post.parsed_title != null' [innerHTML]='post.parsed_title | partiSimpleFormat:post' class='post-title' smartBody></div>
 <div *ngIf='!isCollection &amp;&amp; post.parsed_body != null' [innerHTML]='post.parsed_body | partiSimpleFormat:post' class='post-body' smartBody></div>
-<div *ngIf='isCollection &amp;&amp; post.parsed_body != null' [innerHTML]='post.truncated_parsed_body | partiSimpleFormat:post' class='post-body' smartBody></div>
+<div *ngIf='isCollection &amp;&amp; post.parsed_body != null' [innerHTML]='post.parsed_body | partiReadMore:post.truncated_parsed_body | partiSimpleFormat:post' class='post-body' smartBody></div>
 <div (click)='onClickLinkReference(post.link_reference)' *ngIf='!!post.link_reference &amp;&amp; !post.link_reference.is_video' class='post-link-reference'>
   <div class='link-reference-image-wrapper'>
     <div [ngStyle]="{ 'background-image': 'url(' + post.link_reference.image_url + ')' }" class='link-reference-image'></div>
@@ -98,13 +98,13 @@
   </div>
 </div>
 <div *ngIf='(post.upvotes_count &gt; 0 || post.comments_count &gt; 0) &amp;&amp; isCollection' class='post-reaction-info-in-collection'>
-  <span *ngIf='post.upvotes_count &gt; 0' class='post-upvotes-count'>
+  <span (click)='onClickPostContent()' *ngIf='post.upvotes_count &gt; 0' class='post-upvotes-count'>
     공감 {{ post.upvotes_count }}
   </span>
   <span *ngIf='post.upvotes_count &gt; 0 &amp;&amp; post.comments_count &gt; 0' class='middot'>
     &middot;
   </span>
-  <span *ngIf='post.comments_count &gt; 0' class='post-comments-count'>
+  <span (click)='onClickPostContent()' *ngIf='post.comments_count &gt; 0' class='post-comments-count'>
     댓글 {{ post.comments_count }}
   </span>
 </div>
@@ -159,7 +159,7 @@
         </div>
       </div>
       <template [ngIf]='!comment.is_blinded'>
-        <div [class.agreed]="comment.choice == 'agree'" [class.disagreed]="comment.choice == 'disagree'" [innerHTML]='comment.body | partiSimpleFormat:comment' class='comment-body' smartBody></div>
+        <div [class.agreed]="comment.choice == 'agree'" [class.disagreed]="comment.choice == 'disagree'" [innerHTML]='comment.body | partiReadMore:comment.truncated_body | partiSimpleFormat:comment' class='comment-body' smartBody></div>
       </template>
       <template [ngIf]='comment.is_blinded'>
         <div class='comment-body comment-body-blinded'>건강하고 유쾌한 빠띠 활동을 위해 숨겨진 댓글입니다.</div>
@@ -182,7 +182,7 @@
         </div>
       </div>
       <template [ngIf]='!comment.is_blinded'>
-        <div (click)='onClickPostContent()' [class.agreed]="comment.choice == 'agree'" [class.disagreed]="comment.choice == 'disagree'" [innerHTML]='comment.body | partiSimpleFormat:comment' class='comment-body' smartBody></div>
+        <div (click)='onClickPostContent($event)' [class.agreed]="comment.choice == 'agree'" [class.disagreed]="comment.choice == 'disagree'" [innerHTML]='comment.body | partiReadMore:comment.truncated_body | partiSimpleFormat:comment' class='comment-body' smartBody></div>
       </template>
       <template [ngIf]='comment.is_blinded'>
         <div class='comment-body comment-body-blinded'>건강하고 유쾌한 빠띠 활동을 위해 숨겨진 댓글입니다.</div>

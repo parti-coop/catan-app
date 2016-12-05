@@ -17,6 +17,7 @@ import { PartiHomePage } from '../../pages/parti-home/parti-home';
 import { ProfilePage } from '../../pages/profile/profile';
 import { MembersPage } from '../../pages/members/members';
 import { UpvoteData } from '../../providers/upvote-data';
+import { PartiReadMorePipe } from '../../pipes/parti-read-more-pipe';
 
 import { VotingData } from '../../providers/voting-data';
 import { MyselfData } from '../../providers/myself-data';
@@ -84,10 +85,18 @@ export class PartiPostPanelComponent {
     this.navCtrl.push(PartiHomePage, { parti: parti });
   }
 
-  onClickPostContent() {
-    this.navCtrl.push(PostPage, {
-      post: this.post
-    });
+  onClickPostContent(event) {
+    if(PartiReadMorePipe.isMoreButtonEvent(event)) {
+      event.preventDefault();
+      event.stopPropagation();
+      PartiReadMorePipe.extend(event);
+      return;
+    }
+    if(this.isCollection == true) {
+      this.navCtrl.push(PostPage, {
+        post: this.post
+      });
+    }
   }
 
   onClickCommentButton() {

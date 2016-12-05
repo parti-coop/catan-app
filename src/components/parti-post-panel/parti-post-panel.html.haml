@@ -9,7 +9,7 @@
   %parti-post-byline{ '[post]': 'post' }
 .post-title{ '*ngIf': 'post.parsed_title != null', '[innerHTML]': "post.parsed_title | partiSimpleFormat:post", smartBody: true }
 .post-body{ '*ngIf': '!isCollection && post.parsed_body != null', '[innerHTML]': "post.parsed_body | partiSimpleFormat:post", smartBody: true }
-.post-body{ '*ngIf': 'isCollection && post.parsed_body != null', '[innerHTML]': "post.truncated_parsed_body | partiSimpleFormat:post", smartBody: true }
+.post-body{ '*ngIf': 'isCollection && post.parsed_body != null', '[innerHTML]': "post.parsed_body | partiReadMore:post.truncated_parsed_body | partiSimpleFormat:post", smartBody: true }
 .post-link-reference{ '(click)': 'onClickLinkReference(post.link_reference)', '*ngIf': '!!post.link_reference && !post.link_reference.is_video' }
   .link-reference-image-wrapper
     .link-reference-image{ '[ngStyle]': "{ 'background-image': 'url(' + post.link_reference.image_url + ')' }" }
@@ -69,11 +69,11 @@
   .poll-before-voting{ '*ngIf': '!isVoted()' }
     찬반 투표하면 현재 결과를 볼 수 있습니다.
 .post-reaction-info-in-collection{ '*ngIf': '(post.upvotes_count > 0 || post.comments_count > 0) && isCollection' }
-  %span.post-upvotes-count{ '*ngIf': 'post.upvotes_count > 0' }
+  %span.post-upvotes-count{ '*ngIf': 'post.upvotes_count > 0', '(click)': 'onClickPostContent()' }
     공감 {{ post.upvotes_count }}
   %span.middot{ '*ngIf': 'post.upvotes_count > 0 && post.comments_count > 0' }
     &middot;
-  %span.post-comments-count{ '*ngIf': 'post.comments_count > 0' }
+  %span.post-comments-count{ '*ngIf': 'post.comments_count > 0', '(click)': 'onClickPostContent()' }
     댓글 {{ post.comments_count }}
 .post-buttons
   %span.upvote-button{ '[class.upvotable]': 'post.is_upvotable' }
@@ -110,7 +110,7 @@
             .comment-created-at
               {{ comment.created_at | partiDateTimeFormatObservable | async }}
       %template{ '[ngIf]': '!comment.is_blinded' }
-        .comment-body{ smartBody: true, '[innerHTML]': "comment.body | partiSimpleFormat:comment", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'" }
+        .comment-body{ smartBody: true, '[innerHTML]': "comment.body | partiReadMore:comment.truncated_body | partiSimpleFormat:comment", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'" }
       %template{ '[ngIf]': 'comment.is_blinded' }
         .comment-body.comment-body-blinded 건강하고 유쾌한 빠띠 활동을 위해 숨겨진 댓글입니다.
 .post-footer-in-collection{ '*ngIf': "isCollection && hasComment()"}
@@ -124,6 +124,6 @@
             .comment-created-at
               {{ comment.created_at | partiDateTimeFormatObservable | async }}
       %template{ '[ngIf]': '!comment.is_blinded' }
-        .comment-body{ smartBody: true, '[innerHTML]': "comment.body | partiSimpleFormat:comment", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'", '(click)': 'onClickPostContent()' }
+        .comment-body{ smartBody: true, '[innerHTML]': "comment.body | partiReadMore:comment.truncated_body | partiSimpleFormat:comment", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'", '(click)': 'onClickPostContent($event)' }
       %template{ '[ngIf]': 'comment.is_blinded' }
         .comment-body.comment-body-blinded 건강하고 유쾌한 빠띠 활동을 위해 숨겨진 댓글입니다.

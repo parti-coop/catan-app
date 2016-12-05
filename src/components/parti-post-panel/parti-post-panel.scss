@@ -50,10 +50,6 @@ parti-post-panel {
         width: 100%;
       }
     }
-    .more {
-      color: #777777;
-      font-size: $font-size-small;
-    }
   }
 
   .post-buttons {
@@ -352,7 +348,6 @@ parti-post-panel {
         }
         .comment-body {
           padding-left: 32px;
-          @include multi-text-ellipsis(2);
           &.agreed:before {
             content: '\f392  찬성 ';
             font-family: "Ionicons";

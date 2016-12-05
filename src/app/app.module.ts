@@ -7,6 +7,7 @@ import { PartiApp } from './app.component';
 
 import { PartiSimpleFormatPipe } from '../pipes/parti-simple-format-pipe';
 import { PartiDateTimeFormatObservablePipe } from '../pipes/parti-datetime-format-observable-pipe';
+import { PartiReadMorePipe } from '../pipes/parti-read-more-pipe';
 
 import { PartiPostPanelComponent } from '../components/parti-post-panel/parti-post-panel';
 import { PartiPostBylineComponent } from '../components/parti-post-byline/parti-post-byline';
@@ -93,6 +94,7 @@ moment.locale('ko');
     KeyboardAttachDirective,
     SmartBody,
     Shrinkage,
+    PartiReadMorePipe,
     PartiDateTimeFormatObservablePipe
   ],
   imports: [

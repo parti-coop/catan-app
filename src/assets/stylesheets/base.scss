@@ -123,3 +123,32 @@ ion-action-sheet {
     }
   }
 }
+
+// parti-read-more-pipe
+.read-more-content {
+  display: inline-block;
+  .read-more-btn {
+    color: #777777;
+    font-size: $font-size-small;
+    white-space: nowrap;
+  }
+  input {
+    display: none; /* hide the checkboxes */
+    & ~ {
+      & .original{
+        display:none;
+      }
+      & .truncated{
+        display:inline-block;
+      }
+    }
+    &:checked ~ {
+      & .original {
+        display:inline-block;
+      }
+      & .truncated {
+        display:none;
+      }
+    }
+  }
+}

@@ -1,37 +1,4 @@
 page-post {
-  ion-header {
-    ion-navbar {
-      height: 42px !important;
-      padding-bottom: 0 !important;
-      min-height: 0 !important;
-    }
-    ion-title {
-      text-align: center;
-      .toolbar-title {
-        display: flex;
-        .parti-info {
-          flex: 1;
-          font-size: $font-size-large;
-          color: $gray-dark;
-          font-weight: bold;
-          vertical-align: text-bottom;
-          @include single-text-ellipsis();
-
-          .parti-title {
-          }
-          .parti-group {
-          }
-        }
-        .parti-home-link {
-          font-size: $font-size-base;
-          color: $gray-light;
-          align-self: flex-end;
-          width: 46px;
-          margin-top: 6px;
-        }
-      }
-    }
-  }
   ion-footer {
     .toolbar {
       padding: 7px 4px;
