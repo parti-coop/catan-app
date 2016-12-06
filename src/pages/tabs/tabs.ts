@@ -36,6 +36,9 @@ export class TabsPage {
   newMessagesCountLabel: string;
   newMessagesCountSubscription: Subscription;
 
+  private onShowSubscription: Subscription;
+  private onHideSubscription: Subscription;
+
   constructor(
     private platform: Platform,
     private menuCtrl: MenuController,
@@ -47,16 +50,6 @@ export class TabsPage {
     private messageData: MessageData,
     private partiData: PartiData
   ) {
-    platform.ready().then(() => {
-      Keyboard.onKeyboardShow().subscribe(() => {
-          document.body.classList.add('keyboard-is-open');
-      });
-
-      Keyboard.onKeyboardHide().subscribe(() => {
-          document.body.classList.remove('keyboard-is-open');
-      });
-    });
-
     this.listenToDeepLiknEvents();
     this.listenToNewPostsCountEvents();
     this.listenToLastMessageIdEvents();
@@ -64,6 +57,13 @@ export class TabsPage {
 
   ionViewDidLoad() {
     this.platform.ready().then(() => {
+      this.onShowSubscription = Keyboard.onKeyboardShow().subscribe(() => {
+          document.body.classList.add('keyboard-is-open');
+      });
+      this.onHideSubscription = Keyboard.onKeyboardHide().subscribe(() => {
+          document.body.classList.remove('keyboard-is-open');
+      });
+
       this.newMessagesCountSubscription = this.pollingNewMessagesCount();
     });
   }
@@ -75,6 +75,12 @@ export class TabsPage {
       tab && tab.popAll();
     }
     this.newMessagesCountSubscription.unsubscribe();
+    if (this.onShowSubscription) {
+      this.onShowSubscription.unsubscribe();
+    }
+    if (this.onHideSubscription) {
+      this.onHideSubscription.unsubscribe();
+    }
   }
 
   pollingNewMessagesCount() {

@@ -32,7 +32,7 @@
         %ion-input{ type: 'text', 'formControlName': 'poll', placeholder: '찬반투표 제목을 넣어 주세요', 'class': 'poll' }
       %ion-item{ '*ngIf': 'referenceTypeName() == "FileSource"' }
         %img{'[src]': "imageSrc" }
-%ion-footer{ '[keyboardAttach]': 'content' }
+%ion-footer
   %ion-toolbar
     %ion-buttons{ 'left': true }
       .post-btns

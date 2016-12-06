@@ -38,17 +38,9 @@ export class PostPage {
     this.commentForm = this.formBuilder.group({
       body: ['', Validators.required]
     });
+
     if(platform.ready()) {
       Keyboard.disableScroll(true);
-      if(this.platform.is('cordova') && this.platform.is('ios')) {
-        this.onShowSubscription = Keyboard.onKeyboardShow().subscribe(() => {
-          document.body.classList.add('keyboard-is-open');
-        });
-
-        this.onHideSubscription = Keyboard.onKeyboardHide().subscribe(() => {
-          document.body.classList.remove('keyboard-is-open');
-        });
-      }
     }
   }
 
@@ -70,7 +62,7 @@ export class PostPage {
     if(this.navParams.get('needFocusCommentInut')) {
       setTimeout(() => {
         this.setFocusCommentForm();
-      }, 50);
+      }, 500);
     }
   }
 
