@@ -68,12 +68,12 @@
     명이 투표했습니다.
   .poll-before-voting{ '*ngIf': '!isVoted()' }
     찬반 투표하면 현재 결과를 볼 수 있습니다.
-.post-reaction-info-in-collection{ '*ngIf': '(post.upvotes_count > 0 || post.comments_count > 0) && isCollection' }
-  %span.post-upvotes-count{ '*ngIf': 'post.upvotes_count > 0', '(click)': 'onClickPostContent()' }
+.post-reaction-info-in-collection{ '*ngIf': '(hasUpvote() || hasComment()) && isCollection' }
+  %span.post-upvotes-count{ '*ngIf': 'hasUpvote()' }
     공감 {{ post.upvotes_count }}
-  %span.middot{ '*ngIf': 'post.upvotes_count > 0 && post.comments_count > 0' }
+  %span.middot{ '*ngIf': 'hasUpvote() && hasComment()' }
     &middot;
-  %span.post-comments-count{ '*ngIf': 'post.comments_count > 0', '(click)': 'onClickPostContent()' }
+  %span.post-comments-count{ '*ngIf': 'hasComment()' }
     댓글 {{ post.comments_count }}
 .post-buttons
   %span.upvote-button{ '[class.upvotable]': 'post.is_upvotable' }
@@ -87,19 +87,19 @@
   %span.parti-share-button{ '(click)': 'onClickShare()' }
     %ion-icon{ name: 'md-share' }
     공유하기
-.post-footer{ '*ngIf': "!isCollection && (post.upvotes_count > 0 || post.comments_count > 0)" }
+.post-footer{ '*ngIf': "!isCollection && (hasUpvote() || hasComment())" }
   .post-reaction-info
-    %span.post-upvotes-count{ '*ngIf': 'post.upvotes_count > 0' }
+    %span.post-upvotes-count{ '*ngIf': 'hasUpvote()' }
       공감 {{ post.upvotes_count }}
-    %span.middot{ '*ngIf': 'post.upvotes_count > 0 && post.comments_count > 0' }
+    %span.middot{ '*ngIf': 'hasUpvote() && hasComment()' }
       &middot;
-    %span.post-comments-count{ '*ngIf': 'post.comments_count > 0' }
+    %span.post-comments-count{ '*ngIf': 'hasComment()' }
       댓글 {{ post.comments_count }}
-    .commenters{ '*ngIf': "hasComment()" }
-      .comment-user{ '*ngFor': 'let user of post.comment_users.slice(0,8)'}
+    .upvoters{ '*ngIf': "hasUpvote()" }
+      .upvote-user{ '*ngFor': 'let user of post.upvote_users.slice(0,8)'}
         .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }", '(click)': 'onClickUser(user)' }
-      .more-users{ '*ngIf': "post.comment_users.length > 8", '(click)': "onClickMoreUsers()" }
-        + {{ post.comment_users.length - 8 }}
+      .more-users{ '*ngIf': "post.upvote_users.length > 8", '(click)': "onClickMoreUsers()" }
+        + {{ post.upvote_users.length - 8 }}
   .post-comments{ '*ngIf': "hasComment()" }
     .comment{ '*ngFor': 'let comment of post.comments'}
       .comment-header

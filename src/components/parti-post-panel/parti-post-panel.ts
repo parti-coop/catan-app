@@ -81,6 +81,10 @@ export class PartiPostPanelComponent {
     return this.post.comments_count > 0;
   }
 
+  hasUpvote() {
+    return this.post.upvotes_count > 0;
+  }
+
   onClickParti(parti: Parti) {
     this.navCtrl.push(PartiHomePage, { parti: parti });
   }
@@ -210,7 +214,7 @@ export class PartiPostPanelComponent {
   }
 
   onClickMoreUsers() {
-    let profileModal = this.modalCtrl.create(MembersPage, { post: this.post, from: 'post-comments' });
+    let profileModal = this.modalCtrl.create(MembersPage, { post: this.post, from: 'post-upvotes' });
     profileModal.present();
   }
 

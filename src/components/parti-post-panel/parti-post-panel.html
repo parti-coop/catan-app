@@ -97,14 +97,14 @@
     찬반 투표하면 현재 결과를 볼 수 있습니다.
   </div>
 </div>
-<div *ngIf='(post.upvotes_count &gt; 0 || post.comments_count &gt; 0) &amp;&amp; isCollection' class='post-reaction-info-in-collection'>
-  <span (click)='onClickPostContent()' *ngIf='post.upvotes_count &gt; 0' class='post-upvotes-count'>
+<div *ngIf='(hasUpvote() || hasComment()) &amp;&amp; isCollection' class='post-reaction-info-in-collection'>
+  <span *ngIf='hasUpvote()' class='post-upvotes-count'>
     공감 {{ post.upvotes_count }}
   </span>
-  <span *ngIf='post.upvotes_count &gt; 0 &amp;&amp; post.comments_count &gt; 0' class='middot'>
+  <span *ngIf='hasUpvote() &amp;&amp; hasComment()' class='middot'>
     &middot;
   </span>
-  <span (click)='onClickPostContent()' *ngIf='post.comments_count &gt; 0' class='post-comments-count'>
+  <span *ngIf='hasComment()' class='post-comments-count'>
     댓글 {{ post.comments_count }}
   </span>
 </div>
@@ -125,23 +125,23 @@
     공유하기
   </span>
 </div>
-<div *ngIf='!isCollection &amp;&amp; (post.upvotes_count &gt; 0 || post.comments_count &gt; 0)' class='post-footer'>
+<div *ngIf='!isCollection &amp;&amp; (hasUpvote() || hasComment())' class='post-footer'>
   <div class='post-reaction-info'>
-    <span *ngIf='post.upvotes_count &gt; 0' class='post-upvotes-count'>
+    <span *ngIf='hasUpvote()' class='post-upvotes-count'>
       공감 {{ post.upvotes_count }}
     </span>
-    <span *ngIf='post.upvotes_count &gt; 0 &amp;&amp; post.comments_count &gt; 0' class='middot'>
+    <span *ngIf='hasUpvote() &amp;&amp; hasComment()' class='middot'>
       &middot;
     </span>
-    <span *ngIf='post.comments_count &gt; 0' class='post-comments-count'>
+    <span *ngIf='hasComment()' class='post-comments-count'>
       댓글 {{ post.comments_count }}
     </span>
-    <div *ngIf='hasComment()' class='commenters'>
-      <div *ngFor='let user of post.comment_users.slice(0,8)' class='comment-user'>
+    <div *ngIf='hasUpvote()' class='upvoters'>
+      <div *ngFor='let user of post.upvoted_users.slice(0,8)' class='upvote-user'>
         <div (click)='onClickUser(user)' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='user-image'></div>
       </div>
-      <div (click)='onClickMoreUsers()' *ngIf='post.comment_users.length &gt; 8' class='more-users'>
-        + {{ post.comment_users.length - 8 }}
+      <div (click)='onClickMoreUsers()' *ngIf='post.upvoted_users.length &gt; 8' class='more-users'>
+        + {{ post.upvoted_users.length - 8 }}
       </div>
     </div>
   </div>

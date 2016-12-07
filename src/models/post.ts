@@ -1,6 +1,7 @@
 import { Parti } from '../models/parti';
 import { User } from '../models/user';
 import { Comment } from '../models/comment';
+import { Upvote } from '../models/upvote';
 import { LinkSource } from '../models/link-source';
 import { FileSource } from '../models/file-source';
 import { Poll } from '../models/poll';
@@ -18,8 +19,9 @@ export interface Post {
   last_touched_at: string;
   is_upvotable: boolean;
   upvotes_count: number;
+  upvote_users: User[];
+  upvotes: Upvote[];
   comments_count: number;
-  comment_users: User[];
   comments: Comment[];
   link_reference: LinkSource;
   file_reference: FileSource;

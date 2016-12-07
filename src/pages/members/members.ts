@@ -48,8 +48,8 @@ export class MembersPage {
         this.users = this.post.poll.disagreed_voting_users;
       }
     }
-    if(this.from == 'post-comments'){
-      this.users = this.post.comment_users;
+    if(this.from == 'post-upvotes'){
+      this.users = this.post.upvote_users;
     }
 
 
