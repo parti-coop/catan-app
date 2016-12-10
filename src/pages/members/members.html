@@ -9,7 +9,7 @@
       <div *ngIf="from == 'parti-home'" class='title-member'>멤버 {{ parti.members_count }}명</div>
       <div *ngIf="from == 'post-poll' &amp;&amp; choice == 'agree'" class='title-member'>찬성 멤버 {{ post.poll.agreed_votings_count }}명</div>
       <div *ngIf="from == 'post-poll' &amp;&amp; choice == 'disagree'" class='title-member'>반대 멤버 {{ post.poll.disagreed_votings_count }}명</div>
-      <div *ngIf="from == 'post-upvotes'" class='title-member'>공감한 멤버 {{ post.upvoted_users.length }}명</div>
+      <div *ngIf="from == 'post-upvotes'" class='title-member'>공감한 멤버 {{ post.upvotes_count }}명</div>
     </ion-title>
   </ion-toolbar>
 </ion-header>

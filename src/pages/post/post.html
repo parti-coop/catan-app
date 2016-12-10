@@ -18,6 +18,11 @@
 </ion-header>
 <ion-content #content>
   <parti-post-panel (onAddComment)='setFocusCommentForm($event)' [isCollection]='false' [isPartiHome]='false' [ngStyle]="{ 'box-shadow': 'none' }" [post]='post'></parti-post-panel>
+  <template [ngIf]='partiPostPanel.hasMoreComment'>
+    <ion-infinite-scroll (ionInfinite)='loadMoreComments($event)'>
+      <ion-infinite-scroll-content loadingSpinner='bubbles'></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </template>
 </ion-content>
 <ion-footer [keyboardAttach]='content'>
   <ion-toolbar>

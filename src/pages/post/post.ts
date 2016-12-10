@@ -1,14 +1,18 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Content, NavController, NavParams, TextArea, LoadingController } from 'ionic-angular';
+import { Platform, InfiniteScroll, Content, NavController, NavParams, TextArea, LoadingController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Keyboard } from 'ionic-native';
 import { Subscription } from 'rxjs/rx';
-import { Parti } from '../../models/parti';
 
 import 'rxjs/add/operator/finally';
 
-import { CommentData } from '../../providers/comment-data';
+import { PartiPostPanelComponent } from '../../components/parti-post-panel/parti-post-panel';
 
+import { CommentData } from '../../providers/comment-data';
+import { PostData } from '../../providers/post-data';
+
+import { Parti } from '../../models/parti';
+import { InfinitPage } from '../../models/infinit-page';
 import { Post } from '../../models/post';
 import { Comment } from '../../models/comment';
 import { PartiHomePage } from '../../pages/parti-home/parti-home';
@@ -20,6 +24,7 @@ import { PartiHomePage } from '../../pages/parti-home/parti-home';
 export class PostPage {
   @ViewChild('content') content: Content;
   @ViewChild('inputCommentBody') inputCommentBody: TextArea;
+  @ViewChild(PartiPostPanelComponent) partiPostPanel: PartiPostPanelComponent;
 
   post: Post;
   commentForm: FormGroup;
@@ -31,6 +36,7 @@ export class PostPage {
     private navParams: NavParams,
     private formBuilder: FormBuilder,
     private platform: Platform,
+    private postData: PostData,
     private commentData: CommentData,
     private loadingCtrl: LoadingController
   ){
@@ -42,6 +48,23 @@ export class PostPage {
     if(platform.ready()) {
       Keyboard.disableScroll(true);
     }
+  }
+
+  ionViewDidLoad() {
+    if(!this.post.full) {
+      this.postData.get(this.post.id).subscribe((post) => {
+        this.post = post;
+      });
+    }
+  }
+
+  loadMoreComments(infiniteScroll) {
+    this.partiPostPanel.loadComments(() => {
+      infiniteScroll.complete();
+      if(!this.partiPostPanel.hasMoreComment) {
+        infiniteScroll.enable(false);
+      }
+    });
   }
 
   setFocusCommentForm(event = null) {
@@ -75,10 +98,11 @@ export class PostPage {
       .finally(() => {
         loading.dismiss();
       }).subscribe((comment: Comment) => {
-        if(!this.post.comments) {
-          this.post.comments = [];
+        if(!this.post.latest_comments) {
+          this.post.latest_comments = [];
         }
-        this.post.comments.push(comment);
+        this.post.latest_comments.unshift(comment);
+        this.partiPostPanel.addComment(comment);
         this.post.comments_count += 1;
         this.commentForm.controls['body'].setValue(null);
         this.content.resize();

@@ -9,6 +9,7 @@ import { Share } from '../models/share';
 
 export interface Post {
   id: number;
+  full: boolean;
   parsed_title: string;
   parsed_body: string;
   truncated_parsed_body: string;
@@ -19,10 +20,10 @@ export interface Post {
   last_touched_at: string;
   is_upvotable: boolean;
   upvotes_count: number;
-  upvote_users: User[];
-  upvotes: Upvote[];
+  latest_upvote_users: User[];
+  latest_upvotes: Upvote[];
   comments_count: number;
-  comments: Comment[];
+  latest_comments: Comment[];
   link_reference: LinkSource;
   file_reference: FileSource;
   poll: Poll;

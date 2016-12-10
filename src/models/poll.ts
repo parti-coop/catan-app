@@ -6,7 +6,7 @@ export interface Poll {
   votings_count: number;
   agreed_votings_count: number;
   disagreed_votings_count: number;
-  agreed_voting_users: User[];
-  disagreed_voting_users: User[];
+  latest_agreed_voting_users: User[];
+  latest_disagreed_voting_users: User[];
   my_choice: string;
 }

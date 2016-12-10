@@ -4,8 +4,7 @@ import { Post } from '../models/post';
 
 export interface Upvote {
   id: number;
-  post_upvotable: Post;
-  comment_upvotable: Comment;
   user: User;
+  upvotable_id: number;
   upvotable_type: string;
 }

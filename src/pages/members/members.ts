@@ -42,14 +42,14 @@ export class MembersPage {
     }
     if(this.from == 'post-poll'){
       if(this.choice == 'agree'){
-        this.users = this.post.poll.agreed_voting_users;
+        this.users = this.post.poll.latest_agreed_voting_users;
       }
       if(this.choice == 'disagree'){
-        this.users = this.post.poll.disagreed_voting_users;
+        this.users = this.post.poll.latest_disagreed_voting_users;
       }
     }
     if(this.from == 'post-upvotes'){
-      this.users = this.post.upvote_users;
+      this.users = this.post.latest_upvote_users;
     }
 
 

@@ -59,9 +59,9 @@
       댓글로 의견을 나눠 보세요
   .poll-votings{ '*ngIf': 'isVoted() && !isCollection' }
     .agreed-voting-users{ '(click)': "onClickVotingUsers('agree')" }
-      .voting-user{ '*ngFor': 'let user of post.poll.agreed_voting_users.slice(0,6)', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
+      .voting-user{ '*ngFor': 'let user of post.poll.latest_agreed_voting_users', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
     .disagreed-voting-users{ '(click)': "onClickVotingUsers('disagree')" }
-      .voting-user{ '*ngFor': 'let user of post.poll.disagreed_voting_users.slice(0,6)', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
+      .voting-user{ '*ngFor': 'let user of post.poll.latest_disagreed_voting_users', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
   .poll-recommend-voting
     현재
     %span.poll-voted-counts {{ post.poll.agreed_votings_count + post.poll.disagreed_votings_count }}
@@ -69,11 +69,11 @@
   .poll-before-voting{ '*ngIf': '!isVoted()' }
     찬반 투표하면 현재 결과를 볼 수 있습니다.
 .post-reaction-info-in-collection{ '*ngIf': '(hasUpvote() || hasComment()) && isCollection' }
-  %span.post-upvotes-count{ '*ngIf': 'hasUpvote()' }
+  %span.post-upvotes-count{ '*ngIf': 'hasUpvote()', '(click)': 'onClickUpvoteUsers()' }
     공감 {{ post.upvotes_count }}
   %span.middot{ '*ngIf': 'hasUpvote() && hasComment()' }
     &middot;
-  %span.post-comments-count{ '*ngIf': 'hasComment()' }
+  %span.post-comments-count{ '*ngIf': 'hasComment()', '(click)': 'onClickPostContent($event)'  }
     댓글 {{ post.comments_count }}
 .post-buttons
   %span.upvote-button{ '[class.upvotable]': 'post.is_upvotable' }
@@ -87,35 +87,17 @@
   %span.parti-share-button{ '(click)': 'onClickShare()' }
     %ion-icon{ name: 'md-share' }
     공유하기
-.post-footer{ '*ngIf': "!isCollection && (hasUpvote() || hasComment())" }
-  .post-reaction-info
-    %span.post-upvotes-count{ '*ngIf': 'hasUpvote()' }
+.post-footer{ '*ngIf': "(isCollection && hasComment()) || (!isCollection && (hasComment() || hasUpvote()))" }
+  .post-reaction-info{ '*ngIf': '!isCollection && hasUpvote()' }
+    %span.post-upvotes-count{ '*ngIf': 'hasUpvote()', '(click)': 'onClickUpvoteUsers()' }
       공감 {{ post.upvotes_count }}
-    %span.middot{ '*ngIf': 'hasUpvote() && hasComment()' }
-      &middot;
-    %span.post-comments-count{ '*ngIf': 'hasComment()' }
-      댓글 {{ post.comments_count }}
     .upvoters{ '*ngIf': "hasUpvote()" }
-      .upvote-user{ '*ngFor': 'let user of post.upvote_users.slice(0,8)'}
+      .upvote-user{ '*ngFor': 'let user of post.latest_upvote_users'}
         .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }", '(click)': 'onClickUser(user)' }
-      .more-users{ '*ngIf': "post.upvote_users.length > 8", '(click)': "onClickMoreUsers()" }
-        + {{ post.upvote_users.length - 8 }}
+      .more-users{ '*ngIf': "post.latest_upvote_users.length > 8", '(click)': "onClickUpvoteUsers()" }
+        + {{ post.latest_upvote_users.length - 8 }}
   .post-comments{ '*ngIf': "hasComment()" }
-    .comment{ '*ngFor': 'let comment of post.comments'}
-      .comment-header
-        .comment-byline
-          .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + comment.user.image_url + ')' }", '(click)': 'onClickUser(comment.user)' }
-          .byline-info
-            .user-nickname{ '(click)': 'onClickUser(comment.user)' } {{ comment.user.nickname }}
-            .comment-created-at
-              {{ comment.created_at | partiDateTimeFormatObservable | async }}
-      %template{ '[ngIf]': '!comment.is_blinded' }
-        .comment-body{ smartBody: true, '[innerHTML]': "comment.body | partiReadMore:comment.truncated_body | partiSimpleFormat:comment", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'" }
-      %template{ '[ngIf]': 'comment.is_blinded' }
-        .comment-body.comment-body-blinded 건강하고 유쾌한 빠띠 활동을 위해 숨겨진 댓글입니다.
-.post-footer-in-collection{ '*ngIf': "isCollection && hasComment()"}
-  .post-comments
-    .comment{ '*ngFor': 'let comment of post.comments.slice(-2)'}
+    .comment{ '*ngFor': 'let comment of comments'}
       .comment-header
         .comment-byline
           .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + comment.user.image_url + ')' }", '(click)': 'onClickUser(comment.user)' }
@@ -127,3 +109,5 @@
         .comment-body{ smartBody: true, '[innerHTML]': "comment.body | partiReadMore:comment.truncated_body | partiSimpleFormat:comment", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'", '(click)': 'onClickPostContent($event)' }
       %template{ '[ngIf]': 'comment.is_blinded' }
         .comment-body.comment-body-blinded 건강하고 유쾌한 빠띠 활동을 위해 숨겨진 댓글입니다.
+
+

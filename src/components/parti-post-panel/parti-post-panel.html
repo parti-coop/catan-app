@@ -82,10 +82,10 @@
   </div>
   <div *ngIf='isVoted() &amp;&amp; !isCollection' class='poll-votings'>
     <div (click)="onClickVotingUsers('agree')" class='agreed-voting-users'>
-      <div *ngFor='let user of post.poll.agreed_voting_users.slice(0,6)' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='voting-user'></div>
+      <div *ngFor='let user of post.poll.latest_agreed_voting_users' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='voting-user'></div>
     </div>
     <div (click)="onClickVotingUsers('disagree')" class='disagreed-voting-users'>
-      <div *ngFor='let user of post.poll.disagreed_voting_users.slice(0,6)' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='voting-user'></div>
+      <div *ngFor='let user of post.poll.latest_disagreed_voting_users' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='voting-user'></div>
     </div>
   </div>
   <div class='poll-recommend-voting'>
@@ -98,13 +98,13 @@
   </div>
 </div>
 <div *ngIf='(hasUpvote() || hasComment()) &amp;&amp; isCollection' class='post-reaction-info-in-collection'>
-  <span *ngIf='hasUpvote()' class='post-upvotes-count'>
+  <span (click)='onClickUpvoteUsers()' *ngIf='hasUpvote()' class='post-upvotes-count'>
     공감 {{ post.upvotes_count }}
   </span>
   <span *ngIf='hasUpvote() &amp;&amp; hasComment()' class='middot'>
     &middot;
   </span>
-  <span *ngIf='hasComment()' class='post-comments-count'>
+  <span (click)='onClickPostContent($event)' *ngIf='hasComment()' class='post-comments-count'>
     댓글 {{ post.comments_count }}
   </span>
 </div>
@@ -125,51 +125,22 @@
     공유하기
   </span>
 </div>
-<div *ngIf='!isCollection &amp;&amp; (hasUpvote() || hasComment())' class='post-footer'>
-  <div class='post-reaction-info'>
-    <span *ngIf='hasUpvote()' class='post-upvotes-count'>
+<div *ngIf='(isCollection &amp;&amp; hasComment()) || (!isCollection &amp;&amp; (hasComment() || hasUpvote()))' class='post-footer'>
+  <div *ngIf='!isCollection &amp;&amp; hasUpvote()' class='post-reaction-info'>
+    <span (click)='onClickUpvoteUsers()' *ngIf='hasUpvote()' class='post-upvotes-count'>
       공감 {{ post.upvotes_count }}
     </span>
-    <span *ngIf='hasUpvote() &amp;&amp; hasComment()' class='middot'>
-      &middot;
-    </span>
-    <span *ngIf='hasComment()' class='post-comments-count'>
-      댓글 {{ post.comments_count }}
-    </span>
     <div *ngIf='hasUpvote()' class='upvoters'>
-      <div *ngFor='let user of post.upvoted_users.slice(0,8)' class='upvote-user'>
+      <div *ngFor='let user of post.latest_upvote_users' class='upvote-user'>
         <div (click)='onClickUser(user)' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='user-image'></div>
       </div>
-      <div (click)='onClickMoreUsers()' *ngIf='post.upvoted_users.length &gt; 8' class='more-users'>
-        + {{ post.upvoted_users.length - 8 }}
+      <div (click)='onClickUpvoteUsers()' *ngIf='post.latest_upvote_users.length &gt; 8' class='more-users'>
+        + {{ post.latest_upvote_users.length - 8 }}
       </div>
     </div>
   </div>
   <div *ngIf='hasComment()' class='post-comments'>
-    <div *ngFor='let comment of post.comments' class='comment'>
-      <div class='comment-header'>
-        <div class='comment-byline'>
-          <div (click)='onClickUser(comment.user)' [ngStyle]="{ 'background-image': 'url(' + comment.user.image_url + ')' }" class='user-image'></div>
-          <div class='byline-info'>
-            <div (click)='onClickUser(comment.user)' class='user-nickname'>{{ comment.user.nickname }}</div>
-            <div class='comment-created-at'>
-              {{ comment.created_at | partiDateTimeFormatObservable | async }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <template [ngIf]='!comment.is_blinded'>
-        <div [class.agreed]="comment.choice == 'agree'" [class.disagreed]="comment.choice == 'disagree'" [innerHTML]='comment.body | partiReadMore:comment.truncated_body | partiSimpleFormat:comment' class='comment-body' smartBody></div>
-      </template>
-      <template [ngIf]='comment.is_blinded'>
-        <div class='comment-body comment-body-blinded'>건강하고 유쾌한 빠띠 활동을 위해 숨겨진 댓글입니다.</div>
-      </template>
-    </div>
-  </div>
-</div>
-<div *ngIf='isCollection &amp;&amp; hasComment()' class='post-footer-in-collection'>
-  <div class='post-comments'>
-    <div *ngFor='let comment of post.comments.slice(-2)' class='comment'>
+    <div *ngFor='let comment of comments' class='comment'>
       <div class='comment-header'>
         <div class='comment-byline'>
           <div (click)='onClickUser(comment.user)' [ngStyle]="{ 'background-image': 'url(' + comment.user.image_url + ')' }" class='user-image'></div>

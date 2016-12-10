@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output, ViewChild } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { NavController, AlertController, ToastController, ActionSheetController, ModalController } from 'ionic-angular';
 import { InAppBrowser, Transfer, FileOpener, SocialSharing, Facebook, Device, AppAvailability } from 'ionic-native';
@@ -12,13 +12,16 @@ import { FileSource } from '../../models/file-source';
 import { User } from '../../models/user';
 import { Parti } from '../../models/parti';
 import { Post } from '../../models/post';
+import { Comment } from '../../models/comment';
+
 import { PostPage } from '../../pages/post/post';
 import { PartiHomePage } from '../../pages/parti-home/parti-home';
 import { ProfilePage } from '../../pages/profile/profile';
 import { MembersPage } from '../../pages/members/members';
-import { UpvoteData } from '../../providers/upvote-data';
 import { PartiReadMorePipe } from '../../pipes/parti-read-more-pipe';
 
+import { UpvoteData } from '../../providers/upvote-data';
+import { CommentData } from '../../providers/comment-data';
 import { VotingData } from '../../providers/voting-data';
 import { MyselfData } from '../../providers/myself-data';
 
@@ -30,19 +33,15 @@ declare var KakaoTalk;
   templateUrl: 'parti-post-panel.html'
 })
 export class PartiPostPanelComponent {
-  @Input()
-  post: Post;
-
-  @Input()
-  isCollection: boolean;
-
-  @Input()
-  isPartiHome: boolean;
-
+  @Input() post: Post;
+  @Input() isCollection: boolean;
+  @Input() isPartiHome: boolean;
   @Output() onAddComment = new EventEmitter();
 
+  comments: Comment[];
+  lastComment: Comment;
+  hasMoreComment: boolean = false;
   isLoading: boolean = false;
-
   disableVotingButtons: boolean = false;
 
   constructor(
@@ -54,8 +53,36 @@ export class PartiPostPanelComponent {
     private modalCtrl: ModalController,
     private votingData: VotingData,
     private upvoteData: UpvoteData,
-    private myselfData: MyselfData
+    private myselfData: MyselfData,
+    private commentData: CommentData
   ) {}
+
+  ngAfterViewInit() {
+    if(!this.isCollection) {
+      this.loadComments();
+    } else {
+      this.comments = this.post.latest_comments;
+    }
+  }
+
+  loadComments(onCompleted: () => void = null) {
+    this.commentData.byPost(this.post, this.lastComment)
+      .finally(() => {
+        if(!!onCompleted) {
+          onCompleted();
+        }
+      })
+      .subscribe(pagedComments => {
+        this.hasMoreComment = pagedComments.has_more_item;
+        if(this.comments == null) {
+          this.comments = [];
+        }
+        this.comments = this.comments.concat(pagedComments.items);
+        if(!!this.comments && this.comments.length > 0) {
+          this.lastComment = this.comments[this.comments.length-1];
+        }
+      });
+  }
 
   isAgreed() {
     return this.post.poll.my_choice === "agree";
@@ -213,7 +240,7 @@ export class PartiPostPanelComponent {
     this.navCtrl.push(ProfilePage, { user: user });
   }
 
-  onClickMoreUsers() {
+  onClickUpvoteUsers() {
     let profileModal = this.modalCtrl.create(MembersPage, { post: this.post, from: 'post-upvotes' });
     profileModal.present();
   }
@@ -345,5 +372,9 @@ export class PartiPostPanelComponent {
         }]
     });
     actionSheet.present();
+  }
+
+  addComment(comment) {
+    this.comments.unshift(comment);
   }
 }
