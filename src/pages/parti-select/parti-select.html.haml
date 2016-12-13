@@ -1,11 +1,15 @@
 %ion-header
   %ion-navbar
-    %ion-title  빠띠 선택
-
-%ion-content{ 'padding': true }
-  %ion-list
-    %ion-item{ '*ngFor': 'let parti of parties' }
-      %ion-label {{ parti.title }}
+    %ion-title  이야기할 빠띠 선택
+    %ion-buttons{ 'start': true }
+      %button{ 'ion-button': true, '(click)': 'dismiss()' }
+        %ion-icon{ name: 'md-close' }
+%ion-content
+  %ion-list{ '*ngFor': 'let partiesPair of groupingParties', 'text-wrap': true }
+    %ion-item-divider 가입한 {{partiesPair[0]}} 빠띠
+    %ion-item{ '*ngFor': 'let parti of partiesPair[1]', 'text-wrap': true }
+      %ion-label
+        {{ parti.title }}
       %ion-checkbox{ 'checked': '{{ (seletedParti && parti.id == seletedParti.id) ? "true" : "false" }}', '(ionChange)': 'onClickParti(parti)' }
 
 

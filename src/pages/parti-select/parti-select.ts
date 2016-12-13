@@ -1,6 +1,8 @@
 import { Component, ElementRef, Renderer } from '@angular/core';
 import { NavController, ViewController, Platform, NavParams } from 'ionic-angular';
 
+import _ from 'lodash';
+
 import { MyselfData } from '../../providers/myself-data';
 import { Parti } from '../../models/parti';
 
@@ -9,12 +11,12 @@ import { Parti } from '../../models/parti';
   templateUrl: 'parti-select.html'
 })
 export class PartiSelectPage {
-  parties: Parti[];
+  groupingParties: any = [];
   seletedParti: Parti;
 
   constructor(
     public navCtrl: NavController,
-    private viewController: ViewController,
+    private viewCtrl: ViewController,
     private platform: Platform,
     private elm: ElementRef,
     private renderer: Renderer,
@@ -22,7 +24,7 @@ export class PartiSelectPage {
     private myselfData: MyselfData
   ) {
     this.seletedParti = this.navParams.get("parti");
-    this.parties = this.navParams.get("parties");
+    this.groupingParties = this.groupParties(this.navParams.get("parties"));
   }
 
   ngAfterViewInit() {
@@ -38,18 +40,39 @@ export class PartiSelectPage {
     this.registerBackButtonListener();
   }
 
+  groupParties(parties: Parti[]) {
+    let _paramParties = _(parties);
+    let dictParties: { [id: string] : Parti[]; } = {};
+    if(!_paramParties.isEmpty()) {
+      _paramParties.each((parti) => {
+        let groupName = parti.group ? parti.group.name : ''
+        if(_.isEmpty(dictParties[groupName])) {
+          dictParties[groupName] = [];
+        }
+
+        dictParties[groupName].push(parti);
+      });
+    }
+
+    return _.sortBy(_.toPairs(dictParties), (pair) => { return -1 * pair[1].length; });
+  }
+
   isSelected(parti) {
     return !!this.seletedParti && this.seletedParti.id == parti.id;
   }
 
   onClickParti(parti) {
     this.seletedParti == parti;
-    this.viewController.dismiss({ parti: parti });
+    this.viewCtrl.dismiss({ parti: parti });
   }
 
   registerBackButtonListener() {
     this.platform.registerBackButtonAction(() => {
-      this.viewController.dismiss();
+      this.viewCtrl.dismiss();
     });
+  }
+
+  dismiss() {
+    this.viewCtrl.dismiss();
   }
 }

@@ -1,12 +1,20 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>빠띠 선택</ion-title>
+    <ion-title>이야기할 빠띠 선택</ion-title>
+    <ion-buttons start>
+      <button (click)='dismiss()' ion-button>
+        <ion-icon name='md-close'></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
-  <ion-list>
-    <ion-item *ngFor='let parti of parties'>
-      <ion-label>{{ parti.title }}</ion-label>
+<ion-content>
+  <ion-list *ngFor='let partiesPair of groupingParties' text-wrap>
+    <ion-item-divider>가입한 {{partiesPair[0]}} 빠띠</ion-item-divider>
+    <ion-item *ngFor='let parti of partiesPair[1]' text-wrap>
+      <ion-label>
+        {{ parti.title }}
+      </ion-label>
       <ion-checkbox (ionChange)='onClickParti(parti)' checked='{{ (seletedParti &amp;&amp; parti.id == seletedParti.id) ? "true" : "false" }}'></ion-checkbox>
     </ion-item>
   </ion-list>
