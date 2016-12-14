@@ -43,7 +43,7 @@ export class EditorPage {
     private modalCtrl: ModalController,
     private ref: ChangeDetectorRef,
     private events: Events,
-    private viewController: ViewController,
+    private viewCtrl: ViewController,
     private platform: Platform,
     private formBuilder: FormBuilder,
     private loadingCtrl: LoadingController,
@@ -95,7 +95,7 @@ export class EditorPage {
 
   registerBackButtonListener() {
     this.platform.registerBackButtonAction(() => {
-      this.viewController.dismiss();
+      this.viewCtrl.dismiss();
     });
   }
 
@@ -123,7 +123,7 @@ export class EditorPage {
         loading.dismiss();
       }).subscribe((post: Post) => {
         this.events.publish('home:force-refresh-and-show');
-        this.viewController.dismiss();
+        this.viewCtrl.dismiss();
       });
   }
 
@@ -179,5 +179,9 @@ export class EditorPage {
 
   referenceTypeName() {
     return ReferenceType[this.referenceType];
+  }
+
+  dismiss() {
+    this.viewCtrl.dismiss();
   }
 }

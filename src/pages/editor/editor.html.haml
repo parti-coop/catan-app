@@ -1,8 +1,13 @@
 %ion-content{ '#content': true }
+  %ion-row
+    %ion-col{ 'width-80': true }
+      .user-info
+        .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + myselfData.imageUrl + ')' }" }
+        .user-nickname {{ myselfData.nickname }}
+    %ion-col.close-button{ 'width-20': true }
+      %button{ 'ion-button': true, 'icon-only': true, clear: true, color: 'dark', small: true, '(click)': 'dismiss()' }
+        %ion-icon{ name: 'md-close' }
   %form{ '[formGroup]': 'postForm', '(ngSubmit)': 'save()' }
-    .user-info
-      .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + myselfData.imageUrl + ')' }" }
-      .user-nickname {{ myselfData.nickname }}
     .select-parti
       %ion-item{ '[hidden]': '!!parties' }
         .select-parti--before-select

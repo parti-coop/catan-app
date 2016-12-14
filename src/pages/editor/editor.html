@@ -1,9 +1,18 @@
 <ion-content #content>
+  <ion-row>
+    <ion-col width-80>
+      <div class='user-info'>
+        <div [ngStyle]="{ 'background-image': 'url(' + myselfData.imageUrl + ')' }" class='user-image'></div>
+        <div class='user-nickname'>{{ myselfData.nickname }}</div>
+      </div>
+    </ion-col>
+    <ion-col class='close-button' width-20>
+      <button (click)='dismiss()' clear color='dark' icon-only ion-button small>
+        <ion-icon name='md-close'></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
   <form (ngSubmit)='save()' [formGroup]='postForm'>
-    <div class='user-info'>
-      <div [ngStyle]="{ 'background-image': 'url(' + myselfData.imageUrl + ')' }" class='user-image'></div>
-      <div class='user-nickname'>{{ myselfData.nickname }}</div>
-    </div>
     <div class='select-parti'>
       <ion-item [hidden]='!!parties'>
         <div class='select-parti--before-select'>

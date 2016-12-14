@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { Events, Platform, App, NavController } from 'ionic-angular';
+import { Events, Platform, ModalController, App, NavController } from 'ionic-angular';
 import { NativeStorage } from 'ionic-native';
 
 import { OpeningPage } from '../../pages/opening/opening';
 import { IntroPage } from '../../pages/intro/intro';
+import { EditorPage } from '../../pages/editor/editor';
 
 @Component({
   selector: 'page-dev',
@@ -15,7 +16,8 @@ export class DevPage {
     public navCtrl: NavController,
     private platform: Platform,
     private app: App,
-    private events: Events
+    private events: Events,
+    private modalCtrl: ModalController
   ) {}
 
   ionViewDidLoad() {
@@ -40,5 +42,10 @@ export class DevPage {
 
   onClickRefresh() {
     this.events.publish('refresh');
+  }
+
+  onClickEditor() {
+    let editorModal = this.modalCtrl.create(EditorPage);
+    editorModal.present();
   }
 }

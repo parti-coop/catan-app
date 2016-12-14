@@ -22,7 +22,13 @@ page-editor {
       color: $brand-primary-dark;
       margin-left: 12px;
       padding-top: 6px;
+      @include single-text-ellipsis();
     }
+  }
+  .close-button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
   .select-parti {
     ion-label{
