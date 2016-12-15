@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, InfiniteScroll, Content, NavController, NavParams, TextArea, LoadingController } from 'ionic-angular';
+import { Platform, Content, NavController, NavParams, TextArea, LoadingController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Keyboard } from 'ionic-native';
 import { Subscription } from 'rxjs/rx';
@@ -12,7 +12,6 @@ import { CommentData } from '../../providers/comment-data';
 import { PostData } from '../../providers/post-data';
 
 import { Parti } from '../../models/parti';
-import { InfinitPage } from '../../models/infinit-page';
 import { Post } from '../../models/post';
 import { Comment } from '../../models/comment';
 import { PartiHomePage } from '../../pages/parti-home/parti-home';
@@ -105,10 +104,6 @@ export class PostPage {
         this.partiPostPanel.addComment(comment);
         this.post.comments_count += 1;
         this.commentForm.controls['body'].setValue(null);
-        this.content.resize();
-        setTimeout(() => {
-          this.content.scrollToBottom();
-        }, 50);
       });
   }
 

@@ -6,6 +6,8 @@ import 'rxjs/add/operator/map';
 import { ApiHttp } from '../providers/api-http';
 import { Parti } from '../models/parti';
 import { User } from '../models/user';
+import { Member } from '../models/member';
+import { InfinitePage } from '../models/infinite-page';
 
 @Injectable()
 export class PartiData {
@@ -65,5 +67,20 @@ export class PartiData {
 
     return this.http.get(`/api/v1/parties/${slug}`, requestOptions)
       .map(res => <Parti>(res.json().parti));
+  }
+
+  members(parti: Parti, lastMember: Member = null): Observable<InfinitePage<Member>> {
+    let requestOptions = new RequestOptions();
+    let searchParams = new URLSearchParams();
+    if(!!lastMember) {
+      searchParams.set('last_id', String(lastMember.id));
+    }
+    if(!!parti.group) {
+      searchParams.set('group_slug', String(parti.group.slug));
+    }
+    requestOptions.search = searchParams;
+
+    return this.http.get(`/api/v1/parties/${parti.slug}/members`, requestOptions)
+      .map(req => <InfinitePage<Member>>(req.json()));
   }
 }

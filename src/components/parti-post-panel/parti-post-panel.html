@@ -55,7 +55,9 @@
   </button>
 </div>
 <div *ngIf='!!post.poll' class='post-poll'>
-  <div class='poll-title'>"{{ post.poll.title }}"</div>
+  <div class='poll-title'>
+    "{{ post.poll.title }}"
+  </div>
   <div class='poll-voting-btns'>
     <div class='voting-btns-wrapper'>
       <button (click)='onClickVotingButton("agree")' [class.voted]='isAgreed()' [disabled]='disableVotingButtons' class='agreed-voting-btn' color='agree' ion-button outline>
@@ -80,7 +82,7 @@
       댓글로 의견을 나눠 보세요
     </div>
   </div>
-  <div *ngIf='isVoted() &amp;&amp; !isCollection' class='poll-votings'>
+  <div *ngIf='isVoted()' class='poll-votings'>
     <div (click)="onClickVotingUsers('agree')" class='agreed-voting-users'>
       <div *ngFor='let user of post.poll.latest_agreed_voting_users' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='voting-user'></div>
     </div>

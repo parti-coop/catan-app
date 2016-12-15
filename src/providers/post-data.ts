@@ -8,7 +8,7 @@ import { ApiHttp } from '../providers/api-http';
 import { Post } from '../models/post';
 import { Parti } from '../models/parti';
 import { User } from '../models/user';
-import { InfinitPage } from '../models/infinit-page';
+import { InfinitePage } from '../models/infinite-page';
 
 @Injectable()
 export class PostData {
@@ -16,7 +16,7 @@ export class PostData {
     private http: ApiHttp
   ) {}
 
-  dashboardAfter(lastPost: Post = null): Observable<InfinitPage<Post>> {
+  dashboardAfter(lastPost: Post = null): Observable<InfinitePage<Post>> {
     let requestOptions = new RequestOptions();
     let searchParams = new URLSearchParams();
     if(!!lastPost) {
@@ -24,10 +24,10 @@ export class PostData {
       requestOptions.search = searchParams;
     }
     return this.http.get('/api/v1/posts/dashboard_after', requestOptions)
-      .map(res => <InfinitPage<Post>>(res.json()));
+      .map(res => <InfinitePage<Post>>(res.json()));
   }
 
-  dashboardLatest(firstPost: Post = null): Observable<InfinitPage<Post>> {
+  dashboardLatest(firstPost: Post = null): Observable<InfinitePage<Post>> {
     let requestOptions = new RequestOptions();
     let searchParams = new URLSearchParams();
     if(!!firstPost) {
@@ -35,10 +35,10 @@ export class PostData {
       requestOptions.search = searchParams;
     }
     return this.http.get('/api/v1/posts/dashboard_latest', requestOptions)
-      .map(res => <InfinitPage<Post>>(res.json()));
+      .map(res => <InfinitePage<Post>>(res.json()));
   }
 
-  parti(parti: Parti, lastPost: Post = null): Observable<InfinitPage<Post>> {
+  parti(parti: Parti, lastPost: Post = null): Observable<InfinitePage<Post>> {
     let requestOptions = new RequestOptions();
     let searchParams = new URLSearchParams();
     if(!!lastPost) {
@@ -49,10 +49,10 @@ export class PostData {
     }
     requestOptions.search = searchParams;
     return this.http.get(`/api/v1/parties/${parti.slug}/posts`, requestOptions)
-      .map(res => <InfinitPage<Post>>(res.json()));
+      .map(res => <InfinitePage<Post>>(res.json()));
   }
 
-  byUser(user: User, lastPost: Post = null): Observable<InfinitPage<Post>> {
+  byUser(user: User, lastPost: Post = null): Observable<InfinitePage<Post>> {
     let requestOptions = new RequestOptions();
     let searchParams = new URLSearchParams();
     searchParams.set('user_id', String(user.id));
@@ -61,7 +61,7 @@ export class PostData {
     }
     requestOptions.search = searchParams;
     return this.http.get(`/api/v1/posts/by_user`, requestOptions)
-      .map(res => <InfinitPage<Post>>(res.json()));
+      .map(res => <InfinitePage<Post>>(res.json()));
   }
 
   get(id: number): Observable<Post> {

@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { RequestMethod, RequestOptions, Response } from '@angular/http';
+import { RequestMethod, RequestOptions, Response, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import { ApiHttp } from '../providers/api-http'
+
+import { InfinitePage } from '../models/infinite-page';
+import { Post } from '../models/post';
+import { Upvote } from '../models/upvote';
 
 @Injectable()
 export class UpvoteData {
@@ -28,5 +32,18 @@ export class UpvoteData {
       }
     });
     return this.http.request(method, '/api/v1/upvotes', requestOptions);
+  }
+
+  ofPost(post: Post, lastUpvote: Upvote = null): Observable<InfinitePage<Upvote>> {
+    let requestOptions = new RequestOptions();
+    let searchParams = new URLSearchParams();
+    searchParams.set('post_id', String(post.id));
+    if(!!lastUpvote) {
+      searchParams.set('last_id', String(lastUpvote.id));
+    }
+    requestOptions.search = searchParams;
+
+    return this.http.get('/api/v1/upvotes/of_post', requestOptions)
+      .map(req => <InfinitePage<Upvote>>(req.json()));
   }
 }

@@ -9,14 +9,11 @@
       .title-member{ '*ngIf': "from == 'post-poll' && choice == 'disagree'" } 반대 멤버 {{ post.poll.disagreed_votings_count }}명
       .title-member{ '*ngIf': "from == 'post-upvotes'" } 공감한 멤버 {{ post.upvotes_count }}명
 %ion-content{ 'padding': true }
-  %ion-list{ '*ngIf': "from == 'parti-home'" }
-    %ion-item{ '*ngFor': 'let member of members' }
+  %ion-list
+    %ion-item{ '*ngFor': 'let userAction of userActions' }
       .member
-        .member-image{ '[ngStyle]': "{ 'background-image': 'url(' + member.user.image_url + ')' }", '(click)': 'onClickUser(member.user)' }
-        .member-name{ '(click)': 'onClickUser(member)' } {{ member.user.nickname }}
-        .member-maker{ '*ngIf': "member.is_maker" } 빠띠메이커
-  %ion-list{ '*ngIf': "from == 'post-poll' || 'post-upvotes'" }
-    %ion-item{ '*ngFor': 'let user of users' }
-      .member{ '(click)': 'onClickUser(user)' }
-        .member-image{ '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
-        .member-name {{ user.nickname }}
+        .member-image{ '[ngStyle]': "{ 'background-image': 'url(' + userAction.user.image_url + ')' }", '(click)': 'onClickUser(userAction.user)' }
+        .member-name{ '(click)': 'onClickUser(userAction)' } {{ userAction.user.nickname }}
+        .member-maker{ '*ngIf': "from == 'parti-home' && userAction.is_maker" } 빠띠메이커
+    %ion-infinite-scroll{ '(ionInfinite)': 'loadMore($event)', '#infiniteScroll': true }
+      %ion-infinite-scroll-content{ loadingSpinner: "bubbles" }

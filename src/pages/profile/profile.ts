@@ -11,7 +11,7 @@ import { Parti } from '../../models/parti';
 import { User } from '../../models/user';
 import { Post } from '../../models/post';
 import { MorePage } from '../../pages/more/more';
-import { InfinitPage } from '../../models/infinit-page';
+import { InfinitePage } from '../../models/infinite-page';
 import { Shrinkage } from '../../directives/shrinkage';
 import { PostPage } from '../../pages/post/post';
 

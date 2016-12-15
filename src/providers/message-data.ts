@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 
 import { ApiHttp } from '../providers/api-http'
 import { Message } from '../models/message'
-import { InfinitPage } from '../models/infinit-page'
+import { InfinitePage } from '../models/infinite-page'
 
 @Injectable()
 export class MessageData {
@@ -14,7 +14,7 @@ export class MessageData {
     private http: ApiHttp
   ) {}
 
-  inbox(lastMessage: Message = null): Observable<InfinitPage<Message>> {
+  inbox(lastMessage: Message = null): Observable<InfinitePage<Message>> {
     let requestOptions = new RequestOptions();
     let searchParams = new URLSearchParams();
     if(!!lastMessage) {
@@ -23,7 +23,7 @@ export class MessageData {
     requestOptions.search = searchParams;
 
     return this.http.get('/api/v1/messages', requestOptions)
-      .map(req => <InfinitPage<Message>>(req.json()));
+      .map(req => <InfinitePage<Message>>(req.json()));
   }
 
   touchReadAt(message: Message): Observable<void> {

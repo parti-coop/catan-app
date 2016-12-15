@@ -14,21 +14,16 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-  <ion-list *ngIf="from == 'parti-home'">
-    <ion-item *ngFor='let member of members'>
+  <ion-list>
+    <ion-item *ngFor='let userAction of userActions'>
       <div class='member'>
-        <div (click)='onClickUser(member.user)' [ngStyle]="{ 'background-image': 'url(' + member.user.image_url + ')' }" class='member-image'></div>
-        <div (click)='onClickUser(member)' class='member-name'>{{ member.user.nickname }}</div>
-        <div *ngIf='member.is_maker' class='member-maker'>빠띠메이커</div>
+        <div (click)='onClickUser(userAction.user)' [ngStyle]="{ 'background-image': 'url(' + userAction.user.image_url + ')' }" class='member-image'></div>
+        <div (click)='onClickUser(userAction)' class='member-name'>{{ userAction.user.nickname }}</div>
+        <div *ngIf="from == 'parti-home' &amp;&amp; userAction.is_maker" class='member-maker'>빠띠메이커</div>
       </div>
     </ion-item>
-  </ion-list>
-  <ion-list *ngIf="from == 'post-poll' || 'post-upvotes'">
-    <ion-item *ngFor='let user of users'>
-      <div (click)='onClickUser(user)' class='member'>
-        <div [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='member-image'></div>
-        <div class='member-name'>{{ user.nickname }}</div>
-      </div>
-    </ion-item>
+    <ion-infinite-scroll #infiniteScroll (ionInfinite)='loadMore($event)'>
+      <ion-infinite-scroll-content loadingSpinner='bubbles'></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </ion-list>
 </ion-content>

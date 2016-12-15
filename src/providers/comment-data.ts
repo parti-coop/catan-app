@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import { ApiHttp } from '../providers/api-http'
 import { Comment } from '../models/comment'
 import { Post } from '../models/post'
-import { InfinitPage } from '../models/infinit-page';
+import { InfinitePage } from '../models/infinite-page';
 
 @Injectable()
 export class CommentData {
@@ -26,7 +26,7 @@ export class CommentData {
       .map(res => <Comment>(res.json().comment));
   }
 
-  byPost(post: Post, lastComment: Comment = null): Observable<InfinitPage<Comment>> {
+  byPost(post: Post, lastComment: Comment = null): Observable<InfinitePage<Comment>> {
     let requestOptions = new RequestOptions();
     let searchParams = new URLSearchParams();
     searchParams.set('post_id', String(post.id));
@@ -35,6 +35,6 @@ export class CommentData {
     }
     requestOptions.search = searchParams;
     return this.http.get(`/api/v1/comments/by_post`, requestOptions)
-      .map(res => <InfinitPage<Comment>>(res.json()));
+      .map(res => <InfinitePage<Comment>>(res.json()));
   }
 }

@@ -5,7 +5,6 @@ import 'rxjs/add/operator/map';
 
 import { ApiHttp } from '../providers/api-http'
 import { Parti } from '../models/parti'
-import { Member } from '../models/member'
 
 @Injectable()
 export class MemberData {
@@ -39,16 +38,4 @@ export class MemberData {
       .map(res => {});
   }
 
-  allOfParti(parti: Parti): Observable<Member[]> {
-    let requestOptions = new RequestOptions();
-
-    if(!!parti.group) {
-      let searchParams = new URLSearchParams();
-      searchParams.set('group_slug', String(parti.group.slug));
-      requestOptions.search = searchParams;
-    }
-
-    return this.http.get(`/api/v1/parties/${parti.slug}/members`, requestOptions)
-      .map(res => <Member[]>(res.json().members));
-  }
 }

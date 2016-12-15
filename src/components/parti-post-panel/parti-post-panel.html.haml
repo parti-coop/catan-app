@@ -40,7 +40,8 @@
   %button.file-reference-button{ 'ion-button': true, 'outline': true, color: 'gray', '(click)': 'onClickFileReference(post.file_reference)' }
     다운로드
 .post-poll{ '*ngIf': '!!post.poll' }
-  .poll-title "{{ post.poll.title }}"
+  .poll-title
+    "{{ post.poll.title }}"
   .poll-voting-btns
     .voting-btns-wrapper
       %button.agreed-voting-btn{ 'ion-button': true, 'outline': true, color: 'agree', '[class.voted]': 'isAgreed()', '(click)': 'onClickVotingButton("agree")', '[disabled]': 'disableVotingButtons' }
@@ -57,7 +58,7 @@
       잘 모르겠습니다
     .unsure-voted{ '*ngIf': 'isUnsured()', '(click)': 'onClickCommentButton()' }
       댓글로 의견을 나눠 보세요
-  .poll-votings{ '*ngIf': 'isVoted() && !isCollection' }
+  .poll-votings{ '*ngIf': 'isVoted()' }
     .agreed-voting-users{ '(click)': "onClickVotingUsers('agree')" }
       .voting-user{ '*ngFor': 'let user of post.poll.latest_agreed_voting_users', '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }" }
     .disagreed-voting-users{ '(click)': "onClickVotingUsers('disagree')" }

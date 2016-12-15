@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { NavController, AlertController, ToastController, ActionSheetController, ModalController } from 'ionic-angular';
 import { InAppBrowser, Transfer, FileOpener, SocialSharing, Facebook, Device, AppAvailability } from 'ionic-native';
@@ -38,7 +38,7 @@ export class PartiPostPanelComponent {
   @Input() isPartiHome: boolean;
   @Output() onAddComment = new EventEmitter();
 
-  comments: Comment[];
+  comments: Comment[] = [];
   lastComment: Comment;
   hasMoreComment: boolean = false;
   isLoading: boolean = false;
@@ -57,7 +57,7 @@ export class PartiPostPanelComponent {
     private commentData: CommentData
   ) {}
 
-  ngAfterViewInit() {
+  ngOnInit() {
     if(!this.isCollection) {
       this.loadComments();
     } else {
@@ -223,7 +223,7 @@ export class PartiPostPanelComponent {
             }
           }
 
-          this.post.poll[`${choice}d_voting_users`].push(this.myselfData.asModel());
+          this.post.poll[`latest_${choice}d_voting_users`].push(this.myselfData.asModel());
           this.post.poll[`${choice}d_votings_count`]++;
           this.post.poll[`${antiChoice}d_voting_users`] = _.reject(this.post.poll[`${antiChoice}d_voting_users`], { id: this.myselfData.id });
           this.post.poll.my_choice = choice;
