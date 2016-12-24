@@ -111,13 +111,16 @@ export class PartiesPage {
       if(!data) {
         return;
       }
-      let parti: Parti = <Parti>data[0];
+      let parti: Parti = <Parti>data;
       if (!_.includes(this.parties['joined'], {id: parti.id})) {
         this.parties['joined'].unshift(parti);
       }
     });
     this.events.subscribe('parti:cancel', (data) => {
-      let parti: Parti = <Parti>data[0];
+      if(!data) {
+        return;
+      }
+      let parti: Parti = <Parti>data;
       _.remove(this.parties['joined'], { id: parti.id });
       _.remove(this.parties['making'], { id: parti.id });
     });

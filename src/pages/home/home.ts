@@ -104,7 +104,7 @@ export class HomePage {
   }
 
   listenToFroceRefreshAndShowEvents() {
-    this.events.subscribe('home:force-refresh-and-show', (data) => {
+    this.events.subscribe('home:force-refresh-and-show', () => {
       this.loadLatest();
       this.navCtrl.parent.select(HomePage.HOME_TAB_INDEX);
     });

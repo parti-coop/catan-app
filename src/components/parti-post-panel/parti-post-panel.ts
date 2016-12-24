@@ -268,7 +268,7 @@ export class PartiPostPanelComponent {
         .subscribe(() => {
           this.post.is_upvotable = true;
           _.remove(this.post.latest_upvote_users, (user) => {
-            return user.id == this.myselfData.asModel().id
+            return user.id == this.myselfData.asModel().id;
           });
           this.post.upvotes_count--;
         });

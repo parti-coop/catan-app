@@ -113,12 +113,10 @@ export class TabsPage {
   }
 
   listenToDeepLiknEvents() {
-    this.events.subscribe('tabs:parti-deeplink', (data) => {
-      if(!data) {
+    this.events.subscribe('tabs:parti-deeplink', (partiSlug, groupSlug) => {
+      if(!partiSlug || !groupSlug) {
         return;
       }
-      let partiSlug = data[0]
-      let groupSlug = data[1]
       this.partiData.get(partiSlug, groupSlug)
         .subscribe(
           (parti: Parti) => {
@@ -127,11 +125,10 @@ export class TabsPage {
             console.log(`${partiSlug} slug 빠띠가 없습니다`);
           });
     });
-    this.events.subscribe('tabs:post-deeplink', (data) => {
-      if(!data) {
+    this.events.subscribe('tabs:post-deeplink', (postId) => {
+      if(!postId) {
         return;
       }
-      let postId = data[0]
       this.postData.get(postId)
         .subscribe(
           (post: Post) => {
@@ -147,7 +144,7 @@ export class TabsPage {
       if(!data) {
         return;
       }
-      this.newPostsCountLabel = data[0];
+      this.newPostsCountLabel = data;
     });
   }
 
@@ -156,7 +153,7 @@ export class TabsPage {
       if(!data) {
         return;
       }
-      this.myselfData.setLastMessageId(data[0]).subscribe((value) => {
+      this.myselfData.setLastMessageId(data).subscribe((value) => {
         this.newMessagesCountLabel = null;
       });
     });
