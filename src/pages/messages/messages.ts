@@ -61,7 +61,7 @@ export class MessagesPage {
   }
 
   ngAfterViewInit() {
-    this.content.addScrollListener((event) => {
+    this.content.ionScroll.subscribe((event) => {
       this.onPageScroll(event);
     });
   }
@@ -85,8 +85,8 @@ export class MessagesPage {
           this.needToRefresh = true;
         }
       } else {
-        let lastMessageId = data[0];
-        if(_(this.messages).last() != lastMessageId) {
+        let lastMessageId = data && data[0];
+        if(_(this.messages).head() && _(this.messages).head().id != lastMessageId) {
           this.content.scrollToTop();
           this.loadNewest();
         }
@@ -104,7 +104,7 @@ export class MessagesPage {
   }
 
   private isRefreshableScrollTop() {
-    return this.content.getScrollTop() <= this.REFRESHABLE_SCROLL_TOP;
+    return this.content.scrollTop <= this.REFRESHABLE_SCROLL_TOP;
   }
 
   loadNewest(onCompleted: () => void = null) {

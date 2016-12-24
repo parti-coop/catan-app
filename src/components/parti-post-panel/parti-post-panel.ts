@@ -321,9 +321,9 @@ export class PartiPostPanelComponent {
           text: '카카오톡으로 공유',
           handler: () => {
             var app = null;
-            if (Device.device.platform === 'iOS') {
+            if (Device.platform === 'iOS') {
               app = 'kakaolink://';
-            } else if (Device.device.platform === 'Android') {
+            } else if (Device.platform === 'Android') {
               app = 'com.kakao.talk';
             }
 

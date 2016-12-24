@@ -114,6 +114,9 @@ export class TabsPage {
 
   listenToDeepLiknEvents() {
     this.events.subscribe('tabs:parti-deeplink', (data) => {
+      if(!data) {
+        return;
+      }
       let partiSlug = data[0]
       let groupSlug = data[1]
       this.partiData.get(partiSlug, groupSlug)
@@ -125,6 +128,9 @@ export class TabsPage {
           });
     });
     this.events.subscribe('tabs:post-deeplink', (data) => {
+      if(!data) {
+        return;
+      }
       let postId = data[0]
       this.postData.get(postId)
         .subscribe(
@@ -138,12 +144,18 @@ export class TabsPage {
 
   listenToNewPostsCountEvents() {
     this.events.subscribe('tabs:new-posts-count', (data) => {
+      if(!data) {
+        return;
+      }
       this.newPostsCountLabel = data[0];
     });
   }
 
   listenToLastMessageIdEvents() {
     this.events.subscribe('tabs:last-message-id', (data) => {
+      if(!data) {
+        return;
+      }
       this.myselfData.setLastMessageId(data[0]).subscribe((value) => {
         this.newMessagesCountLabel = null;
       });

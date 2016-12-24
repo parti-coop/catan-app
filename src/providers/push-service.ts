@@ -25,7 +25,7 @@ export class PushService {
   ) {}
 
   init() {
-    if(Device.device.isVirtual) {
+    if(Device.isVirtual) {
       console.log("시뮬레이터에서는 푸쉬 받지 않습니다.");
       return;
     }

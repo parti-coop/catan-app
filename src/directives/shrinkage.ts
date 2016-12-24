@@ -36,7 +36,7 @@ export class Shrinkage implements AfterViewInit {
     // Kick of rendering
     this.render(null);
     // This listener only updates values. It doesn't do any rendering.
-    this.content.addScrollListener((event) => {
+    this.content.ionScroll.subscribe((event) => {
       this.onPageScroll(event);
     });
     _.forEach(this.scrolls, (scroll) => {

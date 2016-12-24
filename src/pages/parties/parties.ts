@@ -108,6 +108,9 @@ export class PartiesPage {
 
   listenToMemberEvents() {
     this.events.subscribe('parti:join', (data) => {
+      if(!data) {
+        return;
+      }
       let parti: Parti = <Parti>data[0];
       if (!_.includes(this.parties['joined'], {id: parti.id})) {
         this.parties['joined'].unshift(parti);
