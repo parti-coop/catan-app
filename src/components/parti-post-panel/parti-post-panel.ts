@@ -1,7 +1,7 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { NavController, AlertController, ToastController, ActionSheetController, ModalController } from 'ionic-angular';
-import { InAppBrowser, Transfer, FileOpener, SocialSharing, Facebook, Device, AppAvailability } from 'ionic-native';
+import { InAppBrowser, Transfer, FileOpener, SocialSharing, Facebook, Device, AppAvailability, Clipboard } from 'ionic-native';
 
 import _ from 'lodash';
 
@@ -369,6 +369,11 @@ export class PartiPostPanelComponent {
                 alert.present();
               }
             );
+          }
+        },{
+          text: '링크 복사',
+          handler: () => {
+            Clipboard.copy(share.url);
           }
         },{
           text: '닫기',
