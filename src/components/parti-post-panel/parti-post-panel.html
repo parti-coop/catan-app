@@ -136,8 +136,8 @@
       <div *ngFor='let user of post.latest_upvote_users' class='upvote-user'>
         <div (click)='onClickUser(user)' [ngStyle]="{ 'background-image': 'url(' + user.image_url + ')' }" class='user-image'></div>
       </div>
-      <div (click)='onClickUpvoteUsers()' *ngIf='post.latest_upvote_users.length &gt; 8' class='more-users'>
-        + {{ post.latest_upvote_users.length - 8 }}
+      <div (click)='onClickUpvoteUsers()' *ngIf='post.latest_upvote_users &amp;&amp; post.latest_upvote_users.length &lt; post.upvotes_count' class='more-users'>
+        + {{ post.upvotes_count - post.latest_upvote_users.length }}
       </div>
     </div>
   </div>

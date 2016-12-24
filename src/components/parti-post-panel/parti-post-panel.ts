@@ -254,6 +254,10 @@ export class PartiPostPanelComponent {
         })
         .subscribe(() => {
           this.post.is_upvotable = false;
+          if(!this.post.latest_upvote_users) {
+            this.post.latest_upvote_users = [];
+          }
+          this.post.latest_upvote_users.unshift(this.myselfData.asModel());
           this.post.upvotes_count++;
         });
     } else {
@@ -263,6 +267,9 @@ export class PartiPostPanelComponent {
         })
         .subscribe(() => {
           this.post.is_upvotable = true;
+          _.remove(this.post.latest_upvote_users, (user) => {
+            return user.id == this.myselfData.asModel().id
+          });
           this.post.upvotes_count--;
         });
     }

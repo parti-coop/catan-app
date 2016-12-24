@@ -95,8 +95,8 @@
     .upvoters{ '*ngIf': "hasUpvote()" }
       .upvote-user{ '*ngFor': 'let user of post.latest_upvote_users'}
         .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }", '(click)': 'onClickUser(user)' }
-      .more-users{ '*ngIf': "post.latest_upvote_users.length > 8", '(click)': "onClickUpvoteUsers()" }
-        + {{ post.latest_upvote_users.length - 8 }}
+      .more-users{ '*ngIf': "post.latest_upvote_users && post.latest_upvote_users.length < post.upvotes_count", '(click)': "onClickUpvoteUsers()" }
+        + {{ post.upvotes_count - post.latest_upvote_users.length }}
   .post-comments{ '*ngIf': "hasComment()" }
     .comment{ '*ngFor': 'let comment of comments'}
       .comment-header
