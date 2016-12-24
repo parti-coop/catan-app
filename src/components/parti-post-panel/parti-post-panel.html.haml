@@ -11,7 +11,7 @@
 .post-body{ '*ngIf': '!isCollection && post.parsed_body != null', '[innerHTML]': "post.parsed_body | partiSimpleFormat:post", smartBody: true }
 .post-body{ '*ngIf': 'isCollection && post.parsed_body != null', '[innerHTML]': "post.parsed_body | partiReadMore:post.truncated_parsed_body | partiSimpleFormat:post", smartBody: true }
 .post-link-reference{ '(click)': 'onClickLinkReference(post.link_reference)', '*ngIf': '!!post.link_reference && !post.link_reference.is_video' }
-  .link-reference-image-wrapper
+  .link-reference-image-wrapper{ '*ngIf': '!!post.link_reference.image_url' }
     .link-reference-image{ '[ngStyle]': "{ 'background-image': 'url(' + post.link_reference.image_url + ')' }" }
   .link-reference-detail-wrapper
     .link-reference-title {{ post.link_reference.title || post.link_reference.url }}
