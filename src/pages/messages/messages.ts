@@ -76,7 +76,6 @@ export class MessagesPage {
     this.events.subscribe('messages:refresh', (lastMessageId) => {
       let selectedMessagesTab = this.navCtrl.parent.getSelected().index == this.MESSAGES_TAB_INDEX;
       if(selectedMessagesTab && this.navCtrl.isActive(this.viewCtrl)) {
-        console.log("nonono");
         if(this.isRefreshableScrollTop()) {
           this.loadNewest(() => {
             this.sendLastMessageIdEventToTabs();
@@ -85,11 +84,8 @@ export class MessagesPage {
           this.needToRefresh = true;
         }
       } else {
-        if(_(this.messages).head() && _(this.messages).head().id != lastMessageId) {
-          console.log('scroll to top in messages')
-          this.content.scrollToTop();
-          this.loadNewest();
-        }
+        this.content.scrollToTop();
+        this.loadNewest();
       }
     });
   }

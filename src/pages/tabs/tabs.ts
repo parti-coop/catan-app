@@ -141,18 +141,12 @@ export class TabsPage {
 
   listenToNewPostsCountEvents() {
     this.events.subscribe('tabs:new-posts-count', (data) => {
-      if(!data) {
-        return;
-      }
       this.newPostsCountLabel = data;
     });
   }
 
   listenToLastMessageIdEvents() {
     this.events.subscribe('tabs:last-message-id', (data) => {
-      if(!data) {
-        return;
-      }
       this.myselfData.setLastMessageId(data).subscribe((value) => {
         this.newMessagesCountLabel = null;
       });
