@@ -19,17 +19,17 @@
               .group-content {{group.name}}
       .parti-list{ '[hidden]': "selection !== 'joined'" }
         %joined-parti-list{ '[parties]': 'parties["joined"]' }
-  %div.full{ '[hidden]': "selection !== 'all' && selection!== 'tagged'" }
+  %div.full{ '[hidden]': "selection !== 'all'" }
     %ion-scroll.full{ scrollY: 'true' }
       .select-tag-panel
         %p 관심있는 태그를 선택해 보세요
         %ion-scroll{ scrollX: 'true' }
           .tags
-            .tag{ '*ngFor': 'let tag of tags', '(click)': 'onClickTag(tag)' }
+            .tag{ '*ngFor': 'let tag of tags', '(click)': 'onClickTag(tag)', '#tagNode': true, '[ngClass]': '{"active": tag.selected}' }
               .tag-content
                 \# {{tag.name}}
-      .parti-list{ '[hidden]': "selection !== 'all'" }
+      .parti-list{ '[hidden]': "showTaggingOnly" }
         %parti-list{ '[parties]': 'parties["all"]' }
-      .parti-list{ '[hidden]': "selection !== 'tagged'" }
+      .parti-list{ '[hidden]': "!showTaggingOnly" }
         %parti-list{ '[parties]': 'parties["tagged"]' }
 

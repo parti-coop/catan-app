@@ -73,8 +73,19 @@ page-parties {
   }
   .select-tag-panel ion-scroll{
     white-space: nowrap;
-    height: 30px;
+    height: 34px;
     background-color: #fff;
+    .tags .tag {
+      margin-left: 2px;
+      .tag-content {
+        padding: 2px 4px;
+        border-radius: 2px;
+      }
+      &.active .tag-content {
+        background-color: $brand-primary;
+        color: #fff;
+      }
+    }
   }
   ion-scroll {
     background-color: $gray-lightest;

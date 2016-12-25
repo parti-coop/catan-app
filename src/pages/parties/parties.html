@@ -33,13 +33,13 @@
       </div>
     </ion-scroll>
   </div>
-  <div [hidden]="selection !== 'all' &amp;&amp; selection!== 'tagged'" class='full'>
+  <div [hidden]="selection !== 'all'" class='full'>
     <ion-scroll class='full' scrollY='true'>
       <div class='select-tag-panel'>
         <p>관심있는 태그를 선택해 보세요</p>
         <ion-scroll scrollX='true'>
           <div class='tags'>
-            <div (click)='onClickTag(tag)' *ngFor='let tag of tags' class='tag'>
+            <div #tagNode (click)='onClickTag(tag)' *ngFor='let tag of tags' [ngClass]='{"active": tag.selected}' class='tag'>
               <div class='tag-content'>
                 # {{tag.name}}
               </div>
@@ -47,10 +47,10 @@
           </div>
         </ion-scroll>
       </div>
-      <div [hidden]="selection !== 'all'" class='parti-list'>
+      <div [hidden]='showTaggingOnly' class='parti-list'>
         <parti-list [parties]='parties["all"]'></parti-list>
       </div>
-      <div [hidden]="selection !== 'tagged'" class='parti-list'>
+      <div [hidden]='!showTaggingOnly' class='parti-list'>
         <parti-list [parties]='parties["tagged"]'></parti-list>
       </div>
     </ion-scroll>

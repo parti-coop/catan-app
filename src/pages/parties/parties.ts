@@ -18,6 +18,7 @@ import { GroupPartiesPage } from '../../pages/group-parties/group-parties';
 
 export interface Tag {
   name: string;
+  selected: boolean;
 }
 
 @Component({
@@ -27,6 +28,7 @@ export interface Tag {
 export class PartiesPage {
   parties: { [id: string] : Parti[]; } = {};
   selection: string = 'joined';
+  showTaggingOnly: boolean = false;
   groups: Group[];
   has_group: boolean = false;
   tags: Tag[];
@@ -96,14 +98,26 @@ export class PartiesPage {
   }
 
   onClickTag(tag: Tag) {
-    this.selection = "tagged";
-    this.partiData.tagged([tag.name]).subscribe((parties: Parti[]) => {
-            this.parties['tagged'] = parties;
-          }, (error) => {
-            this.parties['tagged'] = this.parties['tagged'] || [];
-          }, () => {
-            this.parties['tagged'] = this.parties['tagged'] || [];
-          });
+    if(!tag.selected) {
+      this.showTaggingOnly = true;
+      _(this.tags).each(tag => {
+        tag.selected = false;
+      });
+      tag.selected = true;
+      this.partiData.tagged([tag.name]).subscribe(
+        (parties: Parti[]) => {
+          this.parties['tagged'] = parties;
+        }, (error) => {
+          this.parties['tagged'] = this.parties['tagged'] || [];
+        }, () => {
+          this.parties['tagged'] = this.parties['tagged'] || [];
+        });
+    } else {
+      this.showTaggingOnly = false;
+      _(this.tags).each(tag => {
+        tag.selected = false;
+      });
+    }
   }
 
   listenToMemberEvents() {
