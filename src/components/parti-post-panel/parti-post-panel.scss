@@ -33,8 +33,10 @@ parti-post-panel {
     font-size: $font-size-large;
     color: $gray-darker;
     padding: 0 6px;
+    word-break: keep-all;
     p {
       margin: 12px 0;
+      word-break: keep-all;
     }
   }
   .post-body {
@@ -169,6 +171,7 @@ parti-post-panel {
     .poll-title {
       font-size: $font-size-large;
       font-weight: bold;
+      word-break: keep-all;
     }
     .poll-voting-btns {
       margin: 24px 0 6px;
