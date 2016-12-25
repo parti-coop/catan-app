@@ -2,6 +2,9 @@
   .tab-button {
     padding: 0;
     color: $gray-less-lighter;
+    .tab-button-icon {
+      color: $gray-less-lighter;
+    }
     .ion-md-parti:before{
       content: url('../assets/images/icon_parti_tab.png');
     }
@@ -10,6 +13,10 @@
     padding: 0;
     color: $gray;
     font-size: $font-size-small;
+
+    .tab-button-icon {
+      color: $gray;
+    }
     #tab-t0-2 {
       padding: 0 10px;
     }
