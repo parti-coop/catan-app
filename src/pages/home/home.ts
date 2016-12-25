@@ -70,6 +70,7 @@ import { DevPage } from '../../pages/dev/dev';
 })
 export class HomePage {
   static HOME_TAB_INDEX = 0;
+  static MAX_POSTS_COUNT = 3000;
 
   @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
   @ViewChild(Content) content: Content;
@@ -168,7 +169,7 @@ export class HomePage {
     this.postData.dashboardAfter(_.last(this.posts))
       .finally(() => {
         infiniteScroll.complete();
-        if(!this.hasPreviousPosts) {
+        if(!this.hasPreviousPosts || HomePage.MAX_POSTS_COUNT <= this.posts.length) {
           infiniteScroll.enable(false);
         }
       }).subscribe(pagedPosts => {

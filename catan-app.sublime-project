@@ -2,8 +2,14 @@
 	"folders":
 	[
 		{
-			"path": ".",
-      "folder_exclude_patterns": [".tmp"]
+			"folder_exclude_patterns":
+			[
+				".tmp"
+			],
+			"path": "."
+		},
+		{
+			"path": "/Users/dalikim/Downloads/미투프로젝트 파일"
 		}
 	]
 }
