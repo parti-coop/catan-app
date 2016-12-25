@@ -208,6 +208,10 @@ export class HomePage {
     this.content.scrollToTop();
   }
 
+  onClickTitle() {
+    this.content.scrollToTop();
+  }
+
   resetNewPostsCount() {
     this.shownNewPostsCount = false;
     this.updateNewPostsCount(0);

@@ -1,6 +1,6 @@
 %ion-header
   %ion-navbar
-    %ion-title {{partiEnvironment.appTitle}}
+    %ion-title{ '(click)': 'onClickTitle()' } {{partiEnvironment.appTitle}}
     %ion-buttons{ 'end': true }
       %button{ 'icon-only': true, 'ion-button': true, '(click)': 'onClickBug()' }
         %ion-icon{ name: 'ios-bug' }
