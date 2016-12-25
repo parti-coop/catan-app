@@ -14,6 +14,8 @@
                 멤버 {{ parti.members_count }}명
               .parti-info--posts
                 게시글 {{ parti.posts_count }}개
+              .parti-info--group{{ '*ngIf': 'parti.group' }}
+                {{ parti.group.name }}
         %template{ '[ngIf]': '!parti.is_member' }
           .parti-join-btn
             %button{ 'ion-button': true, '(click)': 'onClickJoinParti(parti)' }

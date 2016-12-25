@@ -18,6 +18,9 @@
               <div class='parti-info--posts'>
                 게시글 {{ parti.posts_count }}개
               </div>
+              <div *ngIf='parti.group' class='parti-info--group'>
+                {{ parti.group.name }}
+              </div>
             </div>
           </div>
         </div>

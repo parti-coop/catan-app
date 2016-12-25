@@ -32,6 +32,7 @@ parti-list {
       }
       .parti-body {
         flex: 1;
+        padding-right: 5px;
         overflow: hidden;
         display: flex;
         flex-flow: column;
@@ -81,6 +82,12 @@ parti-list {
             margin-left: 15px;
             color: $gray-light;
             font-size: $font-size-small;
+          }
+          &--group {
+            margin-left: 15px;
+            font-size: $font-size-small;
+            color: $gray-light;
+            @include single-text-ellipsis();
           }
           &--date {
             font-size: $font-size-base;

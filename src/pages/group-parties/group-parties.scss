@@ -121,8 +121,8 @@ page-group-parties {
         flex-flow: column;
         justify-content: center;
         .parti-title {
-          display: flex;
           font-size: $font-size-base;
+          @include single-text-ellipsis();
           &--title {
             color: $gray-darker;
           }
