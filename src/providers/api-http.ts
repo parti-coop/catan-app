@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Http, Headers } from "@angular/http";
-import { Events, AlertController } from 'ionic-angular';
+import { Events, AlertController, ToastController } from 'ionic-angular';
 import { RequestOptions, RequestMethod, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
@@ -20,6 +20,7 @@ export class ApiHttp {
     private myselfData: MyselfData,
     private partiEnvironment: PartiEnvironment,
     private events: Events,
+    private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private http: Http
   ) {
@@ -106,12 +107,11 @@ export class ApiHttp {
 
   handleError(error, usedSessionStamp): Observable<any> {
     if (error && error.status  == 404) {
-      let alert = this.alertCtrl.create({
-        title: '안내',
-        subTitle: '지워지거나 없는 정보입니다.',
-        buttons: ['확인']
+      let toast = this.toastCtrl.create({
+        message: '지워지거나 없는 정보입니다.',
+        duration: 3000
       });
-      alert.present();
+      toast.present();
       return Observable.throw(error);
     } else {
       if(usedSessionStamp != this.sessionStamp) {
@@ -122,12 +122,11 @@ export class ApiHttp {
       this.sessionStamp = new Date();
       console.log("ApiHttps#handleError : error - " + JSON.stringify(error));
 
-      let alert = this.alertCtrl.create({
-        title: '오류',
-        subTitle: '죄송합니다. 뭔가 잘못되었습니다.',
-        buttons: ['확인']
+      let toast = this.toastCtrl.create({
+        message: '아! 뭔가 잘못되었습니다.',
+        duration: 3000
       });
-      alert.present();
+      toast.present();
       return Observable.throw(error);
     }
   }

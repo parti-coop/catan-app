@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { App, NavController, AlertController, ViewController, LoadingController } from 'ionic-angular';
+import { App, NavController, AlertController, ViewController,
+  LoadingController, ToastController } from 'ionic-angular';
 
 import 'rxjs/add/operator/finally';
 
@@ -21,6 +22,7 @@ export class MorePage {
     public viewCtrl: ViewController,
     public partiEnvironment: PartiEnvironment,
     private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private myselfData: MyselfData,
     private pushService: PushService,
@@ -74,12 +76,11 @@ export class MorePage {
           });
         }, (error) => {
           loading.dismiss().then(() => {
-            let alert = this.alertCtrl.create({
-              title: '로그아웃 실패',
-              subTitle: '뭔가 잘못되었네요.',
-              buttons: ['확인']
+            let toast = this.toastCtrl.create({
+              message: '아! 뭔가 잘못되었습니다.',
+              duration: 3000
             });
-            alert.present();
+            toast.present();
           });
         })
     });

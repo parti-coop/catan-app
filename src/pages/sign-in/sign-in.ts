@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Facebook, TwitterConnect } from 'ionic-native';
-import { App, Platform, LoadingController, AlertController } from 'ionic-angular';
+import { App, Platform, LoadingController, AlertController, ToastController } from 'ionic-angular';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -23,6 +23,7 @@ export class SignInPage {
     public loadingCtrl: LoadingController,
     private platform: Platform,
     private alertCtrl: AlertController,
+    private toastCtrl: ToastController,
     private pushService: PushService,
     private app: App,
     private myselfData: MyselfData
@@ -75,12 +76,11 @@ export class SignInPage {
           } else {
             console.log("SignInPage#login : " + error);
             if(error !== "User cancelled authentication." || error !== "User cancelled.") {
-              let alert = this.alertCtrl.create({
-                title: '오류',
-                subTitle: '아! 뭔가 잘못되었습니다.',
-                buttons: ['확인']
+              let toast = this.toastCtrl.create({
+                message: '아! 뭔가 잘못되었습니다.',
+                duration: 3000
               });
-              alert.present();
+              toast.present();
             }
           }
         });

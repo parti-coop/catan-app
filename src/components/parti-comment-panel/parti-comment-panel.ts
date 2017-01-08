@@ -6,7 +6,6 @@ import { Post } from '../../models/post';
 import { Comment } from '../../models/comment';
 
 import { ProfilePage } from '../../pages/profile/profile';
-import { PartiReadMorePipe } from '../../pipes/parti-read-more-pipe';
 
 import { UpvoteData } from '../../providers/upvote-data';
 import { MyselfData } from '../../providers/myself-data';
@@ -25,12 +24,6 @@ export class PartiCommentPanelComponent {
 
   constructor(
     private navCtrl: NavController,
-    // private alertCtrl: AlertController,
-    // private platform: Platform,
-    // private toastCtrl: ToastController,
-    // private actionSheetCtrl: ActionSheetController,
-    // private modalCtrl: ModalController,
-    // private votingData: VotingData,
     private upvoteData: UpvoteData,
     private myselfData: MyselfData,
     private commentData: CommentData

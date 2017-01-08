@@ -1,6 +1,6 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { NavController, AlertController, ToastController, ActionSheetController, ModalController } from 'ionic-angular';
+import { NavController, AlertController, ActionSheetController, ModalController, ToastController } from 'ionic-angular';
 import { InAppBrowser, Transfer, FileOpener, SocialSharing, Facebook, Device, AppAvailability, Clipboard } from 'ionic-native';
 
 import _ from 'lodash';
@@ -190,12 +190,11 @@ export class PartiPostPanelComponent {
           alertSuccess.present(alertSuccess);
         }).catch((error) => {
           console.log("PartiPostPanelComponent#onClickFileReference : " + JSON.stringify(error));
-          let alert = this.alertCtrl.create({
-            title: '오류',
-            subTitle: '다운로드 중에 오류가 발생했습니다.',
-            buttons: ['확인']
+          let toast = this.toastCtrl.create({
+            message: '아! 뭔가 잘못되었습니다.',
+            duration: 3000
           });
-          alert.present();
+          toast.present();
         });
     });
   }
@@ -293,12 +292,11 @@ export class PartiPostPanelComponent {
       if(error['errorMessage'] == 'User cancelled dialog') {
         return;
       }
-      let alert = this.alertCtrl.create({
-        title: '오류',
-        subTitle: '아! 뭔가 잘못되었습니다.',
-        buttons: ['확인']
+      let toast = this.toastCtrl.create({
+        message: '아! 뭔가 잘못되었습니다.',
+        duration: 3000
       });
-      alert.present();
+      toast.present();
     }
 
     let share = this.post.share;
