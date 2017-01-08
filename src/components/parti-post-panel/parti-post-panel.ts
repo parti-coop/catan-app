@@ -304,6 +304,7 @@ export class PartiPostPanelComponent {
     let actionSheet = this.actionSheetCtrl.create({
       buttons: [{
           text: '페이스북으로 공유',
+          cssClass: 'share-facebook',
           handler: () => {
             SocialSharing.shareViaFacebook("", "", share.url)
               .then(successHandler)
@@ -316,6 +317,7 @@ export class PartiPostPanelComponent {
           }
         },{
           text: '트위터로 공유',
+          cssClass: 'share-twitter',
           handler: () => {
             SocialSharing.shareViaTwitter(share.twitter_text, "", share.url)
               .then(successHandler)
@@ -327,6 +329,7 @@ export class PartiPostPanelComponent {
           }
         },{
           text: '카카오톡으로 공유',
+          cssClass: 'share-kakaotalk',
           handler: () => {
             var app = null;
             if (Device.platform === 'iOS') {
@@ -373,11 +376,12 @@ export class PartiPostPanelComponent {
           }
         },{
           text: '링크 복사',
+          cssClass: 'share-url',
           handler: () => {
             Clipboard.copy(share.url);
           }
         },{
-          text: '닫기',
+          text: '취소',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');

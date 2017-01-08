@@ -155,3 +155,28 @@ ion-action-sheet {
 .user__nickname--mentioned {
   text-decoration: none;
 }
+
+// 액션시트 공유
+.share-facebook .button-inner:before {
+  font-family: FontAwesome;
+  content: "\f09a";
+  padding-right: 6px;
+}
+
+.share-twitter .button-inner:before {
+  font-family: FontAwesome;
+  content: "\f099";
+  padding-right: 6px;
+}
+
+.share-kakaotalk .button-inner:before {
+  font-family: FontAwesome;
+  content: "\f075";
+  padding-right: 6px;
+}
+
+.share-url .button-inner:before {
+  font-family: FontAwesome;
+  content: "\f0c1";
+  padding-right: 6px;
+}

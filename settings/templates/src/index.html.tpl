@@ -24,6 +24,7 @@
     }
   </script>-->
 
+  <link href="assets/venders/stylesheets/font-awesome.css" rel="stylesheet">
   <link href="build/main.css" rel="stylesheet">
   <script src="assets/js/web-animations.min.js"></script>
   <script>

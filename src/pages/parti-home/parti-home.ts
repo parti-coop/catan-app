@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams,
   InfiniteScroll, ToastController, PopoverController, Events,
   ActionSheetController, ModalController, AlertController } from 'ionic-angular';
-import { Facebook, SocialSharing, InAppBrowser, AppAvailability, Device } from 'ionic-native';
+import { Facebook, SocialSharing, InAppBrowser, AppAvailability, Device, Clipboard } from 'ionic-native';
 
 import 'rxjs/add/operator/mergeMap';
 
@@ -190,6 +190,7 @@ export class PartiHomePage {
     let actionSheet = this.actionSheetCtrl.create({
       buttons: [{
           text: '페이스북으로 공유',
+          cssClass: 'share-facebook',
           handler: () => {
             SocialSharing.shareViaFacebook("", "", share.url)
               .then(successHandler)
@@ -202,6 +203,7 @@ export class PartiHomePage {
           }
         },{
           text: '트위터로 공유',
+          cssClass: 'share-twitter',
           handler: () => {
             SocialSharing.shareViaTwitter(share.twitter_text, "", share.url)
               .then(successHandler)
@@ -213,6 +215,7 @@ export class PartiHomePage {
           }
         },{
           text: '카카오톡으로 공유',
+          cssClass: 'share-kakaotalk',
           handler: () => {
             var app = null;
             if (Device.platform === 'iOS') {
@@ -255,6 +258,12 @@ export class PartiHomePage {
                 alert.present();
               }
             );
+          }
+        },{
+          text: '링크 복사',
+          cssClass: 'share-url',
+          handler: () => {
+            Clipboard.copy(share.url);
           }
         },{
           text: '취소',

@@ -11,6 +11,9 @@
     "watch": "npm-run-all --parallel watch:*",
     "prewatch": "npm install && gulp settings"
   },
+  "config": {
+    "ionic_copy": "./config/copy-libs.js"
+  },
   "dependencies": {
     "@angular/common": "2.2.1",
     "@angular/compiler": "2.2.1",
@@ -24,6 +27,7 @@
     "@ionic/storage": "1.1.6",
     "angular2-elastic": "0.11.1",
     "angular2-moment": "1.0.0-beta.6",
+    "font-awesome": "^4.7.0",
     "ionic-angular": "^2.0.0-rc.4",
     "ionic-native": "2.2.11",
     "ionicons": "3.0.0",
@@ -32,7 +36,7 @@
     "zone.js": "0.6.26"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "0.0.47",
+    "@ionic/app-scripts": "1.0.0",
     "gulp": "^3.9.1",
     "js-yaml": "^3.6.1",
     "gulp-template": "^4.0.0",
