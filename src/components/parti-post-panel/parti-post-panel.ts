@@ -224,9 +224,10 @@ export class PartiPostPanelComponent {
             }
           }
 
+          this.post.poll[`latest_${antiChoice}d_voting_users`] = _.reject(this.post.poll[`latest_${antiChoice}d_voting_users`], { id: this.myselfData.id });
+          this.post.poll[`latest_${choice}d_voting_users`] = _.reject(this.post.poll[`latest_${choice}d_voting_users`], { id: this.myselfData.id });
           this.post.poll[`latest_${choice}d_voting_users`].push(this.myselfData.asModel());
           this.post.poll[`${choice}d_votings_count`]++;
-          this.post.poll[`${antiChoice}d_voting_users`] = _.reject(this.post.poll[`${antiChoice}d_voting_users`], { id: this.myselfData.id });
           this.post.poll.my_choice = choice;
         }
       });
