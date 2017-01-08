@@ -264,24 +264,25 @@ parti-post-panel {
   .post-reaction-info {
     color: $gray-light;
     font-size: $font-size-small;
-    padding: 0 6px 12px;
     color: $brand-primary;
     .middot {
       padding: 0 2px;
     }
   }
 
+  .post-reaction-info-in-collection {
+    padding: 0 6px 12px;
+  }
+
   .post-footer {
     border-top: 1px solid $gray-lighter;
     background-color: $gray-more-lightest;
-    padding: 12px 12px;
+    padding: 12px 0;
     margin-left: -6px;
     margin-right: -6px;
 
     .post-reaction-info {
-      border-bottom: 1px solid #eaeaeb;
-      margin: 0 -12px 12px;
-      padding: 0 12px 12px;
+      padding: 0 12px;
       .upvoters {
         padding-top: 12px;
         .upvote-user {
@@ -305,63 +306,10 @@ parti-post-panel {
       }
     }
 
-    .post-comments {
-      .comment {
-        &:first-child {
-          border-top: none;
-          padding-top: 0;
-        }
-        &:last-child {
-          padding-bottom: 0;
-        }
-        border-top: 1px solid $gray-lighter;
-        padding: 12px 0;
-        color: $gray-dark;
-        .comment-header {
-          .comment-byline {
-            display: flex;
-            justify-content: flex-start;
-            .user-image {
-              display: inline-block;
-              height: 24px;
-              width: 24px;
-              border-radius: 50%;
-              @include background-thumbnail();
-            }
-            .byline-info {
-              padding-left: 8px;
-              display: flex;
-              flex-flow: row nowrap;
-              .user-nickname{
-                flex: 1;
-                padding-right: 6px;
-                color: $brand-primary-dark;
-              }
-              .comment-created-at {
-                width: 90px;
-                color: $gray-light;
-                font-size: $font-size-small;
-              }
-            }
-          }
-        }
-        .comment-body {
-          padding-left: 32px;
-          &.agreed:before {
-            content: '\f392  찬성 ';
-            font-family: "Ionicons";
-            color: $brand-success;
-          }
-          &.disagreed:before {
-            content: '\f391  반대 ';
-            font-family: "Ionicons";
-            color: $brand-danger;
-          }
-          &.comment-body-blinded {
-            color: $gray-light;
-          }
-        }
-      }
+    .post-reaction-info + .post-comments {
+      border-top: 1px solid #eaeaeb;
+      padding-top: 12px;
+      margin-top: 12px;
     }
   }
 }

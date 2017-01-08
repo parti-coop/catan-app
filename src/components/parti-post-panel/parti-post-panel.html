@@ -78,7 +78,7 @@
     <div (click)='onClickVotingButton("unsure")' *ngIf='!isVoted()' class='unsure-voting'>
       잘 모르겠습니다
     </div>
-    <div (click)='onClickCommentButton()' *ngIf='isUnsured()' class='unsure-voted'>
+    <div (click)='onClickCommentButton($event)' *ngIf='isUnsured()' class='unsure-voted'>
       댓글로 의견을 나눠 보세요
     </div>
   </div>
@@ -112,13 +112,13 @@
 </div>
 <div class='post-buttons'>
   <span [class.upvotable]='post.is_upvotable' class='upvote-button'>
-    <ion-spinner *ngIf='isLoading'></ion-spinner>
-    <div (click)='onClickUpvoteButton()' *ngIf='!isLoading'>
+    <ion-spinner *ngIf='isPostUpvoteLoading'></ion-spinner>
+    <span (click)='onClickUpvoteButton()' *ngIf='!isPostUpvoteLoading'>
       <ion-icon [class.upvoted]='!post.is_upvotable' name='heart'></ion-icon>
-      {{ post.is_upvotable ? '공감해요' : '공감해요 취소' }}
-    </div>
+      {{ post.is_upvotable ? '공감해요' : '공감취소' }}
+    </span>
   </span>
-  <span (click)='onClickCommentButton()' class='comment-button'>
+  <span (click)='onClickCommentButton($event)' class='comment-button'>
     <ion-icon name='chatbubbles'></ion-icon>
     댓글달기
   </span>
@@ -142,24 +142,6 @@
     </div>
   </div>
   <div *ngIf='hasComment()' class='post-comments'>
-    <div *ngFor='let comment of comments' class='comment'>
-      <div class='comment-header'>
-        <div class='comment-byline'>
-          <div (click)='onClickUser(comment.user)' [ngStyle]="{ 'background-image': 'url(' + comment.user.image_url + ')' }" class='user-image'></div>
-          <div class='byline-info'>
-            <div (click)='onClickUser(comment.user)' class='user-nickname'>{{ comment.user.nickname }}</div>
-            <div class='comment-created-at'>
-              {{ comment.created_at | partiDateTimeFormatObservable | async }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <template [ngIf]='!comment.is_blinded'>
-        <div (click)='onClickPostContent($event)' [class.agreed]="comment.choice == 'agree'" [class.disagreed]="comment.choice == 'disagree'" [innerHTML]='comment.body | partiReadMore:comment.truncated_body | partiSimpleFormat:comment' class='comment-body' smartBody></div>
-      </template>
-      <template [ngIf]='comment.is_blinded'>
-        <div class='comment-body comment-body-blinded'>건강하고 유쾌한 빠띠 활동을 위해 숨겨진 댓글입니다.</div>
-      </template>
-    </div>
+    <parti-comment-panel (onAddComment)='onClickCommentButton($event)' *ngFor='let comment of comments' [comment]='comment' [post]='post'></parti-comment-panel>
   </div>
 </div>

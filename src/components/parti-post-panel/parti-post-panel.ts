@@ -41,7 +41,7 @@ export class PartiPostPanelComponent {
   comments: Comment[] = [];
   lastComment: Comment;
   hasMoreComment: boolean = false;
-  isLoading: boolean = false;
+  isPostUpvoteLoading: boolean = false;
   disableVotingButtons: boolean = false;
 
   constructor(
@@ -130,14 +130,16 @@ export class PartiPostPanelComponent {
     }
   }
 
-  onClickCommentButton() {
+  onClickCommentButton(event) {
+    let comment = event && event.comment;
     if(this.isCollection == true) {
       this.navCtrl.push(PostPage, {
         post: this.post,
+        comment: comment,
         needFocusCommentInut: true
       });
     } else {
-      this.onAddComment.emit();
+      this.onAddComment.emit(event);
     }
   }
 
@@ -246,11 +248,11 @@ export class PartiPostPanelComponent {
   }
 
   onClickUpvoteButton() {
-    this.isLoading = true;
+    this.isPostUpvoteLoading = true;
     if(this.post.is_upvotable) {
       this.upvoteData.create(this.post.id, 'Post')
         .finally(() => {
-          this.isLoading = false;
+          this.isPostUpvoteLoading = false;
         })
         .subscribe(() => {
           this.post.is_upvotable = false;
@@ -263,7 +265,7 @@ export class PartiPostPanelComponent {
     } else {
       this.upvoteData.destroy(this.post.id, 'Post')
         .finally(() => {
-          this.isLoading = false;
+          this.isPostUpvoteLoading = false;
         })
         .subscribe(() => {
           this.post.is_upvotable = true;

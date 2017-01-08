@@ -56,7 +56,7 @@
           {{ post.poll.disagreed_votings_count }}
     .unsure-voting{ '*ngIf': '!isVoted()', '(click)': 'onClickVotingButton("unsure")' }
       잘 모르겠습니다
-    .unsure-voted{ '*ngIf': 'isUnsured()', '(click)': 'onClickCommentButton()' }
+    .unsure-voted{ '*ngIf': 'isUnsured()', '(click)': 'onClickCommentButton($event)' }
       댓글로 의견을 나눠 보세요
   .poll-votings{ '*ngIf': 'isVoted()' }
     .agreed-voting-users{ '(click)': "onClickVotingUsers('agree')" }
@@ -78,11 +78,11 @@
     댓글 {{ post.comments_count }}
 .post-buttons
   %span.upvote-button{ '[class.upvotable]': 'post.is_upvotable' }
-    %ion-spinner{ '*ngIf': 'isLoading' }
-    %div{ '*ngIf': '!isLoading', '(click)': 'onClickUpvoteButton()' }
+    %ion-spinner{ '*ngIf': 'isPostUpvoteLoading' }
+    %span{ '*ngIf': '!isPostUpvoteLoading', '(click)': 'onClickUpvoteButton()' }
       %ion-icon{ name: 'heart', '[class.upvoted]': '!post.is_upvotable' }
-      {{ post.is_upvotable ? '공감해요' : '공감해요 취소' }}
-  %span.comment-button{ '(click)': 'onClickCommentButton()' }
+      {{ post.is_upvotable ? '공감해요' : '공감취소' }}
+  %span.comment-button{ '(click)': 'onClickCommentButton($event)' }
     %ion-icon{ name: 'chatbubbles' }
     댓글달기
   %span.parti-share-button{ '(click)': 'onClickShare()' }
@@ -98,17 +98,4 @@
       .more-users{ '*ngIf': "post.latest_upvote_users && post.latest_upvote_users.length < post.upvotes_count", '(click)': "onClickUpvoteUsers()" }
         + {{ post.upvotes_count - post.latest_upvote_users.length }}
   .post-comments{ '*ngIf': "hasComment()" }
-    .comment{ '*ngFor': 'let comment of comments'}
-      .comment-header
-        .comment-byline
-          .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + comment.user.image_url + ')' }", '(click)': 'onClickUser(comment.user)' }
-          .byline-info
-            .user-nickname{ '(click)': 'onClickUser(comment.user)' } {{ comment.user.nickname }}
-            .comment-created-at
-              {{ comment.created_at | partiDateTimeFormatObservable | async }}
-      %template{ '[ngIf]': '!comment.is_blinded' }
-        .comment-body{ smartBody: true, '[innerHTML]': "comment.body | partiReadMore:comment.truncated_body | partiSimpleFormat:comment", '[class.agreed]': "comment.choice == 'agree'" , '[class.disagreed]': "comment.choice == 'disagree'", '(click)': 'onClickPostContent($event)' }
-      %template{ '[ngIf]': 'comment.is_blinded' }
-        .comment-body.comment-body-blinded 건강하고 유쾌한 빠띠 활동을 위해 숨겨진 댓글입니다.
-
-
+    %parti-comment-panel{ '[post]': 'post', '[comment]': 'comment', '(onAddComment)': 'onClickCommentButton($event)', '*ngFor': 'let comment of comments' }

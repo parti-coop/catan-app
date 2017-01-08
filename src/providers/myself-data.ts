@@ -40,8 +40,10 @@ export class MyselfData {
     private platform: Platform,
     private http: Http,
     private partiEnvironment: PartiEnvironment
-  ) {
-    this.platform.ready().then(() => {
+  ) {}
+
+  ready() {
+    return this.platform.ready().then(() => {
       Promise.all([
         NativeStorage.getItem(this.STORAGE_REFERENCE_HAS_SIGNED_IN),
         NativeStorage.getItem(this.STORAGE_REFERENCE_NICKNAME),
@@ -65,11 +67,13 @@ export class MyselfData {
           this.clearMyselfData();
           console.log("MyselfData : 로그아웃");
         }
+        return Promise.resolve();
       }).catch(error => {
         this.clearMyselfData();
         console.log("MyselfData : 로그인 정보 없음");
         console.log(JSON.stringify(error));
         this._hasSignedIn = false;
+        return Promise.resolve();
       });
     });
   }

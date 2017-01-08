@@ -10,6 +10,7 @@ import { PartiDateTimeFormatObservablePipe } from '../pipes/parti-datetime-forma
 import { PartiReadMorePipe } from '../pipes/parti-read-more-pipe';
 
 import { PartiPostPanelComponent } from '../components/parti-post-panel/parti-post-panel';
+import { PartiCommentPanelComponent } from '../components/parti-comment-panel/parti-comment-panel';
 import { PartiPostBylineComponent } from '../components/parti-post-byline/parti-post-byline';
 import { PartiList } from '../components/parti-list/parti-list';
 import { JoinedPartiList } from '../components/joined-parti-list/joined-parti-list';
@@ -88,6 +89,7 @@ moment.locale('ko');
     PartiSelectPage,
     PartiPostBylineComponent,
     PartiPostPanelComponent,
+    PartiCommentPanelComponent,
     PartiList,
     JoinedPartiList,
     PartiSimpleFormatPipe,

@@ -4,6 +4,8 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Keyboard } from 'ionic-native';
 import { Subscription } from 'rxjs/rx';
 
+import _ from 'lodash';
+
 import 'rxjs/add/operator/finally';
 
 import { PartiPostPanelComponent } from '../../components/parti-post-panel/parti-post-panel';
@@ -26,6 +28,7 @@ export class PostPage {
   @ViewChild(PartiPostPanelComponent) partiPostPanel: PartiPostPanelComponent;
 
   post: Post;
+  comment: Comment;
   commentForm: FormGroup;
   private onShowSubscription: Subscription;
   private onHideSubscription: Subscription;
@@ -40,6 +43,7 @@ export class PostPage {
     private loadingCtrl: LoadingController
   ){
     this.post = navParams.get('post');
+
     this.commentForm = this.formBuilder.group({
       body: ['', Validators.required]
     });
@@ -55,6 +59,9 @@ export class PostPage {
         this.post = post;
       });
     }
+
+    let comment = this.navParams.get('comment');
+    this.setMentionCommentBody(comment);
   }
 
   loadMoreComments(infiniteScroll) {
@@ -67,7 +74,19 @@ export class PostPage {
   }
 
   setFocusCommentForm(event = null) {
+    if(event && event.comment) {
+      this.setMentionCommentBody(event.comment);
+    }
     this.inputCommentBody.setFocus();
+  }
+
+  setMentionCommentBody(comment) {
+    console.log(comment);
+    if(comment) {
+      let endsWithSpace = (/\s+$/.test(this.commentForm.value.body));
+      let merged = _.compact([this.commentForm.value.body, `@${comment.user.nickname}`]).join(endsWithSpace ? '': ' ');
+      this.commentForm.controls['body'].setValue(`${merged} `);
+    }
   }
 
   ngOnDestroy() {
@@ -80,7 +99,6 @@ export class PostPage {
   }
 
   ionViewDidEnter() {
-    this.commentForm.controls['body'].setValue(null);
     if(this.navParams.get('needFocusCommentInut')) {
       setTimeout(() => {
         this.setFocusCommentForm();

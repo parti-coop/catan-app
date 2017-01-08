@@ -31,14 +31,16 @@ export class PartiApp {
     private pushService: PushService
   ) {
     platform.ready().then(() => {
-      window.open = (url, target?, opts?) => new InAppBrowser(url, target, opts);
+      myselfData.ready().then(() => {
+        window.open = (url, target?, opts?) => new InAppBrowser(url, target, opts);
 
-      StatusBar.styleDefault();
-      Splashscreen.hide();
+        StatusBar.styleDefault();
+        Splashscreen.hide();
 
-      this.initRootPage();
-      this.pushService.init();
-      this.listenToNetworkStatus();
+        this.initRootPage();
+        this.pushService.init();
+        this.listenToNetworkStatus();
+      });
     });
     this.listenToBaseEvents();
   }
