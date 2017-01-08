@@ -7,7 +7,8 @@
   , "proxies":[
     {
       "path":"/proxy",
-      "proxyUrl":"${constants.apiBaseUrl}"
+      "proxyUrl":"${constants.apiBaseUrl}",
+      "rejectUnauthorized": false
     }
   ]
   <% } %>

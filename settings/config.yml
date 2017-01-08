@@ -2,20 +2,20 @@ development:
   appId: xyz.parti.development
   appName: Parti-D
   appTitle: 빠띠 D
-  apiBaseUrl: "http://parti.dev"
+  apiBaseUrl: "https://parti.dev"
   facebookAppName: parti-xyz - local
   facebookAppId: "824122964355260"
 staging:
   appId: xyz.parti.staging
   appName: Parti-S
   appTitle: 빠띠 S
-  apiBaseUrl: "http://dev.parti.xyz"
+  apiBaseUrl: "https://dev.parti.xyz"
   facebookAppName: parti-xyz - dev
   facebookAppId: "769069449860612"
 production:
   appId: xyz.parti
   appName: Parti
   appTitle: 빠띠
-  apiBaseUrl: "http://parti.xyz"
+  apiBaseUrl: "https://parti.xyz"
   facebookAppName: parti-xyz
   facebookAppId: "743728572394700"
