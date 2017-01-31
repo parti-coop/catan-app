@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Http, Headers } from "@angular/http";
 import { Events, AlertController, ToastController } from 'ionic-angular';
 import { RequestOptions, RequestMethod, Response } from '@angular/http';
+import { Network } from 'ionic-native';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
@@ -114,6 +115,11 @@ export class ApiHttp {
       toast.present();
       return Observable.throw(error);
     } else {
+      let current = Network.type
+      if(current == 'none') {
+        return;
+      }
+
       if(usedSessionStamp != this.sessionStamp) {
         console.log("ApiHttp#handleError : old session");
         return Observable.empty();

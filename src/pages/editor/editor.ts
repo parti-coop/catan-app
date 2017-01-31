@@ -1,7 +1,7 @@
 import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { LoadingController, NavController,
-  Events, ViewController, Platform, TextArea,
+  Events, ViewController, Platform, TextInput,
   ModalController, Content, AlertController } from 'ionic-angular';
 import { NativeStorage, Camera, Clipboard } from 'ionic-native';
 
@@ -28,7 +28,7 @@ export class EditorPage {
   STORAGE_REFERENCE_LAST_CLIPPED_LINK = 'EditorPage_lastClippedLink';
 
   @ViewChild('content') content: Content;
-  @ViewChild('inputBody') inputBody: TextArea;
+  @ViewChild('inputBody') inputBody: TextInput;
 
   imageSrc: string;
   postForm: FormGroup;

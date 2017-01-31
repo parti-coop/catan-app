@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Content, NavController, NavParams, TextArea, LoadingController } from 'ionic-angular';
+import { Platform, Content, NavController, NavParams, TextInput, LoadingController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Keyboard } from 'ionic-native';
 import { Subscription } from 'rxjs/rx';
@@ -24,7 +24,7 @@ import { PartiHomePage } from '../../pages/parti-home/parti-home';
 })
 export class PostPage {
   @ViewChild('content') content: Content;
-  @ViewChild('inputCommentBody') inputCommentBody: TextArea;
+  @ViewChild('inputCommentBody') inputCommentBody: TextInput;
   @ViewChild(PartiPostPanelComponent) partiPostPanel: PartiPostPanelComponent;
 
   post: Post;

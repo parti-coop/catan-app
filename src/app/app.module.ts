@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { Elastic } from 'angular2-elastic';
+import { ElasticModule } from 'angular2-elastic';
 
 import { PartiApp } from './app.component';
 
@@ -100,7 +100,7 @@ moment.locale('ko');
     PartiDateTimeFormatObservablePipe
   ],
   imports: [
-    Elastic,
+    ElasticModule,
     IonicModule.forRoot(PartiApp)
   ],
   bootstrap: [IonicApp],

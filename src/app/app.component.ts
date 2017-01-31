@@ -95,7 +95,7 @@ export class PartiApp {
   }
 
   defaultRoot(cb) {
-    let current = Network.connection
+    let current = Network.type
     if(current == 'none') {
       cb(DisconnectedPage);
       return;
