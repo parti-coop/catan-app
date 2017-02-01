@@ -80,7 +80,11 @@ gulp.task('reset', ['settings'], function() {
     + 'ionic plugin add twitter-connect-plugin --variable FABRIC_KEY='
     + configVariables.secrets.fabricKey
     + ' && '
-    + `cp -rf ./settings/resources/google-services.${configVariables.constants.env}.json ./platforms/android/google-services.json`
+    + `cp -rf ./settings/resources/google-services.${configVariables.constants.env}.json ./google-services.json`
+    + ' && '
+    + `cp -rf ./settings/resources/GoogleService-Info.${configVariables.constants.env}.plist ./GoogleService-Info.plist`
+    + ' && '
+    + 'ionic plugin add cordova-plugin-fcm'
     + ' && '
     + 'ionic plugin add https://github.com/taejaehan/cordova-kakaotalk.git --variable KAKAO_APP_KEY='
     + configVariables.constants.kakaoKey;

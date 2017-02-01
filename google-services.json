@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "352279967334",
+    "firebase_url": "https://parti-xyz-local.firebaseio.com",
+    "project_id": "parti-xyz-local",
+    "storage_bucket": "parti-xyz-local.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352279967334:android:800d9dddc70901db",
+        "android_client_info": {
+          "package_name": "xyz.parti.development"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "352279967334-j5nagg94pd9srnii57cnotplabrsn1ol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEGB2KxUqX1vZn67IiLpjautV5nWKRC6w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
