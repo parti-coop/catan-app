@@ -78,7 +78,7 @@
     <div (click)='onClickVotingButton("unsure")' *ngIf='!isVoted()' class='unsure-voting'>
       잘 모르겠습니다
     </div>
-    <div (click)='onClickCommentButton($event)' *ngIf='isUnsured()' class='unsure-voted'>
+    <div (click)='onClickAddCommentButton($event)' *ngIf='isUnsured()' class='unsure-voted'>
       댓글로 의견을 나눠 보세요
     </div>
   </div>
@@ -118,7 +118,7 @@
       {{ post.is_upvotable ? '공감해요' : '공감취소' }}
     </span>
   </span>
-  <span (click)='onClickCommentButton($event)' class='comment-button'>
+  <span (click)='onClickAddCommentButton($event)' class='comment-button'>
     <ion-icon name='chatbubbles'></ion-icon>
     댓글달기
   </span>
@@ -127,7 +127,7 @@
     공유하기
   </span>
 </div>
-<div *ngIf='(isCollection &amp;&amp; hasComment()) || (!isCollection &amp;&amp; (hasComment() || hasUpvote()))' class='post-footer'>
+<div *ngIf='(isCollection &amp;&amp; hasLatestComment()) || (!isCollection &amp;&amp; (hasLatestComment() || hasUpvote()))' class='post-footer'>
   <div *ngIf='!isCollection &amp;&amp; hasUpvote()' class='post-reaction-info'>
     <span (click)='onClickUpvoteUsers()' *ngIf='hasUpvote()' class='post-upvotes-count'>
       공감 {{ post.upvotes_count }}
@@ -141,7 +141,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf='hasComment()' class='post-comments'>
-    <parti-comment-panel (onAddComment)='onClickCommentButton($event)' *ngFor='let comment of comments' [comment]='comment' [post]='post'></parti-comment-panel>
+  <div *ngIf='hasLatestComment()' class='post-comments'>
+    <parti-comment-panel (onAddComment)='onClickAddCommentButton($event)' (onRemoveComment)='onClickRemoveCommentButton($event)' *ngFor='let comment of smart_post_latest_comments()' [comment]='comment' [post]='post'></parti-comment-panel>
   </div>
 </div>

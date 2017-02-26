@@ -13,8 +13,12 @@
         %ion-spinner{ '*ngIf': 'isUpvoteLoading' }
         %span{ '*ngIf': '!isUpvoteLoading', '(click)': 'onClickUpvoteButton()' }
           {{ comment.is_upvotable ? '공감해요' : '공감취소' }}
-      %span.comment-button{ '(click)': 'onClickCommentButton()' }
-        댓글달기
+      %template{ '[ngIf]': 'isMyComment(comment)' }
+        %span.delete-button{ '(click)': 'onClickRemoveCommentButton()' }
+          댓글삭제
+      %template{ '[ngIf]': '!isMyComment(comment)' }
+        %span.comment-button{ '(click)': 'onClickAddCommentButton()' }
+          댓글달기
       %span.upvotes-count{ '*ngIf': 'comment.upvotes_count > 0' }
         %ion-icon{ name: 'heart', '[class.upvoted]': '!comment.is_upvotable' }
         {{ comment.upvotes_count }}

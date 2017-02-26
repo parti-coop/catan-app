@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController, ViewController } from 'ionic-angular';
 
 import { User } from '../../models/user';
 import { Post } from '../../models/post';
@@ -19,11 +19,14 @@ export class PartiCommentPanelComponent {
   @Input() comment: Comment;
   @Input() post: Post;
   @Output() onAddComment = new EventEmitter();
+  @Output() onRemoveComment = new EventEmitter();
 
   isUpvoteLoading: boolean = false;
+  exists: boolean = true;
 
   constructor(
     private navCtrl: NavController,
+    public alertCtrl: AlertController,
     private upvoteData: UpvoteData,
     private myselfData: MyselfData,
     private commentData: CommentData
@@ -56,8 +59,32 @@ export class PartiCommentPanelComponent {
     }
   }
 
-  onClickCommentButton() {
+  onClickAddCommentButton() {
     this.onAddComment.emit({comment: this.comment});
+  }
+
+  onClickRemoveCommentButton() {
+    let alert = this.alertCtrl.create({
+      title: '확인',
+      message: '정말 삭제하시겠습니까?',
+      buttons: [
+        {
+          text: '취소',
+          role: 'cancel'
+        },
+        {
+          text: '삭제합니다',
+          handler: () => {
+            this.onRemoveComment.emit({comment: this.comment});
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  isMyComment(comment) {
+    return comment.user.id == this.myselfData.id;
   }
 }
 

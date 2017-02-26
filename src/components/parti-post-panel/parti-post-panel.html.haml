@@ -56,7 +56,7 @@
           {{ post.poll.disagreed_votings_count }}
     .unsure-voting{ '*ngIf': '!isVoted()', '(click)': 'onClickVotingButton("unsure")' }
       잘 모르겠습니다
-    .unsure-voted{ '*ngIf': 'isUnsured()', '(click)': 'onClickCommentButton($event)' }
+    .unsure-voted{ '*ngIf': 'isUnsured()', '(click)': 'onClickAddCommentButton($event)' }
       댓글로 의견을 나눠 보세요
   .poll-votings{ '*ngIf': 'isVoted()' }
     .agreed-voting-users{ '(click)': "onClickVotingUsers('agree')" }
@@ -82,13 +82,13 @@
     %span{ '*ngIf': '!isPostUpvoteLoading', '(click)': 'onClickUpvoteButton()' }
       %ion-icon{ name: 'heart', '[class.upvoted]': '!post.is_upvotable' }
       {{ post.is_upvotable ? '공감해요' : '공감취소' }}
-  %span.comment-button{ '(click)': 'onClickCommentButton($event)' }
+  %span.comment-button{ '(click)': 'onClickAddCommentButton($event)' }
     %ion-icon{ name: 'chatbubbles' }
     댓글달기
   %span.parti-share-button{ '(click)': 'onClickShare()' }
     %ion-icon{ name: 'md-share' }
     공유하기
-.post-footer{ '*ngIf': "(isCollection && hasComment()) || (!isCollection && (hasComment() || hasUpvote()))" }
+.post-footer{ '*ngIf': "(isCollection && hasLatestComment()) || (!isCollection && (hasLatestComment() || hasUpvote()))" }
   .post-reaction-info{ '*ngIf': '!isCollection && hasUpvote()' }
     %span.post-upvotes-count{ '*ngIf': 'hasUpvote()', '(click)': 'onClickUpvoteUsers()' }
       공감 {{ post.upvotes_count }}
@@ -97,5 +97,5 @@
         .user-image{ '[ngStyle]': "{ 'background-image': 'url(' + user.image_url + ')' }", '(click)': 'onClickUser(user)' }
       .more-users{ '*ngIf': "post.latest_upvote_users && post.latest_upvote_users.length < post.upvotes_count", '(click)': "onClickUpvoteUsers()" }
         + {{ post.upvotes_count - post.latest_upvote_users.length }}
-  .post-comments{ '*ngIf': "hasComment()" }
-    %parti-comment-panel{ '[post]': 'post', '[comment]': 'comment', '(onAddComment)': 'onClickCommentButton($event)', '*ngFor': 'let comment of comments' }
+  .post-comments{ '*ngIf': "hasLatestComment()" }
+    %parti-comment-panel{ '[post]': 'post', '[comment]': 'comment', '(onAddComment)': 'onClickAddCommentButton($event)', '(onRemoveComment)': 'onClickRemoveCommentButton($event)', '*ngFor': 'let comment of smart_post_latest_comments()' }

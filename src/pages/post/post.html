@@ -26,7 +26,7 @@
 </ion-content>
 <ion-footer [keyboardAttach]='content'>
   <ion-toolbar>
-    <form (ngSubmit)='save()' [formGroup]='commentForm'>
+    <form (ngSubmit)='saveComment()' [formGroup]='commentForm'>
       <div class='container'>
         <ion-item>
           <ion-textarea #inputCommentBody formControlName='body' fz-elastic placeholder='댓글을 입력해주세요.' rows='1'></ion-textarea>

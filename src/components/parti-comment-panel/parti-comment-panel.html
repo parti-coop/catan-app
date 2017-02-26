@@ -19,9 +19,16 @@
           {{ comment.is_upvotable ? '공감해요' : '공감취소' }}
         </span>
       </span>
-      <span (click)='onClickCommentButton()' class='comment-button'>
-        댓글달기
-      </span>
+      <template [ngIf]='isMyComment(comment)'>
+        <span (click)='onClickRemoveCommentButton()' class='delete-button'>
+          댓글삭제
+        </span>
+      </template>
+      <template [ngIf]='!isMyComment(comment)'>
+        <span (click)='onClickAddCommentButton()' class='comment-button'>
+          댓글달기
+        </span>
+      </template>
       <span *ngIf='comment.upvotes_count &gt; 0' class='upvotes-count'>
         <ion-icon [class.upvoted]='!comment.is_upvotable' name='heart'></ion-icon>
         {{ comment.upvotes_count }}

@@ -60,8 +60,6 @@ export class PartiPostPanelComponent {
   ngOnInit() {
     if(!this.isCollection) {
       this.loadComments();
-    } else {
-      this.comments = this.post.latest_comments;
     }
   }
 
@@ -74,12 +72,12 @@ export class PartiPostPanelComponent {
       })
       .subscribe(pagedComments => {
         this.hasMoreComment = pagedComments.has_more_item;
-        if(this.comments == null) {
-          this.comments = [];
+        if(this.post.latest_comments == null) {
+          this.post.latest_comments = [];
         }
-        this.comments = this.comments.concat(pagedComments.items);
-        if(!!this.comments && this.comments.length > 0) {
-          this.lastComment = this.comments[this.comments.length-1];
+        this.post.latest_comments = this.post.latest_comments.concat(pagedComments.items);
+        if(!!this.post.latest_comments && this.post.latest_comments.length > 0) {
+          this.lastComment = this.post.latest_comments[this.post.latest_comments.length-1];
         }
       });
   }
@@ -112,6 +110,10 @@ export class PartiPostPanelComponent {
     return this.post.upvotes_count > 0;
   }
 
+  hasLatestComment() {
+    return this.post.latest_comments.length > 0;
+  }
+
   onClickParti(parti: Parti) {
     this.navCtrl.push(PartiHomePage, { parti: parti });
   }
@@ -130,7 +132,7 @@ export class PartiPostPanelComponent {
     }
   }
 
-  onClickCommentButton(event) {
+  onClickAddCommentButton(event) {
     let comment = event && event.comment;
     if(this.isCollection == true) {
       this.navCtrl.push(PostPage, {
@@ -141,6 +143,17 @@ export class PartiPostPanelComponent {
     } else {
       this.onAddComment.emit(event);
     }
+  }
+
+  onClickRemoveCommentButton(event) {
+    let target_comment = event && event.comment;
+    this.commentData.destroy(target_comment)
+      .subscribe(() => {
+        _.remove(this.post.latest_comments, (comment) => {
+          return target_comment.id == comment.id;
+        });
+        this.post.comments_count--;
+      });
   }
 
   onClickLinkReference(linkSource: LinkSource) {
@@ -391,7 +404,11 @@ export class PartiPostPanelComponent {
     actionSheet.present();
   }
 
-  addComment(comment) {
-    this.comments.unshift(comment);
+  smart_post_latest_comments() {
+    if(this.isCollection) {
+      return _.slice(this.post.latest_comments, this.post.latest_comments.length - 2)
+    } else {
+      return this.post.latest_comments
+    }
   }
 }

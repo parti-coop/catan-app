@@ -26,6 +26,11 @@ export class CommentData {
       .map(res => <Comment>(res.json().comment));
   }
 
+  destroy(comment: Comment): Observable<void> {
+    return this.http.delete(`/api/v1/comments/${comment.id}`)
+      .map(res => {});
+  }
+
   byPost(post: Post, lastComment: Comment = null): Observable<InfinitePage<Comment>> {
     let requestOptions = new RequestOptions();
     let searchParams = new URLSearchParams();

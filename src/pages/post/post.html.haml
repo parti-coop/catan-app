@@ -17,7 +17,7 @@
       %ion-infinite-scroll-content{ loadingSpinner: "bubbles" }
 %ion-footer{ '[keyboardAttach]': 'content' }
   %ion-toolbar
-    %form{ '[formGroup]': 'commentForm', '(ngSubmit)': 'save()' }
+    %form{ '[formGroup]': 'commentForm', '(ngSubmit)': 'saveComment()' }
       .container
         %ion-item
           %ion-textarea{ 'formControlName': 'body', '#inputCommentBody': true, 'rows': 1, 'fz-elastic': true, placeholder: "댓글을 입력해주세요." }

@@ -106,7 +106,7 @@ export class PostPage {
     }
   }
 
-  save() {
+  saveComment() {
     let loading = this.loadingCtrl.create();
     loading.present();
 
@@ -119,7 +119,6 @@ export class PostPage {
           this.post.latest_comments = [];
         }
         this.post.latest_comments.unshift(comment);
-        this.partiPostPanel.addComment(comment);
         this.post.comments_count += 1;
         this.commentForm.controls['body'].setValue(null);
       });
